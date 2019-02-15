@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/usr/bin/env sh
 
 cp .github/.git_pre_commit_hook .git/hooks/pre-commit
 chmod +x .git/hooks/pre-commit
