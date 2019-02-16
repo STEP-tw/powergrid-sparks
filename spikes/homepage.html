@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>homepage</title>
+    <link rel="stylesheet" type="text/css" media="screen" href="homepage.css" />
+  </head>
+
+  <body>
+    <header>
+      <div>P O W E R   G R I D</div>
+      <img class="logo" src="bulb-icon.png" alt="logo" />
+    </header>
+    <main>
+      <div class="main-box">
+        <div class="options">
+          <button onclick="document.querySelector('.overlay').style.visibility='visible'" >
+            PLAY
+          </button>
+          <button onclick="document.querySelector('#rules-book').style.visibility='visible'" >
+            RULES BOOK
+          </button>
+          <button onclick="document.querySelector('#about').style.visibility='visible'">ABOUT US</button>
+        </div>
+      </div>
+
+      <div class="overlay" id="play-game">
+        <div class="popup">
+          <div class="options" style="height: 250px;">
+            <button onclick="document.querySelector('#create-game').style.visibility='visible'">CREATE GAME</button>
+            <button onclick="document.querySelector('#join-game').style.visibility='visible'">JOIN GAME</button>
+          </div>
+        </div>
+        <div class="cross-button">
+          <span onclick="document.querySelector('#play-game').style.visibility='hidden'">x</span>
+        </div>
+      </div>
+
+      <div class="overlay" id="rules-book">
+        <div class="popup">
+            <h1>Rules Book</h1>
+          </div>
+        <div class="cross-button">
+          <span onclick="document.querySelector('#rules-book').style.visibility='hidden'">x</span>
+        </div>
+      </div>
+
+      <div class="overlay" id="about">
+        <div class="popup">
+          <div class="names" >
+            <h1>About us</h1>
+            <h2>Naman</h2>
+            <h2>Leela Prasanth</h2>
+            <h2>Keerthy</h2>
+            <h2>Gaurav</h2>
+            <h2>Deepika</h2>
+            <h2>Chandan</h2>
+            <h2>Ankon</h2>
+          </div>
+        </div>
+        <div class="cross-button">
+          <span onclick="document.querySelector('#about').style.visibility='hidden'">x</span>
+        </div>
+      </div>
+
+      <div class="overlay" id="create-game">
+        <div class="popup">
+          <div class="options">
+            <input class="textField" type="text" placeholder="Enter Your Name">
+            <select class="textField">
+              <option value="0">No of Players:</option>
+              <option value="1">2</option>
+              <option value="2">3</option>
+              <option value="3">4</option>
+              <option value="4">5</option>
+              <option value="5">6</option>
+            </select>
+            <button onclick="document.querySelector('#waiting-for-players').style.visibility='visible'">SUBMIT</button>
+          </div>
+        </div>
+        <div class="cross-button">
+          <span onclick="document.querySelector('#create-game').style.visibility='hidden'">x</span>
+        </div>
+      </div>
+
+      <div class="overlay" id="join-game">
+          <div class="popup">
+            <div class="options">
+              <input class="textField" type="text" placeholder="Enter Your Name">
+              <input class="textField" type="text" placeholder="Enter Game ID">
+              <button onclick="document.querySelector('#waiting-for-players').style.visibility='visible'">SUBMIT</button>
+            </div>
+          </div>
+          <div class="cross-button">
+            <span onclick="document.querySelector('#join-game').style.visibility='hidden'">x</span>
+          </div>
+        </div>
+
+        <div class="overlay" id="waiting-for-players">
+            <div class="popup">
+              <div class="waiting-page">
+                <div> Waiting for other players to join</div>
+                <div> GAME ID: 1234 </div>
+                <div class="loader"></div>
+                <div> Gaurav has joined game</div>
+                <div> Ankon has joined game</div>
+                <div> Leela has joined game</div>
+              </div>
+            </div>
+        </div>
+
+    </main>
+  </body>
+</html>
