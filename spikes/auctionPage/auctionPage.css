@@ -1,0 +1,155 @@
+body,
+html {
+  background-color: rgb(180, 180, 182);
+  display: flex;
+  justify-content: center;
+  height: 100%;
+}
+main {
+  height: 100%;
+  width: 65%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+.resource-market {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  height: 20%;
+  border: solid 1px black;
+}
+
+.auction {
+  width: 100%;
+  height: 55%;
+  border: solid 1px black;
+}
+
+.power-plant-cards {
+  margin-top: 0.5%;
+  width: 100%;
+  height: 85%;
+}
+
+.market {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  width: 100%;
+  height: 50%;
+}
+
+.power-plant-card {
+  height: 90%;
+  width: 17%;
+}
+
+.players {
+  width: 100%;
+  height: 20%;
+  border: solid 1px black;
+}
+.resource-grid {
+  position: relative;
+  justify-content: space-around;
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  width: 10%;
+  height: 90%;
+  border: solid 1px black;
+}
+
+.last-uranium {
+  position: relative;
+  width: 40%;
+  height: 40%;
+  border: solid 1px black;
+}
+
+.resource {
+  width: 30%;
+  height: 30%;
+  border: solid 1px black;
+}
+
+.resource.middle-resource {
+  width: 22%;
+  color: black;
+}
+
+.coal {
+  margin: 40% 25%;
+  height: 50%;
+  width: 50%;
+  background-color: rgba(131, 79, 1, 0.63);
+}
+
+.oil {
+  width: 50%;
+  height: 70%;
+  background-color: black;
+  margin: 30% 25%;
+}
+
+.garbage {
+  width: 40%;
+  height: 70%;
+  background-color: rgb(90, 90, 5);
+  margin: 20% 25%;
+  border: 1px solid rgb(200, 241, 87);
+}
+
+.uranium {
+  width: 50%;
+  height: 70%;
+  background-color: red;
+  margin: 30% 25%;
+}
+
+.cost {
+  position: absolute;
+  bottom: 89%;
+  left: 90%;
+  width: 5%;
+  height: 5%;
+  padding-left: 3%;
+  padding-right: 6%;
+  padding-bottom: 10%;
+  padding-top: 1%;
+  background-color: white;
+  border: 2px solid black;
+  border-radius: 50%;
+  z-index: 1;
+}
+
+.uranium-cost {
+  position: absolute;
+  bottom: 75%;
+  left: 70%;
+  width: 32%;
+  height: 32%;
+  padding-right: 1%;
+  padding-top: 5%;
+  padding-bottom: 1%;
+  background-color: white;
+  border: 2px solid black;
+  border-radius: 50%;
+  z-index: 1;
+  font-size: 70%;
+}
+
+.bidding-section {
+  height: 13%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+.increase-bid {
+  position: relative;
+  top: 10%;
+  height: 100%;
+}
