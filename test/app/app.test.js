@@ -16,8 +16,8 @@ describe("POST /createGame", () => {
     request(app)
       .post("/createGame")
       .send({ body: "chandan" })
-      .expect("Content-Type", /html/)
-      .expect(200, done);
+      .expect("Content-Type", /plain/)
+      .expect(302, done);
   });
 });
 
@@ -67,9 +67,18 @@ describe("GET /createGame", () => {
 });
 
 describe("GET /gameplay", () => {
-  it("should show the gameplat page with response code 200", done => {
+  it("should show the gameplay page with response code 200", done => {
     request(app)
       .get('/gameplay')
       .expect(200, done)
+  });
+});
+
+describe('GET /waitingPage',() => {
+  it('should show the waiting page with response code 200',done => {
+    app.activeGames['2'] = new Game(2);
+    request(app)
+      .get('/waitingPage?gameId=2')
+      .expect(200,done)
   });
 });

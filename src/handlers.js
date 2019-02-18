@@ -16,17 +16,22 @@ const createGame = function(req, res) {
   const game = new Game(req.body.playerCount);
   res.app.activeGames[gameId] = game;
   game.addPlayer(req.body.hostName);
-  res.render("createdGame.html", { users: game.getPlayers(), gameId });
+  res.redirect(`/waitingPage?gameId=${gameId}`);
 };
+
+const renderWaitingPage = function(req, res){
+  const gameId = url.parse(req.url, true).query.gameId;
+  const game = res.app.activeGames[+gameId];
+  res.render("createdGame.html", { users: game.getPlayers(), gameId });
+}
 
 const renderGamePage = function(req, res) {
   const gameId = url.parse(req.url, true).query.gameId;
   const game = res.app.activeGames[+gameId];
   if (game.getCurrentPlayersCount() == game.getMaxPlayersCount()) {
     game.start();
-    // return res.redirect("/gameplay");
   }
-  res.send({users: game.getPlayers(), gameState:game.hasStarted()});
+  res.send({users: game.getPlayers(), gameState:game.hasStarted(), gameId});
 };
 
 const renderGameplay = function(req, res){
@@ -52,5 +57,6 @@ module.exports = {
   generateGameId,
   joinGame,
   renderGamePage,
-  renderGameplay
+  renderGameplay,
+  renderWaitingPage
 };
