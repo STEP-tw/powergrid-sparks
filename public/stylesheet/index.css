@@ -1,109 +1,160 @@
-html {
-  font-family: Arial, Helvetica, sans-serif;
-}
-
-body {
-  margin: 0;
-}
-
-.players-section {
+main {
   display: flex;
-  justify-content: space-around;
-  height: 163px;
+  height: 90%;
   width: 100%;
+  justify-content: center;
   align-items: center;
-  background-image: linear-gradient(to right, #f0eded, #aeadad, #f0eded);
 }
 
-.player-profile {
-  box-shadow: 8px 8px 36px -3px rgba(56, 46, 56, 1);
-  border-radius: 5%;
-  height: 135px;
-  align-items: center;
-  width: 160px;
+html, body {
+  width: 100%;
+  height: 100%;
+  font-family: Arial, Helvetica, sans-serif;
+  background-image: url('https://bit.ly/2S7mJsU');
+  background-size: cover;
+}
+
+.main-box {
   display: flex;
   flex-direction: column;
+
+  width: 50%;
+  height: 60%;
+  text-align: center;
+  align-items: center;
+  justify-content: space-around;
+}
+
+header {
+  display: flex;
+  width: 100%;
+  height: 10%;
+  align-items: center;
+  font-size: 50px;
+  font-weight: bold;
+  text-shadow: 2px 4px gray;
+  text-align: center;
   justify-content: center;
 }
 
-#player-1 {
-  background-color: rgb(254, 97, 97);
+.logo {
+  height: 70%;
+  width: 4%;
+  transform: rotate(30deg);
 }
 
-#player-2 {
-  background-color: rgb(97, 223, 254);
-}
-
-#player-3 {
-  background-color: rgb(200, 224, 154);
-}
-
-#player-4 {
-  background-color: rgb(241, 250, 119);
-}
-
-#player-5 {
-  background-color: rgb(157, 149, 149);
-}
-
-#player-6 {
-  background-color: rgb(162, 88, 88);
-}
-
-.map-section {
-  border: 1px solid black;
-  width: 66%;
-  background: skyblue;
-}
-
-.activity-log {
-  overflow: scroll;
-  width: 35%;
-  border: 1px solid black;
-  height: 600px;
-  background-image: linear-gradient(
-    to top left,
-    rgba(242, 224, 173, 0.7),
-    rgba(238, 192, 64)
-  );
-  text-align: center;
-  font-weight: bold;
-  font-size: 22px;
-}
-
-.player-name {
-  font-weight: bolder;
-}
-
-.self-details {
-  overflow: scroll;
-  width: 35%;
-  border: 1px solid black;
-  height: 600px;
+.options {
+  height: 300px;
+  width: 300px;
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: space-around;
-  background-image: linear-gradient(
-    to top left,
-    rgba(242, 224, 173, 0.7),
-    rgba(238, 192, 64)
-  );
+  margin: 0 auto;
 }
 
-.power-plant{
-  width: 80%;
-  height: 125px;
-  border: 1px solid black;
+.options > button {
+  height: 65px;
+  border-radius: 6px;
+  font-size: 20px;
+  font-weight: bolder;
+  background-image: linear-gradient(rgb(250, 207, 207), rgb(233, 164, 91));
+  cursor: pointer;
+  box-shadow: 2px 3px 20px 3px rgb(0, 0, 0);
 }
 
-table{
-  width: 80%;
-  border-collapse: collapse;
+.options > button:focus {
+  text-decoration: none;
+  outline: none;
+}
+
+.options > button:hover {
+  background-image: linear-gradient(rgb(233, 164, 91), rgb(237, 148, 53));
+}
+
+.overlay {
+  visibility: hidden;
+  display: flex;
+  position: fixed;
+  width: 102%;
+  height: 112%;
+
+  background: rgba(63, 63, 63, 0.96);
+}
+
+.popup {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.cross-button {
+  padding: 0px;
+  text-align: right;
+  margin: 1% 3%;
+  font-size: 40px;
+  color: rgb(218, 213, 226);
+}
+
+.cross-button :hover {
+  color: whitesmoke;
+  cursor: pointer;
+}
+
+.textField {
+  border: none;
+  border-bottom: 2px solid rgb(233, 164, 91);
+
+  font-size: 25px;
   text-align: center;
-  font-size: 18px;
+  
+  color: whitesmoke;
+  background: transparent;
 }
 
-th,td {
-  border: 1px solid black;  
+.textField::placeholder {
+  color: rgb(168, 172, 175);
+  font-family: 'Open Sans', sans-serif;
+  font-weight: lighter;
+}
+
+.textField:focus {
+  outline: none;
+}
+
+.textField:hover {
+  color: whitesmoke;
+  border-bottom: 3px solid rgb(223, 241, 243);
+}
+
+.loader {
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid #3498db;
+  width: 80px;
+  height: 80px;
+  -webkit-animation: spin 2s linear infinite; /* Safari */
+  animation: spin 2s linear infinite;
+}
+
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.waiting-page{
+  height: 60%;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  text-align: center;
+  font-size: 40px;
+  color: rgb(189, 234, 240);
 }
