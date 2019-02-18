@@ -69,7 +69,16 @@ describe("GET /createGame", () => {
 describe("GET /gameplay", () => {
   it("should show the gameplat page with response code 200", done => {
     request(app)
-      .get('/gameplay')
-      .expect(200, done)
+      .get("/gameplay")
+      .expect(200, done);
+  });
+});
+
+describe("GET /displayPowerPlantMarket", () => {
+  it("should return the powerPlants with status code 200", done => {
+    request(app)
+      .get("/displayPowerPlantMarket")
+      .expect("Content-Type", /html/)
+      .expect(200, done);
   });
 });

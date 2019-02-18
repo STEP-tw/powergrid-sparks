@@ -12,7 +12,8 @@ const {
   createGame,
   joinGame,
   renderGamePage,
-  renderGameplay
+  renderGameplay,
+  initializeMarket
 } = require("./src/handlers");
 
 app.set("views", __dirname + "/public/html");
@@ -28,9 +29,11 @@ app.get("/", renderHome);
 app.post("/createGame", createGame);
 app.get(/\/createGame/, renderGamePage);
 app.post("/joinGame", joinGame);
-app.get('/gameplay',renderGameplay);
+app.get("/gameplay", renderGameplay);
+app.get("/displayPowerPlantMarket", initializeMarket);
 
 app.use(express.static("public/html"));
+app.use(express.static("public/scripts"));
 app.use(express.static("public/stylesheet"));
 app.use(express.static("public/javascript"));
 app.use(express.static("public/images"));

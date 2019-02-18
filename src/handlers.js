@@ -1,6 +1,12 @@
+const fs = require("fs");
 const url = require("url");
 const Game = require("./model/Game");
+const PowerPlantMarket = require("./model/power_plant_cards");
 
+const powerPlantCards = fs.readFileSync(
+  "./private/data/card_details.json",
+  "UTF8"
+);
 const renderHome = function(req, res) {
   res.render("index.html");
 };
@@ -29,9 +35,9 @@ const renderGamePage = function(req, res) {
   res.render("createdGame.html", { users: game.getPlayers(), gameId });
 };
 
-const renderGameplay = function(req, res){
-  res.render('gameplay.html');
-}
+const renderGameplay = function(req, res) {
+  res.render("gameplay.html");
+};
 
 const joinGame = function(req, res) {
   const { gameId, joinerName } = req.body;
@@ -46,11 +52,18 @@ const joinGame = function(req, res) {
   res.redirect("index.html");
 };
 
+const initializeMarket = function(req, res) {
+  const powerPlantMarket = new PowerPlantMarket(JSON.parse(powerPlantCards));
+  const cardDetails = JSON.stringify(powerPlantMarket.initializeMarket());
+  res.send(cardDetails);
+};
+
 module.exports = {
   renderHome,
   createGame,
   generateGameId,
   joinGame,
   renderGamePage,
-  renderGameplay
+  renderGameplay,
+  initializeMarket
 };

@@ -91,19 +91,67 @@ body {
   );
 }
 
-.power-plant{
+.power-plant {
   width: 80%;
   height: 125px;
   border: 1px solid black;
 }
 
-table{
+table {
   width: 80%;
   border-collapse: collapse;
   text-align: center;
   font-size: 18px;
 }
 
-th,td {
-  border: 1px solid black;  
+th,
+td {
+  border: 1px solid black;
+}
+
+.power-plant-card {
+  height: 70%;
+  width: 15%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  font-size: 25px;
+  border: 1px solid black;
+}
+
+.price {
+  height: 60%;
+  width: 40%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid black;
+  border-radius: 50%;
+}
+
+.single-market {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: 0.5%;
+  width: 940px;
+  height: 230px;
+}
+
+.price-details {
+  display: flex;
+  justify-content: center;
+  height: 60%;
+  width: 100%;
+  border-bottom: 0.2px solid black;
+}
+
+.price {
+  height: 60%;
+  width: 40%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid black;
+  border-radius: 50%;
 }
