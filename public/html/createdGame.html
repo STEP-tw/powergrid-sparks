@@ -1,30 +1,29 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Waiting Page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="/waiting_page.js"></script>
+    <link rel="stylesheet" type="text/css" media="screen" href="index.css" />
+  </head>
 
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Waiting Page</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta http-equiv="refresh" content="2; url='/createGame?gameId=<%= gameId %>'">
-  <link rel="stylesheet" type="text/css" media="screen" href="index.css">
-</head>
-
-<body>
-  <div class="overlay" style="visibility: visible" id="waiting-for-players">
-    <div class="popup">
-      <div class="waiting-page">
-        <div> Waiting for other players to join</div>
-        <div> GAME ID:
-          <%= gameId %>
+  <body>
+    <div class="overlay" style="visibility: visible" id="waiting-for-players">
+      <div class="popup">
+        <div class="waiting-page">
+          <div>Waiting for other players to join</div>
+          <div>GAME ID: <%= gameId %></div>
+          <div class="loader"></div>
+          <div id="players">
+            <% users.forEach(function(user){ %> 
+              <%-  include('joinedUser', {name:
+            user.name}); %> <% }); %>
+          </div>
+          <input type="hidden" id="gameId" name="gameId" value= "<%= gameId %>">
         </div>
-        <div class="loader"></div>
-        <% users.forEach(function(user){ %>
-        <%- include('joinedUser', {name: user}); %>
-        <% }); %>
       </div>
     </div>
-  </div>
-</body>
-
+  </body>
 </html>

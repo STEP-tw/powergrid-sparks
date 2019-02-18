@@ -67,7 +67,7 @@
     <div class="overlay" id="create-game">
       <div class="popup">
         <div class="options">
-          <form method="POST" action="/createGame">
+          <form class="options" method="POST" action="/createGame">
             <input class="textField" id="hostName" name='hostName' type="text" placeholder="Enter Your Name" required>
             <select class="textField" name="playerCount" required>
               <option value="">No of players</option>
@@ -77,7 +77,7 @@
               <option value="5">5</option>
               <option value="6">6</option>
             </select>
-            <input type="submit" class='submit' name="submit" value="submit">
+            <input class="submit" type="submit" class='submit' name="submit" value="submit">
           </form>
         </div>
       </div>
@@ -89,7 +89,7 @@
     <div class="overlay" id="join-game">
       <div class="popup">
         <div class="options">
-          <form method="POST" action="/joinGame">
+          <form class="options" method="POST" action="/joinGame">
             <input class="textField" name='joinerName' id='joinerName' type="text" placeholder="Enter Your Name">
             <input class="textField" name="gameId" id='gameId' type="text" placeholder="Enter Game ID">
             <button>SUBMIT</button>

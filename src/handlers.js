@@ -2,6 +2,8 @@ const fs = require("fs");
 const url = require("url");
 const Game = require("./model/Game");
 const PowerPlantMarket = require("./model/power_plant_cards");
+const Player = require("./model/player");
+const colors = ["red", "blue", "pink", "black", "orange", "yellow"];
 
 const powerPlantCards = fs.readFileSync(
   "./private/data/card_details.json",
@@ -21,7 +23,14 @@ const createGame = function(req, res) {
   const gameId = generateGameId(res.app.activeGames, Math.random);
   const game = new Game(req.body.playerCount);
   res.app.activeGames[gameId] = game;
-  game.addPlayer(req.body.hostName);
+  const player = new Player(colors.shift(), req.body.hostName);
+  game.addPlayer(player);
+  res.redirect(`/waitingPage?gameId=${gameId}`);
+};
+
+const renderWaitingPage = function(req, res) {
+  const gameId = url.parse(req.url, true).query.gameId;
+  const game = res.app.activeGames[+gameId];
   res.render("createdGame.html", { users: game.getPlayers(), gameId });
 };
 
@@ -30,13 +39,14 @@ const renderGamePage = function(req, res) {
   const game = res.app.activeGames[+gameId];
   if (game.getCurrentPlayersCount() == game.getMaxPlayersCount()) {
     game.start();
-    return res.redirect("/gameplay");
   }
-  res.render("createdGame.html", { users: game.getPlayers(), gameId });
+  res.send({ users: game.getPlayers(), gameState: game.hasStarted(), gameId });
 };
 
 const renderGameplay = function(req, res) {
-  res.render("gameplay.html");
+  const gameId = url.parse(req.url, true).query.gameId;
+  const game = res.app.activeGames[+gameId];
+  res.render("gameplay.html", { players: game.getPlayers() });
 };
 
 const joinGame = function(req, res) {
@@ -46,7 +56,8 @@ const joinGame = function(req, res) {
     if (game.hasStarted()) {
       return res.send("game is already started!");
     }
-    game.addPlayer(joinerName);
+    const player = new Player(colors.shift(), joinerName);
+    game.addPlayer(player);
     return res.render("createdGame.html", { users: game.getPlayers(), gameId });
   }
   res.redirect("index.html");
@@ -65,5 +76,6 @@ module.exports = {
   joinGame,
   renderGamePage,
   renderGameplay,
-  initializeMarket
+  initializeMarket,
+  renderWaitingPage
 };

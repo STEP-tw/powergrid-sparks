@@ -13,7 +13,8 @@ const {
   joinGame,
   renderGamePage,
   renderGameplay,
-  initializeMarket
+  initializeMarket,
+  renderWaitingPage
 } = require("./src/handlers");
 
 app.set("views", __dirname + "/public/html");
@@ -27,10 +28,11 @@ app.use(cookieParser());
 
 app.get("/", renderHome);
 app.post("/createGame", createGame);
-app.get(/\/createGame/, renderGamePage);
+app.get("/createGame", renderGamePage);
 app.post("/joinGame", joinGame);
-app.get("/gameplay", renderGameplay);
 app.get("/displayPowerPlantMarket", initializeMarket);
+app.get(/\/gameplay/, renderGameplay);
+app.get(/\/waitingPage/, renderWaitingPage);
 
 app.use(express.static("public/html"));
 app.use(express.static("public/scripts"));

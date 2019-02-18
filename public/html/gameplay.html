@@ -1,17 +1,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <style>
-  
-  </style>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Page Title</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+<<<<<<< HEAD
   <link rel="stylesheet" type="text/css" media="screen" href="gameplay.css">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
   integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
   <script src="/power_plant_market.js"></script>
+=======
+  <link rel="stylesheet" type="text/css" media="screen" href="gamepage.css">
+  <script src="main.js"></script>
+>>>>>>> e0334bcf21bfeb8241f666df815dbe79289d7637
 </head>
 <body>
   <main style="width: 100%;height: 100%; display: flex">
@@ -602,30 +604,9 @@
     </section>
   </main>
   <section class = "players-section">
-    <div class = "player-profile" id="player-1">
-      <p class="player-name"> PLAYER 1</p>
-      <img src="user.png" alt="user"/>
-    </div>
-    <div class = "player-profile" id="player-2">
-      <p class="player-name"> PLAYER 2</p>
-      <img src="user.png" alt="user"/>
-    </div>
-    <div class = "player-profile" id="player-3">
-      <p class="player-name"> PLAYER 3</p>
-      <img src="user.png" alt="user"/>
-    </div>
-    <div class = "player-profile" id="player-4">
-      <p class="player-name"> PLAYER 4</p>
-      <img src="user.png" alt="user"/>
-    </div>
-    <div class = "player-profile" id="player-5">
-      <p class="player-name"> PLAYER 5</p>
-      <img src="user.png" alt="user"/>
-    </div>
-    <div class = "player-profile" id="player-6">
-        <p class="player-name"> PLAYER 6</p>
-        <img src="user.png" alt="user"/>
-    </div>
+      <% players.forEach(function(player){ %>
+      <%- include('allUsers', {player,id:players.indexOf(player)+1}); %>
+      <% }); %>
   </section>
 
   
