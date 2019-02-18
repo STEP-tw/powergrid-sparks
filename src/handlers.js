@@ -1,5 +1,7 @@
 const url = require("url");
 const Game = require("./model/Game");
+const Player = require('./model/player');
+const colors =['red','blue','pink','black','orange','yellow'];
 
 const renderHome = function(req, res) {
   res.render("index.html");
@@ -15,7 +17,8 @@ const createGame = function(req, res) {
   const gameId = generateGameId(res.app.activeGames, Math.random);
   const game = new Game(req.body.playerCount);
   res.app.activeGames[gameId] = game;
-  game.addPlayer(req.body.hostName);
+  const player = new Player(colors.shift(),req.body.hostName);
+  game.addPlayer(player);
   res.redirect(`/waitingPage?gameId=${gameId}`);
 };
 
@@ -47,7 +50,8 @@ const joinGame = function(req, res) {
     if (game.hasStarted()) {
       return res.send("game is already started!");
     }
-    game.addPlayer(joinerName);
+    const player = new Player(colors.shift(),joinerName);
+    game.addPlayer(player);
     return res.render("createdGame.html", { users: game.getPlayers(), gameId });
   }
   res.redirect("index.html");

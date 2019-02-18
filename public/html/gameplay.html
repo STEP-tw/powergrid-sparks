@@ -598,7 +598,7 @@
   </main>
   <section class = "players-section">
       <% players.forEach(function(player){ %>
-      <%- include('allUsers', {name: player,id:players.indexOf(player)+1}); %>
+      <%- include('allUsers', {player,id:players.indexOf(player)+1}); %>
       <% }); %>
   </section>
 

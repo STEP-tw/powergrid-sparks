@@ -1,7 +1,7 @@
 const createHTML = function(elements) {
   let div = "";
   elements.forEach(element => {
-    div += element + "  has joined game\n";
+    div += element.name + "  has joined game\n";
   });
   return div;
 };
