@@ -597,30 +597,9 @@
     </section>
   </main>
   <section class = "players-section">
-    <div class = "player-profile" id="player-1">
-      <p class="player-name"> PLAYER 1</p>
-      <img src="user.png" alt="user"/>
-    </div>
-    <div class = "player-profile" id="player-2">
-      <p class="player-name"> PLAYER 2</p>
-      <img src="user.png" alt="user"/>
-    </div>
-    <div class = "player-profile" id="player-3">
-      <p class="player-name"> PLAYER 3</p>
-      <img src="user.png" alt="user"/>
-    </div>
-    <div class = "player-profile" id="player-4">
-      <p class="player-name"> PLAYER 4</p>
-      <img src="user.png" alt="user"/>
-    </div>
-    <div class = "player-profile" id="player-5">
-      <p class="player-name"> PLAYER 5</p>
-      <img src="user.png" alt="user"/>
-    </div>
-    <div class = "player-profile" id="player-6">
-        <p class="player-name"> PLAYER 6</p>
-        <img src="user.png" alt="user"/>
-    </div>
+      <% players.forEach(function(player){ %>
+      <%- include('allUsers', {name: player,id:players.indexOf(player)+1}); %>
+      <% }); %>
   </section>
 
   

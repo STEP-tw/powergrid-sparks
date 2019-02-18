@@ -62,6 +62,16 @@ header {
   box-shadow: 2px 3px 20px 3px rgb(0, 0, 0);
 }
 
+.submit {
+  height: 65px;
+  border-radius: 6px;
+  font-size: 20px;
+  font-weight: bolder;
+  background-image: linear-gradient(rgb(250, 207, 207), rgb(233, 164, 91));
+  cursor: pointer;
+  box-shadow: 2px 3px 20px 3px rgb(0, 0, 0);
+}
+
 .options > button:focus {
   text-decoration: none;
   outline: none;

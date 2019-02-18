@@ -35,7 +35,9 @@ const renderGamePage = function(req, res) {
 };
 
 const renderGameplay = function(req, res){
-  res.render('gameplay.html');
+  const gameId = url.parse(req.url, true).query.gameId;
+  const game = res.app.activeGames[+gameId];
+  res.render("gameplay.html", { players: game.getPlayers() });
 }
 
 const joinGame = function(req, res) {

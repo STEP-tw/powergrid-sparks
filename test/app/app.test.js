@@ -68,8 +68,9 @@ describe("GET /createGame", () => {
 
 describe("GET /gameplay", () => {
   it("should show the gameplay page with response code 200", done => {
+    app.activeGames["2"] = new Game(0);
     request(app)
-      .get('/gameplay')
+      .get('/gameplay?gameId=2')
       .expect(200, done)
   });
 });
