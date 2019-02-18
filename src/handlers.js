@@ -24,9 +24,9 @@ const renderGamePage = function(req, res) {
   const game = res.app.activeGames[+gameId];
   if (game.getCurrentPlayersCount() == game.getMaxPlayersCount()) {
     game.start();
-    return res.redirect("/gameplay");
+    // return res.redirect("/gameplay");
   }
-  res.render("createdGame.html", { users: game.getPlayers(), gameId });
+  res.send({users: game.getPlayers(), gameState:game.hasStarted()});
 };
 
 const renderGameplay = function(req, res){

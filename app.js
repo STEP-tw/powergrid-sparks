@@ -26,7 +26,7 @@ app.use(cookieParser());
 
 app.get("/", renderHome);
 app.post("/createGame", createGame);
-app.get(/\/createGame/, renderGamePage);
+app.get('/createGame', renderGamePage);
 app.post("/joinGame", joinGame);
 app.get('/gameplay',renderGameplay);
 

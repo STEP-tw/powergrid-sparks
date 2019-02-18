@@ -58,11 +58,11 @@ describe("GET /createGame", () => {
       .expect(200, done);
   });
 
-  it("should redirect to the gameplay page if max player has joined", done => {
+  it("should give to the gameplay page if max player has joined", done => {
     app.activeGames["2"] = new Game(0);
     request(app)
       .get("/createGame?gameId=2")
-      .expect(302, done);
+      .expect(200, done);
   });
 });
 
