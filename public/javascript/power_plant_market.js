@@ -22,7 +22,6 @@ const initialResourceCount = {
 
 const displayMarket = function() {
   const map = document.getElementById("map");
-  map.onclick = "";
   fetch("/displayPowerPlantMarket")
     .then(res => res.text())
     .then(res => displayPowerPlantMarket(res));
@@ -182,3 +181,11 @@ const appendChildren = function(parent, children) {
     parent.appendChild(child);
   });
 };
+
+const displayMap = function() {
+  let container = document.getElementById("map");
+  let mapHTML = getMap();
+  container.innerHTML = mapHTML;
+};
+
+window.onload = displayMarket();
