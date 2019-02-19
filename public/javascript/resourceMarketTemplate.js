@@ -1,3 +1,13 @@
+const getBiddingSectionTemplate = function() {
+  return `
+    <div>
+      CURRENT BID AMOUNT :
+          <span id="current-bid-amount">100</span>
+    </div>
+    <div ><span class="increase-bid">INCREASE BID : <span>100</span> &nbsp</span><button>&#x2b</button>&nbsp<button>MAKE BID</button>&nbsp<button>PASS</button></div>
+  `;
+};
+
 const getResourceMarketTemplate = function() {
   return `
   <div class="resource-grid">

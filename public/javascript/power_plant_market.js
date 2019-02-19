@@ -65,6 +65,9 @@ const generatePowerPlantMarket = function(powerPlantCards) {
   const marketDiv = document.createElement("div");
   marketDiv.appendChild(currentMarketDiv);
   marketDiv.appendChild(futureMarketDiv);
+  const biddingDiv = generateDiv("bidding-section");
+  biddingDiv.innerHTML = getBiddingSectionTemplate();
+  marketDiv.appendChild(biddingDiv);
   marketDiv.appendChild(resourceMarketDiv);
   return marketDiv;
 };
