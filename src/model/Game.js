@@ -3,6 +3,7 @@ class Game {
     this.active = false;
     this.players = [];
     this.maxPlayerCount = playerCount;
+    this.isShuffled = false;
   }
 
   addPlayer(player) {
@@ -19,6 +20,11 @@ class Game {
 
   getPlayers() {
     return this.players;
+  }
+
+  decideOrder(shuffler) {
+    !this.isShuffled && (this.players = shuffler(this.players));
+    this.isShuffled = true;
   }
 
   getCurrentPlayersCount() {

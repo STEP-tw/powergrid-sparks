@@ -1,5 +1,6 @@
 const fs = require("fs");
 const url = require("url");
+const _ = require('lodash');
 const Game = require("./model/Game");
 const PowerPlantMarket = require("./model/power_plant_cards");
 const Player = require("./model/player");
@@ -38,6 +39,7 @@ const renderGamePage = function(req, res) {
   const gameId = url.parse(req.url, true).query.gameId;
   const game = res.app.activeGames[+gameId];
   if (game.getCurrentPlayersCount() == game.getMaxPlayersCount()) {
+    game.decideOrder(_.shuffle);
     game.start();
   }
   res.send({ users: game.getPlayers(), gameState: game.hasStarted(), gameId });
