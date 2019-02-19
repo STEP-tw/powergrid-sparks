@@ -134,11 +134,11 @@ const addFocus = function(element) {
 
 const generateResourceDiv = function(cardDetails) {
   const resourceDiv = document.createElement("div");
-  resourceDiv.innerHTML = `${resources[cardDetails.type]} 
-                               ${cardDetails.inputs} 
+  resourceDiv.innerHTML = `${resources[cardDetails.resource.type]} 
+                               ${cardDetails.resource.quantity} 
                                <i class='fas fa-arrow-right' ></i >  
                                <i class="fas fa-house-damage"></i>
-                               ${cardDetails.output}`;
+                               ${cardDetails.city}`;
   return resourceDiv;
 };
 

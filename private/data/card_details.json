@@ -1,50 +1,66 @@
 {
   "3": {
-    "type": "Oil",
-    "inputs": 2,
-    "output": 1,
+    "resource": {
+      "type": "Oil",
+      "quantity": 2
+    },
+    "city": 1,
     "inDeck": true
   },
   "4": {
-    "type": "Coal",
-    "inputs": 2,
-    "output": 1,
+    "resource": {
+      "type": "Coal",
+      "quantity": 2
+    },
+    "city": 1,
     "inDeck": true
   },
   "5": {
-    "type": "Hybrid",
-    "inputs": 2,
-    "output": 1,
+    "resource": {
+      "type": "Hybrid",
+      "quantity": 2
+    },
+    "city": 1,
     "inDeck": true
   },
   "6": {
-    "type": "Garbage",
-    "inputs": 1,
-    "output": 1,
+    "resource": {
+      "type": "Garbage",
+      "quantity": 1
+    },
+    "city": 1,
     "inDeck": true
   },
   "7": {
-    "type": "Oil",
-    "inputs": 3,
-    "output": 2,
+    "resource": {
+      "type": "Oil",
+      "quantity": 3
+    },
+    "city": 2,
     "inDeck": true
   },
   "8": {
-    "type": "Coal",
-    "inputs": 3,
-    "output": 2,
+    "resource": {
+      "type": "Coal",
+      "quantity": 3
+    },
+    "city": 2,
     "inDeck": true
   },
   "9": {
-    "type": "Oil",
-    "inputs": 1,
-    "output": 1,
+    "resource": {
+      "type": "Oil",
+      "quantity": 1
+    },
+    "city": 1,
     "inDeck": true
   },
   "10": {
-    "type": "Coal",
-    "inputs": 2,
-    "output": 2,
+    "resource": {
+      "type": "Coal",
+      "quantity": 2
+    },
+    "city": 2,
     "inDeck": true
   },
   "11": {
@@ -54,9 +70,11 @@
     "inDeck": true
   },
   "12": {
-    "type": "Hybrid",
-    "inputs": 2,
-    "output": 2,
+    "resource": {
+      "type": "Hybrid",
+      "quantity": 2
+    },
+    "city": 2,
     "inDeck": true
   },
   "13": {
@@ -66,189 +84,249 @@
     "inDeck": true
   },
   "14": {
-    "type": "Garbage",
-    "inputs": 2,
-    "output": 2,
+    "resource": {
+      "type": "Garbage",
+      "quantity": 2
+    },
+    "city": 2,
     "inDeck": true
   },
   "15": {
-    "type": "Coal",
-    "inputs": 2,
-    "output": 3,
+    "resource": {
+      "type": "Coal",
+      "quantity": 2
+    },
+    "city": 3,
     "inDeck": true
   },
   "16": {
-    "type": "Oil",
-    "inputs": 2,
-    "output": 3,
+    "resource": {
+      "type": "Oil",
+      "quantity": 2
+    },
+    "city": 3,
     "inDeck": true
   },
   "17": {
-    "type": "Nuclear",
-    "inputs": 1,
-    "output": 2,
+    "resource": {
+      "type": "Nulear",
+      "quantity": 1
+    },
+    "city": 2,
     "inDeck": true
   },
   "18": {
-    "type": "Ecological",
-    "inputs": 0,
-    "output": 2,
+    "resource": {
+      "type": "Ecological",
+      "quantity": 0
+    },
+    "city": 4,
     "inDeck": true
   },
   "19": {
-    "type": "Garbgae",
+    "type": "Garbage",
     "inputs": 2,
     "output": 3,
     "inDeck": true
   },
   "20": {
-    "type": "Coal",
-    "inputs": 3,
-    "output": 5,
+    "resource": {
+      "type": "Coal",
+      "quantity": 3
+    },
+    "city": 5,
     "inDeck": true
   },
   "21": {
-    "type": "Hybrid",
-    "inputs": 2,
-    "output": 4,
+    "resource": {
+      "type": "Hybrid",
+      "quantity": 2
+    },
+    "city": 4,
     "inDeck": true
   },
   "22": {
-    "type": "Ecological",
-    "inputs": 0,
-    "output": 2,
+    "resource": {
+      "type": "Ecological",
+      "quantity": 0
+    },
+    "city": 4,
     "inDeck": true
   },
   "23": {
-    "type": "Nuclear",
-    "inputs": 1,
-    "output": 3,
+    "resource": {
+      "type": "Nulear",
+      "quantity": 1
+    },
+    "city": 3,
     "inDeck": true
   },
   "24": {
-    "type": "Garbage",
-    "inputs": 2,
-    "output": 4,
+    "resource": {
+      "type": "Garbage",
+      "quantity": 2
+    },
+    "city": 4,
     "inDeck": true
   },
   "25": {
-    "type": "Coal",
-    "inputs": 2,
-    "output": 5,
+    "resource": {
+      "type": "Coal",
+      "quantity": 2
+    },
+    "city": 5,
     "inDeck": true
   },
   "26": {
-    "type": "Oil",
-    "inputs": 2,
-    "output": 5,
+    "resource": {
+      "type": "Oil",
+      "quantity": 2
+    },
+    "city": 5,
     "inDeck": true
   },
   "27": {
-    "type": "Ecological",
-    "inputs": 0,
-    "output": 3,
+    "resource": {
+      "type": "Ecological",
+      "quantity": 0
+    },
+    "city": 4,
     "inDeck": true
   },
   "28": {
-    "type": "Nuclear",
-    "inputs": 1,
-    "output": 4,
+    "resource": {
+      "type": "Nulear",
+      "quantity": 1
+    },
+    "city": 4,
     "inDeck": true
   },
   "29": {
-    "type": "Hybrid",
-    "inputs": 1,
-    "output": 4,
+    "resource": {
+      "type": "Hybrid",
+      "quantity": 1
+    },
+    "city": 4,
     "inDeck": true
   },
   "30": {
-    "type": "Garbage",
-    "inputs": 3,
-    "output": 6,
+    "resource": {
+      "type": "Garbage",
+      "quantity": 3
+    },
+    "city": 6,
     "inDeck": true
   },
   "31": {
-    "type": "Coal",
-    "inputs": 3,
-    "output": 6,
+    "resource": {
+      "type": "Coal",
+      "quantity": 3
+    },
+    "city": 6,
     "inDeck": true
   },
   "32": {
-    "type": "Oil",
-    "inputs": 3,
-    "output": 6,
+    "resource": {
+      "type": "Oil",
+      "quantity": 3
+    },
+    "city": 6,
     "inDeck": true
   },
   "33": {
-    "type": "Ecological",
-    "inputs": 0,
-    "output": 4,
+    "resource": {
+      "type": "Ecological",
+      "quantity": 0
+    },
+    "city": 4,
     "inDeck": true
   },
   "34": {
-    "type": "Nuclear",
-    "inputs": 1,
-    "output": 5,
+    "resource": {
+      "type": "Nulear",
+      "quantity": 1
+    },
+    "city": 5,
     "inDeck": true
   },
   "35": {
-    "type": "Oil",
-    "inputs": 1,
-    "output": 5,
+    "resource": {
+      "type": "Oil",
+      "quantity": 1
+    },
+    "city": 5,
     "inDeck": true
   },
   "36": {
-    "type": "Coal",
-    "inputs": 3,
-    "output": 7,
+    "resource": {
+      "type": "Coal",
+      "quantity": 3
+    },
+    "city": 7,
     "inDeck": true
   },
   "37": {
-    "type": "Ecological",
-    "inputs": 0,
-    "output": 4,
+    "resource": {
+      "type": "Ecological",
+      "quantity": 0
+    },
+    "city": 4,
     "inDeck": true
   },
   "38": {
-    "type": "Garbage",
-    "inputs": 3,
-    "output": 7,
+    "resource": {
+      "type": "Garbage",
+      "quantity": 3
+    },
+    "city": 7,
     "inDeck": true
   },
   "39": {
-    "type": "Nuclear",
-    "inputs": 1,
-    "output": 6,
+    "resource": {
+      "type": "Nulear",
+      "quantity": 1
+    },
+    "city": 6,
     "inDeck": true
   },
   "40": {
-    "type": "Oil",
-    "inputs": 2,
-    "output": 6,
+    "resource": {
+      "type": "Oil",
+      "quantity": 2
+    },
+    "city": 6,
     "inDeck": true
   },
   "42": {
-    "type": "Coal",
-    "inputs": 2,
-    "output": 6,
+    "resource": {
+      "type": "Coal",
+      "quantity": 2
+    },
+    "city": 6,
     "inDeck": true
   },
   "44": {
-    "type": "Ecological",
-    "inputs": 0,
-    "output": 5,
+    "resource": {
+      "type": "Ecological",
+      "quantity": 0
+    },
+    "city": 4,
     "inDeck": true
   },
   "46": {
-    "type": "Hybrid",
-    "inputs": 3,
-    "output": 7,
+    "resource": {
+      "type": "Hybrid",
+      "quantity": 3
+    },
+    "city": 7,
     "inDeck": true
   },
   "50": {
-    "type": "Ecological",
-    "inputs": 0,
-    "output": 6,
+    "resource": {
+      "type": "Ecological",
+      "quantity": 0
+    },
+    "city": 4,
     "inDeck": true
   }
 }
