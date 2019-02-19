@@ -35,8 +35,8 @@ describe("POST /joinGame", () => {
     request(app)
       .post("/joinGame")
       .send("username=chandan&gameId=2")
-      .expect("Content-Type", /html/)
-      .expect(200, done);
+      .expect("Content-Type", /plain/)
+      .expect(302, done);
   });
 
   it("should show that the game has started if game is already active", done => {

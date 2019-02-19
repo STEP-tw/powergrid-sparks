@@ -61,9 +61,9 @@ const joinGame = function(req, res) {
     const playerColor = game.getPlayerColor();
     const player = new Player(playerColor, joinerName);
     game.addPlayer(player);
-    return res.render("createdGame.html", { users: game.getPlayers(), gameId });
+    res.redirect(`/waitingPage?gameId=${gameId}`);
   }
-  res.redirect("index.html");
+  res.redirect("/");
 };
 
 const initializeMarket = function(req, res) {
