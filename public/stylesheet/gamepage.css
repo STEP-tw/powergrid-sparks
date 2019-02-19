@@ -213,8 +213,8 @@ td {
 }
 
 .resource-market {
-  padding-top: 1%;
-  padding-bottom: 1%;
+  /* padding-top: 1%; */
+  /* padding-bottom: 1%; */
   margin-top: 1%;
   display: flex;
   justify-content: space-around;
