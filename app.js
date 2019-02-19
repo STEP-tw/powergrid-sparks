@@ -35,7 +35,6 @@ app.get(/\/gameplay/, renderGameplay);
 app.get(/\/waitingPage/, renderWaitingPage);
 
 app.use(express.static("public/html"));
-app.use(express.static("public/scripts"));
 app.use(express.static("public/stylesheet"));
 app.use(express.static("public/javascript"));
 app.use(express.static("public/images"));
