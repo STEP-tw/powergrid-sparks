@@ -61,7 +61,7 @@ const joinGame = function(req, res) {
     const playerColor = game.getPlayerColor();
     const player = new Player(playerColor, joinerName);
     game.addPlayer(player);
-    res.redirect(`/waitingPage?gameId=${gameId}`);
+    return res.redirect(`/waitingPage?gameId=${gameId}`);
   }
   res.redirect("/");
 };
