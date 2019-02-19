@@ -1,5 +1,10 @@
 const currentMarketCards = {};
 
+const increaseBid = function() {
+  const currentBid = document.getElementById("bid-amount").innerText  ;
+  document.getElementById("bid-amount").innerText = +currentBid + 1;
+};
+
 const resources = {
   Garbage: '<i class="fas fa-trash-alt"></i>',
   Coal: '<i class="fas fa-cubes"></i>',
@@ -8,7 +13,7 @@ const resources = {
   Hybrid: '<i class="fas fa-hands-helping"></i>'
 };
 
-const initialMarketCount = {
+const initialResourceCount = {
   coal: 24,
   oil: 18,
   garbage: 6,
@@ -50,7 +55,7 @@ const fillResource = function(resource) {
   const maxCount = 24;
   for (
     let resourceCount = maxCount;
-    resourceCount > maxCount - initialMarketCount[resource];
+    resourceCount > maxCount - initialResourceCount[resource];
     resourceCount--
   ) {
     generateResource(resource, resourceCount);
@@ -103,7 +108,11 @@ const generateResourceMarketDiv = function() {
 const arrangeCurrentMarket = function(singleMarket, powerPlant, cardDetails) {
   const powerPlantCardId = `powerPlant_${powerPlant}`;
   const powerPlantCardDiv = generateDiv("unselectedCard", powerPlantCardId);
-  powerPlantCardDiv.onclick = addFocus.bind(null, powerPlantCardDiv);
+  powerPlantCardDiv.onclick = addFocus.bind(
+    null,
+    powerPlantCardDiv,
+    powerPlant
+  );
   const priceDiv = generatePriceDiv(powerPlant);
   const resourceDiv = generateResourceDiv(cardDetails);
   powerPlantCardDiv.appendChild(priceDiv);
@@ -125,7 +134,7 @@ const arrangeFutureMarket = function(singleMarket, powerPlant, cardDetails) {
   singleMarket.appendChild(powerPlantCardDiv);
 };
 
-const addFocus = function(element) {
+const addFocus = function(element, powerPlant) {
   Object.keys(currentMarketCards).forEach(card => {
     currentMarketCards[card].isSelected = false;
     currentMarketCards[card].powerplant.className = "unselectedCard";
@@ -133,6 +142,8 @@ const addFocus = function(element) {
   const id = element.id.slice(-1);
   currentMarketCards[id].isSelected = true;
   element.className = "selectedCard";
+  document.getElementById("current-bid-amount").innerText = powerPlant;
+  document.getElementById("bid-amount").innerText = powerPlant;
 };
 
 const generateResourceDiv = function(cardDetails) {
