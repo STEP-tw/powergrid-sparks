@@ -1,4 +1,5 @@
 const chai = require('chai');
+const sinon = require('sinon');
 const Game = require('../../src/model/Game');
 
 describe('Game', () => {
@@ -58,6 +59,32 @@ describe('Game', () => {
     it('should return 6 initially', () => {
       const expectedOutput = 6;
       const actualOutput = game.getMaxPlayersCount();
+      chai.expect(expectedOutput).to.be.deep.equal(actualOutput);
+    });
+  });
+  
+  describe('getPlayerColor',() => {
+    it('It should return a color',() => {
+      const actualOutput = game.getPlayerColor();
+      const expectedOutput = 'red';
+      chai.expect(expectedOutput).to.be.deep.equal(actualOutput);
+    });
+  });
+
+  describe('decideOrder',() => {
+    it('should decide the random order of players',() => {
+      game.decideOrder(()=>{})
+      const actualOutput = game.isShuffled;
+      const expectedOutput = true;
+      chai.expect(expectedOutput).to.be.deep.equal(actualOutput);
+    });
+
+    it('should give the shuffled order',()=>{
+      const shuffler = sinon.stub();
+      shuffler.onFirstCall().returns(['chandan','ankon','gaurav'])
+      game.decideOrder(shuffler);
+      const expectedOutput = ['chandan','ankon','gaurav'];
+      const actualOutput = game.players;
       chai.expect(expectedOutput).to.be.deep.equal(actualOutput);
     });
   });

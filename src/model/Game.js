@@ -3,6 +3,7 @@ class Game {
     this.active = false;
     this.players = [];
     this.maxPlayerCount = playerCount;
+    this.colors = ["red", "blue", "pink", "black", "orange", "yellow"];
     this.isShuffled = false;
   }
 
@@ -20,6 +21,10 @@ class Game {
 
   getPlayers() {
     return this.players;
+  }
+
+  getPlayerColor() {
+    return this.colors.shift();
   }
 
   decideOrder(shuffler) {

@@ -1,10 +1,9 @@
 const fs = require("fs");
 const url = require("url");
-const _ = require('lodash');
+const _ = require("lodash");
 const Game = require("./model/Game");
 const PowerPlantMarket = require("./model/power_plant_cards");
 const Player = require("./model/player");
-const colors = ["red", "blue", "pink", "black", "orange", "yellow"];
 
 const powerPlantCards = fs.readFileSync(
   "./private/data/card_details.json",
@@ -24,7 +23,8 @@ const createGame = function(req, res) {
   const gameId = generateGameId(res.app.activeGames, Math.random);
   const game = new Game(req.body.playerCount);
   res.app.activeGames[gameId] = game;
-  const player = new Player(colors.shift(), req.body.hostName);
+  const playerColor = game.getPlayerColor();
+  const player = new Player(playerColor, req.body.hostName);
   game.addPlayer(player);
   res.redirect(`/waitingPage?gameId=${gameId}`);
 };
@@ -58,11 +58,12 @@ const joinGame = function(req, res) {
     if (game.hasStarted()) {
       return res.send("game is already started!");
     }
-    const player = new Player(colors.shift(), joinerName);
+    const playerColor = game.getPlayerColor();
+    const player = new Player(playerColor, joinerName);
     game.addPlayer(player);
-    return res.render("createdGame.html", { users: game.getPlayers(), gameId });
+    res.redirect(`/waitingPage?gameId=${gameId}`);
   }
-  res.redirect("index.html");
+  res.redirect("/");
 };
 
 const initializeMarket = function(req, res) {

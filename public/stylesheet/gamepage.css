@@ -15,6 +15,27 @@ body {
   background-image: linear-gradient(to right, #f0eded, #aeadad, #f0eded);
 }
 
+.player-color-red {
+  border-top: 10px solid red;
+}
+
+.player-color-blue {
+  border-top: 10px solid blue;
+}
+
+.player-color-orange {
+  border-top: 10px solid orange;
+}
+.player-color-pink {
+  border-top: 10px solid pink;
+}
+.player-color-black {
+  border-top: 10px solid black;
+}
+.player-color-yellow {
+  border-top: 10px solid yellow;
+}
+
 .player-profile {
   box-shadow: 8px 8px 36px -3px rgba(56, 46, 56, 1);
   border-radius: 5%;
@@ -23,7 +44,7 @@ body {
   width: 160px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
 }
 
 #player-1 {
@@ -71,6 +92,15 @@ body {
   font-size: 22px;
 }
 
+.player-header{
+  width: 100%;
+  margin-top: 2%;
+  border-bottom: 2px solid black;
+
+  display: flex;
+  justify-content: space-between;
+  font-weight: bolder;
+}
 .player-name {
   font-weight: bolder;
 }
