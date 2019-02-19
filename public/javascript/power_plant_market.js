@@ -153,6 +153,7 @@ const addFocus = function(element, powerPlant) {
 
 const generateResourceDiv = function(cardDetails) {
   const resourceDiv = document.createElement("div");
+  resourceDiv.className = 'card-details';
   resourceDiv.innerHTML = `${resources[cardDetails.resource.type]} 
                                ${cardDetails.resource.quantity} 
                                <i class='fas fa-arrow-right' ></i >  
