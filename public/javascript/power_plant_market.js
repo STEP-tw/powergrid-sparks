@@ -8,6 +8,13 @@ const resources = {
   Hybrid: '<i class="fas fa-hands-helping"></i>'
 };
 
+const initialMarketCount = {
+  coal: 24,
+  oil: 18,
+  garbage: 6,
+  uranium: 2
+};
+
 const displayMarket = function() {
   const map = document.getElementById("map");
   map.onclick = "";
@@ -20,15 +27,45 @@ const displayPowerPlantMarket = function(powerPlantCards) {
   const map = document.getElementById("map");
   map.innerHTML = "";
   map.appendChild(generatePowerPlantMarket(powerPlantCards));
+  fillResources();
+};
+
+const fillResources = function() {
+  fillResource("coal");
+  fillResource("oil");
+  fillResource("garbage");
+  document.getElementById("uranium_14_0").className = "uranium";
+  document.getElementById("uranium_16_0").className = "uranium";
+};
+
+const generateResource = function(resource, resourceCount) {
+  let resourceId = `${resource}_${Math.ceil(
+    resourceCount / 3
+  )}_${resourceCount % 3}`;
+  let resourceDiv = document.getElementById(resourceId);
+  resourceDiv.className = resource;
+};
+
+const fillResource = function(resource) {
+  const maxCount = 24;
+  for (
+    let resourceCount = maxCount;
+    resourceCount > maxCount - initialMarketCount[resource];
+    resourceCount--
+  ) {
+    generateResource(resource, resourceCount);
+  }
 };
 
 const generatePowerPlantMarket = function(powerPlantCards) {
   const powerPlants = JSON.parse(powerPlantCards);
   const currentMarketDiv = generateCurrentMarket(powerPlants);
   const futureMarketDiv = generateFutureMarket(powerPlants);
+  const resourceMarketDiv = generateResourceMarketDiv();
   const marketDiv = document.createElement("div");
   marketDiv.appendChild(currentMarketDiv);
   marketDiv.appendChild(futureMarketDiv);
+  marketDiv.appendChild(resourceMarketDiv);
   return marketDiv;
 };
 
@@ -49,9 +86,15 @@ const generateFutureMarket = function(powerPlants) {
   const futureMarketDiv = generateDiv("single-market", "futureMarket");
   const futureMarket = Object.keys(powerPlants).slice(4);
   futureMarket.map(powerPlant =>
-    arrangeFurtureMarket(futureMarketDiv, powerPlant, powerPlants[powerPlant])
+    arrangeFutureMarket(futureMarketDiv, powerPlant, powerPlants[powerPlant])
   );
   return futureMarketDiv;
+};
+
+const generateResourceMarketDiv = function() {
+  const resourceDiv = generateDiv("resource-market", "resourceMarket");
+  resourceDiv.innerHTML = getResourceMarketTemplate();
+  return resourceDiv;
 };
 
 const arrangeCurrentMarket = function(singleMarket, powerPlant, cardDetails) {
@@ -69,7 +112,7 @@ const arrangeCurrentMarket = function(singleMarket, powerPlant, cardDetails) {
   };
 };
 
-const arrangeFurtureMarket = function(singleMarket, powerPlant, cardDetails) {
+const arrangeFutureMarket = function(singleMarket, powerPlant, cardDetails) {
   const powerPlantCardId = `powerPlant_${powerPlant}`;
   const powerPlantCardDiv = generateDiv("unselectedCard", powerPlantCardId);
   const priceDiv = generatePriceDiv(powerPlant);
