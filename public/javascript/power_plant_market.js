@@ -1,7 +1,7 @@
 const currentMarketCards = {};
 
 const increaseBid = function() {
-  const currentBid = document.getElementById("bid-amount").innerText  ;
+  const currentBid = document.getElementById("bid-amount").innerText;
   document.getElementById("bid-amount").innerText = +currentBid + 1;
 };
 
@@ -67,14 +67,21 @@ const generatePowerPlantMarket = function(powerPlantCards) {
   const currentMarketDiv = generateCurrentMarket(powerPlants);
   const futureMarketDiv = generateFutureMarket(powerPlants);
   const resourceMarketDiv = generateResourceMarketDiv();
+  const biddingDiv = generateBidDiv();
   const marketDiv = document.createElement("div");
-  marketDiv.appendChild(currentMarketDiv);
-  marketDiv.appendChild(futureMarketDiv);
+  appendChildren(marketDiv, [
+    currentMarketDiv,
+    futureMarketDiv,
+    biddingDiv,
+    resourceMarketDiv
+  ]);
+  return marketDiv;
+};
+
+const generateBidDiv = function() {
   const biddingDiv = generateDiv("bidding-section");
   biddingDiv.innerHTML = getBiddingSectionTemplate();
-  marketDiv.appendChild(biddingDiv);
-  marketDiv.appendChild(resourceMarketDiv);
-  return marketDiv;
+  return biddingDiv;
 };
 
 const generateCurrentMarket = function(powerPlants) {
@@ -115,8 +122,7 @@ const arrangeCurrentMarket = function(singleMarket, powerPlant, cardDetails) {
   );
   const priceDiv = generatePriceDiv(powerPlant);
   const resourceDiv = generateResourceDiv(cardDetails);
-  powerPlantCardDiv.appendChild(priceDiv);
-  powerPlantCardDiv.appendChild(resourceDiv);
+  appendChildren(powerPlantCardDiv, [priceDiv, resourceDiv]);
   singleMarket.appendChild(powerPlantCardDiv);
   currentMarketCards[powerPlant] = {
     isSelected: false,
@@ -129,8 +135,7 @@ const arrangeFutureMarket = function(singleMarket, powerPlant, cardDetails) {
   const powerPlantCardDiv = generateDiv("unselectedCard", powerPlantCardId);
   const priceDiv = generatePriceDiv(powerPlant);
   const resourceDiv = generateResourceDiv(cardDetails);
-  powerPlantCardDiv.appendChild(priceDiv);
-  powerPlantCardDiv.appendChild(resourceDiv);
+  appendChildren(powerPlantCardDiv, [priceDiv, resourceDiv]);
   singleMarket.appendChild(powerPlantCardDiv);
 };
 
@@ -169,4 +174,11 @@ const generateDiv = function(className, id) {
   divElement.className = className;
   divElement.id = id;
   return divElement;
+};
+
+const appendChildren = function(parent, children) {
+  parent.innerHTML = "";
+  children.forEach(child => {
+    parent.appendChild(child);
+  });
 };
