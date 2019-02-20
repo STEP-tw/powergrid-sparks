@@ -1,0 +1,95 @@
+html, body {
+  margin: 0;
+}
+
+.popup {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  color: #b4aac1;
+}
+
+.cross-button {
+  padding: 0px;
+  text-align: right;
+  margin: 1% 3%;
+  font-size: 40px;
+  color: rgb(218, 213, 226);
+}
+
+.cross-button :hover {
+  color: whitesmoke;
+  cursor: pointer;
+}
+
+.textField {
+  border: none;
+  border-bottom: 2px solid rgb(233, 164, 91);
+
+  font-size: 25px;
+  text-align: center;
+  
+  color: whitesmoke;
+  background: transparent;
+}
+
+.textField::placeholder {
+  color: rgb(168, 172, 175);
+  font-family: 'Open Sans', sans-serif;
+  font-weight: lighter;
+}
+
+.textField:focus {
+  outline: none;
+}
+
+.textField:hover {
+  color: whitesmoke;
+  border-bottom: 3px solid rgb(223, 241, 243);
+}
+
+.options {
+  height: 300px;
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  margin: 0 auto;
+}
+
+.options > button {
+  height: 65px;
+  border-radius: 6px;
+  font-size: 20px;
+  font-weight: bolder;
+  background-image: linear-gradient(rgb(250, 207, 207), rgb(233, 164, 91));
+  cursor: pointer;
+  box-shadow: 2px 3px 20px 3px rgb(0, 0, 0);
+}
+
+.options > button:focus {
+  text-decoration: none;
+  outline: none;
+}
+
+.options > button:hover {
+  background-image: linear-gradient(rgb(233, 164, 91), rgb(237, 148, 53));
+}
+
+.overlay {
+  display: flex;
+  position: fixed;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+
+  background: rgba(63, 63, 63, 0.96);
+}
+
+.err-msg {
+  color: red;
+  font-size: 25px;
+  font-weight: bold;
+  text-align: center;
+}

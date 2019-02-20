@@ -14,7 +14,8 @@ const {
   renderGamePage,
   renderGameplay,
   initializeMarket,
-  renderWaitingPage
+  renderWaitingPage,
+  renderErrorPage
 } = require("./src/handlers");
 
 app.set("views", __dirname + "/public/html");
@@ -33,6 +34,7 @@ app.post("/joinGame", joinGame);
 app.get("/displayPowerPlantMarket", initializeMarket);
 app.get(/\/gameplay/, renderGameplay);
 app.get(/\/waitingPage/, renderWaitingPage);
+app.get('/invalidGameId',renderErrorPage);
 
 app.use(express.static("public/html"));
 app.use(express.static("public/stylesheet"));

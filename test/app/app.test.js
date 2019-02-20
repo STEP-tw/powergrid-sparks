@@ -92,3 +92,11 @@ describe("GET /waitingPage", () => {
       .expect(200, done);
   });
 });
+
+describe("GET /invalidGameId", () => {
+  it("should show the join page with error message", done => {
+    request(app)
+      .get("/invalidGameId")
+      .expect(200, done);
+  });
+});

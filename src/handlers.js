@@ -63,8 +63,12 @@ const joinGame = function(req, res) {
     game.addPlayer(player);
     return res.redirect(`/waitingPage?gameId=${gameId}`);
   }
-  res.redirect("/");
+  res.redirect("/invalidGameId");
 };
+
+const renderErrorPage = function(req, res){
+  res.render('joinPageWithErr.html');
+}
 
 const initializeMarket = function(req, res) {
   const powerPlantMarket = new PowerPlantMarket(JSON.parse(powerPlantCards));
@@ -80,5 +84,6 @@ module.exports = {
   renderGamePage,
   renderGameplay,
   initializeMarket,
-  renderWaitingPage
+  renderWaitingPage,
+  renderErrorPage
 };
