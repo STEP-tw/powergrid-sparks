@@ -6,6 +6,7 @@ const view = require("ejs");
 const logger = require("morgan");
 
 app.activeGames = {};
+app.cookies = {};
 
 const {
   renderHome,

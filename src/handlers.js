@@ -9,8 +9,17 @@ const powerPlantCards = fs.readFileSync(
   "./private/data/card_details.json",
   "UTF8"
 );
+
 const renderHome = function(req, res) {
-  res.render("index.html");
+  if (res.app.cookies[req.cookies.playerId]) {
+    const gameId = req.cookies.gameId;
+    const game = res.app.activeGames[+gameId];
+    if (game.getCurrentPlayersCount() == game.getMaxPlayersCount()){
+      return res.redirect( `/gameplay?gameId=${+Object.keys(res.app.activeGames)[0]}`);
+    }
+    return res.redirect(`/waitingPage?gameId=${gameId}`);
+  }
+  return res.render("index.html");
 };
 
 const generateGameId = function(activeGames, randomGenerator) {
@@ -19,12 +28,20 @@ const generateGameId = function(activeGames, randomGenerator) {
   return gameId;
 };
 
+const setCookie = function(res, gameId, playerName) {
+  const cookie = Date.now();
+  res.cookie("playerId", cookie);
+  res.cookie("gameId", gameId);
+  res.app.cookies[cookie] = playerName;
+};
+
 const createGame = function(req, res) {
   const gameId = generateGameId(res.app.activeGames, Math.random);
   const game = new Game(req.body.playerCount);
   res.app.activeGames[gameId] = game;
   const playerColor = game.getPlayerColor();
   const player = new Player(playerColor, req.body.hostName);
+  setCookie(res, gameId, req.body.hostName);
   game.addPlayer(player);
   res.redirect(`/waitingPage?gameId=${gameId}`);
 };
@@ -51,6 +68,12 @@ const renderGameplay = function(req, res) {
   res.render("gameplay.html", { players: game.getPlayers() });
 };
 
+const addPlayer = function(game, joinerName) {
+  const playerColor = game.getPlayerColor();
+  const player = new Player(playerColor, joinerName);
+  game.addPlayer(player);
+};
+
 const joinGame = function(req, res) {
   const { gameId, joinerName } = req.body;
   const game = res.app.activeGames[+gameId];
@@ -58,9 +81,8 @@ const joinGame = function(req, res) {
     if (game.hasStarted()) {
       return res.send("game is already started!");
     }
-    const playerColor = game.getPlayerColor();
-    const player = new Player(playerColor, joinerName);
-    game.addPlayer(player);
+    addPlayer(game, joinerName);
+    setCookie(res, gameId, joinerName);
     return res.redirect(`/waitingPage?gameId=${gameId}`);
   }
   res.redirect("/invalidGameId");

@@ -9,6 +9,26 @@ describe("GET /", () => {
       .expect("Content-Type", /html/)
       .expect(200, done);
   });
+
+  it("should redirect to gameplay if valid cookie is set", done => {
+    app.activeGames["3"] = new Game(2);
+    app.cookies["123"] = "Ankon";
+    request(app)
+      .get("/")
+      .set("Cookie", ["gameId=3;playerId=123"])
+      .expect("Content-Type", /plain/)
+      .expect(302, done);
+  });
+
+  it("should redirect to gameplay if valid cookie is set", done => {
+    app.activeGames["3"] = new Game(0);
+    app.cookies["123"] = "Ankon";
+    request(app)
+      .get("/")
+      .set("Cookie", ["gameId=3;playerId=123"])
+      .expect("Content-Type", /plain/)
+      .expect(302, done);
+  });
 });
 
 describe("POST /createGame", () => {
