@@ -21,17 +21,14 @@ const initialResourceCount = {
 };
 
 const displayMarket = function() {
-  const map = document.getElementById("map");
-  map.onclick = "";
   fetch("/displayPowerPlantMarket")
     .then(res => res.text())
     .then(res => displayPowerPlantMarket(res));
 };
 
 const displayPowerPlantMarket = function(powerPlantCards) {
-  const map = document.getElementById("map");
-  map.innerHTML = "";
-  map.appendChild(generatePowerPlantMarket(powerPlantCards));
+  const market = document.getElementById("market");
+  market.appendChild(generatePowerPlantMarket(powerPlantCards));
   fillResources();
 };
 
@@ -153,7 +150,7 @@ const addFocus = function(element, powerPlant) {
 
 const generateResourceDiv = function(cardDetails) {
   const resourceDiv = document.createElement("div");
-  resourceDiv.className = 'card-details';
+  resourceDiv.className = "card-details";
   resourceDiv.innerHTML = `${resources[cardDetails.resource.type]} 
                                ${cardDetails.resource.quantity} 
                                <i class='fas fa-arrow-right' ></i >  
@@ -183,3 +180,11 @@ const appendChildren = function(parent, children) {
     parent.appendChild(child);
   });
 };
+
+const displayMap = function() {
+  const map = document.getElementById("map");
+  const market = document.getElementById("market");
+  map.style.display = "inline";
+  market.style.display = "none";
+};
+window.onload = displayMarket();

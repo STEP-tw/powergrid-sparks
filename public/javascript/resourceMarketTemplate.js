@@ -4,7 +4,7 @@ const getBiddingSectionTemplate = function() {
       INITIAL BID AMOUNT :
           <span id="current-bid-amount"></span>
     </div>
-    <div ><span class="increase-bid">INCREASED BID : <span id="bid-amount"></span> &nbsp</span><button id="increase_bid" onclick = 'increaseBid()'>&#x2b</button>&nbsp<button>MAKE BID</button>&nbsp<button>PASS</button></div>
+    <div ><span class="increase-bid">INCREASED BID : <span id="bid-amount"></span> &nbsp</span><button id="increase_bid" onclick = 'increaseBid()'>&#x2b</button>&nbsp<button>MAKE BID</button>&nbsp<button onclick = "displayMap()">MAP</button></div>
   `;
 };
 

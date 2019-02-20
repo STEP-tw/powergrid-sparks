@@ -14,7 +14,7 @@
 </head>
 <body onload="showPlayerAssets('<%= JSON.stringify(players) %>')">
   <main style="width: 100%;height: 100%; display: flex">
-    <section class='self-details'>
+    <section class='self-details' >
       <div class="player-name">PLAYER 3</div>
       <div class="power-plant"></div>
       <div class="power-plant"></div>
@@ -45,7 +45,7 @@
       </table>
       <div class="self-cash">C A S H : $ 5 0 /- </div>
     </section>
-    <section id="map" class = "map-section" onclick="displayMarket()">
+    <section id="map" class = "map-section" style="display: none">
       <svg  width="941" height="593">
         <defs>
          <style type="text/css">
@@ -596,6 +596,7 @@
         </g>
        </svg>
     </section>
+    <section id="market"></section>
     <section class="activity-log">
       <p>ACTIVITY LOG</p>
     </section>
