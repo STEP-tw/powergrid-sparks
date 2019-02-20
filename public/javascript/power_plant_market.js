@@ -187,4 +187,3 @@ const displayMap = function() {
   map.style.display = "inline";
   market.style.display = "none";
 };
-window.onload = displayMarket();
