@@ -73,6 +73,15 @@ header {
   box-shadow: 2px 3px 20px 3px rgb(0, 0, 0);
 }
 
+.submit:focus {
+  text-decoration: none;
+  outline: none;
+}
+
+.submit:hover {
+  background-image: linear-gradient(rgb(233, 164, 91), rgb(237, 148, 53));
+}
+
 .options > button:focus {
   text-decoration: none;
   outline: none;
@@ -86,8 +95,9 @@ header {
   visibility: hidden;
   display: flex;
   position: fixed;
-  width: 102%;
-  height: 112%;
+  top: 0px;
+  width: 100%;
+  height: 100%;
 
   background: rgba(63, 63, 63, 0.96);
 }
@@ -97,6 +107,7 @@ header {
   width: 100%;
   justify-content: center;
   align-items: center;
+  color: #b4aac1;
 }
 
 .cross-button {
@@ -141,7 +152,7 @@ header {
 .loader {
   border: 16px solid #f3f3f3;
   border-radius: 50%;
-  border-top: 16px solid #3498db;
+  border-top: 16px solid #3ea8da;
   width: 80px;
   height: 80px;
   -webkit-animation: spin 2s linear infinite; /* Safari */
@@ -167,5 +178,5 @@ header {
   align-items: center;
   text-align: center;
   font-size: 40px;
-  color: rgb(189, 234, 240);
+  color: #b0d8eb;
 }
