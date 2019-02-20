@@ -257,18 +257,21 @@ td {
   width: 30%;
   height: 30%;
   border: solid 1px black;
+  color: #3e4346;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .cost {
   position: absolute;
   bottom: 89%;
   left: 90%;
-  width: 5%;
-  height: 5%;
-  padding-left: 3%;
-  padding-right: 6%;
-  padding-bottom: 10%;
-  padding-top: 1%;
+  width: 20%;
+  height: 20%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   color: #3e4346;
   background-color: white;
   border: 1px solid black;
@@ -281,51 +284,25 @@ td {
   width: 40%;
   height: 40%;
   border: solid 1px black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #3e4346;
 }
 
 .resource.middle-resource {
   width: 22%;
-  color: black;
-}
-
-.coal {
-  margin: 40% 25%;
-  height: 50%;
-  width: 50%;
-  background-color: rgba(131, 79, 1, 0.63);
-}
-
-.oil {
-  width: 50%;
-  height: 70%;
-  background-color: black;
-  margin: 30% 25%;
-}
-
-.garbage {
-  width: 40%;
-  height: 70%;
-  background-color: rgb(90, 90, 5);
-  margin: 20% 25%;
-  border: 1px solid rgb(200, 241, 87);
-}
-
-.uranium {
-  width: 50%;
-  height: 70%;
-  background-color: red;
-  margin: 30% 25%;
 }
 
 .uranium-cost {
   position: absolute;
   bottom: 73%;
   left: 76%;
-  width: 32%;
-  height: 32%;
-  padding-right: 1%;
-  padding-top: 5%;
-  padding-bottom: 1%;
+  width: 36%;
+  height: 36%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background-color: white;
   border: 1px solid black;
   border-radius: 50%;

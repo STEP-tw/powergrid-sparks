@@ -14,10 +14,10 @@ const resources = {
 };
 
 const initialResourceCount = {
-  coal: 24,
-  oil: 18,
-  garbage: 6,
-  uranium: 2
+  Coal: 24,
+  Oil: 18,
+  Garbage: 6,
+  Uranium: 2
 };
 
 const displayMarket = function() {
@@ -33,11 +33,11 @@ const displayPowerPlantMarket = function(powerPlantCards) {
 };
 
 const fillResources = function() {
-  fillResource("coal");
-  fillResource("oil");
-  fillResource("garbage");
-  document.getElementById("uranium_14_0").className = "uranium";
-  document.getElementById("uranium_16_0").className = "uranium";
+  fillResource("Coal");
+  fillResource("Oil");
+  fillResource("Garbage");
+  document.getElementById("Uranium_14_0").innerHTML = resources["Uranium"];
+  document.getElementById("Uranium_16_0").innerHTML = resources["Uranium"];
 };
 
 const generateResource = function(resource, resourceCount) {
@@ -45,7 +45,8 @@ const generateResource = function(resource, resourceCount) {
     resourceCount / 3
   )}_${resourceCount % 3}`;
   let resourceDiv = document.getElementById(resourceId);
-  resourceDiv.className = resource;
+  console.log(resource)
+  resourceDiv.innerHTML = resources[resource];
 };
 
 const fillResource = function(resource) {
