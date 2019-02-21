@@ -7,6 +7,14 @@ class Player {
     this.color = color;
   }
 
+  getName(){
+    return this.name;
+  }
+
+  setId(id){
+    this.id = id;
+  }
+
   addPowerplant({ value, resource, city }) {
     this.powerplants[value] = { resource, city };
   }

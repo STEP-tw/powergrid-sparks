@@ -1,3 +1,5 @@
+const Turn = require("./turn");
+
 class Game {
   constructor(playerCount) {
     this.active = false;
@@ -9,6 +11,13 @@ class Game {
 
   addPlayer(player) {
     this.players.push(player);
+  }
+
+  getTurn(players) {
+    if (this.turn==undefined) {
+      this.turn = new Turn(players);
+    }
+    return this.turn;
   }
 
   hasStarted() {

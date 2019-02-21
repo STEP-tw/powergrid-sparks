@@ -6,30 +6,26 @@
     <script src="main.js"></script>
   </head>
 
-  <body>
-    <header>
-      <div>P O W E R G R I D</div>
-      <img class="logo" src="bulb-icon.png" alt="logo" />
-    </header>
-    <main>
-      <div class="main-box">
-        <div class="options">
-          <button
-            onclick="document.querySelector('.overlay').style.visibility='visible'"
-          >
-            PLAY
-          </button>
-          <button
-            onclick="document.querySelector('#rules-book').style.visibility='visible'"
-          >
-            RULES BOOK
-          </button>
-          <button
-            onclick="document.querySelector('#about').style.visibility='visible'"
-          >
-            ABOUT US
-          </button>
-        </div>
+<head>
+  <title>homepage</title>
+  <link rel="stylesheet" type="text/css" media="screen" href="/index.css" />
+</head>
+
+<body>
+  <header>
+    <div>P O W E R G R I D</div>
+    <img class="logo" src="bulb-icon.png" alt="logo" />
+  </header>
+  <main>
+    <div class="main-box">
+      <div class="options">
+        <button onclick="document.querySelector('.overlay').style.visibility='visible'">
+          PLAY
+        </button>
+        <button onclick="document.querySelector('#rules-book').style.visibility='visible'">
+          RULES BOOK
+        </button>
+        <button onclick="document.querySelector('#about').style.visibility='visible'">ABOUT US</button>
       </div>
 
       <div class="overlay" id="play-game">

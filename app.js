@@ -16,7 +16,9 @@ const {
   renderGameplay,
   initializeMarket,
   renderWaitingPage,
-  renderErrorPage
+  renderErrorPage,
+  getCurrentPlayer,
+  updateCurrentPlayer
 } = require("./src/handlers");
 
 app.set("views", __dirname + "/public/html");
@@ -36,6 +38,8 @@ app.get("/displayPowerPlantMarket", initializeMarket);
 app.get(/\/gameplay/, renderGameplay);
 app.get(/\/waitingPage/, renderWaitingPage);
 app.get('/invalidGameId',renderErrorPage);
+app.get('/currentPlayer',getCurrentPlayer);
+app.get('/updateCurrentPlayer',updateCurrentPlayer);
 
 app.use(express.static("public/html"));
 app.use(express.static("public/stylesheet"));

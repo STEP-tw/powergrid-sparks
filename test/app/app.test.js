@@ -120,3 +120,25 @@ describe("GET /invalidGameId", () => {
       .expect(200, done);
   });
 });
+
+describe("GET /currentPlayer", () => {
+  it("should return response code 200 if cookie is present", done => {
+    app.activeGames["5"] = new Game(2);
+    app.cookies["1234"] = "Ankon";
+    request(app)
+      .get("/currentPlayer")
+      .set("Cookie", ["gameId=5;playerId=1234"])
+      .expect(200, done);
+  });
+});
+
+describe("GET /updateCurrentPlayer", () => {
+  it("should return response code 200 if cookie is present", done => {
+    app.activeGames["5"] = new Game(2);
+    app.cookies["1234"] = "Ankon";
+    request(app)
+      .get("/updateCurrentPlayer")
+      .set("Cookie", ["gameId=5;playerId=1234"])
+      .expect(200, done);
+  });
+});

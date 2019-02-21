@@ -14,8 +14,10 @@ const renderHome = function(req, res) {
   if (res.app.cookies[req.cookies.playerId]) {
     const gameId = req.cookies.gameId;
     const game = res.app.activeGames[+gameId];
-    if (game.getCurrentPlayersCount() == game.getMaxPlayersCount()){
-      return res.redirect( `/gameplay?gameId=${+Object.keys(res.app.activeGames)[0]}`);
+    if (game.getCurrentPlayersCount() == game.getMaxPlayersCount()) {
+      return res.redirect(
+        `/gameplay?gameId=${+Object.keys(res.app.activeGames)[0]}`
+      );
     }
     return res.redirect(`/waitingPage?gameId=${gameId}`);
   }
@@ -28,11 +30,12 @@ const generateGameId = function(activeGames, randomGenerator) {
   return gameId;
 };
 
-const setCookie = function(res, gameId, playerName) {
+const setCookie = function(res, gameId, player) {
   const cookie = Date.now();
   res.cookie("playerId", cookie);
   res.cookie("gameId", gameId);
-  res.app.cookies[cookie] = playerName;
+  res.app.cookies[cookie] = player.getName();
+  player.setId(cookie);
 };
 
 const createGame = function(req, res) {
@@ -41,7 +44,7 @@ const createGame = function(req, res) {
   res.app.activeGames[gameId] = game;
   const playerColor = game.getPlayerColor();
   const player = new Player(playerColor, req.body.hostName);
-  setCookie(res, gameId, req.body.hostName);
+  setCookie(res, gameId, player);
   game.addPlayer(player);
   res.redirect(`/waitingPage?gameId=${gameId}`);
 };
@@ -68,9 +71,10 @@ const renderGameplay = function(req, res) {
   res.render("gameplay.html", { players: game.getPlayers() });
 };
 
-const addPlayer = function(game, joinerName) {
+const addPlayer = function(game, joinerName, res, gameId) {
   const playerColor = game.getPlayerColor();
   const player = new Player(playerColor, joinerName);
+  setCookie(res, gameId, player);
   game.addPlayer(player);
 };
 
@@ -81,21 +85,36 @@ const joinGame = function(req, res) {
     if (game.hasStarted()) {
       return res.send("game is already started!");
     }
-    addPlayer(game, joinerName);
-    setCookie(res, gameId, joinerName);
+    addPlayer(game, joinerName, res, gameId);
     return res.redirect(`/waitingPage?gameId=${gameId}`);
   }
   res.redirect("/invalidGameId");
 };
 
-const renderErrorPage = function(req, res){
-  res.render('joinPageWithErr.html');
-}
+const renderErrorPage = function(req, res) {
+  res.render("joinPageWithErr.html");
+};
 
 const initializeMarket = function(req, res) {
   const powerPlantMarket = new PowerPlantMarket(JSON.parse(powerPlantCards));
   const cardDetails = JSON.stringify(powerPlantMarket.initializeMarket());
   res.send(cardDetails);
+};
+
+const getCurrentPlayer = function(req, res) {
+  const gameId = req.cookies.gameId;
+  const game = res.app.activeGames[+gameId];
+  const players = game.getPlayers();
+  const turn = game.getTurn(players);
+  res.send(turn.getCurrentPlayer());
+};
+
+const updateCurrentPlayer = function(req, res) {
+  const gameId = req.cookies.gameId;
+  const game = res.app.activeGames[+gameId];
+  const players = game.getPlayers();
+  const turn = game.getTurn(players);
+  res.send(turn.updateCurrentPlayer());
 };
 
 module.exports = {
@@ -107,5 +126,7 @@ module.exports = {
   renderGameplay,
   initializeMarket,
   renderWaitingPage,
-  renderErrorPage
+  renderErrorPage,
+  getCurrentPlayer,
+  updateCurrentPlayer
 };
