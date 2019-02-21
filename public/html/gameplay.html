@@ -11,6 +11,7 @@
   <script src="/power_plant_market.js"></script>
   <script src="/player_profile.js"></script>
   <script src="/resourceMarketTemplate.js"></script>
+  <script src="/buildingCity.js"></script>
 </head>
 <body onload="showPlayerAssets('<%= JSON.stringify(players) %>')">
   <section>
@@ -209,118 +210,118 @@
           <text opacity="0.68" fill="#ffffff" stroke="#333333" stroke-width="0" stroke-opacity="null" x="437.031481" y="193.353872" font-size="11" font-family="Arvo, sans-serif" text-anchor="start" xml:space="preserve" font-weight="bold">OMAHA</text>
           <line fill="none" stroke="#000000" fill-opacity="null" x1="454.211208" y1="206.077298" x2="460.519697" y2="278.099214" stroke-linejoin="null" stroke-linecap="null" stroke-dasharray="2,2"/>
           <rect stroke-width="0.5" stroke="#000000" height="12" width="34" y="61.924836" x="249.856969" fill="#46b450"/>
-           <ellipse onclick="event.target.className.baseVal = 'red'" id="billings_10" stroke="#333333" ry="4" rx="4" cy="68.067883" cx="255.536374" stroke-width="null" fill="#ffffff"/>
+           <ellipse  id="billings_10" onclick="updateCost()" stroke="#333333" ry="4" rx="4" cy="68.067883" cx="255.536374" stroke-width="null" fill="#ffffff"/>
            <ellipse  id="billings_15" stroke="#333333" ry="4" rx="4" cy="68.326897" cx="277.551506" stroke-width="null" fill="#ffffff"/>
            <ellipse  id="billings_20" stroke="#333333" ry="4" rx="4" cy="68.067883" cx="266.425242" stroke-width="null" fill="#ffffff"/>
           <rect stroke-width="0.5" stroke="#000000" height="12" width="34" y="28.086685" x="109.425645" fill="#46b450"/>
-           <ellipse onclick="event.target.className.baseVal = 'red'" id="seattle_10" stroke="#333333" ry="4" rx="4" class = 'x' cy="34.269791" cx="115.512574" stroke-width="null" />
+           <ellipse  id="seattle_10" onclick="updateCost()" stroke="#333333" ry="4" rx="4" class = 'x' cy="34.269791" cx="115.512574" stroke-width="null" fill="#ffffff" />
            <ellipse id="seattle_15" stroke="#333333" ry="4" rx="4" cy="34.269791" cx="125.68428" stroke-width="null" fill="#ffffff"/>
            <ellipse id="seattle_20" stroke="#333333" ry="4" rx="4" cy="34.528805" cx="136.242133" stroke-width="null" fill="#ffffff"/>
           <rect stroke-width="0.5" stroke="#000000" height="12" width="34" y="160.590846" x="127.295096" fill="#46b450"/>
-           <ellipse onclick="event.target.className.baseVal = 'red'" id="boise_10" stroke="#333333" ry="4" rx="4" cy="166.128789" cx="133.178732" stroke-width="null" fill="#ffffff"/>
+           <ellipse  id="boise_10" onclick="updateCost()" stroke="#333333" ry="4" rx="4" cy="166.128789" cx="133.178732" stroke-width="null" fill="#ffffff"/>
            <ellipse id="boise_15" stroke="#333333" ry="4" rx="4" cy="166.128789" cx="143.995599" stroke-width="null" fill="#ffffff"/>
            <ellipse id="boise_20" stroke="#333333" ry="4" rx="4" cy="166.387803" cx="155.07148" stroke-width="null" fill="#ffffff"/>
            <ellipse id="portland_20" stroke="#333333" ry="4" rx="4" cy="94.317198" cx="95.150192" stroke-width="null" fill="#ffffff"/>
            <ellipse id="portland_15" stroke="#333333" ry="4" rx="4" cy="94.317198" cx="84.488176" stroke-width="null" fill="#ffffff"/>
-           <ellipse onclick="event.target.className.baseVal = 'red'" id="portland_10" stroke="#333333" ry="4" rx="4" cy="94.680804" cx="73.462558" stroke-width="null" fill="#ffffff"/>
+           <ellipse  id="portland_10" onclick="updateCost()" stroke="#333333" ry="4" rx="4" cy="94.680804" cx="73.462558" stroke-width="null" fill="#ffffff"/>
           <rect stroke-width="0.5" stroke="#000000" height="12" width="34" y="138.0102" x="335.037042" fill="#46b450"/>
-           <ellipse onclick="event.target.className.baseVal = 'red'" id="cheyenne_10" stroke="#333333" ry="4" rx="4" cy="143.948712" cx="341.517991" stroke-width="null" fill="#ffffff"/>
+           <ellipse  id="cheyenne_10" onclick="updateCost()" stroke="#333333" ry="4" rx="4" cy="143.948712" cx="341.517991" stroke-width="null" fill="#ffffff"/>
            <ellipse id="cheyenne_15" stroke="#333333" ry="4" rx="4" cy="143.948712" cx="362.559608" stroke-width="null" fill="#ffffff"/>
            <ellipse id="cheyenne_20" stroke="#333333" ry="4" rx="4" cy="143.948712" cx="352.17116" stroke-width="null" fill="#ffffff"/>
           <rect stroke-width="0.5" stroke="#000000" height="12" width="34" y="212.717761" x="171.055039" fill="#0073aa"/>
-           <ellipse onclick="event.target.className.baseVal = 'red'" id="salt_lake_city_10" stroke="#333333" ry="4" rx="4" cy="218.514721" cx="177.090149" stroke-width="null" fill="#ffffff"/>
+           <ellipse  id="salt_lake_city_10" onclick="updateCost()" stroke="#333333" ry="4" rx="4" cy="218.514721" cx="177.090149" stroke-width="null" fill="#ffffff"/>
            <ellipse id="salt_lake_city_15" stroke="#333333" ry="4" rx="4" cy="218.210624" cx="188.188572" stroke-width="null" fill="#ffffff"/>
            <ellipse id="salt_lake_city_20" stroke="#333333" ry="4" rx="4" cy="218.210624" cx="199.204945" stroke-width="null" fill="#ffffff"/>
           <rect stroke-width="0.5" stroke="#000000" height="12" width="34" y="263.692115" x="83.37123" fill="#0073aa"/>
            <ellipse id="san_francisco_20" stroke="#333333" ry="4" rx="4" cy="269.489076" cx="111.508266" stroke-width="null" fill="#ffffff"/>
            <ellipse id="san_francisco_15" stroke="#333333" ry="4" rx="4" cy="269.230063" cx="100.305252" stroke-width="null" fill="#ffffff"/>
-           <ellipse onclick="event.target.className.baseVal = 'red'" id="san_francisco_10" stroke="#333333" ry="4" rx="4" cy="269.230063" cx="89.7474" stroke-width="null" fill="#ffffff"/>
+           <ellipse  id="san_francisco_10" onclick="updateCost()" stroke="#333333" ry="4" rx="4" cy="269.230063" cx="89.7474" stroke-width="null" fill="#ffffff"/>
           <rect stroke-width="0.5" stroke="#000000" height="12" width="34" y="295.771453" x="212.650696" fill="#0073aa"/>
-           <ellipse onclick="event.target.className.baseVal = 'red'" id="las_vegas_10" stroke="#333333" ry="4" rx="4" cy="301.572361" cx="218.904767" stroke-width="null" fill="#ffffff"/>
+           <ellipse  id="las_vegas_10" onclick="updateCost()" stroke="#333333" ry="4" rx="4" cy="301.572361" cx="218.904767" stroke-width="null" fill="#ffffff"/>
            <ellipse id="las_vegas_15" stroke="#333333" ry="4" rx="4" cy="301.572361" cx="229.93039" stroke-width="null" fill="#ffffff"/>
            <ellipse id="las_vegas_20" stroke="#333333" ry="4" rx="4" cy="301.572361" cx="240.873962" stroke-width="null" fill="#ffffff"/>
           <rect stroke-width="0.5" stroke="#000000" height="12" width="34" y="335.322407" x="81.389099" fill="#0073aa"/>
-           <ellipse onclick="event.target.className.baseVal = 'red'" id="los_angeles_10" stroke="#333333" ry="4" rx="4" cy="341.123315" cx="86.99801" stroke-width="null" fill="#ffffff"/>
+           <ellipse  id="los_angeles_10" onclick="updateCost()" stroke="#333333" ry="4" rx="4" cy="341.123315" cx="86.99801" stroke-width="null" fill="#ffffff"/>
            <ellipse id="los_angeles_15" stroke="#333333" ry="4" rx="4" cy="341.123315" cx="98.868299" stroke-width="null" fill="#ffffff"/>
            <ellipse id="los_angeles_20" stroke="#333333" ry="4" rx="4" cy="340.841759" cx="109.811871" stroke-width="null" fill="#ffffff"/>
           <rect stroke-width="0.5" stroke="#000000" height="12" width="34" y="379.037121" x="115.485966" fill="#0073aa"/>
-           <ellipse onclick="event.target.className.baseVal = 'red'" id="san_diego_10" stroke="#333333" ry="4" rx="4" cy="384.838025" cx="121.376436" stroke-width="null" fill="#ffffff"/>
+           <ellipse  id="san_diego_10" onclick="updateCost()" stroke="#333333" ry="4" rx="4" cy="384.838025" cx="121.376436" stroke-width="null" fill="#ffffff"/>
            <ellipse id="san_diego_15" stroke="#333333" ry="4" rx="4" cy="384.838025" cx="132.038453" stroke-width="null" fill="#ffffff"/>
            <ellipse id="san_diego_20" stroke="#333333" ry="4" rx="4" cy="384.838025" cx="143.627187" stroke-width="null" fill="#ffffff"/>
           <rect stroke-width="0.5" stroke="#000000" height="12" width="34" y="389.218074" x="223.640912" fill="#0073aa"/>
-           <ellipse onclick="event.target.className.baseVal = 'red'" id="phoenix_10" stroke="#333333" ry="4" rx="4" cy="394.655374" cx="230.17654" stroke-width="null" fill="#ffffff"/>
+           <ellipse  id="phoenix_10" onclick="updateCost()" stroke="#333333" ry="4" rx="4" cy="394.655374" cx="230.17654" stroke-width="null" fill="#ffffff"/>
            <ellipse id="phoenix_15" stroke="#333333" ry="4" rx="4" cy="394.655374" cx="241.202162" stroke-width="null" fill="#ffffff"/>
            <ellipse id="phoenix_20" stroke="#333333" ry="4" rx="4" cy="394.655374" cx="251.500573" stroke-width="null" fill="#ffffff"/>
           <rect stroke-width="0.5" stroke="#000000" height="12" width="34" y="335.686014" x="324.441696" fill="#0073aa"/>
-           <ellipse onclick="event.target.className.baseVal = 'red'" id="santa_fe_10" stroke="#333333" ry="4" rx="4" cy="341.205362" cx="330.496257" stroke-width="null" fill="#ffffff"/>
+           <ellipse  id="santa_fe_10" onclick="updateCost()" stroke="#333333" ry="4" rx="4" cy="341.205362" cx="330.496257" stroke-width="null" fill="#ffffff"/>
            <ellipse id="santa_fe_15" stroke="#333333" ry="4" rx="4" cy="341.205362" cx="341.721388" stroke-width="null" fill="#ffffff"/>
            <ellipse id="santa_fe_20" stroke="#333333" ry="4" rx="4" cy="341.205362" cx="352.582914" stroke-width="null" fill="#ffffff"/>
           <text opacity="0.68" fill="#ffffff" stroke="#333333" stroke-width="0" stroke-opacity="null" x="323.031481" y="333.353872" font-size="11" font-family="Arvo, sans-serif" text-anchor="start" xml:space="preserve" font-weight="bold">SANTA FE</text>
           <rect stroke-width="0.5" stroke="#000000" height="12" width="34" y="196.091506" x="338.985702" fill="#46b450"/>
-           <ellipse onclick="event.target.className.baseVal = 'red'" id="denver_10" stroke="#333333" ry="4" rx="4" cy="202.030904" cx="345.519223" stroke-width="null" fill="#ffffff"/>
+           <ellipse  id="denver_10" onclick="updateCost()" stroke="#333333" ry="4" rx="4" cy="202.030904" cx="345.519223" stroke-width="null" fill="#ffffff"/>
            <ellipse id="denver_15" stroke="#333333" ry="4" rx="4" cy="202.030904" cx="355.683159" stroke-width="null" fill="#ffffff"/>
            <ellipse id="denver_20" stroke="#333333" ry="4" rx="4" cy="202.030904" cx="366.492256" stroke-width="null" fill="#ffffff"/>
           <rect stroke-width="0.5" stroke="#000000" height="12" width="34" y="195.03653" x="435.876213" fill="#46b450"/>
            <ellipse id="omaha_15" stroke="#333333" ry="4" rx="4" cy="201.010142" cx="452.326922" stroke-width="null" fill="#ffffff"/>
            <ellipse id="omaha_20" stroke="#333333" ry="4" rx="4" cy="201.010142" cx="463.527849" stroke-width="null" fill="#ffffff"/>
           <rect stroke-width="0.5" stroke="#000000" height="12" width="34" y="79.283797" x="416.087015" fill="#ffb900"/>
-           <ellipse onclick="event.target.className.baseVal = 'red'" id="fargo_10" stroke="#333333" ry="4" rx="4" cy="85.205334" cx="422.044824" stroke-width="null" fill="#ffffff"/>
+           <ellipse  id="fargo_10" onclick="updateCost()" stroke="#333333" ry="4" rx="4" cy="85.205334" cx="422.044824" stroke-width="null" fill="#ffffff"/>
            <ellipse id="fargo_15" stroke="#333333" ry="4" rx="4" cy="85.205334" cx="432.943731" stroke-width="null" fill="#ffffff"/>
            <ellipse id="fargo_20" stroke="#333333" ry="4" rx="4" cy="85.205334" cx="443.390879" stroke-width="null" fill="#ffffff"/>
           <rect stroke-width="0.5" stroke="#000000" height="12" width="34" y="71.171412" x="475.651978" fill="#ffb900"/>
-           <ellipse onclick="event.target.className.baseVal = 'red'" id="ouloth_10" stroke="#333333" ry="4" rx="4" cy="77.054795" cx="481.925112" stroke-width="null" fill="#ffffff"/>
+           <ellipse  id="ouloth_10" onclick="updateCost()" stroke="#333333" ry="4" rx="4" cy="77.054795" cx="481.925112" stroke-width="null" fill="#ffffff"/>
            <ellipse id="ouloth_15" stroke="#333333" ry="4" rx="4" cy="77.036812" cx="492.824022" stroke-width="null" fill="#ffffff"/>
            <ellipse id="ouloth_20" stroke="#333333" ry="4" rx="4" cy="77.446626" cx="503.331099" stroke-width="null" fill="#ffffff"/>
           <rect stroke-width="0.5" stroke="#000000" height="12" width="34" y="117.63042" x="468.535539" fill="#ffb900"/>
-           <ellipse onclick="event.target.className.baseVal = 'red'" id="minnea_polis_10" stroke="#333333" ry="4" rx="4" cy="124.056534" cx="474.325589" stroke-width="null" fill="#ffffff"/>
+           <ellipse  id="minnea_polis_10" onclick="updateCost()" stroke="#333333" ry="4" rx="4" cy="124.056534" cx="474.325589" stroke-width="null" fill="#ffffff"/>
            <ellipse id="minnea_polis_15" stroke="#333333" ry="4" rx="4" cy="124.056534" cx="485.379227" stroke-width="null" fill="#ffffff"/>
            <ellipse id="minnea_polis_20" stroke="#333333" ry="4" rx="4" cy="124.056534" cx="496.278135" stroke-width="null" fill="#ffffff"/>
           <rect stroke="#000000" height="12" width="34" y="190.987079" x="527.329603" fill="#ffb900" stroke-width="0.5"/>
-           <ellipse onclick="event.target.className.baseVal = 'red'" id="chicago_10" stroke="#333333" ry="4" rx="4" cy="196.937104" cx="532.626043" stroke-width="null" fill="#ffffff"/>
+           <ellipse  id="chicago_10" onclick="updateCost()" stroke="#333333" ry="4" rx="4" cy="196.937104" cx="532.626043" stroke-width="null" fill="#ffffff"/>
            <ellipse id="chicago_15" stroke="#333333" ry="4" rx="4" cy="196.937104" cx="543.76205" stroke-width="null" fill="#ffffff"/>
            <ellipse id="chicago_20" stroke="#333333" ry="4" rx="4" cy="196.937104" cx="554.815688" stroke-width="null" fill="#ffffff"/>
           <rect stroke-width="0.5" stroke="#000000" height="12" width="34" y="276.857274" x="444.957037" fill="#dd4264"/>
-           <ellipse onclick="event.target.className.baseVal = 'red'" id="kansas_city_10" stroke="#333333" ry="4" rx="4" cy="282.748097" cx="450.97046" stroke-width="null" fill="#ffffff"/>
+           <ellipse  id="kansas_city_10" onclick="updateCost()" stroke="#333333" ry="4" rx="4" cy="282.748097" cx="450.97046" stroke-width="null" fill="#ffffff"/>
            <ellipse id="kansas_city_15" stroke="#333333" ry="4" rx="4" cy="282.748097" cx="461.477536" stroke-width="null" fill="#ffffff"/>
            <ellipse id="kansas_city_20" stroke="#333333" ry="4" rx="4" cy="282.748097" cx="472.221713" stroke-width="null" fill="#ffffff"/>
           <rect stroke-width="0.5" stroke="#000000" height="12" width="34" y="352.072313" x="422.226584" fill="#dd4264"/>
-           <ellipse onclick="event.target.className.baseVal = 'red'" id="oklhahoma_city_10" stroke="#333333" ry="4" rx="4" cy="357.332217" cx="429.091855" stroke-width="null" fill="#ffffff"/>
+           <ellipse  id="oklhahoma_city_10" onclick="updateCost()" stroke="#333333" ry="4" rx="4" cy="357.332217" cx="429.091855" stroke-width="null" fill="#ffffff"/>
            <ellipse id="oklhahoma_city_15" stroke="#333333" ry="4" rx="4" cy="357.678234" cx="439.283054" stroke-width="null" fill="#ffffff"/>
            <ellipse id="oklhahoma_city_20" stroke="#333333" ry="4" rx="4" cy="357.678234" cx="449.757165" stroke-width="null" fill="#ffffff"/>
           <rect stroke-width="0.5" stroke="#000000" height="12" width="34" y="439.553337" x="433.701365" fill="#dd4264"/>
-           <ellipse onclick="event.target.className.baseVal = 'red'" id="dallas_10" stroke="#333333" ry="4" rx="4" cy="444.966136" cx="440.318668" stroke-width="null" fill="#ffffff"/>
+           <ellipse  id="dallas_10" onclick="updateCost()" stroke="#333333" ry="4" rx="4" cy="444.966136" cx="440.318668" stroke-width="null" fill="#ffffff"/>
            <ellipse id="dallas_15" stroke="#333333" ry="4" rx="4" cy="444.966136" cx="450.825744" stroke-width="null" fill="#ffffff"/>
            <ellipse id="dallas_20" stroke="#333333" ry="4" rx="4" cy="444.966136" cx="461.487551" stroke-width="null" fill="#ffffff"/>
           <rect stroke-width="0.5" stroke="#000000" height="12" width="34" y="502.855352" x="440.830475" fill="#dd4264"/>
-           <ellipse onclick="event.target.className.baseVal = 'red'" id="houston_10" stroke="#333333" ry="4" rx="4" cy="508.834594" cx="447.206888" stroke-width="null" fill="#ffffff"/>
+           <ellipse  id="houston_10" onclick="updateCost()" stroke="#333333" ry="4" rx="4" cy="508.834594" cx="447.206888" stroke-width="null" fill="#ffffff"/>
            <ellipse id="houston_15" stroke="#333333" ry="4" rx="4" cy="508.834594" cx="457.951064" stroke-width="null" fill="#ffffff"/>
            <ellipse id="houston_20" stroke="#333333" ry="4" rx="4" cy="508.834594" cx="468.849972" stroke-width="null" fill="#ffffff"/>
           <rect stroke-width="0.5" stroke="#000000" height="12" width="34" y="476.217458" x="552.54735" fill="#dd4264"/>
-           <ellipse onclick="event.target.className.baseVal = 'red'" id="new_orleans_10" stroke="#333333" ry="4" rx="4" cy="482.819016" cx="558.414531" stroke-width="null" fill="#ffffff"/>
+           <ellipse  id="new_orleans_10" onclick="updateCost()" stroke="#333333" ry="4" rx="4" cy="482.819016" cx="558.414531" stroke-width="null" fill="#ffffff"/>
            <ellipse id="new_orleans_15" stroke="#333333" ry="4" rx="4" cy="482.581916" cx="569.70527" stroke-width="null" fill="#ffffff"/>
            <ellipse id="new_orleans_20" stroke="#333333" ry="4" rx="4" cy="482.581916" cx="580.129976" stroke-width="null" fill="#ffffff"/>
           <rect stroke-width="0.5" stroke="#000000" height="12" width="34" y="281.775038" x="527.548719" fill="#ffb900"/>
-           <ellipse onclick="event.target.className.baseVal = 'red'" id="st_louis_10" stroke="#333333" ry="4" rx="4" cy="288.079001" cx="533.337344" stroke-width="null" fill="#ffffff"/>
+           <ellipse  id="st_louis_10" onclick="updateCost()" stroke="#333333" ry="4" rx="4" cy="288.079001" cx="533.337344" stroke-width="null" fill="#ffffff"/>
            <ellipse id="st_louis_15" stroke="#333333" ry="4" rx="4" cy="287.841901" cx="544.473352" stroke-width="null" fill="#ffffff"/>
            <ellipse id="st_louis_20" stroke="#333333" ry="4" rx="4" cy="287.841901" cx="556.00119" stroke-width="null" fill="#ffffff"/>
           <rect stroke-width="0.5" stroke="#000000" height="12" width="34" y="353.492451" x="518.313699" fill="#dd4264"/>
-           <ellipse onclick="event.target.className.baseVal = 'red'" id="memphis_10" stroke="#333333" ry="4" rx="4" cy="359.062301" cx="524.718705" stroke-width="null" fill="#ffffff"/>
+           <ellipse  id="memphis_10" onclick="updateCost()" stroke="#333333" ry="4" rx="4" cy="359.062301" cx="524.718705" stroke-width="null" fill="#ffffff"/>
            <ellipse id="memphis_15" stroke="#333333" ry="4" rx="4" cy="359.062301" cx="535.538835" stroke-width="null" fill="#ffffff"/>
            <ellipse id="memphis_20" stroke="#333333" ry="4" rx="4" cy="359.062301" cx="545.730032" stroke-width="null" fill="#ffffff"/>
           <rect stroke-width="0.5" stroke="#000000" height="12" width="34" y="401.631357" x="577.95581" fill="#dd4264"/>
-           <ellipse onclick="event.target.className.baseVal = 'red'" id="bhiringham_10" stroke="#333333" ry="4" rx="4" cy="407.742193" cx="583.646443" stroke-width="null" fill="#ffffff"/>
+           <ellipse  id="bhiringham_10" onclick="updateCost()" stroke="#333333" ry="4" rx="4" cy="407.742193" cx="583.646443" stroke-width="null" fill="#ffffff"/>
            <ellipse id="bhiringham_15" stroke="#333333" ry="4" rx="4" cy="407.742193" cx="594.54535" stroke-width="null" fill="#ffffff"/>
            <ellipse id="bhiringham_20" stroke="#333333" ry="4" rx="4" cy="408.134024" cx="605.207157" stroke-width="null" fill="#ffffff"/>
           <rect stroke-width="0.5" stroke="#000000" height="12" width="34" y="243.061846" x="586.123663" fill="#ffb900"/>
-           <ellipse onclick="event.target.className.baseVal = 'red'" id="cincinnati_10" stroke="#333333" ry="4" rx="4" cy="248.658799" cx="591.555427" stroke-width="null" fill="#ffffff"/>
+           <ellipse  id="cincinnati_10" onclick="updateCost()" stroke="#333333" ry="4" rx="4" cy="248.658799" cx="591.555427" stroke-width="null" fill="#ffffff"/>
            <ellipse id="cincinnati_15" stroke="#333333" ry="4" rx="4" cy="248.658799" cx="603.320365" stroke-width="null" fill="#ffffff"/>
            <ellipse id="cincinnati_20" stroke="#333333" ry="4" rx="4" cy="248.658799" cx="614.848204" stroke-width="null" fill="#ffffff"/>
           <rect stroke-width="0.5" stroke="#000000" height="12" width="34" y="326.444735" x="622.873048" fill="#ffb900"/>
-           <ellipse onclick="event.target.className.baseVal = 'red'" id="knoxville_10" stroke="#333333" ry="4" rx="4" cy="331.726972" cx="628.39755" stroke-width="null" fill="#ffffff"/>
+           <ellipse  id="knoxville_10" onclick="updateCost()" stroke="#333333" ry="4" rx="4" cy="331.726972" cx="628.39755" stroke-width="null" fill="#ffffff"/>
            <ellipse id="knoxville_15" stroke="#333333" ry="4" rx="4" cy="332.118803" cx="640.162488" stroke-width="null" fill="#ffffff"/>
            <ellipse id="knoxville_20" stroke="#333333" ry="4" rx="4" cy="332.118803" cx="650.906666" stroke-width="null" fill="#ffffff"/>
           <rect stroke-width="0.5" stroke="#000000" height="12" width="34" y="386.687365" x="647.023637" fill="#826eb4"/>
-           <ellipse onclick="event.target.className.baseVal = 'red'" id="atlanta_10" stroke="#333333" ry="4" rx="4" cy="392.460783" cx="652.608704" stroke-width="null" fill="#ffffff"/>
+           <ellipse  id="atlanta_10" onclick="updateCost()" stroke="#333333" ry="4" rx="4" cy="392.460783" cx="652.608704" stroke-width="null" fill="#ffffff"/>
            <ellipse id="atlanta_15" stroke="#333333" ry="4" rx="4" cy="392.460783" cx="663.270512" stroke-width="null" fill="#ffffff"/>
            <ellipse id="atlanta_20" stroke="#333333" ry="4" rx="4" cy="392.460783" cx="674.406519" stroke-width="null" fill="#ffffff"/>
           <line stroke-dasharray="2,2" stroke-linecap="null" stroke-linejoin="null" y2="209.395349" x2="658.387284" y1="194.630293" x1="561.743276" fill-opacity="null" stroke="#000000" fill="none"/>
@@ -357,53 +358,53 @@
           <line stroke-linecap="null" stroke-linejoin="null" y2="391.945141" x2="646.977922" y1="406.039059" x1="612.749836" fill-opacity="null" stroke-dasharray="2,2" stroke="#000000" fill="none"/>
           <line stroke-linecap="null" stroke-linejoin="null" y2="448.320812" x2="713.420677" y1="412.750448" x1="611.407558" fill-opacity="null" stroke-dasharray="2,2" stroke="#000000" fill="none"/>
           <text opacity="0.68" fill="#ffffff" stroke="#333333" stroke-width="0" stroke-opacity="null" x="697.031481" y="443.669606" font-size="11" font-family="Arvo, sans-serif" text-anchor="start" xml:space="preserve" font-weight="bold">JACKSONVILLE</text>
-           <ellipse onclick="event.target.className.baseVal = 'red'" id="omaha_10" stroke="#333333" ry="4" rx="4" cy="201.010142" cx="441.909657" stroke-width="null" fill="#ffffff"/>
+           <ellipse  id="omaha_10" onclick="updateCost()" stroke="#333333" ry="4" rx="4" cy="201.010142" cx="441.909657" stroke-width="null" fill="#ffffff"/>
           <rect stroke-width="0.5" stroke="#000000" height="12" width="34" y="203.701608" x="655.557311" fill="#96612e"/>
-           <ellipse onclick="event.target.className.baseVal = 'red'" id="detroit_10" stroke="#333333" ry="4" rx="4" cy="209.867521" cx="661.928378" stroke-width="null" fill="#ffffff"/>
+           <ellipse  id="detroit_10" onclick="updateCost()" stroke="#333333" ry="4" rx="4" cy="209.867521" cx="661.928378" stroke-width="null" fill="#ffffff"/>
            <ellipse id="detroit_15" stroke="#333333" ry="4" rx="4" cy="210.259352" cx="671.890793" stroke-width="null" fill="#ffffff"/>
            <ellipse id="detroit_20" stroke="#333333" ry="4" rx="4" cy="209.867521" cx="682.24504" stroke-width="null" fill="#ffffff"/>
           <rect stroke-width="0.5" stroke="#000000" height="12" width="34" y="167.091485" x="773.75625" fill="#96612e"/>
-           <ellipse onclick="event.target.className.baseVal = 'red'" id="buffalo_10" stroke="#333333" ry="4" rx="4" cy="173.099322" cx="780.02311" stroke-width="null" fill="#ffffff"/>
+           <ellipse  id="buffalo_10" onclick="updateCost()" stroke="#333333" ry="4" rx="4" cy="173.099322" cx="780.02311" stroke-width="null" fill="#ffffff"/>
            <ellipse id="buffalo_15" stroke="#333333" ry="4" rx="4" cy="173.099322" cx="790.340713" stroke-width="null" fill="#ffffff"/>
            <ellipse id="buffalo_20" stroke="#333333" ry="4" rx="4" cy="173.445338" cx="801.0253" stroke-width="null" fill="#ffffff"/>
           <rect stroke-width="0.5" stroke="#000000" height="12" width="34" y="200.957467" x="821.965714" fill="#96612e"/>
-           <ellipse onclick="event.target.className.baseVal = 'red'" id="new_york_10" stroke="#333333" ry="4" rx="4" cy="206.662954" cx="827.794399" stroke-width="null" fill="#ffffff"/>
+           <ellipse  id="new_york_10" onclick="updateCost()" stroke="#333333" ry="4" rx="4" cy="206.662954" cx="827.794399" stroke-width="null" fill="#ffffff"/>
            <ellipse id="new_york_15" stroke="#333333" ry="4" rx="4" cy="206.662954" cx="838.437052" stroke-width="null" fill="#ffffff"/>
            <ellipse id="new_york_20" stroke="#333333" ry="4" rx="4" cy="206.662954" cx="848.754655" stroke-width="null" fill="#ffffff"/>
           <rect stroke-width="0.5" stroke="#000000" height="12" width="34" y="229.644429" x="800.245585" fill="#96612e"/>
-           <ellipse onclick="event.target.className.baseVal = 'red'" id="philadelphia_10" stroke="#333333" ry="4" rx="4" cy="235.728369" cx="805.974371" stroke-width="null" fill="#ffffff"/>
+           <ellipse  id="philadelphia_10" onclick="updateCost()" stroke="#333333" ry="4" rx="4" cy="235.728369" cx="805.974371" stroke-width="null" fill="#ffffff"/>
            <ellipse id="philadelphia_15" stroke="#333333" ry="4" rx="4" cy="235.728369" cx="827.993645" stroke-width="null" fill="#ffffff"/>
            <ellipse id="philadelphia_20" stroke="#333333" ry="4" rx="4" cy="235.728369" cx="816.984009" stroke-width="null" fill="#ffffff"/>
           <rect stroke-width="0.5" stroke="#000000" height="12" width="34" y="280.871148" x="755.575885" fill="#96612e"/>
-           <ellipse onclick="event.target.className.baseVal = 'red'" id="washington_10" stroke="#333333" ry="4" rx="4" cy="286.666403" cx="761.015816" stroke-width="null" fill="#ffffff"/>
+           <ellipse  id="washington_10" onclick="updateCost()" stroke="#333333" ry="4" rx="4" cy="286.666403" cx="761.015816" stroke-width="null" fill="#ffffff"/>
            <ellipse id="washington_15" stroke="#333333" ry="4" rx="4" cy="286.666403" cx="771.415877" stroke-width="null" fill="#ffffff"/>
            <ellipse id="washington_20" stroke="#333333" ry="4" rx="4" cy="286.666403" cx="783.112256" stroke-width="null" fill="#ffffff"/>
           <rect stroke-width="0.5" stroke="#000000" height="12" width="34" y="321.032902" x="801.213776" fill="#826eb4"/>
-           <ellipse onclick="event.target.className.baseVal = 'red'" id="norfolk_10" stroke="#333333" ry="4" rx="4" cy="327.006933" cx="807.058707" stroke-width="null" fill="#ffffff"/>
+           <ellipse  id="norfolk_10" onclick="updateCost()" stroke="#333333" ry="4" rx="4" cy="327.006933" cx="807.058707" stroke-width="null" fill="#ffffff"/>
            <ellipse id="norfolk_15" stroke="#333333" ry="4" rx="4" cy="327.006933" cx="817.701359" stroke-width="null" fill="#ffffff"/>
            <ellipse id="norfolk_20" stroke="#333333" ry="4" rx="4" cy="326.660916" cx="828.69003" stroke-width="null" fill="#ffffff"/>
           <rect stroke-width="0.5" stroke="#000000" height="12" width="34" y="372.111062" x="759.786717" fill="#826eb4"/>
-           <ellipse onclick="event.target.className.baseVal = 'red'" id="ralengh_10" stroke="#333333" ry="4" rx="4" cy="377.571203" cx="765.371772" stroke-width="null" fill="#ffffff"/>
+           <ellipse  id="ralengh_10" onclick="updateCost()" stroke="#333333" ry="4" rx="4" cy="377.571203" cx="765.371772" stroke-width="null" fill="#ffffff"/>
            <ellipse id="ralengh_15" stroke="#333333" ry="4" rx="4" cy="377.571203" cx="776.509681" stroke-width="null" fill="#ffffff"/>
            <ellipse id="ralengh_20" stroke="#333333" ry="4" rx="4" cy="377.850438" cx="787.534993" stroke-width="null" fill="#ffffff"/>
           <rect stroke-width="0.5" stroke="#000000" height="12" width="34" y="418.97839" x="726.591801" fill="#826eb4"/>
-           <ellipse onclick="event.target.className.baseVal = 'red'" id="savannah_10" stroke="#333333" ry="4" rx="4" cy="424.590925" cx="732.849797" stroke-width="null" fill="#ffffff"/>
+           <ellipse  id="savannah_10" onclick="updateCost()" stroke="#333333" ry="4" rx="4" cy="424.590925" cx="732.849797" stroke-width="null" fill="#ffffff"/>
            <ellipse id="savannah_15" stroke="#333333" ry="4" rx="4" cy="424.590925" cx="743.595875" stroke-width="null" fill="#ffffff"/>
            <ellipse id="savannah_20" stroke="#333333" ry="4" rx="4" cy="424.590925" cx="754.229356" stroke-width="null" fill="#ffffff"/>
           <rect stroke-width="0.5" stroke="#000000" height="12" width="34" y="446.435912" x="711.987067" fill="#826eb4"/>
-           <ellipse onclick="event.target.className.baseVal = 'red'" id="jacksonville_10" stroke="#333333" ry="4" rx="4" cy="451.983135" cx="718.352048" stroke-width="null" fill="#ffffff"/>
+           <ellipse  id="jacksonville_10" onclick="updateCost()" stroke="#333333" ry="4" rx="4" cy="451.983135" cx="718.352048" stroke-width="null" fill="#ffffff"/>
            <ellipse id="jacksonville_15" stroke="#333333" ry="4" rx="4" cy="452.001118" cx="728.314463" stroke-width="null" fill="#ffffff"/>
            <ellipse id="jacksonville_20" stroke="#333333" ry="4" rx="4" cy="452.019101" cx="739.060541" stroke-width="null" fill="#ffffff"/>
           <rect stroke-width="0.5" stroke="#000000" height="12" width="34" y="528.398662" x="767.870299" fill="#826eb4"/>
-           <ellipse onclick="event.target.className.baseVal = 'red'" id="miami_10" stroke="#333333" ry="4" rx="4" cy="534.367502" cx="773.849517" stroke-width="null" fill="#ffffff"/>
+           <ellipse  id="miami_10" onclick="updateCost()" stroke="#333333" ry="4" rx="4" cy="534.367502" cx="773.849517" stroke-width="null" fill="#ffffff"/>
            <ellipse id="miami_15" stroke="#333333" ry="4" rx="4" cy="534.367502" cx="784.49217" stroke-width="null" fill="#ffffff"/>
            <ellipse id="miami_20" stroke="#333333" ry="4" rx="4" cy="534.367502" cx="795.134824" stroke-width="null" fill="#ffffff"/>
           <rect stroke-width="0.5" stroke="#000000" height="12" width="34" y="134.058644" x="844.193879" fill="#96612e"/>
-           <ellipse onclick="event.target.className.baseVal = 'red'" id="boston_10" stroke="#333333" ry="4" rx="4" cy="139.796926" cx="850.716687" stroke-width="null" fill="#ffffff"/>
+           <ellipse  id="boston_10" onclick="updateCost()" stroke="#333333" ry="4" rx="4" cy="139.796926" cx="850.716687" stroke-width="null" fill="#ffffff"/>
            <ellipse id="boston_15" stroke="#333333" ry="4" rx="4" cy="139.450909" cx="861.03429" stroke-width="null" fill="#ffffff"/>
            <ellipse id="boston_20" stroke="#333333" ry="4" rx="4" cy="139.450909" cx="871.676943" stroke-width="null" fill="#ffffff"/>
           <rect stroke-width="0.5" stroke="#000000" height="12" width="34" y="246.446634" x="668.101045" fill="#96612e"/>
-           <ellipse onclick="event.target.className.baseVal = 'red'" id="pitsburgh_10" stroke="#333333" ry="4" rx="4" cy="252.064718" cx="673.819572" stroke-width="null" fill="#ffffff"/>
+           <ellipse  id="pitsburgh_10" onclick="updateCost()" stroke="#333333" ry="4" rx="4" cy="252.064718" cx="673.819572" stroke-width="null" fill="#ffffff"/>
            <ellipse id="pitsburgh_15" stroke="#333333" ry="4" rx="4" cy="252.064718" cx="685.154259" stroke-width="null" fill="#ffffff"/>
            <ellipse id="pitsburgh_20" stroke="#333333" ry="4" rx="4" cy="252.410735" cx="695.796911" stroke-width="null" fill="#ffffff"/>
           <line stroke-dasharray="2,2" stroke-linecap="null" stroke-linejoin="null" y2="452.96985" x2="712.672574" y1="481.154641" x1="586.512081" stroke-opacity="null" stroke="#000000" fill="none"/>
@@ -568,7 +569,7 @@
           <text font-weight="bold" xml:space="preserve" text-anchor="start" font-family="Arvo, sans-serif" font-size="11" y="339.422549" x="588.708001" fill-opacity="null" stroke-opacity="null" stroke-width="0" stroke="#333333" fill="#ffffff">12</text>
           <text font-weight="bold" xml:space="preserve" text-anchor="start" font-family="Arvo, sans-serif" font-size="11" y="361.25263" x="642.22691" fill-opacity="null" stroke-opacity="null" stroke-width="0" stroke="#333333" fill="#ffffff">5</text>
           <rect stroke-width="0.5" stroke="#000000" height="12" width="34" y="484.689158" x="743.719469" fill="#826eb4"/>
-           <ellipse onclick="event.target.className.baseVal = 'red'" id="tampa_10" stroke="#333333" ry="4" rx="4" cy="489.884676" cx="748.849673" stroke-width="null" fill="#ffffff"/>
+           <ellipse  id="tampa_10" onclick="updateCost()" stroke="#333333" ry="4" rx="4" cy="489.884676" cx="748.849673" stroke-width="null" fill="#ffffff"/>
            <ellipse id="tampa_15" stroke="#333333" ry="4" rx="4" cy="489.884676" cx="759.76239" stroke-width="null" fill="#ffffff"/>
            <ellipse id="tampa_20" stroke="#333333" ry="4" rx="4" cy="489.884676" cx="770.675108" stroke-width="null" fill="#ffffff"/>
           <text font-weight="bold" xml:space="preserve" text-anchor="start" font-family="Arvo, sans-serif" font-size="11" y="402.90739" x="626.269829" stroke-opacity="null" stroke-width="0" stroke="#000000" fill="#ffffff">3</text>
@@ -598,9 +599,16 @@
        </svg>
     </section>
     <section id="market" class = "map-section"></section>
+    <section class="info">
     <section class="activity-log">
       <p>ACTIVITY LOG</p>
     </section>
+    <section >
+      <p id="building-cost">Building cost: 0</p>
+      <button> Build</button>
+      <button onclick="reset()"> Cancel</button>
+    </section>
+  </section>
   </main>
   <section class = "players-section">
       <% players.forEach(function(player){ %>

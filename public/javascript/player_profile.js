@@ -57,19 +57,6 @@ const getCurrentPlayer = function() {
   }, 2000);
 };
 
-const startInteraction = function() {
-  fetch("/currentPlayer")
-    .then(res => res.json())
-    .then(player => {
-      setInterval(() => {
-        document.querySelector(".freeze").style.visibility = "visible";
-        if (player.id == playerId) {
-          document.querySelector(".freeze").style.visibility = "hidden";
-        }
-      }, 2000);
-    });
-};
-
 const readArgs = text => {
   let args = {};
   const splitKeyValue = pair => pair.split("=");
@@ -83,7 +70,6 @@ const readArgs = text => {
 
 const showPlayerAssets = function(players) {
   getCurrentPlayer();
-  // document.querySelector('.freeze').style.visibility = 'hidden';
   const users = JSON.parse(players);
   users.forEach(player => {
     const powerplantHTML = generatePowerplantHTML(player.powerplants);
