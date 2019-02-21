@@ -1,17 +1,17 @@
 class Player {
   constructor(color, name) {
     this.name = name;
-    this.resources = { coal: 0, garbage: 0, uranium: 0, oil: 0 };
+    this.resources = { Coal: 0, Garbage: 0, Uranium: 0, Oil: 0 };
     this.powerplants = {};
     this.money = 50;
     this.color = color;
   }
 
-  getName(){
+  getName() {
     return this.name;
   }
 
-  setId(id){
+  setId(id) {
     this.id = id;
   }
 

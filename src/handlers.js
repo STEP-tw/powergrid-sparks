@@ -117,6 +117,31 @@ const updateCurrentPlayer = function(req, res) {
   res.send(turn.updateCurrentPlayer());
 };
 
+const buyPowerplant = function(req, res) {
+  const price = +req.body.price;
+  const gameId = req.cookies.gameId;
+  const game = res.app.activeGames[+gameId];
+  const players = game.getPlayers();
+  const turn = game.getTurn(players);
+  const currentPlayer = turn.getCurrentPlayer();
+  const cardDetails = JSON.parse(powerPlantCards)[price];
+  const powerplant = {
+    value: price,
+    resource: cardDetails.resource,
+    city: cardDetails.city
+  };
+  currentPlayer.addPowerplant(powerplant);
+  currentPlayer.payMoney(price);
+  res.send(players);
+};
+
+const getPowerplantDetails = function(req, res) {
+  const gameId = req.cookies.gameId;
+  const game = res.app.activeGames[+gameId];
+  const players = game.getPlayers();
+  res.send(players);
+};
+
 module.exports = {
   renderHome,
   createGame,
@@ -128,5 +153,7 @@ module.exports = {
   renderWaitingPage,
   renderErrorPage,
   getCurrentPlayer,
-  updateCurrentPlayer
+  updateCurrentPlayer,
+  buyPowerplant,
+  getPowerplantDetails
 };

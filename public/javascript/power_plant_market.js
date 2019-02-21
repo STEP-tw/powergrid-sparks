@@ -232,3 +232,13 @@ const generateResourceValue = function(event) {
   resourceDiv.style.border = unclickBorder;
   document.getElementById("resource-amount").innerText = currentAmount - cost;
 };
+
+const buyPowerplant = function() {
+  const price = document.getElementById("current-bid-amount").innerText;
+  fetch("/buyPowerplant", {
+    method: "POST",
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    body: `price=${price}`
+  });
+  updateCurrentPlayer();
+};

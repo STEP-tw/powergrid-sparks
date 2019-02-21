@@ -1,9 +1,9 @@
 const resourceIcons = {
-  garbage: '<i class="fas fa-trash-alt"></i>',
-  coal: '<i class="fas fa-cubes"></i>',
-  oil: '<i class="fas fa-oil-can"></i>',
-  uranium: '<i class="fas fa-radiation-alt"></i>',
-  hybrid: '<i class="fas fa-hands-helping"></i>',
+  Garbage: '<i class="fas fa-trash-alt"></i>',
+  Coal: '<i class="fas fa-cubes"></i>',
+  Oil: '<i class="fas fa-oil-can"></i>',
+  Uranium: '<i class="fas fa-radiation-alt"></i>',
+  Hybrid: '<i class="fas fa-hands-helping"></i>',
   arrow: '<i class="fas fa-arrow-right" ></i >',
   city: '<i class="fas fa-house-damage"></i>'
 };
@@ -41,20 +41,34 @@ const updateCurrentPlayer = function() {
 const getCurrentPlayer = function() {
   setInterval(() => {
     fetch("/currentPlayer")
-    .then(res => res.json())
-    .then(player => {
-      const playerId = readArgs(document.cookie).playerId;
-        document
-          .querySelectorAll(".player-profile")
-          .forEach(element => (element.style.border = "none"));
-        document.querySelector(`.player-color-${player.color}`).style.border =
-          "10px solid white";
-        document.querySelector(".freeze").style.visibility = "visible";
-        if (player.id == playerId) {
-          document.querySelector(".freeze").style.visibility = "hidden";
-        }
+      .then(res => res.json())
+      .then(player => {
+        handleTurn(player);
       });
+    getPowerplantDetails();
   }, 2000);
+};
+
+const handleTurn = function(player) {
+  const playerId = readArgs(document.cookie).playerId;
+  document
+    .querySelectorAll(".player-profile")
+    .forEach(element => (element.style.borderBottom = "none"));
+  document.querySelector(
+    `.player-color-${player.color}`
+  ).style.borderBottom = `10px solid ${player.color}`;
+  document.querySelector(".freeze").style.visibility = "visible";
+  if (player.id == playerId) {
+    document.querySelector(".freeze").style.visibility = "hidden";
+  }
+};
+
+const getPowerplantDetails = function() {
+  fetch("/getPowerplantDetails")
+    .then(res => res.text())
+    .then(players => {
+      showPlayerDetails(players);
+    });
 };
 
 const readArgs = text => {
@@ -69,7 +83,11 @@ const readArgs = text => {
 };
 
 const showPlayerAssets = function(players) {
+  showPlayerDetails(players);
   getCurrentPlayer();
+};
+
+const showPlayerDetails = function(players) {
   const users = JSON.parse(players);
   users.forEach(player => {
     const powerplantHTML = generatePowerplantHTML(player.powerplants);

@@ -18,7 +18,9 @@ const {
   renderWaitingPage,
   renderErrorPage,
   getCurrentPlayer,
-  updateCurrentPlayer
+  updateCurrentPlayer,
+  buyPowerplant,
+  getPowerplantDetails
 } = require("./src/handlers");
 
 app.set("views", __dirname + "/public/html");
@@ -37,9 +39,11 @@ app.post("/joinGame", joinGame);
 app.get("/displayPowerPlantMarket", initializeMarket);
 app.get(/\/gameplay/, renderGameplay);
 app.get(/\/waitingPage/, renderWaitingPage);
-app.get('/invalidGameId',renderErrorPage);
-app.get('/currentPlayer',getCurrentPlayer);
-app.get('/updateCurrentPlayer',updateCurrentPlayer);
+app.get("/invalidGameId", renderErrorPage);
+app.get("/currentPlayer", getCurrentPlayer);
+app.get("/updateCurrentPlayer", updateCurrentPlayer);
+app.post("/buyPowerplant", buyPowerplant);
+app.get("/getPowerplantDetails", getPowerplantDetails);
 
 app.use(express.static("public/html"));
 app.use(express.static("public/stylesheet"));

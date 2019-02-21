@@ -1,6 +1,7 @@
 const request = require("supertest");
 const app = require("../../app");
 const Game = require("../../src/model/Game");
+const Player = require("../../src/model/player");
 
 describe("GET /", () => {
   it("should give the homepage with response code 200", done => {
@@ -139,6 +140,32 @@ describe("GET /updateCurrentPlayer", () => {
     request(app)
       .get("/updateCurrentPlayer")
       .set("Cookie", ["gameId=5;playerId=1234"])
+      .expect(200, done);
+  });
+});
+
+describe("GET /getPowerplantDetails", () => {
+  it("should give player powerplants details", done => {
+    app.activeGames["5"] = new Game(3);
+    app.cookies["2468"] = "Ankon";
+    request(app)
+      .get("/getPowerplantDetails")
+      .set("Cookie", ["gameId=5;playerId=2468"])
+      .expect("Content-Type", /json/)
+      .expect(200, done);
+  });
+});
+
+describe("POST /buyPowerplant", () => {
+  it("should add powerplant details to current player", done => {
+    app.activeGames["10"] = new Game(3);
+    app.cookies["1111"] = "Ankon";
+    const player = new Player("red", "Ankon");
+    app.activeGames[10].addPlayer(player);
+    request(app)
+      .post("/buyPowerplant")
+      .send("price=10")
+      .set("Cookie", ["gameId=10;playerId=2468"])
       .expect(200, done);
   });
 });
