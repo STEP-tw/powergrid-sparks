@@ -14,10 +14,10 @@ const resources = {
 };
 
 const market_resources = {
-  Garbage: "fas fa-trash-alt resource",
-  Coal: "fas fa-cubes resource",
-  Oil: "fas fa-oil-can resource middle-resource",
-  Uranium: "fas fa-radiation-alt resource middle-resource"
+  Garbage: "fas fa-trash-alt resource filled",
+  Coal: "fas fa-cubes resource filled",
+  Oil: "fas fa-oil-can resource middle-resource filled",
+  Uranium: "fas fa-radiation-alt resource middle-resource filled"
 };
 
 const initialResourceCount = {
@@ -43,10 +43,22 @@ const fillResources = function() {
   fillResource("Coal");
   fillResource("Oil");
   fillResource("Garbage");
-  document.getElementById("Uranium_14_0").className =
-    "fas fa-radiation-alt last-uranium";
-  document.getElementById("Uranium_16_0").className =
-    "fas fa-radiation-alt last-uranium";
+  fillUranium();
+};
+
+const fillUranium = function() {
+  let costDiff = 2;
+  let maxCost = 16;
+  for (
+    let uraniumCount = 0;
+    uraniumCount < initialResourceCount["Uranium"];
+    uraniumCount++
+  ) {
+    let uraniumDiv = document.getElementById(`Uranium_${maxCost}_0`);
+    uraniumDiv.className += " fas fa-radiation-alt filled";
+    maxCost -= costDiff;
+    maxCost == 8 && (costDiff = 1);
+  }
 };
 
 const fillResource = function(resource) {
@@ -69,13 +81,10 @@ const generateResource = function(resource, resourceCount) {
 };
 
 const startBuyingResources = function() {
-  const resourceMarket = document.getElementsByClassName("resource");
+  const resourceMarket = document.getElementsByClassName("filled");
   for (let resourceNo = 0; resourceNo < resourceMarket.length; resourceNo++) {
-    resourceMarket[resourceNo].className.split(" ").length > 2 &&
-      (resourceMarket[resourceNo].onclick = generateResourceValue);
+    resourceMarket[resourceNo].onclick = generateResourceValue;
   }
-  document.getElementById("Uranium_14_0").onclick = generateResourceValue;
-  document.getElementById("Uranium_16_0").onclick = generateResourceValue;
 };
 
 const generatePowerPlantMarket = function(powerPlantCards) {
