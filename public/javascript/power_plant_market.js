@@ -45,10 +45,8 @@ const fillResources = function() {
   fillResource("Garbage");
   document.getElementById("Uranium_14_0").className =
     "fas fa-radiation-alt last-uranium";
-  document.getElementById("Uranium_14_0").onclick = generateResourceValue;
   document.getElementById("Uranium_16_0").className =
     "fas fa-radiation-alt last-uranium";
-  document.getElementById("Uranium_16_0").onclick = generateResourceValue;
 };
 
 const fillResource = function(resource) {
@@ -68,7 +66,16 @@ const generateResource = function(resource, resourceCount) {
   )}_${resourceCount % 3}`;
   let resourceDiv = document.getElementById(resourceId);
   resourceDiv.className = market_resources[resource];
-  resourceDiv.onclick = generateResourceValue;
+};
+
+const startBuyingResources = function() {
+  const resourceMarket = document.getElementsByClassName("resource");
+  for (let resourceNo = 0; resourceNo < resourceMarket.length; resourceNo++) {
+    resourceMarket[resourceNo].className.split(" ").length > 2 &&
+      (resourceMarket[resourceNo].onclick = generateResourceValue);
+  }
+  document.getElementById("Uranium_14_0").onclick = generateResourceValue;
+  document.getElementById("Uranium_16_0").onclick = generateResourceValue;
 };
 
 const generatePowerPlantMarket = function(powerPlantCards) {

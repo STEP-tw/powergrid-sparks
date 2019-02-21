@@ -218,7 +218,7 @@ td {
   align-items: center;
   width: 940px;
   height: 125px;
-  border: solid 1px black;
+  border: solid 1px #5e7886;
 }
 
 .price-details {
@@ -250,7 +250,7 @@ td {
   flex-wrap: wrap;
   width: 10%;
   height: 90%;
-  border: solid 1px black;
+  border: solid 1px #5e7886;
 }
 
 .resource {
