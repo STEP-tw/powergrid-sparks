@@ -81,6 +81,8 @@ const generateResource = function(resource, resourceCount) {
 };
 
 const startBuyingResources = function() {
+  document.getElementById("selected-resource-amount").style.visibility =
+    "visible";
   const resourceMarket = document.getElementsByClassName("filled");
   for (let resourceNo = 0; resourceNo < resourceMarket.length; resourceNo++) {
     resourceMarket[resourceNo].onclick = generateResourceValue;
@@ -220,9 +222,13 @@ const generateResourceValue = function(event) {
   const resourceDiv = event.target;
   const clickBorder = "1px solid black";
   const unclickBorder = "1px solid #759cae";
+  const cost = +resourceDiv.id.split("_")[1];
+  const currentAmount = +document.getElementById("resource-amount").innerText;
   if (resourceDiv.id && resourceDiv.style.border != clickBorder) {
     resourceDiv.style.border = clickBorder;
+    document.getElementById("resource-amount").innerText = currentAmount + cost;
     return;
   }
   resourceDiv.style.border = unclickBorder;
+  document.getElementById("resource-amount").innerText = currentAmount - cost;
 };
