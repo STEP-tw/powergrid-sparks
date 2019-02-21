@@ -256,7 +256,7 @@ td {
 .resource {
   width: 30%;
   height: 30%;
-  border: solid 1px black;
+  border: solid 1px #759cae;
   color: #3e4346;
   display: flex;
   justify-content: center;
@@ -283,11 +283,40 @@ td {
   position: relative;
   width: 40%;
   height: 40%;
-  border: solid 1px black;
+  border: solid 1px #759cae;
   display: flex;
   justify-content: center;
   align-items: center;
   color: #3e4346;
+}
+
+.fa-radiation-alt:before {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 150%;
+}
+
+.fa-oil-can:before {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.fa-cubes:before {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.fa-trash-alt:before {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .resource.middle-resource {
@@ -309,6 +338,7 @@ td {
   z-index: 1;
   font-size: 70%;
   color: #3e4346;
+  font-weight: bolder;
 }
 
 .bidding-section {
@@ -328,4 +358,8 @@ td {
   position: relative;
   top: 10%;
   height: 100%;
+}
+
+.focus {
+  border: 1px solid white;
 }

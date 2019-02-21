@@ -13,6 +13,13 @@ const resources = {
   Hybrid: '<i class="fas fa-hands-helping"></i>'
 };
 
+const market_resources = {
+  Garbage: "fas fa-trash-alt resource",
+  Coal: "fas fa-cubes resource",
+  Oil: "fas fa-oil-can resource middle-resource",
+  Uranium: "fas fa-radiation-alt resource middle-resource"
+};
+
 const initialResourceCount = {
   Coal: 24,
   Oil: 18,
@@ -36,17 +43,12 @@ const fillResources = function() {
   fillResource("Coal");
   fillResource("Oil");
   fillResource("Garbage");
-  document.getElementById("Uranium_14_0").innerHTML = resources["Uranium"];
-  document.getElementById("Uranium_16_0").innerHTML = resources["Uranium"];
-};
-
-const generateResource = function(resource, resourceCount) {
-  let resourceId = `${resource}_${Math.ceil(
-    resourceCount / 3
-  )}_${resourceCount % 3}`;
-  let resourceDiv = document.getElementById(resourceId);
-  console.log(resource)
-  resourceDiv.innerHTML = resources[resource];
+  document.getElementById("Uranium_14_0").className =
+    "fas fa-radiation-alt last-uranium";
+  document.getElementById("Uranium_14_0").onclick = generateResourceValue;
+  document.getElementById("Uranium_16_0").className =
+    "fas fa-radiation-alt last-uranium";
+  document.getElementById("Uranium_16_0").onclick = generateResourceValue;
 };
 
 const fillResource = function(resource) {
@@ -58,6 +60,15 @@ const fillResource = function(resource) {
   ) {
     generateResource(resource, resourceCount);
   }
+};
+
+const generateResource = function(resource, resourceCount) {
+  let resourceId = `${resource}_${Math.ceil(
+    resourceCount / 3
+  )}_${resourceCount % 3}`;
+  let resourceDiv = document.getElementById(resourceId);
+  resourceDiv.className = market_resources[resource];
+  resourceDiv.onclick = generateResourceValue;
 };
 
 const generatePowerPlantMarket = function(powerPlantCards) {
@@ -187,4 +198,15 @@ const displayMap = function() {
   const market = document.getElementById("market");
   map.style.display = "inline";
   market.style.display = "none";
+};
+
+const generateResourceValue = function(event) {
+  const resourceDiv = event.target;
+  const clickBorder = "1px solid black";
+  const unclickBorder = "1px solid #759cae";
+  if (resourceDiv.id && resourceDiv.style.border != clickBorder) {
+    resourceDiv.style.border = clickBorder;
+    return;
+  }
+  resourceDiv.style.border = unclickBorder;
 };

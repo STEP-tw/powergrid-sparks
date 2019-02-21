@@ -1,106 +1,172 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <title>homepage</title>
+    <link rel="stylesheet" type="text/css" media="screen" href="/index.css" />
+    <script src="main.js"></script>
+  </head>
 
-<head>
-  <title>homepage</title>
-  <link rel="stylesheet" type="text/css" media="screen" href="/index.css" />
-  <script src="main.js"></script>
-</head>
-
-<body>
-  <header>
-    <div>P O W E R G R I D</div>
-    <img class="logo" src="bulb-icon.png" alt="logo" />
-  </header>
-  <main>
-    <div class="main-box">
-      <div class="options">
-        <button onclick="document.querySelector('.overlay').style.visibility='visible'">
-          PLAY
-        </button>
-        <button onclick="document.querySelector('#rules-book').style.visibility='visible'">
-          RULES BOOK
-        </button>
-        <button onclick="document.querySelector('#about').style.visibility='visible'">ABOUT US</button>
-      </div>
-    </div>
-
-    <div class="overlay" id="play-game">
-      <div class="popup">
-        <div class="options" style="height: 250px;">
-          <button onclick="document.querySelector('#create-game').style.visibility='visible'">CREATE GAME</button>
-          <button onclick="document.querySelector('#join-game').style.visibility='visible'">JOIN GAME</button>
-        </div>
-      </div>
-      <div class="cross-button">
-        <span onclick="document.querySelector('#play-game').style.visibility='hidden'">x</span>
-      </div>
-    </div>
-
-    <div class="overlay" id="rules-book">
-      <div class="popup">
-        <h1>Rules Book</h1>
-      </div>
-      <div class="cross-button">
-        <span onclick="document.querySelector('#rules-book').style.visibility='hidden'">x</span>
-      </div>
-    </div>
-
-    <div class="overlay" id="about">
-      <div class="popup">
-        <div class="names">
-          <h1>About us</h1>
-          <h2>Naman</h2>
-          <h2>Leela Prasanth</h2>
-          <h2>Keerthy</h2>
-          <h2>Gaurav</h2>
-          <h2>Deepika</h2>
-          <h2>Chandan</h2>
-          <h2>Ankon</h2>
-        </div>
-      </div>
-      <div class="cross-button">
-        <span onclick="document.querySelector('#about').style.visibility='hidden'">x</span>
-      </div>
-    </div>
-
-    <div class="overlay" id="create-game">
-      <div class="popup">
+  <body>
+    <header>
+      <div>P O W E R G R I D</div>
+      <img class="logo" src="bulb-icon.png" alt="logo" />
+    </header>
+    <main>
+      <div class="main-box">
         <div class="options">
-          <form autocomplete="off" class="options" method="POST" action="/createGame">
-            <input class="textField" id="hostName" name='hostName' type="text" placeholder="Enter Your Name" required>
-            <select class="textField" name="playerCount" required>
-              <option value="">No of players</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-              <option value="6">6</option>
-            </select>
-            <input class="submit" type="submit" class='submit' name="submit" value="submit">
-          </form>
+          <button
+            onclick="document.querySelector('.overlay').style.visibility='visible'"
+          >
+            PLAY
+          </button>
+          <button
+            onclick="document.querySelector('#rules-book').style.visibility='visible'"
+          >
+            RULES BOOK
+          </button>
+          <button
+            onclick="document.querySelector('#about').style.visibility='visible'"
+          >
+            ABOUT US
+          </button>
         </div>
       </div>
-      <div class="cross-button">
-        <span onclick="document.querySelector('#create-game').style.visibility='hidden'">x</span>
-      </div>
-    </div>
 
-    <div class="overlay" id="join-game">
-      <div class="popup">
-        <div class="options">
-          <form autocomplete="off" class="options" method="POST" action="/joinGame">
-            <input class="textField" name='joinerName' id='joinerName' type="text" placeholder="Enter Your Name" required>
-            <input class="textField" name="gameId" id='gameId' type="text" placeholder="Enter Game ID" required>
-            <button>SUBMIT</button>
-          </form>
+      <div class="overlay" id="play-game">
+        <div class="popup">
+          <div class="options" style="height: 250px;">
+            <button
+              onclick="document.querySelector('#create-game').style.visibility='visible'"
+            >
+              CREATE GAME
+            </button>
+            <button
+              onclick="document.querySelector('#join-game').style.visibility='visible'"
+            >
+              JOIN GAME
+            </button>
+          </div>
+        </div>
+        <div class="cross-button">
+          <span
+            onclick="document.querySelector('#play-game').style.visibility='hidden'"
+            >x</span
+          >
         </div>
       </div>
-      <div class="cross-button">
-        <span onclick="document.querySelector('#join-game').style.visibility='hidden'">x</span>
-      </div>
-    </div>
-  </main>
-</body>
 
+      <div class="overlay" id="rules-book">
+        <div class="popup">
+          <h1>Rules Book</h1>
+        </div>
+        <div class="cross-button">
+          <span
+            onclick="document.querySelector('#rules-book').style.visibility='hidden'"
+            >x</span
+          >
+        </div>
+      </div>
+
+      <div class="overlay" id="about">
+        <div class="popup">
+          <div class="names">
+            <h1>About us</h1>
+            <h2>Naman</h2>
+            <h2>Leela Prasanth</h2>
+            <h2>Keerthy</h2>
+            <h2>Gaurav</h2>
+            <h2>Deepika</h2>
+            <h2>Chandan</h2>
+            <h2>Ankon</h2>
+          </div>
+        </div>
+        <div class="cross-button">
+          <span
+            onclick="document.querySelector('#about').style.visibility='hidden'"
+            >x</span
+          >
+        </div>
+      </div>
+
+      <div class="overlay" id="create-game">
+        <div class="popup">
+          <div class="options">
+            <form
+              autocomplete="off"
+              class="options"
+              method="POST"
+              action="/createGame"
+            >
+              <input
+                class="textField"
+                id="hostName"
+                name="hostName"
+                type="text"
+                placeholder="Enter Your Name"
+                required
+              />
+              <select class="textField" name="playerCount" required>
+                <option value="">No of players</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+              </select>
+              <input
+                class="submit"
+                type="submit"
+                class="submit"
+                name="submit"
+                value="submit"
+              />
+            </form>
+          </div>
+        </div>
+        <div class="cross-button">
+          <span
+            onclick="document.querySelector('#create-game').style.visibility='hidden'"
+            >x</span
+          >
+        </div>
+      </div>
+
+      <div class="overlay" id="join-game">
+        <div class="popup">
+          <div class="options">
+            <form
+              autocomplete="off"
+              class="options"
+              method="POST"
+              action="/joinGame"
+            >
+              <input
+                class="textField"
+                name="joinerName"
+                id="joinerName"
+                type="text"
+                placeholder="Enter Your Name"
+                required
+              />
+              <input
+                class="textField"
+                name="gameId"
+                id="gameId"
+                type="text"
+                placeholder="Enter Game ID"
+                required
+              />
+              <button>SUBMIT</button>
+            </form>
+          </div>
+        </div>
+        <div class="cross-button">
+          <span
+            onclick="document.querySelector('#join-game').style.visibility='hidden'"
+            >x</span
+          >
+        </div>
+      </div>
+    </main>
+  </body>
 </html>
