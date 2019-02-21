@@ -59,14 +59,6 @@ const fillUranium = function() {
     maxCost -= costDiff;
     maxCost == 8 && (costDiff = 1);
   }
-}
-
-const generateResource = function(resource, resourceCount) {
-  let resourceId = `${resource}_${Math.ceil(
-    resourceCount / 3
-  )}_${resourceCount % 3}`;
-  let resourceDiv = document.getElementById(resourceId);
-  resourceDiv.innerHTML = resources[resource];
 };
 
 const fillResource = function(resource) {
