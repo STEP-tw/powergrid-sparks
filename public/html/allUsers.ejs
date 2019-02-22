@@ -1,8 +1,15 @@
-<div class = "player-profile player-color-<%= player.color %>" id="<%= player.name %>_<%= player.color %>" >
+<div
+  class="player-profile player-color-<%= player.color %>"
+  id="<%= player.name %>_<%= player.color %>"
+>
   <div class="player-header">
-    <div> <%= player.name %> </div>
-    <div> $<%= player.money %> </div>
+    <div><%= player.name %></div>
+    <div>$<%= player.money %></div>
   </div>
-    <div class="player-power-plants"> Powerplants: <%= JSON.stringify(player.powerplants) %> </div>
-    <div class="player-resources"> Resources:<%= JSON.stringify(player.resources) %> </div>
+  <div class="player-power-plants">
+    Powerplants: <%= JSON.stringify(player.powerplants) %>
   </div>
+  <div class="player-resources">
+    Resources:<%= JSON.stringify(player.resources) %>
+  </div>
+</div>

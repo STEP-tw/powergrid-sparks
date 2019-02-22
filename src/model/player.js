@@ -35,7 +35,7 @@ class Player {
 
   addResources(resources) {
     ["Coal", "Oil", "Uranium", "Garbage"].map(
-      resource => (this.resources[resource] += resources[resource])
+      resource => (this.resources[resource] += +resources[resource])
     );
   }
 }
