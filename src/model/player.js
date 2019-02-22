@@ -32,6 +32,12 @@ class Player {
     this.money -= money;
     return { payment: "success" };
   }
+
+  addResources(resources) {
+    ["Coal", "Oil", "Uranium", "Garbage"].map(
+      resource => (this.resources[resource] += resources[resource])
+    );
+  }
 }
 
 module.exports = Player;

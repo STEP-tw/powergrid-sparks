@@ -169,3 +169,17 @@ describe("POST /buyPowerplant", () => {
       .expect(200, done);
   });
 });
+
+describe("POST /buyResources", function() {
+  it("should return code 200 if rsource data is registered succesfully", done => {
+    const player1 = new Player("green", "naman");
+    app.activeGames["5"] = new Game(2);
+    app.activeGames["5"].addPlayer(player1);
+    app.cookies["1234"] = "Ankon";
+    request(app)
+      .post("/buyResources")
+      .set("Cookie", ["gameId=5;playerId=1234"])
+      .send("Coal=1&Uranium=1&Oil=1&Garbage=1")
+      .expect(200, done);
+  });
+});

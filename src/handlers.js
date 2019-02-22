@@ -142,6 +142,19 @@ const getPowerplantDetails = function(req, res) {
   res.send(players);
 };
 
+const buyResources = function(req, res) {
+  const resourcesDetail = req.body;
+  const gameId = req.cookies.gameId;
+  const game = res.app.activeGames[+gameId];
+  console.log(game);
+  const players = game.getPlayers();
+  const turn = game.getTurn(players);
+  const currentPlayer = turn.getCurrentPlayer();
+  currentPlayer.payMoney(resourcesDetail.cost);
+  currentPlayer.addResources(resourcesDetail);
+  res.send("");
+};
+
 module.exports = {
   renderHome,
   createGame,
@@ -155,5 +168,6 @@ module.exports = {
   getCurrentPlayer,
   updateCurrentPlayer,
   buyPowerplant,
-  getPowerplantDetails
+  getPowerplantDetails,
+  buyResources
 };

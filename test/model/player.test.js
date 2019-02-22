@@ -51,4 +51,15 @@ describe("Player", () => {
       chai.expect(player.money).to.be.equal(50);
     });
   });
+  describe("addResources", function() {
+    it("should add the resources to player account", function() {
+      player.addResources({ Coal: 1, Oil: 2, Garbage: 3, Uranium: 4 });
+      chai.assert.deepEqual(player.resources, {
+        Coal: 1,
+        Oil: 2,
+        Garbage: 3,
+        Uranium: 4
+      });
+    });
+  });
 });

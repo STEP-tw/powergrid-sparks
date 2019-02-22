@@ -20,7 +20,8 @@ const {
   getCurrentPlayer,
   updateCurrentPlayer,
   buyPowerplant,
-  getPowerplantDetails
+  getPowerplantDetails,
+  buyResources
 } = require("./src/handlers");
 
 app.set("views", __dirname + "/public/html");
@@ -44,6 +45,7 @@ app.get("/currentPlayer", getCurrentPlayer);
 app.get("/updateCurrentPlayer", updateCurrentPlayer);
 app.post("/buyPowerplant", buyPowerplant);
 app.get("/getPowerplantDetails", getPowerplantDetails);
+app.post("/buyResources", buyResources);
 
 app.use(express.static("public/html"));
 app.use(express.static("public/stylesheet"));

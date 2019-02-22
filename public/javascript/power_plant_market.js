@@ -55,7 +55,8 @@ const fillUranium = function() {
     uraniumCount++
   ) {
     let uraniumDiv = document.getElementById(`Uranium_${maxCost}_0`);
-    uraniumDiv.className += " fas fa-radiation-alt filled";
+    let currentClass = uraniumDiv.className;
+    uraniumDiv.className = "fas fa-radiation-alt filled " + currentClass;
     maxCost -= costDiff;
     maxCost == 8 && (costDiff = 1);
   }
@@ -217,20 +218,76 @@ const displayMap = function() {
   map.style.display = "inline";
   market.style.display = "none";
 };
+const splitByHyphen = function(text) {
+  return text.split("_");
+};
+
+const boughtResources = {
+  Coal: 0,
+  Oil: 0,
+  Garbage: 0,
+  Uranium: 0,
+  resourcesID: []
+};
+
+const selectResource = function(resourceDiv, amount, resourceDetails) {
+  const clickBorder = "1px solid black";
+  resourceDiv.style.border = clickBorder;
+  document.getElementById("resource-amount").innerText =
+    amount + +resourceDetails[1];
+  boughtResources[resourceDetails[0]] += 1;
+  boughtResources.resourcesID.push(resourceDiv.id);
+};
+
+const unselectResource = function(resourceDiv, amount, resourceDetails) {
+  const unclickBorder = "1px solid #759cae";
+  resourceDiv.style.border = unclickBorder;
+  document.getElementById("resource-amount").innerText =
+    amount - resourceDetails[1];
+  boughtResources[resourceDetails[0]] -= 1;
+  const resourceIndex = boughtResources.resourcesID.indexOf(resourceDiv.id);
+  boughtResources.resourcesID.splice(resourceIndex, 1);
+};
+
+const removeFirstTwoClasses = function(text) {
+  return text
+    .split(" ")
+    .slice(2)
+    .join(" ");
+};
+
+const registerResourcesData = function() {
+  const { Coal, Oil, Garbage, Uranium, cost } = boughtResources;
+  fetch("/buyResources", {
+    method: "POST",
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    body: `Coal=${Coal}&Oil=${Oil}&Uranium=${Uranium}&Garbage=${Garbage}&cost=${cost}`
+  });
+};
+
+const buyResources = function() {
+  const IDs = boughtResources.resourcesID;
+  IDs.forEach(id => {
+    const currDiv = document.getElementById(id);
+    const currClass = currDiv.className;
+    const newClass = removeFirstTwoClasses(currClass);
+    currDiv.className = newClass;
+  });
+  const costDiv = document.getElementById("resource-amount");
+  boughtResources.cost = +costDiv.innerText;
+  registerResourcesData();
+  updateCurrentPlayer();
+};
 
 const generateResourceValue = function(event) {
   const resourceDiv = event.target;
   const clickBorder = "1px solid black";
-  const unclickBorder = "1px solid #759cae";
-  const cost = +resourceDiv.id.split("_")[1];
+  const resourceDetails = splitByHyphen(resourceDiv.id);
   const currentAmount = +document.getElementById("resource-amount").innerText;
   if (resourceDiv.id && resourceDiv.style.border != clickBorder) {
-    resourceDiv.style.border = clickBorder;
-    document.getElementById("resource-amount").innerText = currentAmount + cost;
-    return;
+    return selectResource(resourceDiv, currentAmount, resourceDetails);
   }
-  resourceDiv.style.border = unclickBorder;
-  document.getElementById("resource-amount").innerText = currentAmount - cost;
+  unselectResource(resourceDiv, currentAmount, resourceDetails);
 };
 
 const buyPowerplant = function() {

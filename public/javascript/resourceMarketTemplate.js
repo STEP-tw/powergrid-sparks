@@ -11,7 +11,7 @@ const getBiddingSectionTemplate = function() {
     <button onclick = "startBuyingResources() ">Start Buying Resources</button>
     <div id="selected-resource-amount" style="visibility:hidden">
     Selected Resource Amount : <span id="resource-amount">0</span>
-    <button>Buy Resources</button></div></div>
+    <button onclick="buyResources()">Buy Resources</button></div></div>
   `;
 };
 
