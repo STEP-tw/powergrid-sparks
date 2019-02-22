@@ -24,7 +24,8 @@ const {
   buyResources,
   getCurrentPowerPlantMarket,
   buildCities,
-  getPlayers
+  getPlayers,
+  getPlayerStats
 } = require("./src/handlers");
 
 app.set("views", __dirname + "/public/html");
@@ -52,6 +53,7 @@ app.post("/buyResources", buyResources);
 app.post("/getCurrentPowerPlantMarket", getCurrentPowerPlantMarket);
 app.post("/buildCities", buildCities);
 app.get("/getPlayers",getPlayers);
+app.get("/getPlayerStats", getPlayerStats);
 
 app.use(express.static("public/html"));
 app.use(express.static("public/stylesheet"));

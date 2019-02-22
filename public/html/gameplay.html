@@ -17,35 +17,40 @@
   <section>
   <main style="width: 100%;height: 100%; display: flex">
     <section class='self-details' >
-      <div class="player-name">PLAYER 3</div>
-      <div class="power-plant"></div>
-      <div class="power-plant"></div>
-      <div class="power-plant"></div>
+      <div class="player-name" id="player-name"></div>
+      <div class="power-plant" id="powerplant-1"></div>
+      <div class="power-plant" id="powerplant-2"></div>
+      <div class="power-plant" id="powerplant-3"></div>
       <table>
         <thead>
-          <th>RESOURCES</th>
-          <th>LEFT</th>
+          <th>Icons</th>
+          <th>Resources</th>
+          <th>Left</th>
         </thead>
         <tbody>
           <tr>
-            <td>Coal <i class="fas fa-cubes"></i></td>
-            <td>0</td>
+            <td><i class="fas fa-cubes"></i></td>
+            <td>Coal</td>
+            <td id="Coal">0</td>
           </tr>
           <tr>
-            <td>Oil <i class="fas fa-oil-can"></i></td>
-            <td>0</td>
+            <td><i class="fas fa-oil-can"></i></td>
+            <td>Oil</td>
+            <td id="Oil">0</td>
           </tr>
           <tr>
-            <td>Garbage <i class="fas fa-trash-alt"></i></td>
-            <td>0</td>
+            <td><i class="fas fa-trash-alt"></i></td>
+            <td>Garbage</td>
+            <td id="Garbage">0</td>
           </tr>
           <tr>
-            <td>Uranium <i class="fas fa-radiation-alt"></i></td>
-            <td>0</td>
+            <td><i class="fas fa-radiation-alt"></i></td>
+            <td>Uranium</td>
+            <td id="Uranium">0</td>
           </tr>
         </tbody>
       </table>
-      <div class="self-cash">C A S H : $ 5 0 /- </div>
+      <div class="self-cash" > C A S H : $ <span id="player-money"></span></div>
     </section>
     <section id="map" class = "map-section" style="display: none">
       <svg  onload="displayMarket()" width="941" height="593">

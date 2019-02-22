@@ -347,3 +347,16 @@ describe("getPlayers", () => {
       .expect(200, done);
   });
 });
+
+describe('GET /getPlayerStats', function() {
+  it('should give current player details ', done => {
+    const player1 = new Player('green', 'naman');
+    app.activeGames['10'] = new Game(2);
+    app.activeGames['10'].addPlayer(player1);
+    app.cookies['12344'] = 'Ankon';
+    request(app)
+      .get('/getPlayerStats')
+      .set('Cookie', ['gameId=10;playerId=12344'])
+      .expect(200, done);
+  });
+});

@@ -166,9 +166,8 @@ const getCurrentPowerPlantMarket = function(req, res) {
 const buildCities = function(req, res) {
   const price = +req.body.price;
   const cityCount = +req.body.cityCount;
-  const cityNames = req.body.cityNames.split(",");
-  const gameId = req.cookies.gameId;
-  const game = res.app.activeGames[+gameId];
+  const cityNames = req.body.cityNames.split(',');
+  const game = initializeGame(req, res);
   const players = game.getPlayers();
   const turn = game.getTurn(players);
   const currentPlayer = turn.getCurrentPlayer();
@@ -180,12 +179,18 @@ const buildCities = function(req, res) {
   res.send({ ispaymentSucess, currentPlayer });
 };
 
-const getPlayers = function(req,res) {
-  const gameId = req.cookies.gameId;
-  const game = res.app.activeGames[+gameId];
+const getPlayers = function(req, res) {
+  const game = initializeGame(req, res);
   const players = game.getPlayers();
   res.send(players);
-}
+};
+
+const getPlayerStats = function(req, res) {
+  const game = initializeGame(req, res);
+  const playerId = req.cookies.playerId;
+  const playerStats = game.players.filter(player => player.id == playerId);
+  res.send(playerStats[0]);
+};
 
 module.exports = {
   renderHome,
@@ -204,5 +209,6 @@ module.exports = {
   buyResources,
   getCurrentPowerPlantMarket,
   buildCities,
-  getPlayers
+  getPlayers,
+  getPlayerStats
 };

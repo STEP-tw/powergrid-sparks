@@ -31,7 +31,10 @@ const initialResourceCount = {
 const displayMarket = function() {
   fetch("/displayPowerPlantMarket")
     .then(res => res.json())
-    .then(res => displayPowerPlantMarket(res));
+    .then(res => {
+      displayPowerPlantMarket(res);
+      getPlayerStatsDiv();
+    });
 };
 
 const displayPowerPlantMarket = function(powerPlantCards) {
@@ -312,4 +315,26 @@ const buyPowerplant = function() {
       displayPowerPlantMarket(res);
     });
   updateCurrentPlayer();
+};
+
+const getPlayerStatsDiv = function() {
+  fetch('/getPlayerStats')
+    .then(res => res.json())
+    .then(res => {
+      updatePlayerStatsDiv(res);
+    });
+};
+
+const updatePlayerStatsDiv = function({ name, resources, powerplants, money }) {
+  let count = 1;
+  document.getElementById('player-name').innerText = name;
+  ['Coal', 'Oil', 'Garbage', 'Uranium'].forEach(
+    resource => (document.getElementById(resource).innerText = resources[resource])
+  );
+  const powerplantsCost = Object.keys(powerplants);
+  powerplantsCost.forEach(powerplant => {
+    const powerPlantDiv = document.getElementById(`powerplant-${count++}`);
+    arrangeFutureMarket(powerPlantDiv, powerplant, powerplants[powerplant]);
+  });
+  document.getElementById('player-money').innerText = money;
 };
