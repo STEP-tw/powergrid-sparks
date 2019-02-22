@@ -4,54 +4,52 @@ const updateCost = function() {
   const houseId = event.target.id.split("_");
   selectedCities.push(event.target);
   const cityCost = +houseId[houseId.length - 1];
-  const currentCost = +document.getElementById("building-cost").innerText;
+  const currentCost = +getInnerText("building-cost");
   if (event.target.className.baseVal == "highlighted") {
     event.target.className.baseVal = undefined;
     const totalCost = currentCost - cityCost;
     selectedCities = selectedCities.filter(selectedCity => {
       return selectedCity.id != event.target.id;
     });
-    document.getElementById("building-cost").innerText = totalCost;
     const cities = [];
     selectedCities.forEach(selectedCity => cities.push(selectedCity.id));
-    document.getElementById("city-names").innerText = cities;
-    document.getElementById("city-count").innerText = totalCost / 10;
+    const cityCount = totalCost / 10;
+    setInnerText("building-cost", totalCost);
+    setInnerText("city-names", cities);
+    setInnerText("city-count", cityCount);
     return;
   }
   event.target.className.baseVal = "highlighted";
   const totalCost = cityCost + currentCost;
   const cities = [];
   selectedCities.forEach(selectedCity => cities.push(selectedCity.id));
-  document.getElementById("building-cost").innerText = totalCost;
-  document.getElementById("city-names").innerText = cities;
-  document.getElementById("city-count").innerText = totalCost / 10;
+  const cityCount = totalCost / 10;
+  setInnerText("city-names", cities);
+  setInnerText("building-cost", totalCost);
+  setInnerText("city-count", cityCount);
 };
 
 const reset = function() {
   selectedCities.forEach(city => {
     city.className.baseVal = undefined;
   });
-  document.getElementById("building-cost").innerText = 0;
+  setInnerText("building-cost", 0);
   selectedCities = [];
-  document.getElementById("city-count").innerText = 0;
-  document.getElementById("city-names").innerText = "";
+  setInnerText("city-count", 0);
+  setInnerText("city-names", "");
 };
 
 const buildCities = function() {
-  const price = document.getElementById("building-cost").innerText;
-  const cityCount = document.getElementById("city-count").innerText;
-  const cityNames = document.getElementById("city-names").innerText;
-  fetch("/buildCities", {
-    method: "POST",
-    headers: { "Content-Type": "application/x-www-form-urlencoded" },
-    body: `price=${price}&cityCount=${cityCount}&cityNames=${cityNames}`
-  })
+  const { price, cityCount, cityNames } = getSelectedCitiesDetails();
+  const body = `price=${price}&cityCount=${cityCount}&cityNames=${cityNames}`;
+  const headers = { "Content-Type": "application/x-www-form-urlencoded" };
+  fetch("/buildCities", { method: "POST", headers, body })
     .then(res => res.json())
     .then(player => {
       if (player.ispaymentSucess) {
         return updateMap(player.currentPlayer);
       }
-      document.getElementById("payment-failed").innerText ="building failed try again"
+      setInnerText("payment-failed", "building failed try again");
       reset();
     });
 };
@@ -60,9 +58,28 @@ const updateMap = function(player) {
   const playerColor = player.color;
   const cityNames = player.cityNames;
   cityNames.forEach(cityName => {
-    document.getElementById(cityName).style.fill = playerColor;
-    document.getElementById(cityName).onclick = "";
+    updateCity(cityName, playerColor);
   });
   reset();
   updateCurrentPlayer();
+};
+
+const getInnerText = function(id) {
+  return document.getElementById(id).innerText;
+};
+
+const setInnerText = function(id, text) {
+  document.getElementById(id).innerText = text;
+};
+
+const updateCity = function(cityName, playerColor) {
+  document.getElementById(cityName).style.fill = playerColor;
+  document.getElementById(cityName).onclick = "";
+};
+
+const getSelectedCitiesDetails = function() {
+  const price = +getInnerText("building-cost");
+  const cityCount = getInnerText("city-count");
+  const cityNames = getInnerText("city-names");
+  return { price, cityCount, cityNames };
 };
