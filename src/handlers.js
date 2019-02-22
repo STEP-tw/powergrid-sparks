@@ -180,6 +180,13 @@ const buildCities = function(req, res) {
   res.send({ ispaymentSucess, currentPlayer });
 };
 
+const getPlayers = function(req,res) {
+  const gameId = req.cookies.gameId;
+  const game = res.app.activeGames[+gameId];
+  const players = game.getPlayers();
+  res.send(players);
+}
+
 module.exports = {
   renderHome,
   createGame,
@@ -196,5 +203,6 @@ module.exports = {
   getPowerplantDetails,
   buyResources,
   getCurrentPowerPlantMarket,
-  buildCities
+  buildCities,
+  getPlayers
 };

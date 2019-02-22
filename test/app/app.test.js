@@ -335,3 +335,15 @@ describe("POST /buildCities", () => {
       .expect(200, done);
   });
 });
+describe("getPlayers", () => {
+  it("should return the details of the players with response code 200", done => {
+    app.activeGames["99"] = new Game(3);
+    app.cookies["999"] = "Ankon";
+    const player = new Player("red", "Ankon");
+    app.activeGames[99].addPlayer(player);
+    request(app)
+      .get("/getPlayers")
+      .set("Cookie", ["gameId=99;playerId=999"])
+      .expect(200, done);
+  });
+});
