@@ -100,6 +100,11 @@ const showPlayerDetails = function(players) {
     ).children[0].children[1].innerText = `$${player.money}`;
     document.getElementById(
       `${player.name}_${player.color}`
+    ).children[0].children[2].innerHTML = `<i class="fas fa-home"></i>${
+      player.cities
+    }`;
+    document.getElementById(
+      `${player.name}_${player.color}`
     ).children[1].innerHTML = powerplantHTML;
     document.getElementById(
       `${player.name}_${player.color}`
