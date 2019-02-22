@@ -246,6 +246,7 @@ const displayMap = function() {
   fetch('/getPlayers')
     .then(res => res.json())
     .then(players => players.forEach(player => updateMap(player)));
+  document.getElementById("building-phase").style.visibility = "visible"
   const map = document.getElementById('map');
   const market = document.getElementById('market');
   map.style.display = 'inline';
