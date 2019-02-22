@@ -2,8 +2,8 @@ const PowerPlantMarket = require('../../src/model/power_plant_cards');
 const chai = require('chai');
 const sinon = require('sinon');
 
-describe('cards', function() {
-  const cardDetails = {
+describe('PowerPlantMarket', function() {
+  const powerPlantDetails = {
     1: 'one',
     2: 'two',
     3: 'three',
@@ -16,58 +16,33 @@ describe('cards', function() {
     10: 'ten'
   };
 
-  const cards = new PowerPlantMarket(cardDetails);
-  describe('cards.initializeMarket', function() {
-    it('should return the first 8 cards', function() {
-      const expectedOutput = {
-        1: 'one',
-        2: 'two',
-        3: 'three',
-        4: 'four',
-        5: 'five',
-        6: 'six',
-        7: 'seven',
-        8: 'eight'
-      };
+  const powerPlants = new PowerPlantMarket(powerPlantDetails);
 
-      const actualOutput = cards.initializeMarket();
-      chai.assert.deepEqual(actualOutput, expectedOutput);
-    });
-  });
-
-  describe('suffleDeck', () => {
+  describe('shuffleDeck', () => {
     it('should shuffle the deck', () => {
       const expectedOutput = ['10', '9'];
       const shuffler = sinon.stub();
       shuffler.onFirstCall().returns(['10', '9']);
-      cards.shuffleDeck(shuffler);
-      const actualOutput = cards.deck;
+      powerPlants.shuffleDeck(shuffler);
+      const actualOutput = powerPlants.deck;
       chai.expect(actualOutput).to.be.deep.equal(expectedOutput);
     });
   });
 
-  describe('removePowerPlant', () => {
+  describe('sellPowerPlant', () => {
     it('should remove given powerplant from the current market', () => {
+      powerPlants.sellPowerPlant('3');
       const expectedOutput = ['1', '2', '4', '5', '6', '7', '8'];
-      cards.removePowerPlant('3');
-      const actualOutput = cards.currentMarket;
+      const actualOutput = powerPlants.currentMarket;
       chai.expect(actualOutput).to.be.deep.equal(expectedOutput);
     });
   });
 
   describe('getCurrentMarket', () => {
     it('should remove given powerplant from the current market', () => {
-      const expectedOutput = {
-        1: 'one',
-        2: 'two',
-        4: 'four',
-        5: 'five',
-        6: 'six',
-        7: 'seven',
-        8: 'eight',
-        10: 'ten'
-      };
-      const actualOutput = cards.getCurrentMarket();
+      powerPlants.updateCurrentMarket();
+      const expectedOutput = ['1','2','4','5','6','7','8','10'];
+      const actualOutput = powerPlants.currentMarket;
       chai.expect(actualOutput).to.be.deep.equal(expectedOutput);
     });
   });

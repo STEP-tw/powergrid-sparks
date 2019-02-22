@@ -1,14 +1,11 @@
-const fs = require("fs");
-const url = require("url");
-const _ = require("lodash");
-const Game = require("./model/Game");
-const PowerPlantMarket = require("./model/power_plant_cards");
-const Player = require("./model/player");
+const fs = require('fs');
+const url = require('url');
+const _ = require('lodash');
+const Game = require('./model/Game');
+const PowerPlantMarket = require('./model/power_plant_cards');
+const Player = require('./model/player');
 
-const powerPlantCards = fs.readFileSync(
-  "./private/data/card_details.json",
-  "UTF8"
-);
+const powerPlantCards = fs.readFileSync('./private/data/card_details.json', 'UTF8');
 
 const initializeGame = function(req, res) {
   const gameId = req.cookies.gameId;
@@ -27,7 +24,7 @@ const renderHome = function(req, res) {
     }
     return res.redirect(`/waitingPage?gameId=${gameId}`);
   }
-  return res.render("index.html");
+  return res.render('index.html');
 };
 
 const generateGameId = function(activeGames, randomGenerator) {
@@ -38,8 +35,8 @@ const generateGameId = function(activeGames, randomGenerator) {
 
 const setCookie = function(res, gameId, player) {
   const cookie = Date.now();
-  res.cookie("playerId", cookie);
-  res.cookie("gameId", gameId);
+  res.cookie('playerId', cookie);
+  res.cookie('gameId', gameId);
   res.app.cookies[cookie] = player.getName();
   player.setId(cookie);
 };
@@ -60,7 +57,7 @@ const createGame = function(req, res) {
 const renderWaitingPage = function(req, res) {
   const gameId = url.parse(req.url, true).query.gameId;
   const game = res.app.activeGames[+gameId];
-  res.render("createdGame.html", { users: game.getPlayers(), gameId });
+  res.render('createdGame.html', { users: game.getPlayers(), gameId });
 };
 
 const renderGamePage = function(req, res) {
@@ -76,7 +73,7 @@ const renderGamePage = function(req, res) {
 const renderGameplay = function(req, res) {
   const gameId = url.parse(req.url, true).query.gameId;
   const game = res.app.activeGames[+gameId];
-  res.render("gameplay.html", { players: game.getPlayers() });
+  res.render('gameplay.html', { players: game.getPlayers() });
 };
 
 const addPlayer = function(game, joinerName, res, gameId) {
@@ -91,24 +88,22 @@ const joinGame = function(req, res) {
   const game = res.app.activeGames[+gameId];
   if (game) {
     if (game.hasStarted()) {
-      return res.send("game is already started!");
+      return res.send('game is already started!');
     }
     addPlayer(game, joinerName, res, gameId);
     return res.redirect(`/waitingPage?gameId=${gameId}`);
   }
-  res.redirect("/invalidGameId");
+  res.redirect('/invalidGameId');
 };
 
 const renderErrorPage = function(req, res) {
-  res.render("joinPageWithErr.html");
+  res.render('joinPageWithErr.html');
 };
 
 const initializeMarket = function(req, res) {
   const game = initializeGame(req, res);
-  const cardDetails = JSON.stringify(
-    game.getPowerPlantMarket().initializeMarket()
-  );
-  game.getPowerPlantMarket().shuffleDeck(_.shuffle);
+  const cardDetails = JSON.stringify(game.getPowerPlantMarket());
+  game.shuffleDeck(_.shuffle);
   res.send(cardDetails);
 };
 
@@ -158,21 +153,22 @@ const buyResources = function(req, res) {
   currentPlayer.payMoney(resourcesDetail.cost);
   currentPlayer.addResources(resourcesDetail);
   updateResourceMarket(resourcesDetail, game);
-  res.send("");
+  res.send('');
 };
 
-const getCurrentPowerPlantMarket = function(req, res) {
+const updateCurrentPowerPlantMarket = function(req, res) {
   const game = initializeGame(req, res);
   const price = req.body.price;
-  game.powerPlantMarket.removePowerPlant(price);
-  const currentMarket = game.powerPlantMarket.getCurrentMarket();
+  game.sellPowerPlant(price);
+  game.updatePowerPlants();
+  const currentMarket = game.getPowerPlantMarket();
   res.send(JSON.stringify(currentMarket));
 };
 
 const buildCities = function(req, res) {
   const price = +req.body.price;
   const cityCount = +req.body.cityCount;
-  const cityNames = req.body.cityNames.split(",");
+  const cityNames = req.body.cityNames.split(',');
   const game = initializeGame(req, res);
   const players = game.getPlayers();
   const turn = game.getTurn(players);
@@ -198,12 +194,11 @@ const getPlayerStats = function(req, res) {
   res.send(playerStats[0]);
 };
 
-const getCurrentPowerPlants = function(req, res){
+const getCurrentPowerPlants = function(req, res) {
   const game = initializeGame(req, res);
   const powerPlants = game.getPowerPlantMarket();
-  const currentPowerPlants = powerPlants.getCurrentPowerPlants();
-  res.send(JSON.stringify(currentPowerPlants));
-}
+  res.send(JSON.stringify(powerPlants));
+};
 
 const getResources = function(req, res) {
   const game = initializeGame(req, res);
@@ -233,7 +228,7 @@ module.exports = {
   buyPowerplant,
   getPowerplantDetails,
   buyResources,
-  getCurrentPowerPlantMarket,
+  updateCurrentPowerPlantMarket,
   buildCities,
   getPlayers,
   getPlayerStats,

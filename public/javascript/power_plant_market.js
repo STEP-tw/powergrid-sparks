@@ -303,7 +303,7 @@ const buyPowerplant = function() {
     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
     body: `price=${price}`
   });
-  fetch('/getCurrentPowerPlantMarket', {
+  fetch('/updateCurrentPowerPlantMarket', {
     method: 'POST',
     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
     body: `price=${price}`
@@ -325,7 +325,7 @@ const updatePlayerStatsDiv = function({ name, resources, powerplants, money }) {
   ['Coal', 'Oil', 'Garbage', 'Uranium'].forEach(
     resource => (document.getElementById(resource).innerText = resources[resource])
   );
-  const powerplantsCost = Object.keys(powerplants);
+  const powerplantsCost = Object.keys(powerplants).slice(0,3);
   powerplantsCost.forEach(powerplant => {
     const powerPlantDiv = document.getElementById(`powerplant-${count++}`);
     powerPlantDiv.innerHTML = '';

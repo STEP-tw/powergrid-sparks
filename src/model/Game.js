@@ -1,12 +1,12 @@
-const Turn = require("./turn");
-const ResourceMarket = require("./resource_market");
+const Turn = require('./turn');
+const ResourceMarket = require('./resource_market');
 
 class Game {
   constructor(playerCount) {
     this.active = false;
     this.players = [];
     this.maxPlayerCount = playerCount;
-    this.colors = ["red", "blue", "pink", "black", "orange", "yellow"];
+    this.colors = ['red', 'blue', 'pink', 'black', 'orange', 'yellow'];
     this.isShuffled = false;
     this.powerPlantMarket;
   }
@@ -62,8 +62,20 @@ class Game {
     this.powerPlantMarket = market;
   }
 
+  shuffleDeck(shuffler){
+    this.powerPlantMarket.shuffleDeck(shuffler);
+  }
+
   getPowerPlantMarket() {
-    return this.powerPlantMarket;
+    return this.powerPlantMarket.getCurrentPowerPlants();
+  }
+
+  sellPowerPlant(price) {
+    this.powerPlantMarket.sellPowerPlant(price);
+  }
+
+  updatePowerPlants() {
+    this.powerPlantMarket.updateCurrentMarket();
   }
 }
 
