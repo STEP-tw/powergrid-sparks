@@ -1,12 +1,13 @@
-const Turn = require("./turn");
+const Turn = require('./turn');
 
 class Game {
   constructor(playerCount) {
     this.active = false;
     this.players = [];
     this.maxPlayerCount = playerCount;
-    this.colors = ["red", "blue", "pink", "black", "orange", "yellow"];
+    this.colors = ['red', 'blue', 'pink', 'black', 'orange', 'yellow'];
     this.isShuffled = false;
+    this.powerPlantMarket;
   }
 
   addPlayer(player) {
@@ -14,7 +15,7 @@ class Game {
   }
 
   getTurn(players) {
-    if (this.turn==undefined) {
+    if (this.turn == undefined) {
       this.turn = new Turn(players);
     }
     return this.turn;
@@ -47,6 +48,14 @@ class Game {
 
   getMaxPlayersCount() {
     return this.maxPlayerCount;
+  }
+
+  initializePowerPlantMarket(market) {
+    this.powerPlantMarket = market;
+  }
+
+  getPowerPlantMarket() {
+    return this.powerPlantMarket;
   }
 }
 

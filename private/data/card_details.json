@@ -64,9 +64,11 @@
     "inDeck": true
   },
   "11": {
-    "type": "Nulear",
-    "inputs": 1,
-    "output": 2,
+    "resource":{
+      "type": "Uranium",
+      "quantity": 1
+    },
+    "city": 2,
     "inDeck": true
   },
   "12": {
@@ -109,7 +111,7 @@
   },
   "17": {
     "resource": {
-      "type": "Nulear",
+      "type": "Uranium",
       "quantity": 1
     },
     "city": 2,
@@ -155,7 +157,7 @@
   },
   "23": {
     "resource": {
-      "type": "Nulear",
+      "type": "Uranium",
       "quantity": 1
     },
     "city": 3,
@@ -195,7 +197,7 @@
   },
   "28": {
     "resource": {
-      "type": "Nulear",
+      "type": "Uranium",
       "quantity": 1
     },
     "city": 4,
@@ -243,7 +245,7 @@
   },
   "34": {
     "resource": {
-      "type": "Nulear",
+      "type": "Uranium",
       "quantity": 1
     },
     "city": 5,
@@ -283,7 +285,7 @@
   },
   "39": {
     "resource": {
-      "type": "Nulear",
+      "type": "Uranium",
       "quantity": 1
     },
     "city": 6,

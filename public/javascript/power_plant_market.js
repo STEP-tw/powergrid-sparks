@@ -1,8 +1,8 @@
 const currentMarketCards = {};
 
 const increaseBid = function() {
-  const currentBid = document.getElementById("bid-amount").innerText;
-  document.getElementById("bid-amount").innerText = +currentBid + 1;
+  const currentBid = document.getElementById('bid-amount').innerText;
+  document.getElementById('bid-amount').innerText = +currentBid + 1;
 };
 
 const resources = {
@@ -10,14 +10,15 @@ const resources = {
   Coal: '<i class="fas fa-cubes"></i>',
   Oil: '<i class="fas fa-oil-can"></i>',
   Uranium: '<i class="fas fa-radiation-alt"></i>',
-  Hybrid: '<i class="fas fa-hands-helping"></i>'
+  Hybrid: '<i class="fas fa-hands-helping"></i>',
+  Ecological: '<i class="fas fa-bolt"></i>'
 };
 
 const market_resources = {
-  Garbage: "fas fa-trash-alt resource filled",
-  Coal: "fas fa-cubes resource filled",
-  Oil: "fas fa-oil-can resource middle-resource filled",
-  Uranium: "fas fa-radiation-alt resource middle-resource filled"
+  Garbage: 'fas fa-trash-alt resource filled',
+  Coal: 'fas fa-cubes resource filled',
+  Oil: 'fas fa-oil-can resource middle-resource filled',
+  Uranium: 'fas fa-radiation-alt resource middle-resource filled'
 };
 
 const initialResourceCount = {
@@ -28,21 +29,21 @@ const initialResourceCount = {
 };
 
 const displayMarket = function() {
-  fetch("/displayPowerPlantMarket")
-    .then(res => res.text())
+  fetch('/displayPowerPlantMarket')
+    .then(res => res.json())
     .then(res => displayPowerPlantMarket(res));
 };
 
 const displayPowerPlantMarket = function(powerPlantCards) {
-  const market = document.getElementById("market");
+  const market = document.getElementById('market');
   market.appendChild(generatePowerPlantMarket(powerPlantCards));
   fillResources();
 };
 
 const fillResources = function() {
-  fillResource("Coal");
-  fillResource("Oil");
-  fillResource("Garbage");
+  fillResource('Coal');
+  fillResource('Oil');
+  fillResource('Garbage');
   fillUranium();
 };
 
@@ -51,12 +52,12 @@ const fillUranium = function() {
   let maxCost = 16;
   for (
     let uraniumCount = 0;
-    uraniumCount < initialResourceCount["Uranium"];
+    uraniumCount < initialResourceCount['Uranium'];
     uraniumCount++
   ) {
     let uraniumDiv = document.getElementById(`Uranium_${maxCost}_0`);
     let currentClass = uraniumDiv.className;
-    uraniumDiv.className = "fas fa-radiation-alt filled " + currentClass;
+    uraniumDiv.className = 'fas fa-radiation-alt filled ' + currentClass;
     maxCost -= costDiff;
     maxCost == 8 && (costDiff = 1);
   }
@@ -74,29 +75,27 @@ const fillResource = function(resource) {
 };
 
 const generateResource = function(resource, resourceCount) {
-  let resourceId = `${resource}_${Math.ceil(
-    resourceCount / 3
-  )}_${resourceCount % 3}`;
+  let resourceId = `${resource}_${Math.ceil(resourceCount / 3)}_${resourceCount %
+    3}`;
   let resourceDiv = document.getElementById(resourceId);
   resourceDiv.className = market_resources[resource];
 };
 
 const startBuyingResources = function() {
-  document.getElementById("selected-resource-amount").style.visibility =
-    "visible";
-  const resourceMarket = document.getElementsByClassName("filled");
+  document.getElementById('selected-resource-amount').style.visibility = 'visible';
+  const resourceMarket = document.getElementsByClassName('filled');
   for (let resourceNo = 0; resourceNo < resourceMarket.length; resourceNo++) {
     resourceMarket[resourceNo].onclick = generateResourceValue;
   }
 };
 
 const generatePowerPlantMarket = function(powerPlantCards) {
-  const powerPlants = JSON.parse(powerPlantCards);
+  const powerPlants = powerPlantCards;
   const currentMarketDiv = generateCurrentMarket(powerPlants);
   const futureMarketDiv = generateFutureMarket(powerPlants);
   const resourceMarketDiv = generateResourceMarketDiv();
   const biddingDiv = generateBidDiv();
-  const marketDiv = document.createElement("div");
+  const marketDiv = document.createElement('div');
   appendChildren(marketDiv, [
     currentMarketDiv,
     futureMarketDiv,
@@ -107,13 +106,13 @@ const generatePowerPlantMarket = function(powerPlantCards) {
 };
 
 const generateBidDiv = function() {
-  const biddingDiv = generateDiv("bidding-section");
+  const biddingDiv = generateDiv('bidding-section');
   biddingDiv.innerHTML = getBiddingSectionTemplate();
   return biddingDiv;
 };
 
 const generateCurrentMarket = function(powerPlants) {
-  const currentMarketDiv = generateDiv("single-market", "currentMarket");
+  const currentMarketDiv = generateDiv('single-market', 'currentMarket');
   const currentMarket = Object.keys(powerPlants).slice(0, 4);
   currentMarket.map(powerPlant => {
     return arrangeCurrentMarket(
@@ -126,7 +125,7 @@ const generateCurrentMarket = function(powerPlants) {
 };
 
 const generateFutureMarket = function(powerPlants) {
-  const futureMarketDiv = generateDiv("single-market", "futureMarket");
+  const futureMarketDiv = generateDiv('single-market', 'futureMarket');
   const futureMarket = Object.keys(powerPlants).slice(4);
   futureMarket.map(powerPlant =>
     arrangeFutureMarket(futureMarketDiv, powerPlant, powerPlants[powerPlant])
@@ -135,19 +134,15 @@ const generateFutureMarket = function(powerPlants) {
 };
 
 const generateResourceMarketDiv = function() {
-  const resourceDiv = generateDiv("resource-market", "resourceMarket");
+  const resourceDiv = generateDiv('resource-market', 'resourceMarket');
   resourceDiv.innerHTML = getResourceMarketTemplate();
   return resourceDiv;
 };
 
 const arrangeCurrentMarket = function(singleMarket, powerPlant, cardDetails) {
   const powerPlantCardId = `powerPlant_${powerPlant}`;
-  const powerPlantCardDiv = generateDiv("unselectedCard", powerPlantCardId);
-  powerPlantCardDiv.onclick = addFocus.bind(
-    null,
-    powerPlantCardDiv,
-    powerPlant
-  );
+  const powerPlantCardDiv = generateDiv('unselectedCard', powerPlantCardId);
+  powerPlantCardDiv.onclick = addFocus.bind(null, powerPlantCardDiv, powerPlant);
   const priceDiv = generatePriceDiv(powerPlant);
   const resourceDiv = generateResourceDiv(cardDetails);
   appendChildren(powerPlantCardDiv, [priceDiv, resourceDiv]);
@@ -160,7 +155,7 @@ const arrangeCurrentMarket = function(singleMarket, powerPlant, cardDetails) {
 
 const arrangeFutureMarket = function(singleMarket, powerPlant, cardDetails) {
   const powerPlantCardId = `powerPlant_${powerPlant}`;
-  const powerPlantCardDiv = generateDiv("unselectedCard", powerPlantCardId);
+  const powerPlantCardDiv = generateDiv('unselectedCard', powerPlantCardId);
   const priceDiv = generatePriceDiv(powerPlant);
   const resourceDiv = generateResourceDiv(cardDetails);
   appendChildren(powerPlantCardDiv, [priceDiv, resourceDiv]);
@@ -170,18 +165,18 @@ const arrangeFutureMarket = function(singleMarket, powerPlant, cardDetails) {
 const addFocus = function(element, powerPlant) {
   Object.keys(currentMarketCards).forEach(card => {
     currentMarketCards[card].isSelected = false;
-    currentMarketCards[card].powerplant.className = "unselectedCard";
+    currentMarketCards[card].powerplant.className = 'unselectedCard';
   });
   const id = element.id.slice(-1);
   currentMarketCards[id].isSelected = true;
-  element.className = "selectedCard";
-  document.getElementById("current-bid-amount").innerText = powerPlant;
-  document.getElementById("bid-amount").innerText = powerPlant;
+  element.className = 'selectedCard';
+  document.getElementById('current-bid-amount').innerText = powerPlant;
+  document.getElementById('bid-amount').innerText = powerPlant;
 };
 
 const generateResourceDiv = function(cardDetails) {
-  const resourceDiv = document.createElement("div");
-  resourceDiv.className = "card-details";
+  const resourceDiv = document.createElement('div');
+  resourceDiv.className = 'card-details';
   resourceDiv.innerHTML = `${resources[cardDetails.resource.type]} 
                                ${cardDetails.resource.quantity} 
                                <i class='fas fa-arrow-right' ></i >  
@@ -191,35 +186,35 @@ const generateResourceDiv = function(cardDetails) {
 };
 
 const generatePriceDiv = function(powerPlant) {
-  const priceDiv = generateDiv("price-details");
-  const price = generateDiv("price");
+  const priceDiv = generateDiv('price-details');
+  const price = generateDiv('price');
   price.innerHTML = powerPlant;
   priceDiv.appendChild(price);
   return priceDiv;
 };
 
 const generateDiv = function(className, id) {
-  const divElement = document.createElement("div");
+  const divElement = document.createElement('div');
   divElement.className = className;
   divElement.id = id;
   return divElement;
 };
 
 const appendChildren = function(parent, children) {
-  parent.innerHTML = "";
+  parent.innerHTML = '';
   children.forEach(child => {
     parent.appendChild(child);
   });
 };
 
 const displayMap = function() {
-  const map = document.getElementById("map");
-  const market = document.getElementById("market");
-  map.style.display = "inline";
-  market.style.display = "none";
+  const map = document.getElementById('map');
+  const market = document.getElementById('market');
+  map.style.display = 'inline';
+  market.style.display = 'none';
 };
 const splitByHyphen = function(text) {
-  return text.split("_");
+  return text.split('_');
 };
 
 const boughtResources = {
@@ -231,19 +226,18 @@ const boughtResources = {
 };
 
 const selectResource = function(resourceDiv, amount, resourceDetails) {
-  const clickBorder = "1px solid black";
+  const clickBorder = '1px solid black';
   resourceDiv.style.border = clickBorder;
-  document.getElementById("resource-amount").innerText =
+  document.getElementById('resource-amount').innerText =
     amount + +resourceDetails[1];
   boughtResources[resourceDetails[0]] += 1;
   boughtResources.resourcesID.push(resourceDiv.id);
 };
 
 const unselectResource = function(resourceDiv, amount, resourceDetails) {
-  const unclickBorder = "1px solid #759cae";
+  const unclickBorder = '1px solid #759cae';
   resourceDiv.style.border = unclickBorder;
-  document.getElementById("resource-amount").innerText =
-    amount - resourceDetails[1];
+  document.getElementById('resource-amount').innerText = amount - resourceDetails[1];
   boughtResources[resourceDetails[0]] -= 1;
   const resourceIndex = boughtResources.resourcesID.indexOf(resourceDiv.id);
   boughtResources.resourcesID.splice(resourceIndex, 1);
@@ -251,16 +245,16 @@ const unselectResource = function(resourceDiv, amount, resourceDetails) {
 
 const removeFirstTwoClasses = function(text) {
   return text
-    .split(" ")
+    .split(' ')
     .slice(2)
-    .join(" ");
+    .join(' ');
 };
 
 const registerResourcesData = function() {
   const { Coal, Oil, Garbage, Uranium, cost } = boughtResources;
-  fetch("/buyResources", {
-    method: "POST",
-    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+  fetch('/buyResources', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
     body: `Coal=${Coal}&Oil=${Oil}&Uranium=${Uranium}&Garbage=${Garbage}&cost=${cost}`
   });
 };
@@ -273,7 +267,7 @@ const buyResources = function() {
     const newClass = removeFirstTwoClasses(currClass);
     currDiv.className = newClass;
   });
-  const costDiv = document.getElementById("resource-amount");
+  const costDiv = document.getElementById('resource-amount');
   boughtResources.cost = +costDiv.innerText;
   registerResourcesData();
   updateCurrentPlayer();
@@ -281,9 +275,9 @@ const buyResources = function() {
 
 const generateResourceValue = function(event) {
   const resourceDiv = event.target;
-  const clickBorder = "1px solid black";
+  const clickBorder = '1px solid black';
   const resourceDetails = splitByHyphen(resourceDiv.id);
-  const currentAmount = +document.getElementById("resource-amount").innerText;
+  const currentAmount = +document.getElementById('resource-amount').innerText;
   if (resourceDiv.id && resourceDiv.style.border != clickBorder) {
     return selectResource(resourceDiv, currentAmount, resourceDetails);
   }
@@ -291,11 +285,20 @@ const generateResourceValue = function(event) {
 };
 
 const buyPowerplant = function() {
-  const price = document.getElementById("current-bid-amount").innerText;
-  fetch("/buyPowerplant", {
-    method: "POST",
-    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+  const price = document.getElementById('current-bid-amount').innerText;
+  fetch('/buyPowerplant', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
     body: `price=${price}`
   });
+  fetch('/getCurrentPowerPlantMarket', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: `price=${price}`
+  })
+    .then(res => res.json())
+    .then(res => {
+      displayPowerPlantMarket(res);
+    });
   updateCurrentPlayer();
 };

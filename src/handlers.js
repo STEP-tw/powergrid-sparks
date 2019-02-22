@@ -1,14 +1,17 @@
-const fs = require("fs");
-const url = require("url");
-const _ = require("lodash");
-const Game = require("./model/Game");
-const PowerPlantMarket = require("./model/power_plant_cards");
-const Player = require("./model/player");
+const fs = require('fs');
+const url = require('url');
+const _ = require('lodash');
+const Game = require('./model/Game');
+const PowerPlantMarket = require('./model/power_plant_cards');
+const Player = require('./model/player');
 
-const powerPlantCards = fs.readFileSync(
-  "./private/data/card_details.json",
-  "UTF8"
-);
+const powerPlantCards = fs.readFileSync('./private/data/card_details.json', 'UTF8');
+
+const initializeGame = function(req, res) {
+  const gameId = req.cookies.gameId;
+  const game = res.app.activeGames[+gameId];
+  return game;
+};
 
 const renderHome = function(req, res) {
   if (res.app.cookies[req.cookies.playerId]) {
@@ -21,7 +24,7 @@ const renderHome = function(req, res) {
     }
     return res.redirect(`/waitingPage?gameId=${gameId}`);
   }
-  return res.render("index.html");
+  return res.render('index.html');
 };
 
 const generateGameId = function(activeGames, randomGenerator) {
@@ -32,8 +35,8 @@ const generateGameId = function(activeGames, randomGenerator) {
 
 const setCookie = function(res, gameId, player) {
   const cookie = Date.now();
-  res.cookie("playerId", cookie);
-  res.cookie("gameId", gameId);
+  res.cookie('playerId', cookie);
+  res.cookie('gameId', gameId);
   res.app.cookies[cookie] = player.getName();
   player.setId(cookie);
 };
@@ -41,7 +44,9 @@ const setCookie = function(res, gameId, player) {
 const createGame = function(req, res) {
   const gameId = generateGameId(res.app.activeGames, Math.random);
   const game = new Game(req.body.playerCount);
+  const powerPlantMarket = new PowerPlantMarket(JSON.parse(powerPlantCards));
   res.app.activeGames[gameId] = game;
+  res.app.activeGames[gameId].initializePowerPlantMarket(powerPlantMarket);
   const playerColor = game.getPlayerColor();
   const player = new Player(playerColor, req.body.hostName);
   setCookie(res, gameId, player);
@@ -52,7 +57,7 @@ const createGame = function(req, res) {
 const renderWaitingPage = function(req, res) {
   const gameId = url.parse(req.url, true).query.gameId;
   const game = res.app.activeGames[+gameId];
-  res.render("createdGame.html", { users: game.getPlayers(), gameId });
+  res.render('createdGame.html', { users: game.getPlayers(), gameId });
 };
 
 const renderGamePage = function(req, res) {
@@ -68,7 +73,7 @@ const renderGamePage = function(req, res) {
 const renderGameplay = function(req, res) {
   const gameId = url.parse(req.url, true).query.gameId;
   const game = res.app.activeGames[+gameId];
-  res.render("gameplay.html", { players: game.getPlayers() });
+  res.render('gameplay.html', { players: game.getPlayers() });
 };
 
 const addPlayer = function(game, joinerName, res, gameId) {
@@ -83,35 +88,34 @@ const joinGame = function(req, res) {
   const game = res.app.activeGames[+gameId];
   if (game) {
     if (game.hasStarted()) {
-      return res.send("game is already started!");
+      return res.send('game is already started!');
     }
     addPlayer(game, joinerName, res, gameId);
     return res.redirect(`/waitingPage?gameId=${gameId}`);
   }
-  res.redirect("/invalidGameId");
+  res.redirect('/invalidGameId');
 };
 
 const renderErrorPage = function(req, res) {
-  res.render("joinPageWithErr.html");
+  res.render('joinPageWithErr.html');
 };
 
 const initializeMarket = function(req, res) {
-  const powerPlantMarket = new PowerPlantMarket(JSON.parse(powerPlantCards));
-  const cardDetails = JSON.stringify(powerPlantMarket.initializeMarket());
+  const game = initializeGame(req, res);
+  const cardDetails = JSON.stringify(game.getPowerPlantMarket().initializeMarket());
+  game.getPowerPlantMarket().shuffleDeck(_.shuffle);
   res.send(cardDetails);
 };
 
 const getCurrentPlayer = function(req, res) {
-  const gameId = req.cookies.gameId;
-  const game = res.app.activeGames[+gameId];
+  const game = initializeGame(req, res);
   const players = game.getPlayers();
   const turn = game.getTurn(players);
   res.send(turn.getCurrentPlayer());
 };
 
 const updateCurrentPlayer = function(req, res) {
-  const gameId = req.cookies.gameId;
-  const game = res.app.activeGames[+gameId];
+  const game = initializeGame(req, res);
   const players = game.getPlayers();
   const turn = game.getTurn(players);
   res.send(turn.updateCurrentPlayer());
@@ -119,8 +123,7 @@ const updateCurrentPlayer = function(req, res) {
 
 const buyPowerplant = function(req, res) {
   const price = +req.body.price;
-  const gameId = req.cookies.gameId;
-  const game = res.app.activeGames[+gameId];
+  const game = initializeGame(req, res);
   const players = game.getPlayers();
   const turn = game.getTurn(players);
   const currentPlayer = turn.getCurrentPlayer();
@@ -136,23 +139,28 @@ const buyPowerplant = function(req, res) {
 };
 
 const getPowerplantDetails = function(req, res) {
-  const gameId = req.cookies.gameId;
-  const game = res.app.activeGames[+gameId];
+  const game = initializeGame(req, res);
   const players = game.getPlayers();
   res.send(players);
 };
 
 const buyResources = function(req, res) {
   const resourcesDetail = req.body;
-  const gameId = req.cookies.gameId;
-  const game = res.app.activeGames[+gameId];
+  const game = initializeGame(req, res);
   const players = game.getPlayers();
   const turn = game.getTurn(players);
   const currentPlayer = turn.getCurrentPlayer();
   currentPlayer.payMoney(resourcesDetail.cost);
   currentPlayer.addResources(resourcesDetail);
-  console.log(currentPlayer);
-  res.send("");
+  res.send('');
+};
+
+const getCurrentPowerPlantMarket = function(req, res) {
+  const game = initializeGame(req, res);
+  const price = req.body.price;
+  game.powerPlantMarket.removePowerPlant(price);
+  const currentMarket = game.powerPlantMarket.getCurrentMarket();
+  res.send(JSON.stringify(currentMarket));
 };
 
 module.exports = {
@@ -169,5 +177,6 @@ module.exports = {
   updateCurrentPlayer,
   buyPowerplant,
   getPowerplantDetails,
-  buyResources
+  buyResources,
+  getCurrentPowerPlantMarket
 };
