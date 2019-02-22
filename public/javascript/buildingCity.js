@@ -49,6 +49,9 @@ const buildCities = function() {
       if (player.ispaymentSucess) {
         return updateMap(player.currentPlayer);
       }
+      setTimeout(() => {
+        setInnerText("payment-failed", "");
+      }, 10000);
       setInnerText("payment-failed", "building failed try again");
       reset();
     });
