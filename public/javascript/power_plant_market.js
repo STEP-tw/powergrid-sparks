@@ -1,5 +1,9 @@
 const currentMarketCards = {};
 
+const boughtResources = {
+  resourcesID: []
+};
+
 const increaseBid = function() {
   const currentBid = document.getElementById("bid-amount").innerText;
   document.getElementById("bid-amount").innerText = +currentBid + 1;
@@ -15,17 +19,66 @@ const resources = {
 };
 
 const market_resources = {
-  Garbage: "fas fa-trash-alt resource filled",
-  Coal: "fas fa-cubes resource filled",
-  Oil: "fas fa-oil-can resource middle-resource filled",
-  Uranium: "fas fa-radiation-alt resource middle-resource filled"
+  Garbage: "fas fa-trash-alt filled resource",
+  Coal: "fas fa-cubes filled resource",
+  Oil: "fas fa-oil-can filled resource middle-resource",
+  Uranium: "fas fa-radiation-alt filled last-uranium"
 };
 
-const initialResourceCount = {
-  Coal: 24,
-  Oil: 18,
-  Garbage: 6,
-  Uranium: 2
+const showResourceMarket = function() {
+  fetch("/getResources")
+    .then(res => res.json())
+    .then(resources => {
+      Object.keys(resources).forEach(resource => {
+        Object.keys(resources[resource]).forEach(cost => {
+          Object.keys(resources[resource][cost]).forEach(id => {
+            displayResource(resources, resource, cost, id);
+          });
+        });
+      });
+    });
+};
+
+const displayResource = function(resources, resource, cost, id) {
+  const index = `${resource}_${cost}_${id}`;
+  const element = document.getElementById(index);
+
+  if (resources[resource][cost][id]) {
+    element.className = `${market_resources[resource]}`;
+    return;
+  }
+  let newClass = removeFirstTwoClasses(element.className);
+  element.className = newClass;
+  element.onclick = "";
+  element.style.border = "1px solid #759cae";
+};
+
+const resetTurn = function() {
+  updateCurrentPlayer();
+  document.getElementById("selected-resource-amount").style.visibility =
+    "hidden";
+  document.getElementById("resource-amount").innerText = 0;
+  boughtResources.resourcesID = [];
+};
+
+const buyResources = function() {
+  let resourceDetails = { Coal: [], Oil: [], Uranium: [], Garbage: [] };
+  const ids = boughtResources.resourcesID;
+  ids.forEach(id => {
+    let details = id.split("_");
+    resourceDetails[details[0]].push(details.slice(1).join("_"));
+  });
+
+  const costDiv = document.getElementById("resource-amount");
+  const cost = +costDiv.innerText;
+
+  const { Coal, Oil, Uranium, Garbage } = resourceDetails;
+  fetch("/buyResources", {
+    method: "POST",
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    body: `Coal=${Coal}&Oil=${Oil}&Uranium=${Uranium}&Garbage=${Garbage}&cost=${cost}`
+  });
+  resetTurn();
 };
 
 const displayMarket = function() {
@@ -40,49 +93,7 @@ const displayMarket = function() {
 const displayPowerPlantMarket = function(powerPlantCards) {
   const market = document.getElementById("market");
   market.appendChild(generatePowerPlantMarket(powerPlantCards));
-  fillResources();
-};
-
-const fillResources = function() {
-  fillResource("Coal");
-  fillResource("Oil");
-  fillResource("Garbage");
-  fillUranium();
-};
-
-const fillUranium = function() {
-  let costDiff = 2;
-  let maxCost = 16;
-  for (
-    let uraniumCount = 0;
-    uraniumCount < initialResourceCount["Uranium"];
-    uraniumCount++
-  ) {
-    let uraniumDiv = document.getElementById(`Uranium_${maxCost}_0`);
-    let currentClass = uraniumDiv.className;
-    uraniumDiv.className = "fas fa-radiation-alt filled " + currentClass;
-    maxCost -= costDiff;
-    maxCost == 8 && (costDiff = 1);
-  }
-};
-
-const fillResource = function(resource) {
-  const maxCount = 24;
-  for (
-    let resourceCount = maxCount;
-    resourceCount > maxCount - initialResourceCount[resource];
-    resourceCount--
-  ) {
-    generateResource(resource, resourceCount);
-  }
-};
-
-const generateResource = function(resource, resourceCount) {
-  let resourceId = `${resource}_${Math.ceil(
-    resourceCount / 3
-  )}_${resourceCount % 3}`;
-  let resourceDiv = document.getElementById(resourceId);
-  resourceDiv.className = market_resources[resource];
+  showResourceMarket();
 };
 
 const startBuyingResources = function() {
@@ -230,14 +241,6 @@ const splitByHyphen = function(text) {
   return text.split("_");
 };
 
-const boughtResources = {
-  Coal: 0,
-  Oil: 0,
-  Garbage: 0,
-  Uranium: 0,
-  resourcesID: []
-};
-
 const selectResource = function(resourceDiv, amount, resourceDetails) {
   const clickBorder = "1px solid black";
   resourceDiv.style.border = clickBorder;
@@ -258,33 +261,13 @@ const unselectResource = function(resourceDiv, amount, resourceDetails) {
 };
 
 const removeFirstTwoClasses = function(text) {
-  return text
-    .split(" ")
-    .slice(2)
-    .join(" ");
-};
-
-const registerResourcesData = function() {
-  const { Coal, Oil, Garbage, Uranium, cost } = boughtResources;
-  fetch("/buyResources", {
-    method: "POST",
-    headers: { "Content-Type": "application/x-www-form-urlencoded" },
-    body: `Coal=${Coal}&Oil=${Oil}&Uranium=${Uranium}&Garbage=${Garbage}&cost=${cost}`
-  });
-};
-
-const buyResources = function() {
-  const IDs = boughtResources.resourcesID;
-  IDs.forEach(id => {
-    const currDiv = document.getElementById(id);
-    const currClass = currDiv.className;
-    const newClass = removeFirstTwoClasses(currClass);
-    currDiv.className = newClass;
-  });
-  const costDiv = document.getElementById("resource-amount");
-  boughtResources.cost = +costDiv.innerText;
-  registerResourcesData();
-  updateCurrentPlayer();
+  const classes = text.split(" ");
+  if (classes.length > 3)
+    return text
+      .split(" ")
+      .slice(2)
+      .join(" ");
+  return text;
 };
 
 const generateResourceValue = function(event) {

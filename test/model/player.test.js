@@ -54,12 +54,17 @@ describe("Player", () => {
   
   describe("addResources", function() {
     it("should add the resources to player account", function() {
-      player.addResources({ Coal: 1, Oil: 2, Garbage: 3, Uranium: 4 });
+      player.addResources({
+        Coal: "1_1",
+        Oil: "2_2",
+        Garbage: "3_2",
+        Uranium: "14_0"
+      });
       chai.assert.deepEqual(player.resources, {
         Coal: 1,
-        Oil: 2,
-        Garbage: 3,
-        Uranium: 4
+        Oil: 1,
+        Garbage: 1,
+        Uranium: 1
       });
     });
 

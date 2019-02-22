@@ -1,17 +1,25 @@
-const Turn = require('./turn');
+const Turn = require("./turn");
+const ResourceMarket = require("./resource_market");
 
 class Game {
   constructor(playerCount) {
     this.active = false;
     this.players = [];
     this.maxPlayerCount = playerCount;
-    this.colors = ['red', 'blue', 'pink', 'black', 'orange', 'yellow'];
+    this.colors = ["red", "blue", "pink", "black", "orange", "yellow"];
     this.isShuffled = false;
     this.powerPlantMarket;
   }
 
   addPlayer(player) {
     this.players.push(player);
+  }
+
+  getResourceMarket() {
+    if (this.resourceMarket == undefined) {
+      this.resourceMarket = new ResourceMarket();
+    }
+    return this.resourceMarket;
   }
 
   getTurn(players) {

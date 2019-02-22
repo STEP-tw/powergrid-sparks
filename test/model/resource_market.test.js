@@ -1,120 +1,14 @@
 const chai = require("chai");
-const sinon = require("sinon");
-const Game = require("../../src/model/Game");
-const Player = require("../../src/model/player");
+const ResourceMarket = require("../../src/model/resource_market");
 
-describe("Game", () => {
-  let game;
+describe("ResourceMarket", () => {
+  let resource_market = {};
   beforeEach(() => {
-    game = new Game(6);
+    resource_market = new ResourceMarket();
   });
-  describe("addPlayer", () => {
-    it("should return empty list if initially", () => {
-      const expectedOutput = [];
-      const actualOutput = game.players;
-      chai.expect(expectedOutput).to.be.deep.equal(actualOutput);
-    });
-
-    it("should add player to players list", () => {
-      game.addPlayer("ankon");
-      const expectedOutput = ["ankon"];
-      const actualOutput = game.players;
-      chai.expect(expectedOutput).to.be.deep.equal(actualOutput);
-    });
-  });
-
-  describe("hasStarted", () => {
-    it("should return false initially", () => {
-      const expectedOutput = false;
-      const actualOutput = game.hasStarted();
-      chai.expect(expectedOutput).to.be.deep.equal(actualOutput);
-    });
-  });
-
-  describe("start", () => {
-    it("should start the game", () => {
-      game.start();
-      const expectedOutput = true;
-      const actualOutput = game.active;
-      chai.expect(expectedOutput).to.be.deep.equal(actualOutput);
-    });
-  });
-
-  describe("getPlayers", () => {
-    it("should return empty array initially", () => {
-      const expectedOutput = [];
-      const actualOutput = game.getPlayers();
-      chai.expect(expectedOutput).to.be.deep.equal(actualOutput);
-    });
-  });
-
-  describe("getCurrentPlayersCount", () => {
-    it("should return 0 initially", () => {
-      const expectedOutput = 0;
-      const actualOutput = game.getCurrentPlayersCount();
-      chai.expect(expectedOutput).to.be.deep.equal(actualOutput);
-    });
-  });
-
-  describe("getMaxPlayersCount", () => {
-    it("should return 6 initially", () => {
-      const expectedOutput = 6;
-      const actualOutput = game.getMaxPlayersCount();
-      chai.expect(expectedOutput).to.be.deep.equal(actualOutput);
-    });
-  });
-
-  describe("getPlayerColor", () => {
-    it("It should return a color", () => {
-      const actualOutput = game.getPlayerColor();
-      const expectedOutput = "red";
-      chai.expect(expectedOutput).to.be.deep.equal(actualOutput);
-    });
-  });
-
-  describe("decideOrder", () => {
-    it("should decide the random order of players", () => {
-      game.decideOrder(() => {});
-      const actualOutput = game.isShuffled;
-      const expectedOutput = true;
-      chai.expect(expectedOutput).to.be.deep.equal(actualOutput);
-    });
-
-    it("should give the shuffled order", () => {
-      const shuffler = sinon.stub();
-      shuffler.onFirstCall().returns(["chandan", "ankon", "gaurav"]);
-      game.decideOrder(shuffler);
-      const expectedOutput = ["chandan", "ankon", "gaurav"];
-      const actualOutput = game.players;
-      chai.expect(expectedOutput).to.be.deep.equal(actualOutput);
-    });
-  });
-
-  describe("getTurn", () => {
-    it("should create a turn if the game doesnt have a turn", () => {
-      const player1 = new Player("green", "leela");
-      const player2 = new Player("blue", "ankon");
-      const players = [player1, player2];
-      const actualOutput = game.getTurn(players);
-      const expectedOutput = { players, currentPlayerIndex: 0 };
-      chai.expect(expectedOutput).to.be.deep.equal(actualOutput);
-    });
-
-    it("should create a turn if the game doesnt have a turn", () => {
-      const player1 = new Player("green", "leela");
-      const player2 = new Player("blue", "ankon");
-      const players = [player1, player2];
-      game.getTurn(players);
-      game.turn.updateCurrentPlayer();
-      const actualOutput = game.getTurn(players);
-      const expectedOutput = { players, currentPlayerIndex: 1 };
-      chai.expect(expectedOutput).to.be.deep.equal(actualOutput);
-    });
-  });
-
-  describe("getResourceMarket", () => {
-    it("should create a resource market if the game doesn't have a resource market", () => {
-      const actualOutput = game.getResourceMarket();
+  describe("getResources", () => {
+    it("should return the resources", () => {
+      const actualOutput = resource_market.getResources();
       const expectedOutput = {
         Coal: {
           "1": {
@@ -281,13 +175,15 @@ describe("Game", () => {
           }
         }
       };
-      chai.expect(expectedOutput).to.be.deep.equal(actualOutput);
+      chai.expect(actualOutput).to.be.deep.equal(expectedOutput);
     });
+  });
 
-    it("shouldn't create a resource market if the game already have it", () => {
-      game.getResourceMarket();
-      const actualOutput = game.getResourceMarket();
-
+  describe("updateResources", () => {
+    it("should update the resources", () => {
+      const resources = { Coal: "4_1", Oil: "", Garbage: "", Uranium: "" };
+      resource_market.updateResources(resources);
+      const actualOutput = resource_market;
       const expectedOutput = {
         Coal: {
           "1": {
@@ -307,7 +203,7 @@ describe("Game", () => {
           },
           "4": {
             "0": true,
-            "1": true,
+            "1": false,
             "2": true
           },
           "5": {
@@ -454,8 +350,6 @@ describe("Game", () => {
           }
         }
       };
-
-      chai.expect(expectedOutput).to.be.deep.equal(actualOutput);
     });
   });
 });

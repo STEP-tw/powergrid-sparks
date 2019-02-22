@@ -44,9 +44,13 @@ class Player {
   }
 
   addResources(resources) {
-    ["Coal", "Oil", "Uranium", "Garbage"].map(
-      resource => (this.resources[resource] += +resources[resource])
-    );
+    ["Coal", "Oil", "Uranium", "Garbage"].map(resource => {
+      const resourceDetails = resources[resource].match(/_/g);
+      if (resourceDetails != null) {
+        const resourceCount = resourceDetails.length;
+        this.resources[resource] += resourceCount;
+      }
+    });
   }
 }
 

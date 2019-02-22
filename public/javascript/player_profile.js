@@ -46,7 +46,8 @@ const getCurrentPlayer = function() {
         handleTurn(player);
       });
     getPowerplantDetails();
-  }, 2000);
+    showResourceMarket();
+  }, 500);
 };
 
 const handleTurn = function(player) {
