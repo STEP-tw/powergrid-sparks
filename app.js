@@ -22,8 +22,9 @@ const {
   buyPowerplant,
   getPowerplantDetails,
   buyResources,
-  getCurrentPowerPlantMarket
-} = require('./src/handlers');
+  getCurrentPowerPlantMarket,
+  buildCities
+} = require("./src/handlers");
 
 app.set("views", __dirname + "/public/html");
 app.engine("html", view.renderFile);
@@ -48,6 +49,7 @@ app.post("/buyPowerplant", buyPowerplant);
 app.get("/getPowerplantDetails", getPowerplantDetails);
 app.post("/buyResources", buyResources);
 app.post("/getCurrentPowerPlantMarket", getCurrentPowerPlantMarket);
+app.post("/buildCities", buildCities);
 
 app.use(express.static("public/html"));
 app.use(express.static("public/stylesheet"));

@@ -163,6 +163,23 @@ const getCurrentPowerPlantMarket = function(req, res) {
   res.send(JSON.stringify(currentMarket));
 };
 
+const buildCities = function(req, res) {
+  const price = +req.body.price;
+  const cityCount = +req.body.cityCount;
+  const cityNames = req.body.cityNames.split(",");
+  const gameId = req.cookies.gameId;
+  const game = res.app.activeGames[+gameId];
+  const players = game.getPlayers();
+  const turn = game.getTurn(players);
+  const currentPlayer = turn.getCurrentPlayer();
+  const ispaymentSucess = currentPlayer.payMoney(price);
+  if (ispaymentSucess) {
+    currentPlayer.addCities(cityCount);
+    currentPlayer.addCityNames(cityNames);
+  }
+  res.send({ ispaymentSucess, currentPlayer });
+};
+
 module.exports = {
   renderHome,
   createGame,
@@ -178,5 +195,6 @@ module.exports = {
   buyPowerplant,
   getPowerplantDetails,
   buyResources,
-  getCurrentPowerPlantMarket
+  getCurrentPowerPlantMarket,
+  buildCities
 };

@@ -40,17 +40,18 @@ describe("Player", () => {
 
   describe("payMoney", () => {
     it("should add money to player account", () => {
-      const { payment } = player.payMoney(25);
-      chai.expect(payment).to.be.equal("success");
+      const payment = player.payMoney(25);
+      chai.expect(payment).to.be.equal(true);
       chai.expect(player.money).to.be.equal(25);
     });
 
     it("should add money to player account", () => {
-      const { payment } = player.payMoney(100);
-      chai.expect(payment).to.be.equal("fail");
+      const payment = player.payMoney(100);
+      chai.expect(payment).to.be.equal(false);
       chai.expect(player.money).to.be.equal(50);
     });
   });
+  
   describe("addResources", function() {
     it("should add the resources to player account", function() {
       player.addResources({ Coal: 1, Oil: 2, Garbage: 3, Uranium: 4 });
@@ -59,6 +60,20 @@ describe("Player", () => {
         Oil: 2,
         Garbage: 3,
         Uranium: 4
+      });
+    });
+
+    describe("addCities", () => {
+      it("should add the city count of the respected player", () => {
+        player.addCities(2);
+        chai.expect(player.cities).to.be.equal(2);
+      });
+    });
+
+    describe("addCityNames", () => {
+      it("should add money to player account", () => {
+        player.addCityNames(["miami", "san-fransisco"]);
+        chai.expect(player.cityNames).to.be.eql(["miami", "san-fransisco"]);
       });
     });
   });

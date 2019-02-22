@@ -5,6 +5,8 @@ class Player {
     this.powerplants = {};
     this.money = 50;
     this.color = color;
+    this.cities = 0;
+    this.cityNames = [];
   }
 
   getName() {
@@ -28,9 +30,17 @@ class Player {
   }
 
   payMoney(money) {
-    if (money > this.money) return { payment: "fail" };
+    if (money > this.money) return false;
     this.money -= money;
-    return { payment: "success" };
+    return true;
+  }
+
+  addCities(citiesCount) {
+    this.cities += citiesCount;
+  }
+
+  addCityNames(cityNames) {
+    this.cityNames = this.cityNames.concat(cityNames);
   }
 
   addResources(resources) {
