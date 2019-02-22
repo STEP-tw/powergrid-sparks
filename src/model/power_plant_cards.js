@@ -19,6 +19,12 @@ class PowerPlantMarket {
     this.currentMarket.splice(this.currentMarket.indexOf(powerplant), 1);
   }
 
+  getCurrentPowerPlants(){
+    const currentCards = {};
+    this.currentMarket.map(card => (currentCards[card] = this.cards[card]));
+    return currentCards;
+  }
+
   getCurrentMarket() {
     const currentCards = {};
     const newPowerPlant = this.deck.splice(0, 1);

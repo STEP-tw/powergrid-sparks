@@ -369,3 +369,17 @@ describe("GET /getResources", function() {
       .expect(200, done);
   });
 });
+
+describe("GET /getCurrentPowerPlants", function() {
+  it('should respond with 200', function(done) {
+    app.activeGames['51'] = new Game(2);
+    app.activeGames['51'].powerPlantMarket = new PowerPlantMarket(
+      powerPlantsCards
+    );
+    app.cookies['123456'] = 'Ankon';
+    request(app)
+      .get('/getCurrentPowerPlants')
+      .set('Cookie', ['gameId=51;playerId=123456'])
+      .expect(200, done);
+  });
+});

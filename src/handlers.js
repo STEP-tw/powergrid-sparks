@@ -198,6 +198,13 @@ const getPlayerStats = function(req, res) {
   res.send(playerStats[0]);
 };
 
+const getCurrentPowerPlants = function(req, res){
+  const game = initializeGame(req, res);
+  const powerPlants = game.getPowerPlantMarket();
+  const currentPowerPlants = powerPlants.getCurrentPowerPlants();
+  res.send(JSON.stringify(currentPowerPlants));
+}
+
 const getResources = function(req, res) {
   const game = initializeGame(req, res);
   const resourceMarket = game.getResourceMarket();
@@ -231,5 +238,6 @@ module.exports = {
   getPlayers,
   getPlayerStats,
   getResources,
-  updateResourceMarket
+  updateResourceMarket,
+  getCurrentPowerPlants
 };

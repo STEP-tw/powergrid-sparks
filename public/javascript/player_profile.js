@@ -47,6 +47,8 @@ const getCurrentPlayer = function() {
       });
     getPowerplantDetails();
     showResourceMarket();
+    getCurrentPowerPlants();
+    getPlayerStatsDiv();
   }, 500);
 };
 
