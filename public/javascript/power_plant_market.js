@@ -175,6 +175,7 @@ const generatePowerPlantMarket = function(powerPlantCards) {
     biddingDiv,
     resourceMarketDiv
   ]);
+  marketDiv.className = "market-div";
   return marketDiv;
 };
 

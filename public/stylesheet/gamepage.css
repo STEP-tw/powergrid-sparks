@@ -1,21 +1,23 @@
 html {
   font-family: Arial, Helvetica, sans-serif;
+  height: 100%;
 }
 
 body {
   margin: 0;
   color: #b0d8eb;
+  height: 100%;
+  background-color: #2d303d;
 }
 
 .player-name {
-  font-weight: bolder;
   font-size: 20px;
 }
 
 .players-section {
   display: flex;
   justify-content: space-around;
-  height: 163px;
+  height: 25%;
   width: 100%;
   align-items: center;
   background-color: #2d303d;
@@ -54,7 +56,7 @@ body {
   background-color: #4b4f62;
 }
 
-.highlighted{
+.highlighted {
   stroke: goldenrod;
 }
 
@@ -70,8 +72,7 @@ body {
 
 .map-section {
   box-shadow: 0px 0px 42px 3px rgba(2, 2, 2, 0.52);
-  width: 66%;
-  height: 600px;
+  width: 100%;
   display: flex;
   z-index: 1;
   background: #b2d8e8;
@@ -79,7 +80,14 @@ body {
   justify-content: center;
 }
 
-button{
+.market-div {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  height: 100%;
+}
+
+button {
   cursor: pointer;
 }
 
@@ -92,7 +100,6 @@ button{
 
 .info {
   width: 35%;
-  height: 600px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -102,9 +109,7 @@ button{
 .activity-log {
   overflow: scroll;
   width: 100%;
-  height: 500px;
   background-color: #2d303d;
-  font-weight: bold;
   font-size: 22px;
   line-height: 1.5;
   margin: 2%;
@@ -117,7 +122,6 @@ button{
 
   display: flex;
   justify-content: space-between;
-  font-weight: bolder;
 }
 
 .self-details {
@@ -136,7 +140,6 @@ button{
   text-align: center;
   background: #605d6842;
   width: 80%;
-  font-weight: bolder;
 }
 
 .power-plant {
@@ -166,9 +169,10 @@ td {
 
 .unselectedCard {
   height: 90%;
-  width: 140px;
+  width: 130px;
   display: flex;
   flex-direction: column;
+  justify-content: space-around;
   font-size: 25px;
   border-radius: 9px;
   background: #759cae;
@@ -191,7 +195,6 @@ td {
   display: flex;
   justify-content: space-between;
   font-size: 12px;
-  font-weight: bold;
 }
 
 .player-resources {
@@ -211,10 +214,11 @@ td {
 }
 
 .selectedCard {
-  height: 88%;
-  width: 15%;
+  height: 90%;
+  width: 17%;
   display: flex;
   flex-direction: column;
+  justify-content: space-around;
   font-size: 25px;
   border-radius: 9px;
   border: 2px solid orangered;
@@ -230,7 +234,7 @@ td {
   border: 2px solid #3e43475e;
   border-radius: 50%;
   color: #3e4346;
-  font-weight: bold;
+
   background: #f0f8ffd6;
 }
 
@@ -249,17 +253,17 @@ td {
   justify-content: space-around;
   align-items: center;
   margin-top: 0.5%;
-  width: 940px;
-  height: 180px;
+  width: 100%;
+  height: 30%;
 }
 
 .resource-market {
-  margin-top: 1%;
+  margin: auto;
   display: flex;
   justify-content: space-around;
   align-items: center;
-  width: 940px;
-  height: 125px;
+  width: 98%;
+  height: 20%;
   border: solid 1px #5e7886;
 }
 
@@ -267,21 +271,19 @@ td {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 70%;
   width: 100%;
+  height: 30%;
 }
 
 .price {
-  height: 55%;
-  width: 45%;
+  height: 100%;
+  width: 40%;
   display: flex;
   justify-content: center;
   align-items: center;
   border: 2px solid #3e43475e;
   border-radius: 50%;
   color: #3e4346;
-  font-weight: bold;
-  background: #f0f8ffd6;
 }
 
 .resource-grid {
@@ -310,7 +312,7 @@ td {
   bottom: 89%;
   left: 90%;
   width: 20%;
-  height: 20%;
+  height: 15%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -369,8 +371,8 @@ td {
   position: absolute;
   bottom: 73%;
   left: 76%;
-  width: 36%;
-  height: 36%;
+  width: 50%;
+  height: 45%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -378,21 +380,20 @@ td {
   border: 1px solid black;
   border-radius: 50%;
   z-index: 1;
-  font-size: 70%;
+  font-size: 80%;
   color: #3e4346;
-  font-weight: bolder;
 }
 
 .bidding-section {
   background-color: white;
   border-radius: 10px;
-  height: 80px;
+  height: 10%;
   width: 98%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
-  margin: 0 10px;
+  margin: auto;
   color: #3e4346;
 }
 
@@ -424,13 +425,13 @@ td {
   border: 1px solid #4b4f62;
 }
 
-.build-cities > button{
+.build-cities > button {
   background: none;
   cursor: pointer;
   border: 1px solid #4b4f62;
   color: #b0d8eb;
 }
 
-.build-cities > button:focus{
+.build-cities > button:focus {
   outline: none;
 }
