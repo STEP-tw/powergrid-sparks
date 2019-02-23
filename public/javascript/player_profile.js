@@ -50,6 +50,7 @@ const getCurrentPlayer = function() {
     getCurrentPowerPlants();
     getPlayerStatsDiv();
     refreshMap();
+    getActivityLogs();
   }, 500);
 };
 

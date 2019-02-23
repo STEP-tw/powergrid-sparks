@@ -383,3 +383,14 @@ describe("GET /getCurrentPowerPlants", function() {
       .expect(200, done);
   });
 });
+
+describe("GET /logs", function () {
+  it('should respond with 200', function (done) {
+    app.activeGames['52'] = new Game(2);
+    app.cookies['1234567'] = 'Ankon';
+    request(app)
+      .get('/logs')
+      .set('Cookie', ['gameId=52;playerId=1234567'])
+      .expect(200, done);
+  });
+});

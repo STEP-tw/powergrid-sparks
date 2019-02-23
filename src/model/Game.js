@@ -1,5 +1,6 @@
 const Turn = require('./turn');
 const ResourceMarket = require('./resource_market');
+const ActivityLog = require('./activityLog');
 
 class Game {
   constructor(playerCount) {
@@ -9,6 +10,7 @@ class Game {
     this.colors = ['red', 'blue', 'pink', 'black', 'orange', 'yellow'];
     this.isShuffled = false;
     this.powerPlantMarket;
+    this.activityLog = new ActivityLog(Date);
   }
 
   addPlayer(player) {
@@ -62,7 +64,7 @@ class Game {
     this.powerPlantMarket = market;
   }
 
-  shuffleDeck(shuffler){
+  shuffleDeck(shuffler) {
     this.powerPlantMarket.shuffleDeck(shuffler);
   }
 
@@ -76,6 +78,14 @@ class Game {
 
   updatePowerPlants() {
     this.powerPlantMarket.updateCurrentMarket();
+  }
+
+  addLog(log) {
+    this.activityLog.addLog(log);
+  }
+
+  getLogs(){
+    return this.activityLog.getLogs();
   }
 }
 

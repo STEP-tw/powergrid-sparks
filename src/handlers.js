@@ -51,6 +51,7 @@ const createGame = function(req, res) {
   const player = new Player(playerColor, req.body.hostName);
   setCookie(res, gameId, player);
   game.addPlayer(player);
+  game.addLog('Game Started');
   res.redirect(`/waitingPage?gameId=${gameId}`);
 };
 
@@ -107,6 +108,25 @@ const initializeMarket = function(req, res) {
   res.send(cardDetails);
 };
 
+const createBuyPowerPlantLog = function(game, turn, powerplant) {
+  const playerName = turn.getCurrentPlayer().name;
+  const logMsg = `${playerName} has bought ${powerplant.value} powerplant !`;
+  game.addLog(logMsg);
+};
+
+const createBuildCityLog = function(game, turn, cityCount) {
+  const playerName = turn.getCurrentPlayer().name;
+  const logMsg = `${playerName} has build ${cityCount} cities !`;
+  game.addLog(logMsg);
+};
+
+const createBuyResourceLog = function(game, turn, resourcesDetail) {
+  const playerName = turn.getCurrentPlayer().name;
+  const cost = resourcesDetail.cost;
+  const logMsg = `${playerName} has bought resources of cost ${cost} !`;
+  game.addLog(logMsg);
+};
+
 const getCurrentPlayer = function(req, res) {
   const game = initializeGame(req, res);
   const players = game.getPlayers();
@@ -135,6 +155,7 @@ const buyPowerplant = function(req, res) {
   };
   currentPlayer.addPowerplant(powerplant);
   currentPlayer.payMoney(price);
+  createBuyPowerPlantLog(game, turn, powerplant);
   res.send(players);
 };
 
@@ -153,6 +174,7 @@ const buyResources = function(req, res) {
   currentPlayer.payMoney(resourcesDetail.cost);
   currentPlayer.addResources(resourcesDetail);
   updateResourceMarket(resourcesDetail, game);
+  createBuyResourceLog(game, turn, resourcesDetail);
   res.send(currentPlayer);
 };
 
@@ -174,7 +196,9 @@ const buildCities = function(req, res) {
   const currentPlayer = turn.getCurrentPlayer();
   const isPaymentSuccess = currentPlayer.payMoney(price);
   if (isPaymentSuccess) {
-    currentPlayer.addCityNames(cityNames.filter(city => city.length > 1));
+    const cities = cityNames.filter(city => city.length > 1);
+    createBuildCityLog(game, turn, cities.length - 1);
+    currentPlayer.addCityNames(cities);
   }
   res.send({ isPaymentSuccess, currentPlayer });
 };
@@ -211,6 +235,11 @@ const updateResourceMarket = function(resourcesDetail, game) {
   resourceMarket.updateResources({ Coal, Oil, Garbage, Uranium });
 };
 
+const getActivityLogs = function(req, res) {
+  const game = initializeGame(req, res);
+  res.send(JSON.stringify(game.getLogs()));
+};
+
 module.exports = {
   renderHome,
   createGame,
@@ -232,5 +261,6 @@ module.exports = {
   getPlayerStats,
   getResources,
   updateResourceMarket,
-  getCurrentPowerPlants
+  getCurrentPowerPlants,
+  getActivityLogs
 };
