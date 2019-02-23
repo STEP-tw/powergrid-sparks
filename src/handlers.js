@@ -153,7 +153,7 @@ const buyResources = function(req, res) {
   currentPlayer.payMoney(resourcesDetail.cost);
   currentPlayer.addResources(resourcesDetail);
   updateResourceMarket(resourcesDetail, game);
-  res.send('');
+  res.send(currentPlayer);
 };
 
 const updateCurrentPowerPlantMarket = function(req, res) {
