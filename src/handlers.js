@@ -54,7 +54,7 @@ const createGame = function(req, res) {
   const player = new Player(playerColor, req.body.hostName);
   setCookie(res, gameId, player);
   game.addPlayer(player);
-  game.addLog('Game Started');
+  game.addLog("Game Started");
   res.redirect(`/waitingPage?gameId=${gameId}`);
 };
 
@@ -125,7 +125,7 @@ const createBuildCityLog = function(game, turn, cityCount) {
 
 const createBuyResourceLog = function(game, turn, resourcesDetail) {
   const playerName = turn.getCurrentPlayer().name;
-  const cost = resourcesDetail.cost;
+  const cost = resourcesDetail.Cost;
   const logMsg = `${playerName} has bought resources of cost ${cost} !`;
   game.addLog(logMsg);
 };
@@ -178,8 +178,9 @@ const buyResources = function(req, res) {
   if (isPaymentSuccess) {
     currentPlayer.addResources(resourcesDetail);
     updateResourceMarket(resourcesDetail, game);
+    createBuyResourceLog(game, turn, resourcesDetail);
   }
-  res.send({currentPlayer,isPaymentSuccess});
+  res.send({ currentPlayer, isPaymentSuccess });
 };
 
 const updateCurrentPowerPlantMarket = function(req, res) {
