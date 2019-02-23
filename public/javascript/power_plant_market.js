@@ -79,9 +79,11 @@ const buyResources = function() {
     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
     body: `Coal=${Coal}&Oil=${Oil}&Uranium=${Uranium}&Garbage=${Garbage}&cost=${cost}`
   })
-    .then(res =>  res.json())
-    .then(result => console.log(result));
-  resetTurn();
+    .then(res => res.json())
+    .then(result => {
+      console.log(result);
+      resetTurn();
+    })  
 };
 
 const displayMarket = function() {
