@@ -294,6 +294,18 @@ describe("POST /buyResources", function() {
       .send("Coal=1&Uranium=1&Oil=1&Garbage=1")
       .expect(200, done);
   });
+
+  it("should return code 200 if resource data is registered succesfully", done => {
+    const player1 = new Player("blue", "deepika");
+    app.activeGames["55"] = new Game(2);
+    app.activeGames["55"].addPlayer(player1);
+    app.cookies["555"] = "Leela";
+    request(app)
+      .post("/buyResources")
+      .set("Cookie", ["gameId=55;playerId=555"])
+      .send("Coal=1&Uranium=1&Oil=1&Garbage=10&Cost=100")
+      .expect(200, done);
+  });
 });
 
 describe("POST /updateCurrentPowerPlantMarket", function() {
@@ -310,6 +322,7 @@ describe("POST /updateCurrentPowerPlantMarket", function() {
       .expect(200, done);
   });
 });
+
 describe("POST /buildCities", () => {
   it("should  add the city details to the player who buys if player has enough money", done => {
     app.activeGames["99"] = new Game(3);

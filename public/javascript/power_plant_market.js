@@ -81,11 +81,30 @@ const buyResources = function() {
     body: `Coal=${Coal}&Oil=${Oil}&Uranium=${Uranium}&Garbage=${Garbage}&cost=${cost}`
   })
     .then(res => res.json())
-    .then(result => resetTurn());
-
-  for (let resourceNo = 0; resourceNo < resourceMarket.length; resourceNo++) {
-    resourceMarket[resourceNo].onclick = '';
-  }
+    .then(player => {
+      if (!player.isPaymentSuccess) {
+        document.getElementById("insufficient-money").style.display = "inline";
+        setTimeout(() => {
+          document.getElementById("insufficient-money").innerText = "";
+        }, 3000);
+        document.getElementById("insufficient-money").innerText = "insufficient money";
+        const unclickBorder = "1px solid #759cae";
+        boughtResources.resourcesID.forEach(resource => {
+          document.getElementById(resource).style.border = unclickBorder;
+        });
+        boughtResources.resourcesID = [];
+        costDiv.innerText = 0;
+        return;
+      }
+      resetTurn();
+      for (
+        let resourceNo = 0;
+        resourceNo < resourceMarket.length;
+        resourceNo++
+      ) {
+        resourceMarket[resourceNo].onclick = "";
+      }
+    });
 };
 
 const displayMarket = function() {
@@ -128,7 +147,11 @@ const startBuyingResources = function() {
     .then(res => res.json())
     .then(player => {
       if (player.id == playerId) {
-        for (let resourceNo = 0; resourceNo < resourceMarket.length; resourceNo++) {
+        for (
+          let resourceNo = 0;
+          resourceNo < resourceMarket.length;
+          resourceNo++
+        ) {
           resourceMarket[resourceNo].onclick = generateResourceValue;
         }
       }
