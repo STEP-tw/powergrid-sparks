@@ -25,11 +25,24 @@ const buildCities = function() {
   fetch('/buildCities', { method: 'POST', headers, body })
     .then(res => res.json())
     .then(player => {
-      if (player.isPaymentSuccess) return updateMap(player.currentPlayer);
+      if (player.isPaymentSuccess) {
+        updateMap(player.currentPlayer);
+        reset();
+        updateCurrentPlayer();
+        return;
+      }
       setInnerText('payment-failed', 'Building failed!!! Insuffient money');
       reset();
     });
 };
+
+const refreshMap = function(){
+  fetch('/getPlayers')
+    .then(res => res.json())
+    .then(players => {
+      players.forEach(player=> updateMap(player))
+    })
+}
 
 const updateMap = function(player) {
   const playerColor = player.color;
@@ -37,8 +50,6 @@ const updateMap = function(player) {
   cityNames.forEach(cityName => {
     updateCity(cityName, playerColor);
   });
-  reset();
-  updateCurrentPlayer();
 };
 
 const getInnerText = function(id) {

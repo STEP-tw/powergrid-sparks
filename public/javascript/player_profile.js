@@ -49,6 +49,7 @@ const getCurrentPlayer = function() {
     showResourceMarket();
     getCurrentPowerPlants();
     getPlayerStatsDiv();
+    refreshMap();
   }, 500);
 };
 
