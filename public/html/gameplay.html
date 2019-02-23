@@ -605,18 +605,18 @@
     </section>
     <section id="market" class = "map-section"></section>
     <section class="info">
-    <section class="activity-log">
-      <p>ACTIVITY LOG</p>
+      <section class="activity-log">
+        <div>ACTIVITY LOG</div>
+      </section>
+      <div id="building-phase" class="build-cities" >
+        <div>Building cost: <span id="building-cost">0</span></div>
+        <div id="selected-cities" class="selected-cities">selected Cities:</div>
+        <div>No.Of Cities:<span id = "city-count"> 0</span></div>
+        <div id="payment-failed"></div>
+        <button onclick="buildCities()"> Build</button>
+        <button onclick="reset()"> Cancel</button>
+      </div>
     </section>
-    <section id="building-phase" style="visibility: hidden;" >
-      <p>Building cost: <span id="building-cost"> 0 </span></p>
-      <p>selected Cities:<span id = "city-names" style="display: flex; flex-wrap: initial"> </span></p>
-      <p>No.Of Cities:<span id = "city-count"> 0</span></p>
-      <p id="payment-failed"></p>
-      <button onclick="buildCities()"> Build</button>
-      <button onclick="reset()"> Cancel</button>
-    </section>
-  </section>
   </main>
   <section class = "players-section">
       <% players.forEach(function(player){ %>

@@ -96,6 +96,7 @@ button{
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  background-color: #2d303d;
 }
 
 .activity-log {
@@ -402,4 +403,33 @@ td {
 
 .focus {
   border: 1px solid white;
+}
+
+.selected-cities {
+  display: flex;
+  flex-wrap: wrap;
+  height: 50%;
+  overflow: scroll;
+  border: 1px solid #4b4f62;
+}
+
+.build-cities {
+  padding-left: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  visibility: hidden;
+  height: 50%;
+  border: 1px solid #4b4f62;
+}
+
+.build-cities > button{
+  background: none;
+  cursor: pointer;
+  border: 1px solid #4b4f62;
+  color: #b0d8eb;
+}
+
+.build-cities > button:focus{
+  outline: none;
 }

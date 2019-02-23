@@ -35,12 +35,10 @@ class Player {
     return true;
   }
 
-  addCities(citiesCount) {
-    this.cities += citiesCount;
-  }
-
   addCityNames(cityNames) {
+    cityNames.shift();
     this.cityNames = this.cityNames.concat(cityNames);
+    this.cities = this.cityNames.length;
   }
 
   addResources(resources) {

@@ -246,7 +246,7 @@ const displayMap = function() {
   fetch('/getPlayers')
     .then(res => res.json())
     .then(players => players.forEach(player => updateMap(player)));
-  document.getElementById("building-phase").style.visibility = "visible"
+  document.getElementById('building-phase').style.visibility = 'visible';
   const map = document.getElementById('map');
   const market = document.getElementById('market');
   map.style.display = 'inline';
@@ -298,6 +298,8 @@ const generateResourceValue = function(event) {
 
 const buyPowerplant = function() {
   const price = document.getElementById('current-bid-amount').innerText;
+  document.getElementById('current-bid-amount').innerText = 0;
+  document.getElementById('bid-amount').innerText = 0;
   fetch('/buyPowerplant', {
     method: 'POST',
     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -325,7 +327,7 @@ const updatePlayerStatsDiv = function({ name, resources, powerplants, money }) {
   ['Coal', 'Oil', 'Garbage', 'Uranium'].forEach(
     resource => (document.getElementById(resource).innerText = resources[resource])
   );
-  const powerplantsCost = Object.keys(powerplants).slice(0,3);
+  const powerplantsCost = Object.keys(powerplants).slice(0, 3);
   powerplantsCost.forEach(powerplant => {
     const powerPlantDiv = document.getElementById(`powerplant-${count++}`);
     powerPlantDiv.innerHTML = '';

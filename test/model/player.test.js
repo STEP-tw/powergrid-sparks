@@ -14,7 +14,8 @@ describe("Player", () => {
         city: 1
       };
       player.addPowerplant(powerplant);
-      chai.expect(player.powerplants).has.key("10");
+      const actualOutput = player.powerplants;
+      chai.expect(actualOutput).has.key("10");
     });
   });
 
@@ -27,14 +28,17 @@ describe("Player", () => {
       };
       player.addPowerplant(powerplant);
       player.removePowerplant(powerplant);
-      chai.expect(player.powerplants).does.not.have.key("10");
+      const expectedOutput = player.powerplants;
+      chai.expect(expectedOutput).does.not.have.key("10");
     });
   });
 
   describe("earnMoney", () => {
     it("should add money to player account", () => {
       player.earnMoney(100);
-      chai.expect(player.money).to.be.equal(150);
+      const actualOutput = player.money;
+      const expectedOutput = 150;
+      chai.expect(actualOutput).to.be.equal(expectedOutput);
     });
   });
 
@@ -68,17 +72,10 @@ describe("Player", () => {
       });
     });
 
-    describe("addCities", () => {
-      it("should add the city count of the respected player", () => {
-        player.addCities(2);
-        chai.expect(player.cities).to.be.equal(2);
-      });
-    });
-
     describe("addCityNames", () => {
       it("should add money to player account", () => {
-        player.addCityNames(["miami", "san-fransisco"]);
-        chai.expect(player.cityNames).to.be.eql(["miami", "san-fransisco"]);
+        player.addCityNames(['',"miami", "san-fransisco"]);
+        chai.expect(player.cityNames).to.be.deep.equal(["miami", "san-fransisco"]);
       });
     });
   });

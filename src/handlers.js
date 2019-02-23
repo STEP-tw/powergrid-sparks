@@ -167,18 +167,16 @@ const updateCurrentPowerPlantMarket = function(req, res) {
 
 const buildCities = function(req, res) {
   const price = +req.body.price;
-  const cityCount = +req.body.cityCount;
-  const cityNames = req.body.cityNames.split(',');
+  const cityNames = req.body.cityNames.split('\n');
   const game = initializeGame(req, res);
   const players = game.getPlayers();
   const turn = game.getTurn(players);
   const currentPlayer = turn.getCurrentPlayer();
-  const ispaymentSucess = currentPlayer.payMoney(price);
-  if (ispaymentSucess) {
-    currentPlayer.addCities(cityCount);
-    currentPlayer.addCityNames(cityNames);
+  const isPaymentSuccess = currentPlayer.payMoney(price);
+  if (isPaymentSuccess) {
+    currentPlayer.addCityNames(cityNames.filter(city => city.length > 1));
   }
-  res.send({ ispaymentSucess, currentPlayer });
+  res.send({ isPaymentSuccess, currentPlayer });
 };
 
 const getPlayers = function(req, res) {
