@@ -73,6 +73,7 @@ const buyResources = function() {
 
   const costDiv = document.getElementById("resource-amount");
   const cost = +costDiv.innerText;
+  const resourceMarket = document.getElementsByClassName("filled");
 
   const { Coal, Oil, Uranium, Garbage } = resourceDetails;
   fetch("/buyResources", {
@@ -82,6 +83,10 @@ const buyResources = function() {
   })
     .then(res => res.json())
     .then(result => resetTurn());
+
+  for (let resourceNo = 0; resourceNo < resourceMarket.length; resourceNo++) {
+    resourceMarket[resourceNo].onclick = '';
+  }
 };
 
 const displayMarket = function() {
