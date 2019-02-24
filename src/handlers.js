@@ -22,10 +22,10 @@ const renderHome = function(req, res) {
     const game = res.app.activeGames[+gameId];
     if (game.getCurrentPlayersCount() == game.getMaxPlayersCount()) {
       return res.redirect(
-        `/gameplay?gameId=${+Object.keys(res.app.activeGames)[0]}`
+        '/gameplay'
       );
     }
-    return res.redirect(`/waitingPage?gameId=${gameId}`);
+    return res.redirect('/waitingPage');
   }
   return res.render("index.html");
 };
@@ -55,11 +55,11 @@ const createGame = function(req, res) {
   setCookie(res, gameId, player);
   game.addPlayer(player);
   game.addLog("Game Started");
-  res.redirect(`/waitingPage?gameId=${gameId}`);
+  res.redirect('/waitingPage');
 };
 
 const renderWaitingPage = function(req, res) {
-  const gameId = url.parse(req.url, true).query.gameId;
+  const gameId = req.cookies.gameId;
   const game = res.app.activeGames[+gameId];
   res.render("createdGame.html", { users: game.getPlayers(), gameId });
 };
@@ -75,7 +75,7 @@ const renderGamePage = function(req, res) {
 };
 
 const renderGameplay = function(req, res) {
-  const gameId = url.parse(req.url, true).query.gameId;
+  const gameId = req.cookies.gameId;
   const game = res.app.activeGames[+gameId];
   res.render("gameplay.html", { players: game.getPlayers() });
 };
@@ -95,7 +95,7 @@ const joinGame = function(req, res) {
       return res.send("game is already started!");
     }
     addPlayer(game, joinerName, res, gameId);
-    return res.redirect(`/waitingPage?gameId=${gameId}`);
+    return res.redirect('/waitingPage');
   }
   res.redirect("/invalidGameId");
 };

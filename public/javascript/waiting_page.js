@@ -9,7 +9,7 @@ const createHTML = function(elements) {
 const updateJoinedPlayers = function(response, interval) {
   if (response.gameState) {
     clearInterval(interval);
-    window.location.href = `/gameplay?gameId=${response.gameId}`;
+    window.location.href = `/gameplay`;
   }
   document.getElementById("players").innerText = createHTML(response.users);
 };
