@@ -106,9 +106,15 @@ button {
   background-color: #2d303d;
 }
 
+.activity-log::-webkit-scrollbar {
+  width: 0px;  /* remove scrollbar space */
+  background: transparent;  /* optional: just make scrollbar invisible */
+}
+
 .activity-log {
   overflow: scroll;
   width: 100%;
+  height: 50%;
   background-color: #2d303d;
   font-size: 22px;
   line-height: 1.5;
@@ -124,10 +130,14 @@ button {
   justify-content: space-between;
 }
 
+.self-details::-webkit-scrollbar {
+  width: 0px;  /* remove scrollbar space */
+  background: transparent;  /* optional: just make scrollbar invisible */
+}
+
 .self-details {
   overflow: scroll;
   width: 35%;
-  height: 600px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -167,9 +177,9 @@ td {
   border: 1px solid #4b4f62;
 }
 
-.unselectedCard {
+.unselected-card {
   height: 90%;
-  width: 130px;
+  width: 17%;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -213,7 +223,7 @@ td {
   align-items: center;
 }
 
-.selectedCard {
+.selected-card {
   height: 90%;
   width: 17%;
   display: flex;
@@ -405,6 +415,11 @@ td {
 
 .focus {
   border: 1px solid white;
+}
+
+.selected-cities::-webkit-scrollbar {
+  width: 0px;  /* remove scrollbar space */
+  background: transparent;  /* optional: just make scrollbar invisible */
 }
 
 .selected-cities {

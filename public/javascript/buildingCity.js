@@ -22,7 +22,7 @@ const buildCities = function() {
   const { price, cityCount, cityNames } = getSelectedCitiesDetails();
   const body = `price=${price}&cityCount=${cityCount}&cityNames=${cityNames}`;
   const headers = { 'Content-Type': 'application/x-www-form-urlencoded' };
-  fetch('/buildCities', { method: 'POST', headers, body })
+  fetch('/cities/build', { method: 'POST', headers, body })
     .then(res => res.json())
     .then(player => {
       if (player.isPaymentSuccess) {
@@ -37,7 +37,7 @@ const buildCities = function() {
 };
 
 const refreshMap = function(){
-  fetch('/getPlayers')
+  fetch('/players')
     .then(res => res.json())
     .then(players => {
       players.forEach(player=> updateMap(player))

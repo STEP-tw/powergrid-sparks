@@ -28,7 +28,7 @@ const market_resources = {
 };
 
 const showResourceMarket = function() {
-  fetch("/getResources")
+  fetch("/resources")
     .then(res => res.json())
     .then(resources => {
       Object.keys(resources).forEach(resource => {
@@ -76,7 +76,7 @@ const buyResources = function() {
   const resourceMarket = document.getElementsByClassName("filled");
 
   const { Coal, Oil, Uranium, Garbage } = resourceDetails;
-  fetch("/buyResources", {
+  fetch("/resources/buy", {
     method: "POST",
     headers: { "Content-Type": "application/x-www-form-urlencoded" },
     body: `Coal=${Coal}&Oil=${Oil}&Uranium=${Uranium}&Garbage=${Garbage}&Cost=${cost}`
@@ -111,7 +111,7 @@ const showFailedPayment = function(costDiv) {
 };
 
 const displayMarket = function() {
-  fetch("/displayPowerPlantMarket")
+  fetch("/powerPlantMarket")
     .then(res => res.json())
     .then(res => {
       displayPowerPlantMarket(res);
@@ -125,7 +125,7 @@ const displayPowerPlantMarket = function(powerPlantCards) {
 };
 
 const getCurrentPowerPlants = function() {
-  fetch("/getCurrentPowerPlants")
+  fetch("/currentPowerPlants")
     .then(res => res.json())
     .then(powerPlants => {
       const currentMarketDiv = generateCurrentMarket(powerPlants);
@@ -133,7 +133,7 @@ const getCurrentPowerPlants = function() {
       const id = selectedPowerPlants[0];
       currentMarketDiv.childNodes.forEach(node => {
         if (node.id == id) {
-          node.className = "selectedCard";
+          node.className = "selected-card";
         }
       });
       const market = document.getElementById("market").children[0];
@@ -215,7 +215,7 @@ const generateResourceMarketDiv = function() {
 
 const arrangeCurrentMarket = function(singleMarket, powerPlant, cardDetails) {
   const powerPlantCardId = `powerPlant_${powerPlant}`;
-  const powerPlantCardDiv = generateDiv("unselectedCard", powerPlantCardId);
+  const powerPlantCardDiv = generateDiv("unselected-card", powerPlantCardId);
   powerPlantCardDiv.onclick = addFocus.bind(
     null,
     powerPlantCardDiv,
@@ -233,7 +233,7 @@ const arrangeCurrentMarket = function(singleMarket, powerPlant, cardDetails) {
 
 const arrangeFutureMarket = function(singleMarket, powerPlant, cardDetails) {
   const powerPlantCardId = `powerPlant_${powerPlant}`;
-  const powerPlantCardDiv = generateDiv("unselectedCard", powerPlantCardId);
+  const powerPlantCardDiv = generateDiv("unselected-card", powerPlantCardId);
   const priceDiv = generatePriceDiv(powerPlant);
   const resourceDiv = generateResourceDiv(cardDetails);
   appendChildren(powerPlantCardDiv, [priceDiv, resourceDiv]);
@@ -243,13 +243,13 @@ const arrangeFutureMarket = function(singleMarket, powerPlant, cardDetails) {
 const addFocus = function(element, powerPlant) {
   Object.keys(currentMarketCards).forEach(card => {
     currentMarketCards[card].isSelected = false;
-    currentMarketCards[card].powerplant.className = "unselectedCard";
+    currentMarketCards[card].powerplant.className = "unselected-card";
   });
   const id = element.id.split("_")[1];
   selectedPowerPlants.pop();
   selectedPowerPlants.push(element.id);
   currentMarketCards[id].isSelected = true;
-  element.className = "selectedCard";
+  element.className = "selected-card";
   document.getElementById("current-bid-amount").innerText = powerPlant;
   document.getElementById("bid-amount").innerText = powerPlant;
 };
@@ -288,7 +288,7 @@ const appendChildren = function(parent, children) {
 };
 
 const displayMap = function() {
-  fetch("/getPlayers")
+  fetch("/players")
     .then(res => res.json())
     .then(players => players.forEach(player => updateMap(player)));
   document.getElementById("building-phase").style.visibility = "visible";
@@ -346,12 +346,12 @@ const buyPowerplant = function() {
   const price = document.getElementById("current-bid-amount").innerText;
   document.getElementById("current-bid-amount").innerText = 0;
   document.getElementById("bid-amount").innerText = 0;
-  fetch("/buyPowerplant", {
+  fetch("/powerPlant/buy", {
     method: "POST",
     headers: { "Content-Type": "application/x-www-form-urlencoded" },
     body: `price=${price}`
   });
-  fetch("/updateCurrentPowerPlantMarket", {
+  fetch("/currentPowerPlantMarket/update", {
     method: "POST",
     headers: { "Content-Type": "application/x-www-form-urlencoded" },
     body: `price=${price}`
@@ -360,7 +360,7 @@ const buyPowerplant = function() {
 };
 
 const getPlayerStatsDiv = function() {
-  fetch("/getPlayerStats")
+  fetch("/players/stats")
     .then(res => res.json())
     .then(res => {
       updatePlayerStatsDiv(res);

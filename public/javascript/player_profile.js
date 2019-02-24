@@ -35,7 +35,7 @@ const generateResourcesHTML = function(playerResources) {
 };
 
 const updateCurrentPlayer = function() {
-  fetch("/updateCurrentPlayer");
+  fetch("/currentPlayer/update");
 };
 
 const getCurrentPlayer = function() {
@@ -69,7 +69,7 @@ const handleTurn = function(player) {
 };
 
 const getPowerplantDetails = function() {
-  fetch("/getPowerplantDetails")
+  fetch("/powerPlantDetails")
     .then(res => res.text())
     .then(players => {
       showPlayerDetails(players);

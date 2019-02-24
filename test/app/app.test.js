@@ -202,7 +202,7 @@ describe("GET /gameplay", () => {
   });
 });
 
-describe("GET /displayPowerPlantMarket", () => {
+describe("GET /powerPlantMarket", () => {
   it("should return the powerPlants with status code 200", done => {
     app.activeGames["11"] = new Game(2);
     app.activeGames["11"].powerPlantMarket = new PowerPlantMarket(
@@ -210,7 +210,7 @@ describe("GET /displayPowerPlantMarket", () => {
     );
     app.cookies["12345"] = "Ankon";
     request(app)
-      .get("/displayPowerPlantMarket")
+      .get("/powerPlantMarket")
       .set("Cookie", ["gameId=11;playerId=12345"])
       .expect("Content-Type", /html/)
       .expect(200, done);
@@ -245,51 +245,51 @@ describe("GET /currentPlayer", () => {
   });
 });
 
-describe("GET /updateCurrentPlayer", () => {
+describe("GET /currentPlayer/update", () => {
   it("should return response code 200 if cookie is present", done => {
     app.activeGames["5"] = new Game(2);
     app.cookies["1234"] = "Ankon";
     request(app)
-      .get("/updateCurrentPlayer")
+      .get("/currentPlayer/update")
       .set("Cookie", ["gameId=5;playerId=1234"])
       .expect(200, done);
   });
 });
 
-describe("GET /getPowerplantDetails", () => {
+describe("GET /powerPlantDetails", () => {
   it("should give player powerplants details", done => {
     app.activeGames["5"] = new Game(3);
     app.cookies["2468"] = "Ankon";
     request(app)
-      .get("/getPowerplantDetails")
+      .get("/powerPlantDetails")
       .set("Cookie", ["gameId=5;playerId=2468"])
       .expect("Content-Type", /json/)
       .expect(200, done);
   });
 });
 
-describe("POST /buyPowerplant", () => {
+describe("POST /powerPlant/buy", () => {
   it("should add powerplant details to current player", done => {
     app.activeGames["10"] = new Game(3);
     app.cookies["1111"] = "Ankon";
     const player = new Player("red", "Ankon");
     app.activeGames[10].addPlayer(player);
     request(app)
-      .post("/buyPowerplant")
+      .post("/powerPlant/buy")
       .send("price=10")
       .set("Cookie", ["gameId=10;playerId=2468"])
       .expect(200, done);
   });
 });
 
-describe("POST /buyResources", function() {
+describe("POST /resources/buy", function() {
   it("should return code 200 if resource data is registered succesfully", done => {
     const player1 = new Player("green", "naman");
     app.activeGames["5"] = new Game(2);
     app.activeGames["5"].addPlayer(player1);
     app.cookies["1234"] = "Ankon";
     request(app)
-      .post("/buyResources")
+      .post("/resources/buy")
       .set("Cookie", ["gameId=5;playerId=1234"])
       .send("Coal=1&Uranium=1&Oil=1&Garbage=1")
       .expect(200, done);
@@ -301,14 +301,14 @@ describe("POST /buyResources", function() {
     app.activeGames["55"].addPlayer(player1);
     app.cookies["555"] = "Leela";
     request(app)
-      .post("/buyResources")
+      .post("/resources/buy")
       .set("Cookie", ["gameId=55;playerId=555"])
       .send("Coal=1&Uranium=1&Oil=1&Garbage=10&Cost=100")
       .expect(200, done);
   });
 });
 
-describe("POST /updateCurrentPowerPlantMarket", function() {
+describe("POST /currentPowerPlantMarket/update", function() {
   it("should give latest powerplant details ", done => {
     app.activeGames["50"] = new Game(2);
     app.activeGames["50"].powerPlantMarket = new PowerPlantMarket(
@@ -316,21 +316,21 @@ describe("POST /updateCurrentPowerPlantMarket", function() {
     );
     app.cookies["12348"] = "Ankon";
     request(app)
-      .post("/updateCurrentPowerPlantMarket")
+      .post("/currentPowerPlantMarket/update")
       .set("Cookie", ["gameId=50;playerId=12348"])
       .expect("Content-Type", /text/)
       .expect(200, done);
   });
 });
 
-describe("POST /buildCities", () => {
+describe("POST /cities/build", () => {
   it("should  add the city details to the player who buys if player has enough money", done => {
     app.activeGames["99"] = new Game(3);
     app.cookies["999"] = "Ankon";
     const player = new Player("red", "Ankon");
     app.activeGames[99].addPlayer(player);
     request(app)
-      .post("/buildCities")
+      .post("/cities/build")
       .send(`price=10&cityCount=2&cityNames=maimi_10`)
       .set("Cookie", ["gameId=99;playerId=999"])
       .expect(200, done);
@@ -342,48 +342,48 @@ describe("POST /buildCities", () => {
     const player = new Player("red", "Ankon");
     app.activeGames[99].addPlayer(player);
     request(app)
-      .post("/buildCities")
+      .post("/cities/build")
       .send(`price=60&cityCount=6&cityNames=maimi_10`)
       .set("Cookie", ["gameId=99;playerId=999"])
       .expect(200, done);
   });
 });
-describe("GET /getPlayers", () => {
+describe("GET /players", () => {
   it("should return the details of the players with response code 200", done => {
     app.activeGames["99"] = new Game(3);
     app.cookies["999"] = "Ankon";
     const player = new Player("red", "Ankon");
     app.activeGames[99].addPlayer(player);
     request(app)
-      .get("/getPlayers")
+      .get("/players")
       .set("Cookie", ["gameId=99;playerId=999"])
       .expect(200, done);
   });
 });
 
-describe("GET /getPlayerStats", function() {
+describe("GET /players/stats", function() {
   it("should give current player details ", done => {
     const player1 = new Player("green", "naman");
     app.activeGames["10"] = new Game(2);
     app.activeGames["10"].addPlayer(player1);
     app.cookies["12344"] = "Ankon";
     request(app)
-      .get("/getPlayerStats")
+      .get("/players/stats")
       .set("Cookie", ["gameId=10;playerId=12344"])
       .expect(200, done);
   });
 });
 
-describe("GET /getResources", function() {
+describe("GET /resources", function() {
   it("should respond with 200", function(done) {
     request(app)
-      .get("/getResources")
+      .get("/resources")
       .set("Cookie", ["gameId=5;playerId=1234"])
       .expect(200, done);
   });
 });
 
-describe("GET /getCurrentPowerPlants", function() {
+describe("GET /currentPowerPlants", function() {
   it('should respond with 200', function(done) {
     app.activeGames['51'] = new Game(2);
     app.activeGames['51'].powerPlantMarket = new PowerPlantMarket(
@@ -391,7 +391,7 @@ describe("GET /getCurrentPowerPlants", function() {
     );
     app.cookies['123456'] = 'Ankon';
     request(app)
-      .get('/getCurrentPowerPlants')
+      .get('/currentPowerPlants')
       .set('Cookie', ['gameId=51;playerId=123456'])
       .expect(200, done);
   });
