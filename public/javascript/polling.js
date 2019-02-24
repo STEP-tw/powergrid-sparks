@@ -3,7 +3,7 @@ const polling = function() {
     getCurrentPlayer()
     getPlayersDetails();
     showResourceMarket();
-    getCurrentPowerPlants();
+    fetchCurrentPowerPlants();
     getPlayerStatsDiv();
     refreshMap();
     getActivityLogs();

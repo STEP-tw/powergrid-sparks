@@ -21,7 +21,6 @@ const {
   updateCurrentPlayer,
   buyPowerplant,
   buyResources,
-  updateCurrentPowerPlantMarket,
   buildCities,
   getPlayers,
   getPlayerStats,
@@ -51,7 +50,6 @@ app.get('/currentPlayer', getCurrentPlayer);
 app.get('/currentPlayer/update', updateCurrentPlayer);
 app.post('/powerPlant/buy', buyPowerplant);
 app.post('/resources/buy', buyResources);
-app.post('/currentPowerPlantMarket/update', updateCurrentPowerPlantMarket);
 app.post('/cities/build', buildCities);
 app.get('/players', getPlayers);
 app.get('/players/stats', getPlayerStats);

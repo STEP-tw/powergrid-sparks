@@ -90,13 +90,16 @@ const showPlayerAssets = function(players) {
   polling();
 };
 
-const displayStat = function(elementId, position, value) {
-  const element = document.getElementById(elementId);
-  element.children[0].children[position].innerText = value;
+const changeInnerText = function(element, value) {
+  element.innerText = value;
 };
 
-const displayHTML = function(elementId, position, html) {
-  document.getElementById(elementId).children[position].innerHTML = html;
+const changeInnerHTML = function(element, html) {
+  element.innerHTML = html;
+};
+
+const getElementById = function(id) {
+  return document.getElementById(id);
 };
 
 const showPlayerDetails = function(players) {
@@ -105,10 +108,15 @@ const showPlayerDetails = function(players) {
     const powerplantHTML = generatePowerplantHTML(player.powerplants);
     const resourceHTML = generateResourcesHTML(player.resources);
     const elementId = `${player.name}_${player.color}`;
-    displayStat(elementId, 0, player.name);
-    displayStat(elementId, 1, `$${player.money}`);
-    displayHTML(elementId, 2, `<i class="fas fa-home"></i>${player.cities}`);
-    displayHTML(elementId, 1, powerplantHTML);
-    displayHTML(elementId, 2, resourceHTML);
+    const nameElement = getElementById(elementId).children[0].children[0];
+    const moneyElement = getElementById(elementId).children[0].children[1];
+    const cityElement = getElementById(elementId).children[0].children[2];
+    const powerplantElement = getElementById(elementId).children[1];
+    const resourceElement = getElementById(elementId).children[2];
+    changeInnerText(nameElement, player.name);
+    changeInnerText(moneyElement, `$${player.money}`);
+    changeInnerHTML(cityElement, `<i class="fas fa-home"></i>${player.cities}`);
+    changeInnerHTML(powerplantElement, powerplantHTML);
+    changeInnerHTML(resourceElement, resourceHTML);
   });
 };

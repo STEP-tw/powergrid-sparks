@@ -30,8 +30,8 @@ class Player {
   }
 
   payMoney(money) {
-    if (money > this.money) return false;
-    this.money -= money;
+    if (+money > this.money) return false;
+    this.money -= +money;
     return true;
   }
 

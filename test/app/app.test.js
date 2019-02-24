@@ -263,6 +263,9 @@ describe("POST /powerPlant/buy", () => {
     app.activeGames["10"] = new Game(3);
     app.cookies["1111"] = "Ankon";
     const player = new Player("red", "Ankon");
+    app.activeGames["10"].powerPlantMarket = new PowerPlantMarket(
+      powerPlantsCards
+    );
     app.activeGames[10].addPlayer(player);
     request(app)
       .post("/powerPlant/buy")
@@ -294,21 +297,6 @@ describe("POST /resources/buy", function() {
       .post("/resources/buy")
       .set("Cookie", ["gameId=55;playerId=555"])
       .send("Coal=1&Uranium=1&Oil=1&Garbage=10&Cost=100")
-      .expect(200, done);
-  });
-});
-
-describe("POST /currentPowerPlantMarket/update", function() {
-  it("should give latest powerplant details ", done => {
-    app.activeGames["50"] = new Game(2);
-    app.activeGames["50"].powerPlantMarket = new PowerPlantMarket(
-      powerPlantsCards
-    );
-    app.cookies["12348"] = "Ankon";
-    request(app)
-      .post("/currentPowerPlantMarket/update")
-      .set("Cookie", ["gameId=50;playerId=12348"])
-      .expect("Content-Type", /text/)
       .expect(200, done);
   });
 });

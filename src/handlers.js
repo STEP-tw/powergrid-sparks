@@ -143,7 +143,7 @@ const updateCurrentPlayer = function(req, res) {
 };
 
 const buyPowerplant = function(req, res) {
-  const price = +req.body.price;
+  const price = req.body.price;
   const game = initializeGame(req, res);
   const players = game.getPlayers();
   const turn = game.getTurn(players);
@@ -156,6 +156,9 @@ const buyPowerplant = function(req, res) {
   };
   currentPlayer.addPowerplant(powerplant);
   currentPlayer.payMoney(price);
+  console.log(game.powerPlants);
+  game.sellPowerPlant(price);
+  game.updatePowerPlants();
   createBuyPowerPlantLog(game, turn, powerplant);
   res.send(players);
 };
@@ -173,15 +176,6 @@ const buyResources = function(req, res) {
     createBuyResourceLog(game, turn, resourcesDetail);
   }
   res.send({ currentPlayer, isPaymentSuccess });
-};
-
-const updateCurrentPowerPlantMarket = function(req, res) {
-  const game = initializeGame(req, res);
-  const price = req.body.price;
-  game.sellPowerPlant(price);
-  game.updatePowerPlants();
-  const currentMarket = game.getPowerPlantMarket();
-  res.send(JSON.stringify(currentMarket));
 };
 
 const buildCities = function(req, res) {
@@ -251,7 +245,6 @@ module.exports = {
   updateCurrentPlayer,
   buyPowerplant,
   buyResources,
-  updateCurrentPowerPlantMarket,
   buildCities,
   getPlayers,
   getPlayerStats,
