@@ -38,22 +38,6 @@ const updateCurrentPlayer = function() {
   fetch("/currentPlayer/update");
 };
 
-const getCurrentPlayer = function() {
-  setInterval(() => {
-    fetch("/currentPlayer")
-      .then(res => res.json())
-      .then(player => {
-        handleTurn(player);
-      });
-    getPowerplantDetails();
-    showResourceMarket();
-    getCurrentPowerPlants();
-    getPlayerStatsDiv();
-    refreshMap();
-    getActivityLogs();
-  }, 500);
-};
-
 const handleTurn = function(player) {
   const playerId = readArgs(document.cookie).playerId;
   document
@@ -66,6 +50,14 @@ const handleTurn = function(player) {
   if (player.id == playerId) {
     document.querySelector(".freeze").style.visibility = "hidden";
   }
+};
+
+const getCurrentPlayer = function() {
+  fetch("/currentPlayer")
+    .then(res => res.json())
+    .then(player => {
+      handleTurn(player);
+    });
 };
 
 const getPowerplantDetails = function() {
@@ -89,7 +81,16 @@ const readArgs = text => {
 
 const showPlayerAssets = function(players) {
   showPlayerDetails(players);
-  getCurrentPlayer();
+  polling();
+};
+
+const displayStat = function(elementId, position, value) {
+  const element = document.getElementById(elementId);
+  element.children[0].children[position].innerText = value;
+};
+
+const displayHTML = function(elementId, position, html) {
+  document.getElementById(elementId).children[position].innerHTML = html;
 };
 
 const showPlayerDetails = function(players) {
@@ -97,22 +98,11 @@ const showPlayerDetails = function(players) {
   users.forEach(player => {
     const powerplantHTML = generatePowerplantHTML(player.powerplants);
     const resourceHTML = generateResourcesHTML(player.resources);
-    document.getElementById(
-      `${player.name}_${player.color}`
-    ).children[0].children[0].innerText = `${player.name}`;
-    document.getElementById(
-      `${player.name}_${player.color}`
-    ).children[0].children[1].innerText = `$${player.money}`;
-    document.getElementById(
-      `${player.name}_${player.color}`
-    ).children[0].children[2].innerHTML = `<i class="fas fa-home"></i>${
-      player.cities
-    }`;
-    document.getElementById(
-      `${player.name}_${player.color}`
-    ).children[1].innerHTML = powerplantHTML;
-    document.getElementById(
-      `${player.name}_${player.color}`
-    ).children[2].innerHTML = resourceHTML;
+    const elementId = `${player.name}_${player.color}`;
+    displayStat(elementId, 0, player.name);
+    displayStat(elementId, 1, `$${player.money}`);
+    displayHTML(elementId, 2, `<i class="fas fa-home"></i>${player.cities}`);
+    displayHTML(elementId, 1, powerplantHTML);
+    displayHTML(elementId, 2, resourceHTML);
   });
 };
