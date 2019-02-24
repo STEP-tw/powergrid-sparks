@@ -26,6 +26,23 @@ const market_resources = {
   Oil: "fas fa-oil-can filled resource middle-resource",
   Uranium: "fas fa-radiation-alt filled last-uranium"
 };
+const hideSoldResource = function(resource) {
+  let newClass = removeFirstTwoClasses(resource.className);
+  resource.className = newClass;
+  resource.onclick = "";
+  resource.style.border = "1px solid #759cae";
+};
+
+const displayResource = function(resources, resource, cost, id) {
+  const index = `${resource}_${cost}_${id}`;
+  const element = document.getElementById(index);
+
+  if (resources[resource][cost][id]) {
+    element.className = `${market_resources[resource]}`;
+    return;
+  }
+  hideSoldResource(element);
+};
 
 const showResourceMarket = function() {
   fetch("/resources")
@@ -41,20 +58,6 @@ const showResourceMarket = function() {
     });
 };
 
-const displayResource = function(resources, resource, cost, id) {
-  const index = `${resource}_${cost}_${id}`;
-  const element = document.getElementById(index);
-
-  if (resources[resource][cost][id]) {
-    element.className = `${market_resources[resource]}`;
-    return;
-  }
-  let newClass = removeFirstTwoClasses(element.className);
-  element.className = newClass;
-  element.onclick = "";
-  element.style.border = "1px solid #759cae";
-};
-
 const resetTurn = function() {
   updateCurrentPlayer();
   document.getElementById("selected-resource-amount").style.visibility =
@@ -62,60 +65,61 @@ const resetTurn = function() {
   document.getElementById("resource-amount").innerText = 0;
   boughtResources.resourcesID = [];
 };
+const showFailedPaymentMessage = function(){
+  const messageContainer = document.getElementById("insufficient-money");
+  messageContainer.style.display = "inline";
+  setTimeout(() => {
+    messageContainer.innerText = "";
+  }, 3000);
+  messageContainer.innerText ="insufficient money";
+}
 
-const buyResources = function() {
-  let resourceDetails = { Coal: [], Oil: [], Uranium: [], Garbage: [] };
+const resetSelection = function(resource){
+  document.getElementById(resource).style.border = "1px solid #759cae";;
+}
+
+const showFailedPayment = function() {
+  document.getElementById("resource-amount").innerText = 0;
+  showFailedPaymentMessage();
+  boughtResources.resourcesID.forEach(resetSelection);
+  boughtResources.resourcesID = [];
+};
+
+const handleSellResources = function(player) {
+  const resourceMarket = document.querySelectorAll(".filled");
+  if (!player.isPaymentSuccess) return showFailedPayment();
+  resetTurn();
+  resourceMarket.forEach(resource => resource.onclick='')
+};
+
+const getResourceDetails = function(){
+  const resourceDetails = { Coal: [], Oil: [], Uranium: [], Garbage: [] };
   const ids = boughtResources.resourcesID;
   ids.forEach(id => {
     let details = id.split("_");
     resourceDetails[details[0]].push(details.slice(1).join("_"));
   });
+  return resourceDetails;
+}
 
-  const costDiv = document.getElementById("resource-amount");
-  const cost = +costDiv.innerText;
-  const resourceMarket = document.getElementsByClassName("filled");
+const buyResources = function() {
+  const {Coal, Oil, Uranium, Garbage} = getResourceDetails();
+  const cost = +document.getElementById("resource-amount").innerText;
 
-  const { Coal, Oil, Uranium, Garbage } = resourceDetails;
   fetch("/resources/buy", {
     method: "POST",
     headers: { "Content-Type": "application/x-www-form-urlencoded" },
     body: `Coal=${Coal}&Oil=${Oil}&Uranium=${Uranium}&Garbage=${Garbage}&Cost=${cost}`
   })
     .then(res => res.json())
-    .then(player => {
-      if (!player.isPaymentSuccess) return showFailedPayment(costDiv);
-      resetTurn();
-      for (
-        let resourceNo = 0;
-        resourceNo < resourceMarket.length;
-        resourceNo++
-      ) {
-        resourceMarket[resourceNo].onclick = "";
-      }
-    });
-};
-
-const showFailedPayment = function(costDiv) {
-  document.getElementById("insufficient-money").style.display = "inline";
-  setTimeout(() => {
-    document.getElementById("insufficient-money").innerText = "";
-  }, 3000);
-  document.getElementById("insufficient-money").innerText =
-    "insufficient money";
-  const unclickBorder = "1px solid #759cae";
-  boughtResources.resourcesID.forEach(resource => {
-    document.getElementById(resource).style.border = unclickBorder;
-  });
-  boughtResources.resourcesID = [];
-  costDiv.innerText = 0;
+    .then(handleSellResources);
 };
 
 const displayMarket = function() {
   fetch("/powerPlantMarket")
     .then(res => res.json())
-    .then(res => {
-      displayPowerPlantMarket(res);
-      getPlayerStatsDiv();
+    .then(powerPlantMarket => {
+      displayPowerPlantMarket(powerPlantMarket);
     });
 };
 
