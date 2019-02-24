@@ -38,18 +38,24 @@ const updateCurrentPlayer = function() {
   fetch("/currentPlayer/update");
 };
 
-const handleTurn = function(player) {
-  const playerId = readArgs(document.cookie).playerId;
-  document
-    .querySelectorAll(".player-profile")
-    .forEach(element => (element.style.borderBottom = "none"));
-  document.querySelector(
-    `.player-color-${player.color}`
-  ).style.borderBottom = `10px solid ${player.color}`;
+const displayCurrentPlayer = function(color) {
+  const allPlayerElements = document.querySelectorAll(".player-profile");
+  const currentPlayerElement = document.querySelector(`.player-color-${color}`);
+  allPlayerElements.forEach(element => (element.style.borderBottom = "none"));
+  currentPlayerElement.style.borderBottom = `10px solid ${color}`;
+};
+
+const handleInteraction = function(currentId, reqId) {
   document.querySelector(".freeze").style.visibility = "visible";
-  if (player.id == playerId) {
+  if (currentId == reqId) {
     document.querySelector(".freeze").style.visibility = "hidden";
   }
+};
+
+const handleTurn = function(player) {
+  const playerId = readCookie(document.cookie).playerId;
+  displayCurrentPlayer(player.color);
+  handleInteraction(player.id, playerId);
 };
 
 const getCurrentPlayer = function() {
@@ -60,15 +66,15 @@ const getCurrentPlayer = function() {
     });
 };
 
-const getPowerplantDetails = function() {
-  fetch("/powerPlantDetails")
+const getPlayersDetails = function() {
+  fetch("/players")
     .then(res => res.text())
     .then(players => {
       showPlayerDetails(players);
     });
 };
 
-const readArgs = text => {
+const readCookie = text => {
   let args = {};
   const splitKeyValue = pair => pair.split("=");
   const assignKeyValueToArgs = ([key, value]) => (args[key] = value);

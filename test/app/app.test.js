@@ -258,18 +258,6 @@ describe("GET /currentPlayer/update", () => {
   });
 });
 
-describe("GET /powerPlantDetails", () => {
-  it("should give player powerplants details", done => {
-    app.activeGames["5"] = new Game(3);
-    app.cookies["2468"] = "Ankon";
-    request(app)
-      .get("/powerPlantDetails")
-      .set("Cookie", ["gameId=5;playerId=2468"])
-      .expect("Content-Type", /json/)
-      .expect(200, done);
-  });
-});
-
 describe("POST /powerPlant/buy", () => {
   it("should add powerplant details to current player", done => {
     app.activeGames["10"] = new Game(3);

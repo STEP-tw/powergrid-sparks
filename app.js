@@ -20,7 +20,6 @@ const {
   getCurrentPlayer,
   updateCurrentPlayer,
   buyPowerplant,
-  getPowerplantDetails,
   buyResources,
   updateCurrentPowerPlantMarket,
   buildCities,
@@ -51,7 +50,6 @@ app.get('/invalidGameId', renderErrorPage);
 app.get('/currentPlayer', getCurrentPlayer);
 app.get('/currentPlayer/update', updateCurrentPlayer);
 app.post('/powerPlant/buy', buyPowerplant);
-app.get('/powerPlantDetails', getPowerplantDetails);
 app.post('/resources/buy', buyResources);
 app.post('/currentPowerPlantMarket/update', updateCurrentPowerPlantMarket);
 app.post('/cities/build', buildCities);

@@ -145,7 +145,7 @@ const getCurrentPowerPlants = function() {
 const startBuyingResources = function() {
   document.getElementById("selected-resource-amount").style.visibility =
     "visible";
-  const playerId = readArgs(document.cookie).playerId;
+  const playerId = readCookie(document.cookie).playerId;
   const resourceMarket = document.getElementsByClassName("filled");
   fetch("/currentPlayer")
     .then(res => res.json())

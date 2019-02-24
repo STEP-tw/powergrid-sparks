@@ -21,11 +21,9 @@ const renderHome = function(req, res) {
     const gameId = req.cookies.gameId;
     const game = res.app.activeGames[+gameId];
     if (game.getCurrentPlayersCount() == game.getMaxPlayersCount()) {
-      return res.redirect(
-        '/gameplay'
-      );
+      return res.redirect("/gameplay");
     }
-    return res.redirect('/waitingPage');
+    return res.redirect("/waitingPage");
   }
   return res.render("index.html");
 };
@@ -55,7 +53,7 @@ const createGame = function(req, res) {
   setCookie(res, gameId, player);
   game.addPlayer(player);
   game.addLog("Game Started");
-  res.redirect('/waitingPage');
+  res.redirect("/waitingPage");
 };
 
 const renderWaitingPage = function(req, res) {
@@ -95,7 +93,7 @@ const joinGame = function(req, res) {
       return res.send("game is already started!");
     }
     addPlayer(game, joinerName, res, gameId);
-    return res.redirect('/waitingPage');
+    return res.redirect("/waitingPage");
   }
   res.redirect("/invalidGameId");
 };
@@ -159,12 +157,6 @@ const buyPowerplant = function(req, res) {
   currentPlayer.addPowerplant(powerplant);
   currentPlayer.payMoney(price);
   createBuyPowerPlantLog(game, turn, powerplant);
-  res.send(players);
-};
-
-const getPowerplantDetails = function(req, res) {
-  const game = initializeGame(req, res);
-  const players = game.getPlayers();
   res.send(players);
 };
 
@@ -258,7 +250,6 @@ module.exports = {
   getCurrentPlayer,
   updateCurrentPlayer,
   buyPowerplant,
-  getPowerplantDetails,
   buyResources,
   updateCurrentPowerPlantMarket,
   buildCities,

@@ -1,7 +1,7 @@
 const polling = function() {
   setInterval(()=>{
     getCurrentPlayer()
-    getPowerplantDetails();
+    getPlayersDetails();
     showResourceMarket();
     getCurrentPowerPlants();
     getPlayerStatsDiv();
