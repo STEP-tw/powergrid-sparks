@@ -13,6 +13,10 @@
   <script src="/resourceMarketTemplate.js"></script>
   <script src="/buildingCity.js"></script>
   <script src="/polling.js"></script>
+  <script src="/utils.js"></script>
+  <script src="/activity-log.js"></script>
+  <script src="/player-stats.js"></script>
+  <script src="/resource-market.js"></script>
 </head>
 <body onload="showPlayerAssets('<%= JSON.stringify(players) %>')">
   <main style="height:75%; width:100%; display: flex">
@@ -53,7 +57,7 @@
       <div class="self-cash" > C A S H : $ <span id="player-money"></span></div>
     </section>
     <section id="map" class = "map-section" style="display: none">
-      <svg  onload="displayMarket()" width="941" height="593">
+      <svg  onload="fetchMarket()" width="941" height="593">
         <defs>
          <style type="text/css">
           .x{
