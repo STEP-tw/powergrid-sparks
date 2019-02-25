@@ -215,6 +215,16 @@ const lightCities = function(req, res) {
   res.send({playerMoney, hasEnoughCities});
 };
 
+const getPowerplants = function(req, res){
+  const game = initializeGame(req, res);
+  const players = game.getPlayers();
+  const turn = game.getTurn(players);
+  const currentPlayer = turn.getCurrentPlayer();
+  const powerplants = currentPlayer.getPowerplants();
+  const resources = currentPlayer.getResources();
+  res.send({powerplants, resources});
+}
+
 const getPlayers = function(req, res) {
   const game = initializeGame(req, res);
   const players = game.getPlayers();
@@ -273,5 +283,6 @@ module.exports = {
   updateResourceMarket,
   getCurrentPowerPlants,
   getActivityLogs,
-  lightCities
+  lightCities,
+  getPowerplants
 };

@@ -415,3 +415,16 @@ describe("POST /cities/light", () => {
   });
 
 });
+
+describe("GET /player/powerplants", function () {
+  it('should respond with 200', function (done) {
+    app.activeGames['5'] = new Game(2);
+    app.cookies['111'] = 'Gaurav';
+    const player = new Player("red", "Gaurav");
+    app.activeGames[5].addPlayer(player);
+    request(app)
+      .get('/player/powerplants')
+      .set('Cookie', ['gameId=5;playerId=111'])
+      .expect(200, done);
+  });
+});

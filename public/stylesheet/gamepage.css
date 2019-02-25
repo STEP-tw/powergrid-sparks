@@ -509,3 +509,24 @@ header {
   justify-content: center;
   justify-content: space-around;
 }
+.select-powerplant {
+  height: 50%;
+  width: 100%;
+  border: 2px solid #4c5061;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.powerplant {
+  height: 60%;
+  width: 25%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid #4c5061;
+  border-radius: 50%;
+  font-size: 25px;
+  cursor: pointer;
+}

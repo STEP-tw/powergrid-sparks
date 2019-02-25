@@ -62,6 +62,7 @@ const takeBuildAction = function(player) {
     reset();
     updateCurrentPlayer();
     getLightedCities();
+    selectPowerplant()
     return;
   }
   setInnerText("payment-failed", "Building failed!!! Insuffient money");
