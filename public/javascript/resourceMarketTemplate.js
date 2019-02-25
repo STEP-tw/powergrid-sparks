@@ -9,12 +9,16 @@ const getBiddingSectionTemplate = function() {
     <button class='increase-bid-button' id="increase_bid" onclick = 'increaseBid()'>&#x2b</button></div>
     <button class="bid-option" onclick="buyPowerplant()">Buy Powerplant</button>
     <button class="bid-option" onclick = "startBuyingResources() ">Start Buying Resources</button>
-    <div id="selected-resource-amount" style="visibility:hidden">
-    Selected Resource Amount : <span id="resource-amount">0</span>
-    <button class="bid-option" onclick="buyResources()">Buy Resources</button></div>
-    <div id="insufficient-money" style="display:hidden"></div>
+    
     
   `;
+};
+
+const getBuyResourceTemplate = function() {
+  return `<div class = "selected-resource-amount" id="selected-resource-amount">
+    <div>Selected Resource Amount </div><div id="resource-amount">0</div>
+    <button class="bid-option " onclick="buyResources()">Buy Resources</button></div>
+    <div id="insufficient-money" style="display:hidden"></div>`;
 };
 
 const getResourceMarketTemplate = function() {

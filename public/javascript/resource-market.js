@@ -108,8 +108,8 @@ const initializeResources = function(player) {
 };
 
 const startBuyingResources = function() {
-  const resourceCostDiv = document.getElementById("selected-resource-amount");
-  resourceCostDiv.style.visibility = "visible";
+  const resourceDiv = getBuyResourceTemplate();
+  document.getElementById("bidding-section").innerHTML = resourceDiv;
   fetch("/currentPlayer")
     .then(res => res.json())
     .then(initializeResources);

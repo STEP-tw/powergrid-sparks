@@ -466,11 +466,12 @@ td {
 }
 
 .bid-option {
+  padding: 0;
   height: 9%;
   width: 60%;
   border-radius: 5px;
   background: #759cae;
-  font-size: 25px;
+  font-size: 10px;
   color: white;
 }
 
@@ -497,4 +498,14 @@ header {
 
 .back-button {
   visibility: hidden;
+}
+
+.selected-resource-amount {
+  display: flex;
+  flex-direction: column;
+  height: 60%;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  justify-content: space-around;
 }
