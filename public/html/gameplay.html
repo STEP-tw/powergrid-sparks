@@ -20,9 +20,14 @@
   <script src="/bureaucracy.js"></script>
 </head>
 <body onload="showPlayerAssets('<%= JSON.stringify(players) %>')">
+  <header>
+
+    <div class="header-option back-button" id="back-button" onclick="window.location.reload(true)" >Back</div>
+    <div class="header-option" id='display-map'  onclick="displayMap()">Map</div>
+    <div class="header-option player-name" id="player-name"></div>
+  </header>
   <main style="height:75%; width:100%; display: flex">
-    <section class='self-details' >
-      <div class="player-name" id="player-name"></div>
+      <section class='self-details' >
       <div class="power-plant" id="powerplant-1"></div>
       <div class="power-plant" id="powerplant-2"></div>
       <div class="power-plant" id="powerplant-3"></div>
