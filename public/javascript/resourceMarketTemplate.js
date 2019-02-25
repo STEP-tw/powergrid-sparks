@@ -203,8 +203,8 @@ const getResourceMarketTemplate = function() {
     <div class="resource" id="Garbage_8_0"></div>
   </div>
   <div class="resource-grid">
-    <div class="last-uranium" id="Uranium_10_0">
-    <div class = "uranium-cost">10</div>
+  <div class="last-uranium" id="Uranium_10_0">
+  <div class = "uranium-cost">10</div>
     </div>
     <div class="last-uranium" id="Uranium_12_0">
     <div class = "uranium-cost">12</div>

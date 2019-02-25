@@ -41,7 +41,6 @@ const showResourceMarket = function() {
     });
 };
 
-
 const resetTurn = function() {
   updateCurrentPlayer();
   document.getElementById("selected-resource-amount").style.visibility =
@@ -49,6 +48,7 @@ const resetTurn = function() {
   document.getElementById("resource-amount").innerText = 0;
   boughtResources.resourcesID = [];
 };
+
 const showFailedPaymentMessage = function() {
   const messageContainer = document.getElementById("insufficient-money");
   messageContainer.style.display = "inline";
@@ -140,12 +140,14 @@ const unselectResource = function(resourceDiv, amount, resourceDetails) {
 
 const generateResourceValue = function() {
   const resourceDiv = event.target;
-  const clickBorder = "1px solid black";
-  const resourceDetails = splitByHyphen(resourceDiv.id);
-  const amountDiv = document.getElementById("resource-amount");
-  const currentAmount = convertToNumber(amountDiv.innerText);
-  if (resourceDiv.style.border != clickBorder) {
-    return selectResource(resourceDiv, currentAmount, resourceDetails);
+  if (resourceDiv.id) {
+    const clickBorder = "1px solid black";
+    const resourceDetails = splitByHyphen(resourceDiv.id);
+    const amountDiv = document.getElementById("resource-amount");
+    const currentAmount = convertToNumber(amountDiv.innerText);
+    if (resourceDiv.style.border != clickBorder) {
+      return selectResource(resourceDiv, currentAmount, resourceDetails);
+    }
+    unselectResource(resourceDiv, currentAmount, resourceDetails);
   }
-  unselectResource(resourceDiv, currentAmount, resourceDetails);
 };
