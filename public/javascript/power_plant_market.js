@@ -86,10 +86,11 @@ const generateMarket = function(powerPlants, startingIndex, endingIndex, id) {
 const displayPowerPlants = function(powerPlants) {
   const currentMarketDiv = generateMarket(powerPlants, 0, 4, "currentMarket");
   const futureMarketDiv = generateMarket(powerPlants, 4, 8, "futureMarket");
+  const powerPlantDiv = generateDiv("power-plant-cards", "power-plant-cards");
+  appendChildren(powerPlantDiv, [currentMarketDiv, futureMarketDiv]);
   persistCardClass(currentMarketDiv);
   const market = document.getElementById("market").children[0];
-  market.replaceChild(currentMarketDiv, market.childNodes[0]);
-  market.replaceChild(futureMarketDiv, market.childNodes[1]);
+  market.replaceChild(powerPlantDiv, market.childNodes[0]);
 };
 
 const fetchCurrentPowerPlants = function() {
@@ -99,25 +100,22 @@ const fetchCurrentPowerPlants = function() {
 };
 
 const generateBidDiv = function() {
-  const biddingDiv = generateDiv("bidding-section");
+  const biddingDiv = generateDiv("bidding-section", "bidding-section");
   biddingDiv.innerHTML = getBiddingSectionTemplate();
   return biddingDiv;
 };
 
 const generatePowerPlantMarket = function(powerPlantCards) {
   const powerPlants = powerPlantCards;
+  const powerPlantDiv = generateDiv("power-plant-cards", "power-plant-cards");
   const currentMarketDiv = generateMarket(powerPlants, 0, 4);
   const futureMarketDiv = generateMarket(powerPlants, 4, 8);
+  appendChildren(powerPlantDiv, [currentMarketDiv, futureMarketDiv]);
   const resourceMarketDiv = generateResourceMarketDiv();
   const biddingDiv = generateBidDiv();
   const marketDiv = document.createElement("div");
   marketDiv.className = "market-div";
-  appendChildren(marketDiv, [
-    currentMarketDiv,
-    futureMarketDiv,
-    biddingDiv,
-    resourceMarketDiv
-  ]);
+  appendChildren(marketDiv, [powerPlantDiv, biddingDiv, resourceMarketDiv]);
   return marketDiv;
 };
 

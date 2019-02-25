@@ -28,7 +28,7 @@ const generateResourcesHTML = function(playerResources) {
   let html = "";
   resources.forEach(resource => {
     html += `<div class="player-resource">
-      ${resourceIcons[resource]}:${playerResources[resource]}
+      ${resourceIcons[resource]}&nbsp${playerResources[resource]}
     </div>`;
   });
   return html;
@@ -113,9 +113,12 @@ const showPlayerDetails = function(players) {
     const cityElement = getElementById(elementId).children[0].children[2];
     const powerplantElement = getElementById(elementId).children[1];
     const resourceElement = getElementById(elementId).children[2];
-    changeInnerText(nameElement, player.name);
-    changeInnerText(moneyElement, `$${player.money}`);
-    changeInnerHTML(cityElement, `<i class="fas fa-home"></i>${player.cities}`);
+    changeInnerText(nameElement, `\u00a0${player.name}`);
+    changeInnerText(moneyElement, `$\u00a0${player.money}`);
+    changeInnerHTML(
+      cityElement,
+      `<i class="fas fa-home"></i>\u00a0${player.cities}\u00a0`
+    );
     changeInnerHTML(powerplantElement, powerplantHTML);
     changeInnerHTML(resourceElement, resourceHTML);
   });

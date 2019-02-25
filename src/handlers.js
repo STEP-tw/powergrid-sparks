@@ -156,7 +156,6 @@ const buyPowerplant = function(req, res) {
   };
   currentPlayer.addPowerplant(powerplant);
   currentPlayer.payMoney(price);
-  console.log(game.powerPlants);
   game.sellPowerPlant(price);
   game.updatePowerPlants();
   createBuyPowerPlantLog(game, turn, powerplant);

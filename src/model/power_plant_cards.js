@@ -10,9 +10,7 @@ class PowerPlantMarket {
   }
 
   sellPowerPlant(powerplant) {
-    console.log();
     this.currentMarket.splice(this.currentMarket.indexOf(powerplant), 1);
-    console.log(this.currentMarket);
   }
 
   getCurrentPowerPlants() {
