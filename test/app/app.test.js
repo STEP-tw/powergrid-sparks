@@ -326,6 +326,7 @@ describe("POST /cities/build", () => {
       .expect(200, done);
   });
 });
+
 describe("GET /players", () => {
   it("should return the details of the players with response code 200", done => {
     app.activeGames["99"] = new Game(3);
@@ -384,4 +385,33 @@ describe("GET /logs", function () {
       .set('Cookie', ['gameId=52;playerId=1234567'])
       .expect(200, done);
   });
+});
+
+describe("POST /cities/light", () => {
+
+  it("should pay for selected lighted cities", done => {
+    app.activeGames["990"] = new Game(4);
+    app.cookies["991"] = "Ankon";
+    const player = new Player("red", "Ankon");
+    app.activeGames[990].addPlayer(player);
+    request(app)
+      .post("/cities/light")
+      .send(`city=1`)
+      .set("Cookie", ["gameId=990;playerId=991"])
+      .expect(200, done);
+  });
+
+  it("should pay for selected lighted cities", done => {
+    app.activeGames["990"] = new Game(4);
+    app.cookies["991"] = "Ankon";
+    const player = new Player("red", "Ankon");
+    player.cities = 3;
+    app.activeGames[990].addPlayer(player);
+    request(app)
+      .post("/cities/light")
+      .send(`city=2`)
+      .set("Cookie", ["gameId=990;playerId=991"])
+      .expect(200, done);
+  });
+
 });

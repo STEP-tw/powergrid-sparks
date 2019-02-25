@@ -4,9 +4,15 @@ const _ = require("lodash");
 const Game = require("./model/Game");
 const PowerPlantMarket = require("./model/power_plant_cards");
 const Player = require("./model/player");
+const Bureaucracy = require("./model/bureaucracy");
 
 const powerPlantCards = fs.readFileSync(
   "./private/data/card_details.json",
+  "UTF8"
+);
+
+const paymentOrder = fs.readFileSync(
+  "./private/data/payment_order.json",
   "UTF8"
 );
 
@@ -193,6 +199,22 @@ const buildCities = function(req, res) {
   res.send({ isPaymentSuccess, currentPlayer });
 };
 
+const lightCities = function(req, res) {
+  const game = initializeGame(req, res);
+  const players = game.getPlayers();
+  const turn = game.getTurn(players);
+  const currentPlayer = turn.getCurrentPlayer();
+  const cityCount = +req.body.city;
+  const bureaucracy = new Bureaucracy(currentPlayer);
+  const hasEnoughCities = bureaucracy.validateCityCount(cityCount);
+  if (hasEnoughCities) {
+    bureaucracy.setLightedCity(cityCount);
+    bureaucracy.payForLightedCities(JSON.parse(paymentOrder));
+  }
+  const playerMoney = currentPlayer.getMoney().toString();
+  res.send({playerMoney, hasEnoughCities});
+};
+
 const getPlayers = function(req, res) {
   const game = initializeGame(req, res);
   const players = game.getPlayers();
@@ -250,5 +272,6 @@ module.exports = {
   getResources,
   updateResourceMarket,
   getCurrentPowerPlants,
-  getActivityLogs
+  getActivityLogs,
+  lightCities
 };

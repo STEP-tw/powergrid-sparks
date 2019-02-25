@@ -7,10 +7,27 @@ class Player {
     this.color = color;
     this.cities = 0;
     this.cityNames = [];
+    this.lightedCity = 0;
   }
 
   getName() {
     return this.name;
+  }
+
+  getResources () {
+    return this.resources;
+  }
+
+  getPowerplants() {
+    return this.powerplants;
+  }
+
+  getMoney() {
+    return this.money;
+  }
+
+  getCityCount() {
+    return this.cities;
   }
 
   setId(id) {
