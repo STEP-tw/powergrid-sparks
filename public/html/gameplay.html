@@ -20,8 +20,9 @@
   <script src="/bureaucracy.js"></script>
 </head>
 <body onload="showPlayerAssets('<%= JSON.stringify(players) %>')">
+  
   <header>
-
+    <div class="header-option" id='activity-log-button' onclick="displayActivityLogs()">Activity log</div>
     <div class="header-option back-button" id="back-button" onclick="window.location.reload(true)" >Back</div>
     <div class="header-option" id='display-map'  onclick="displayMap()">Map</div>
     <div class="header-option player-name" id="player-name"></div>
@@ -609,19 +610,20 @@
        </svg>
     </section>
     <section id="market" class = "map-section"></section>
-    <section class="info">
-      <section class="activity-log">
+    <section id = "info" class="info">
+      <section class="activity-log" id="activity-log">
+        <div style="position: absolute;top:0%;right:5%"  id="close-activity-log" onclick="closeActivityLog()">X</div>
         <div style="text-align: center;border-bottom: 1px solid">ACTIVITY LOG</div>
         <div id="logs"></div>
       </section>
-      <div id="building-phase" class="build-cities" >
+      <!-- <div id="building-phase" class="build-cities" >
         <div>Building cost: <span id="building-cost">0</span></div>
         <div id="selected-cities" class="selected-cities">selected Cities:</div>
         <div>No.Of Cities:<span id = "city-count"> 0</span></div>
         <div id="payment-failed"></div>
         <button onclick="buildCities()"> Build</button>
         <button onclick="reset()"> Cancel</button>
-      </div>
+      </div> -->
     </section>
   </main>
   <section class = "players-section">
@@ -630,5 +632,6 @@
       <% }); %>
   </section>
 <div class='freeze'></div>
+<div class="activity-log-overlay" id="activity-log-overlay"></div>
 </body>
 </html>

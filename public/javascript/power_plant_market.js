@@ -102,7 +102,7 @@ const fetchCurrentPowerPlants = function() {
 const generateBidDiv = function() {
   const biddingDiv = generateDiv("bidding-section", "bidding-section");
   biddingDiv.innerHTML = getBiddingSectionTemplate();
-  return biddingDiv;
+  document.getElementById("info").appendChild(biddingDiv);
 };
 
 const generatePowerPlantMarket = function(powerPlantCards) {
@@ -112,10 +112,10 @@ const generatePowerPlantMarket = function(powerPlantCards) {
   const futureMarketDiv = generateMarket(powerPlants, 4, 8);
   appendChildren(powerPlantDiv, [currentMarketDiv, futureMarketDiv]);
   const resourceMarketDiv = generateResourceMarketDiv();
-  const biddingDiv = generateBidDiv();
+  generateBidDiv();
   const marketDiv = document.createElement("div");
   marketDiv.className = "market-div";
-  appendChildren(marketDiv, [powerPlantDiv, biddingDiv, resourceMarketDiv]);
+  appendChildren(marketDiv, [powerPlantDiv, resourceMarketDiv]);
   return marketDiv;
 };
 

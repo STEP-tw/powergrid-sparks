@@ -101,8 +101,8 @@ button {
 .info {
   width: 35%;
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
+  align-items: center;
   background-color: #2d303d;
 }
 
@@ -112,16 +112,33 @@ button {
 }
 
 .activity-log {
+  right: 30%;
+  bottom: 17%;
+  border: 1px solid white;
+  position: absolute;
+  z-index: 2;
   overflow: scroll;
-  width: 80%;
-  height: 60%;
+  width: 40%;
+  height: 70%;
   background-color: #2d303d;
   font-size: 18px;
-  display: flex;
+  display: none;
   flex-direction: column;
   align-items: center;
   line-height: 2;
   margin: 2%;
+}
+
+.activity-log-overlay {
+  background: rgba(255, 202, 161, 0.104);
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  width: 100%;
+  height: 110%;
+  font-size: 18px;
+  display: none;
 }
 
 .player-header {
@@ -398,19 +415,17 @@ td {
 }
 
 .bidding-section {
-  padding-top: 4%;
-  margin-top: 4%;
+  /* margin-right: 15%; */
   background-color: white;
   border-radius: 10px;
-  height: 50%;
-  width: 20%;
+  height: 80%;
+  width: 80%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   justify-content: space-around;
   color: #3e4346;
-  border: 1px solid #3e4346;
   background: white;
 }
 
@@ -432,35 +447,30 @@ td {
 .selected-cities {
   display: flex;
   flex-wrap: wrap;
+  width: 100%;
   height: 50%;
   overflow: scroll;
   border: 1px solid #4b4f62;
 }
 
-.build-cities {
-  padding-left: 5px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  visibility: hidden;
-  height: 50%;
-  border: 1px solid #4b4f62;
-}
+/* .build-cities {
+  border: none;
+} */
 
-.build-cities > button {
+/* .build-cities > button {
   background: none;
   cursor: pointer;
   border: 1px solid #4b4f62;
   color: #b0d8eb;
-}
+} */
 
-.build-cities > button:focus {
+/* .build-cities > button:focus {
   outline: none;
-}
+} */
 
 .power-plant-cards {
-  height: 70%;
-  width: 70%;
+  height: 80%;
+  width: 100%;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -500,7 +510,7 @@ header {
 }
 
 .back-button {
-  visibility: hidden;
+  display: none;
 }
 
 .selected-resource-amount {
