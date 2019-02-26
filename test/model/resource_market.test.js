@@ -353,3 +353,178 @@ describe("ResourceMarket", () => {
     });
   });
 });
+
+describe("refillResourcesStep1", () => {
+  it("should refill the resources in market", () => {
+    let resourceMarket = new ResourceMarket();
+    resourceMarket.refillResourceStep1();
+    const actualOutput = resourceMarket;
+    const expectedOutput = {
+      Coal: {
+        "1": {
+          "0": true,
+          "1": true,
+          "2": true
+        },
+        "2": {
+          "0": true,
+          "1": true,
+          "2": true
+        },
+        "3": {
+          "0": true,
+          "1": true,
+          "2": true
+        },
+        "4": {
+          "0": true,
+          "1": true,
+          "2": true
+        },
+        "5": {
+          "0": true,
+          "1": true,
+          "2": true
+        },
+        "6": {
+          "0": true,
+          "1": true,
+          "2": true
+        },
+        "7": {
+          "0": true,
+          "1": true,
+          "2": true
+        },
+        "8": {
+          "0": true,
+          "1": true,
+          "2": true
+        }
+      },
+      Garbage: {
+        "1": {
+          "0": false,
+          "1": false,
+          "2": false
+        },
+        "2": {
+          "0": false,
+          "1": false,
+          "2": false
+        },
+        "3": {
+          "0": false,
+          "1": false,
+          "2": false
+        },
+        "4": {
+          "0": false,
+          "1": false,
+          "2": false
+        },
+        "5": {
+          "0": false,
+          "1": false,
+          "2": false
+        },
+        "6": {
+          "0": true,
+          "1": true,
+          "2": true
+        },
+        "7": {
+          "0": true,
+          "1": true,
+          "2": true
+        },
+        "8": {
+          "0": true,
+          "1": true,
+          "2": true
+        }
+      },
+      Oil: {
+        "1": {
+          "0": true,
+          "1": true,
+          "2": false
+        },
+        "2": {
+          "0": true,
+          "1": true,
+          "2": true
+        },
+        "3": {
+          "0": true,
+          "1": true,
+          "2": true
+        },
+        "4": {
+          "0": true,
+          "1": true,
+          "2": true
+        },
+        "5": {
+          "0": true,
+          "1": true,
+          "2": true
+        },
+        "6": {
+          "0": true,
+          "1": true,
+          "2": true
+        },
+        "7": {
+          "0": true,
+          "1": true,
+          "2": true
+        },
+        "8": {
+          "0": true,
+          "1": true,
+          "2": true
+        }
+      },
+      Uranium: {
+        "1": {
+          "0": false
+        },
+        "2": {
+          "0": false
+        },
+        "3": {
+          "0": false
+        },
+        "4": {
+          "0": false
+        },
+        "5": {
+          "0": false
+        },
+        "6": {
+          "0": false
+        },
+        "7": {
+          "0": false
+        },
+        "8": {
+          "0": false
+        },
+        "10": {
+          "0": true
+        },
+        "12": {
+          "0": true
+        },
+        "14": {
+          "0": true
+        },
+        "16": {
+          "0": true
+        }
+      }
+    };
+    chai.expect(actualOutput).to.be.deep.equal(expectedOutput);
+  });
+});

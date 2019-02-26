@@ -87,6 +87,26 @@ class ResourceMarket {
       this[resource].update(resources[resource].split(","));
     });
   }
+
+  refill(refillCount, resource) {
+    const costs = Object.keys(this[resource]).sort((x, y) => y - x);
+    costs.forEach(cost => {
+      Object.keys(this[resource][cost]).forEach(index => {
+        let state = this[resource][cost][index];
+        if (!state && refillCount) {
+          this[resource][cost][index] = true;
+          refillCount--;
+        }
+      });
+    });
+  }
+
+  refillResourceStep1() {
+    this.refill(7, "Coal");
+    this.refill(5, "Oil");
+    this.refill(3, "Garbage");
+    this.refill(2, "Uranium");
+  }
 }
 
 module.exports = ResourceMarket;
