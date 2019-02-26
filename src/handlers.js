@@ -117,20 +117,20 @@ const initializeMarket = function(req, res) {
 
 const createBuyPowerPlantLog = function(game, turn, powerplant) {
   const playerName = turn.getCurrentPlayer().name;
-  const logMsg = `${playerName} has bought power plant ${powerplant.value}!`;
+  const logMsg = `${playerName} has bought power plant ${powerplant.value}.`;
   game.addLog(logMsg);
 };
 
 const createBuildCityLog = function(game, turn, cityCount) {
   const playerName = turn.getCurrentPlayer().name;
-  const logMsg = `${playerName} has build ${cityCount} cities !`;
+  const logMsg = `${playerName} has build ${cityCount} cities.`;
   game.addLog(logMsg);
 };
 
 const createBuyResourceLog = function(game, turn, resourcesDetail) {
   const playerName = turn.getCurrentPlayer().name;
   const cost = resourcesDetail.Cost;
-  const logMsg = `${playerName} has bought resources of cost ${cost} !`;
+  const logMsg = `${playerName} has bought resources of cost ${cost}.`;
   game.addLog(logMsg);
 };
 
