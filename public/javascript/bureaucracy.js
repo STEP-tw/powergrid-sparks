@@ -3,7 +3,7 @@ const selectedPowerPlant = [];
 const getLightedCities = function() {
   const buildingPhase = document.getElementById("building-phase");
   buildingPhase.innerHTML =
-    '<input type="text" name="select Lighted cities" id="lighted-cities" placeholder="enter number of cities to light">';
+    '<input style="font-size:30px" type="text" name="select Lighted cities" id="lighted-cities" placeholder="enter number of cities to light">';
   buildingPhase.innerHTML +=
     '<div class="select-powerplant" id="select-powerplant"></div>';
   buildingPhase.innerHTML += '<button onclick="disableOnclick()">done</button>';
@@ -83,14 +83,23 @@ const validatePlayerResources = function(userInfo) {
   const hasHybridResource =
     resources["Oil"] < hybridResource && resources["Coal"] < hybridResource;
   if (hasHybridResource) isCityCountValid = displayUnsufficientResources();
-  isCityCountValid && enableSubmit();
+  isCityCountValid && updateUserResources(resources, hybridResource);
 };
 
-const enableSubmit = function() {
+const updateUserResources = function(resources, hybridResource) {
+  let hasDeducted = false;
   document.getElementById("err-msg").innerText = "";
   document.getElementById("submit").style.visibility = "visible";
   document.getElementById("submit").onclick = lightCities;
   selectedPowerPlant.splice(0);
+  if (resources.Coal >= hybridResource) {
+    resources.Coal -= hybridResource;
+    hasDeducted = true;
+  }
+  !hasDeducted && (resources.Oil -= hybridResource);
+  const body = `resources=${JSON.stringify(resources)}`;
+  const headers = { "Content-Type": "application/x-www-form-urlencoded" };
+  fetch("/returnResources", { method: "POST", headers, body });
 };
 
 const updatePowerplantInfo = function(powerplants) {
@@ -104,7 +113,7 @@ const updatePowerplantInfo = function(powerplants) {
 };
 
 const clickPowerplant = function(powerplantDiv) {
-  const clickBorder = "2px solid white";
+  const clickBorder = "2px solid black";
   const powerPlantValue = powerplantDiv.innerText;
   powerplantDiv.style.border = clickBorder;
   selectedPowerPlant.push(powerPlantValue);
@@ -119,7 +128,7 @@ const unclickPowerplant = function(powerplantDiv) {
 };
 
 const selectDiv = function() {
-  const clickBorder = "2px solid white";
+  const clickBorder = "2px solid black";
   const powerplantDiv = event.target;
   if (powerplantDiv.style.border == clickBorder) {
     return unclickPowerplant(powerplantDiv);

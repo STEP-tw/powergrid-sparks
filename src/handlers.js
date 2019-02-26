@@ -226,11 +226,19 @@ const getPlayerResources = function(req, res) {
   const game = initializeGame(req, res);
   const playerId = req.cookies.playerId;
   const currentPlayer = game.players.find(player => player.id == playerId);
-  console.log(currentPlayer);
   const powerplants = currentPlayer.getPowerplants();
   const resources = currentPlayer.getResources();
   res.send({ powerplants, resources });
 };
+
+const returnPlayerResources = function(req, res){
+  const game = initializeGame(req, res);
+  const playerId = req.cookies.playerId;
+  const updatedResources = JSON.parse(req.body.resources);
+  const currentPlayer = game.players.find(player => player.id == playerId);
+  currentPlayer.resources = updatedResources;
+  res.send();
+}
 
 const getPlayers = function(req, res) {
   const game = initializeGame(req, res);
@@ -292,5 +300,6 @@ module.exports = {
   getActivityLogs,
   lightCities,
   getPowerplants,
-  getPlayerResources
+  getPlayerResources,
+  returnPlayerResources
 };

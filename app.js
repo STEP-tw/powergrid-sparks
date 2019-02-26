@@ -29,7 +29,8 @@ const {
   getActivityLogs,
   lightCities,
   getPowerplants,
-  getPlayerResources
+  getPlayerResources,
+  returnPlayerResources
 } = require('./src/handlers');
 
 app.set('views', __dirname + '/public/html');
@@ -62,6 +63,7 @@ app.get('/logs',getActivityLogs);
 app.post('/cities/light', lightCities);
 app.get('/player/powerplants',getPowerplants);
 app.get('/playerResources', getPlayerResources);
+app.post('/returnResources', returnPlayerResources);
 
 app.use(express.static('public/html'));
 app.use(express.static('public/stylesheet'));
