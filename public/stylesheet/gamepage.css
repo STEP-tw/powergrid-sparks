@@ -113,11 +113,14 @@ button {
 
 .activity-log {
   overflow: scroll;
-  width: 100%;
-  height: 50%;
+  width: 80%;
+  height: 60%;
   background-color: #2d303d;
-  font-size: 22px;
-  line-height: 1.5;
+  font-size: 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 2;
   margin: 2%;
 }
 

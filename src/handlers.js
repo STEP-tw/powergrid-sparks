@@ -117,7 +117,7 @@ const initializeMarket = function(req, res) {
 
 const createBuyPowerPlantLog = function(game, turn, powerplant) {
   const playerName = turn.getCurrentPlayer().name;
-  const logMsg = `${playerName} has bought ${powerplant.value} powerplant !`;
+  const logMsg = `${playerName} has bought power plant ${powerplant.value}!`;
   game.addLog(logMsg);
 };
 
