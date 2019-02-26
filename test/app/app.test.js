@@ -428,3 +428,16 @@ describe("GET /player/powerplants", function () {
       .expect(200, done);
   });
 });
+
+describe("GET /get/playerResources", function () {
+  it('should respond with 200', function (done) {
+    app.activeGames['4'] = new Game(2);
+    app.cookies['110'] = 'Gaurav';
+    const player = new Player("black", "Gaurav");
+    app.activeGames[4].addPlayer(player);
+    request(app)
+      .get('/get/playerResources')
+      .set('Cookie', ['gameId=4;playerId=110'])
+      .expect(200, done);
+  });
+});

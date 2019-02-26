@@ -212,18 +212,27 @@ const lightCities = function(req, res) {
     bureaucracy.payForLightedCities(JSON.parse(paymentOrder));
   }
   const playerMoney = currentPlayer.getMoney().toString();
-  res.send({playerMoney, hasEnoughCities});
+  res.send({ playerMoney, hasEnoughCities });
 };
 
-const getPowerplants = function(req, res){
+const getPowerplants = function(req, res) {
+  const game = initializeGame(req, res);
+  const players = game.getPlayers();
+  const turn = game.getTurn(players);
+  const currentPlayer = turn.getCurrentPlayer();
+  const powerplants = currentPlayer.getPowerplants();
+  res.send(powerplants);
+};
+
+const getPlayerResources = function(req, res) {
   const game = initializeGame(req, res);
   const players = game.getPlayers();
   const turn = game.getTurn(players);
   const currentPlayer = turn.getCurrentPlayer();
   const powerplants = currentPlayer.getPowerplants();
   const resources = currentPlayer.getResources();
-  res.send({powerplants, resources});
-}
+  res.send({ powerplants, resources });
+};
 
 const getPlayers = function(req, res) {
   const game = initializeGame(req, res);
@@ -284,5 +293,6 @@ module.exports = {
   getCurrentPowerPlants,
   getActivityLogs,
   lightCities,
-  getPowerplants
+  getPowerplants,
+  getPlayerResources
 };
