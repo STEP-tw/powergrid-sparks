@@ -140,7 +140,7 @@ const buyPowerplant = function() {
 };
 
 const addPowerPlantToPlayer = function(count, powerPlants, powerPlantCost) {
-  const powerPlantDiv = document.getElementById(`powerplant-${count++}`);
+  const powerPlantDiv = document.getElementById(`powerplant-${count}`);
   powerPlantDiv.innerHTML = "";
   arrangeMarket(powerPlantDiv, powerPlantCost, powerPlants[powerPlantCost]);
 };

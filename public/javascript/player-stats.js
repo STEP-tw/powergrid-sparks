@@ -7,7 +7,10 @@ const updatePlayerStatsDiv = function(playerStats) {
       (document.getElementById(resource).innerText = resources[resource])
   );
   const powerplantsCost = Object.keys(powerplants).slice(0, 3);
-  powerplantsCost.forEach(addPowerPlantToPlayer.bind(null, count, powerplants));
+  powerplantsCost.forEach(cost => {
+    addPowerPlantToPlayer(count, powerplants, cost);
+    count++;
+  });
   document.getElementById("player-money").innerText = money;
   document.getElementById("player-cities").innerText = cities;
 };
