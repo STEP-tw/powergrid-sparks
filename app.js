@@ -61,7 +61,7 @@ app.get('/currentPowerPlants', getCurrentPowerPlants);
 app.get('/logs',getActivityLogs);
 app.post('/cities/light', lightCities);
 app.get('/player/powerplants',getPowerplants);
-app.get('/get/playerResources', getPlayerResources);
+app.get('/playerResources', getPlayerResources);
 
 app.use(express.static('public/html'));
 app.use(express.static('public/stylesheet'));

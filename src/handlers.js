@@ -201,9 +201,8 @@ const buildCities = function(req, res) {
 
 const lightCities = function(req, res) {
   const game = initializeGame(req, res);
-  const players = game.getPlayers();
-  const turn = game.getTurn(players);
-  const currentPlayer = turn.getCurrentPlayer();
+  const playerId = req.cookies.playerId;
+  const currentPlayer = game.players.find(player => player.id == playerId);
   const cityCount = +req.body.city;
   const bureaucracy = new Bureaucracy(currentPlayer);
   const hasEnoughCities = bureaucracy.validateCityCount(cityCount);
@@ -217,18 +216,17 @@ const lightCities = function(req, res) {
 
 const getPowerplants = function(req, res) {
   const game = initializeGame(req, res);
-  const players = game.getPlayers();
-  const turn = game.getTurn(players);
-  const currentPlayer = turn.getCurrentPlayer();
+  const playerId = req.cookies.playerId;
+  const currentPlayer = game.players.find(player => player.id == playerId);
   const powerplants = currentPlayer.getPowerplants();
   res.send(powerplants);
 };
 
 const getPlayerResources = function(req, res) {
   const game = initializeGame(req, res);
-  const players = game.getPlayers();
-  const turn = game.getTurn(players);
-  const currentPlayer = turn.getCurrentPlayer();
+  const playerId = req.cookies.playerId;
+  const currentPlayer = game.players.find(player => player.id == playerId);
+  console.log(currentPlayer);
   const powerplants = currentPlayer.getPowerplants();
   const resources = currentPlayer.getResources();
   res.send({ powerplants, resources });
@@ -243,8 +241,8 @@ const getPlayers = function(req, res) {
 const getPlayerStats = function(req, res) {
   const game = initializeGame(req, res);
   const playerId = req.cookies.playerId;
-  const playerStats = game.players.filter(player => player.id == playerId);
-  res.send(playerStats[0]);
+  const playerStats = game.players.find(player => player.id == playerId);
+  res.send(playerStats);
 };
 
 const getCurrentPowerPlants = function(req, res) {
