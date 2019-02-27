@@ -21,6 +21,12 @@ const displayResource = function(resources, resource, cost, id) {
   const element = document.getElementById(index);
 
   if (resources[resource][cost][id]) {
+    if (resource == "Uranium" && cost < 10) {
+      element.className =
+        "fas fa-radiation-alt filled resource middle-resource";
+      return;
+    }
+    console.log(resource, cost, id);
     element.className = `${market_resources[resource]}`;
     return;
   }
