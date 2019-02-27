@@ -45,7 +45,7 @@ const getPlayerAssets = function(powerplants) {
 };
 
 const displayUnsufficientResources = function(isCityCountValid) {
-  document.getElementById("err-msg").innerText = "unsufficient resources";
+  document.getElementById("err-msg").innerText = "insufficient resources";
   const powerplantDiv = document.getElementById("select-powerplant");
   const allPowerplants = powerplantDiv.childNodes;
   allPowerplants.forEach(powerplant => (powerplant.onclick = selectDiv));
