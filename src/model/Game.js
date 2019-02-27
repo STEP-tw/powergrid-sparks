@@ -153,6 +153,10 @@ class Game {
   addSelectedPowerPlant(powerPlant) {
     this.powerPlantMarket.addSelectedPowerPlant(powerPlant);
   }
+
+  rearrangePowerPlants() {
+    this.powerPlantMarket.rearrange();
+  }
 }
 
 module.exports = Game;

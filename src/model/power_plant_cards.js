@@ -33,6 +33,12 @@ class PowerPlantMarket {
       }
     });
   }
+
+  rearrange() {
+    const lastCard = this.currentMarket.pop();
+    this.updateCurrentMarket();
+    this.deck.push(lastCard);
+  }
 }
 
 module.exports = PowerPlantMarket;

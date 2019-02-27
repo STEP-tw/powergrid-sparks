@@ -241,6 +241,7 @@ const returnPlayerResources = function(req, res) {
     const resourceMarket = game.getResourceMarket();
     resourceMarket.refillResourceStep1();
     game.setPlayingOrder();
+    game.rearrangePowerPlants();
   }
   res.send();
 };

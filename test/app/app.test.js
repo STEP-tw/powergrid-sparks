@@ -489,8 +489,10 @@ describe("POST /returnResources", function() {
     const resources = { Coal: 0, Oil: 0, Uranium: 0, Garbage: 0 };
     const player = new Player("green", "gaurav");
     player.id = "7351";
+    const powerPlantMarket = new PowerPlantMarket(powerPlantsCards);
     app.activeGames["420"] = new Game(2);
     app.activeGames["420"].addPlayer(player);
+    app.activeGames["420"].initializePowerPlantMarket(powerPlantMarket);
     app.cookies["7351"] = "gaurav";
     request(app)
       .post("/returnResources")
@@ -500,7 +502,7 @@ describe("POST /returnResources", function() {
   });
 });
 
-describe("POST /returnResources", function() {
+describe("POST updating powerplant and refilling resources", function() {
   it("should return the player resources ", done => {
     const resources = { Coal: 0, Oil: 0, Uranium: 0, Garbage: 0 };
     const player1 = new Player("green", "gaurav");
