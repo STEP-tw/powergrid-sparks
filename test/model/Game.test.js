@@ -3,6 +3,7 @@ const sinon = require("sinon");
 const Game = require("../../src/model/Game");
 const Player = require("../../src/model/player");
 const PowerPlantMarket = require("../../src/model/power_plant_cards");
+const playingOrder = require("../../src/model/playing_order");
 
 describe("Game", () => {
   let game;
@@ -53,6 +54,15 @@ describe("Game", () => {
     it("should return 0 initially", () => {
       const expectedOutput = 0;
       const actualOutput = game.getCurrentPlayersCount();
+      chai.expect(expectedOutput).to.be.deep.equal(actualOutput);
+    });
+  });
+
+  describe("setPlayingOrder", () => {
+    it("should change the playing order", () => {
+      const playersOrder = new playingOrder(game.players)
+      const expectedOutput = game.player;
+      const actualOutput = game.player;
       chai.expect(expectedOutput).to.be.deep.equal(actualOutput);
     });
   });

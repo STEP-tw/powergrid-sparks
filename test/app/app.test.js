@@ -387,7 +387,7 @@ describe("GET /logs", function() {
   });
 });
 
-describe("POST /cities/light", () => {
+describe("GET /cities/light", () => {
   it("should pay for selected lighted cities", done => {
     app.activeGames["992"] = new Game(2);
     app.cookies["991"] = "Ankon";
@@ -395,8 +395,7 @@ describe("POST /cities/light", () => {
     player.id = "991";
     app.activeGames["992"].addPlayer(player);
     request(app)
-      .post("/cities/light")
-      .send(`city=1`)
+      .get("/cities/light")
       .set("Cookie", ["gameId=992;playerId=991"])
       .expect(200, done);
   });
@@ -409,8 +408,7 @@ describe("POST /cities/light", () => {
     player.cities = 3;
     app.activeGames["987"].addPlayer(player);
     request(app)
-      .post("/cities/light")
-      .send(`city=2`)
+      .get("/cities/light")
       .set("Cookie", ["gameId=987;playerId=789"])
       .expect(200, done);
   });
@@ -470,23 +468,10 @@ describe("GET /player/powerplants", function() {
   });
 });
 
-describe("GET /playerResources", function() {
-  it("should give current player details ", done => {
-    const player1 = new Player("green", "naman");
-    player1.id = "123444";
-    app.activeGames["101"] = new Game(2);
-    app.activeGames["101"].addPlayer(player1);
-    app.cookies["123444"] = "naman";
-    request(app)
-      .get("/playerResources")
-      .set("Cookie", ["gameId=101;playerId=123444"])
-      .expect(200, done);
-  });
-});
-
 describe("POST /returnResources", function() {
   it("should return the player resources ", done => {
     const resources = { Coal: 0, Oil: 0, Uranium: 0, Garbage: 0 };
+    const cityCount = 2;
     const player = new Player("green", "gaurav");
     player.id = "7351";
     const powerPlantMarket = new PowerPlantMarket(powerPlantsCards);
@@ -497,7 +482,7 @@ describe("POST /returnResources", function() {
     request(app)
       .post("/returnResources")
       .set("Cookie", ["gameId=420;playerId=7351"])
-      .send(`resources=${JSON.stringify(resources)}`)
+      .send(`resources=${JSON.stringify(resources)}&cityCount=${cityCount}`)
       .expect(200, done);
   });
 });
@@ -505,6 +490,7 @@ describe("POST /returnResources", function() {
 describe("POST updating powerplant and refilling resources", function() {
   it("should return the player resources ", done => {
     const resources = { Coal: 0, Oil: 0, Uranium: 0, Garbage: 0 };
+    const cityCount = 2;
     const player1 = new Player("green", "gaurav");
     const player2 = new Player("black", "naman");
     player1.id = "7351";
@@ -516,7 +502,7 @@ describe("POST updating powerplant and refilling resources", function() {
     request(app)
       .post("/returnResources")
       .set("Cookie", ["gameId=420;playerId=7351"])
-      .send(`resources=${JSON.stringify(resources)}`)
+      .send(`resources=${JSON.stringify(resources)}&cityCount=${cityCount}`)
       .expect(200, done);
   });
 });

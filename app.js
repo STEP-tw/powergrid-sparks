@@ -29,7 +29,6 @@ const {
   getActivityLogs,
   lightCities,
   getPowerplants,
-  getPlayerResources,
   returnPlayerResources,
   makeBid,
   selectPowerPlant,
@@ -66,9 +65,8 @@ app.get("/logs", getActivityLogs);
 app.post("/auction/bid", makeBid);
 app.post("/powerPlant/select", selectPowerPlant);
 app.get("/currentBid", getCurrentBid);
-app.post("/cities/light", lightCities);
+app.get("/cities/light", lightCities);
 app.get("/player/powerplants", getPowerplants);
-app.get("/playerResources", getPlayerResources);
 app.post("/returnResources", returnPlayerResources);
 
 app.use(express.static("public/html"));

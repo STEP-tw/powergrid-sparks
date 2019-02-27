@@ -416,14 +416,14 @@ td {
 .bidding-section {
   background-color: white;
   border-radius: 10px;
-  height: 80%;
+  height: 85%;
   width: 80%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-evenly;
   color: #3e4346;
-  font-size: 25px;
+  font-size: 20px;
 }
 
 .increase-bid {
@@ -484,7 +484,7 @@ header {
 }
 
 .header-option {
-  width: 7%;
+  width: 8%;
   display: flex;
   align-items: center;
   justify-content: center;

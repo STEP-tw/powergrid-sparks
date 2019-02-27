@@ -203,15 +203,10 @@ const lightCities = function(req, res) {
   const game = initializeGame(req, res);
   const playerId = req.cookies.playerId;
   const currentPlayer = game.players.find(player => player.id == playerId);
-  const cityCount = +req.body.city;
-  const bureaucracy = new Bureaucracy(currentPlayer);
-  const hasEnoughCities = bureaucracy.validateCityCount(cityCount);
-  if (hasEnoughCities) {
-    bureaucracy.setLightedCity(cityCount);
-    bureaucracy.payForLightedCities(JSON.parse(paymentOrder));
-  }
-  const playerMoney = currentPlayer.getMoney().toString();
-  res.send({ playerMoney, hasEnoughCities });
+  const cityCount = currentPlayer.getCityCount();
+  const resources = currentPlayer.getResources();
+  const powerplants = currentPlayer.getPowerplants();
+  res.send({ powerplants, cityCount, resources });
 };
 
 const getPowerplants = function(req, res) {
@@ -222,28 +217,30 @@ const getPowerplants = function(req, res) {
   res.send(powerplants);
 };
 
-const getPlayerResources = function(req, res) {
-  const game = initializeGame(req, res);
-  const playerId = req.cookies.playerId;
-  const currentPlayer = game.players.find(player => player.id == playerId);
-  const powerplants = currentPlayer.getPowerplants();
-  const resources = currentPlayer.getResources();
-  res.send({ powerplants, resources });
-};
-
 const returnPlayerResources = function(req, res) {
   const game = initializeGame(req, res);
+  const { cityCount, resources } = req.body;
   const playerId = req.cookies.playerId;
-  const updatedResources = JSON.parse(req.body.resources);
+  const updatedResources = JSON.parse(resources);
   const currentPlayer = game.players.find(player => player.id == playerId);
   currentPlayer.resources = updatedResources;
-  if (currentPlayer.name == game.players[game.players.length - 1].name) {
+  const bureaucracy = new Bureaucracy(currentPlayer);
+  bureaucracy.setLightedCity(+cityCount);
+  bureaucracy.payForLightedCities(JSON.parse(paymentOrder));
+  refillResources(currentPlayer, game);
+  res.send();
+};
+
+const refillResources = function(currentPlayer, game) {
+  const players = game.players;
+  const lastPlayerIndex = players.length - 1;
+  const lastPlayer = players[lastPlayerIndex].name;
+  if (currentPlayer.name == lastPlayer) {
     const resourceMarket = game.getResourceMarket();
     resourceMarket.refillResourceStep1();
     game.setPlayingOrder();
     game.rearrangePowerPlants();
   }
-  res.send();
 };
 
 const getPlayers = function(req, res) {
@@ -334,9 +331,9 @@ module.exports = {
   getActivityLogs,
   lightCities,
   getPowerplants,
-  getPlayerResources,
   returnPlayerResources,
   makeBid,
   selectPowerPlant,
-  getCurrentBid
+  getCurrentBid,
+  returnPlayerResources
 };

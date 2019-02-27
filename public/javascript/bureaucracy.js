@@ -6,19 +6,15 @@ const getLightedCities = function() {
     '<input class="city-count" autocomplete="off" type="text" id="lighted-cities" placeholder="Enter number of cities to light">';
   buildingPhase.innerHTML +=
     '<div class="select-powerplant" id="select-powerplant"></div>';
-  buildingPhase.innerHTML += '<button class="bid-option" onclick="disableOnclick()">Done</button>';
   buildingPhase.innerHTML += '<button class="bid-option" id="submit">Submit</button>';
   buildingPhase.innerHTML += '<div id="err-msg"></div>';
-  document.getElementById("submit").style.visibility = "hidden";
+  document.getElementById("submit").onclick = validatePlayerAssets;
 };
 
-const disableOnclick = function() {
-  const powerplantDiv = document.getElementById("select-powerplant");
-  const allPowerplants = powerplantDiv.childNodes;
-  allPowerplants.forEach(powerplant => (powerplant.onclick = null));
-  fetch("/playerResources")
+const validatePlayerAssets = function() {
+  fetch("/cities/light")
     .then(res => res.json())
-    .then(validatePlayerResources);
+    .then(validatePlayerResources)
 };
 
 const validateLightedCities = function(bureaucracy) {
@@ -49,7 +45,6 @@ const getPlayerAssets = function(powerplants) {
 };
 
 const displayUnsufficientResources = function(isCityCountValid) {
-  document.getElementById("submit").onclick = null;
   document.getElementById("err-msg").innerText = "unsufficient resources";
   const powerplantDiv = document.getElementById("select-powerplant");
   const allPowerplants = powerplantDiv.childNodes;
@@ -62,19 +57,24 @@ const DisplayPowerplantErrMsg = function(city) {
   const allPowerplants = powerplantDiv.childNodes;
   allPowerplants.forEach(powerplant => (powerplant.onclick = selectDiv));
   const errMsg = `selected powerplant can not light more than ${city} city`;
-  document.getElementById("submit").onclick = null;
   document.getElementById("err-msg").innerText = errMsg;
 };
 
+const displayCityErrMsg = function(){
+  const errMsg = `You don't have enough cities`;
+  document.getElementById("err-msg").innerText = errMsg;
+}
+
 const validatePlayerResources = function(userInfo) {
   let isCityCountValid = true;
-  const { powerplants, resources } = userInfo;
+  const { powerplants, cityCount, resources } = userInfo;
   const playerAssets = getPlayerAssets(powerplants);
   const allResources = Object.keys(playerAssets);
-  const city = playerAssets[allResources.pop()];
+  const playerCities = playerAssets[allResources.pop()];
   const hybridResource = playerAssets[allResources.pop()];
-  const citiesToLight = document.getElementById("lighted-cities").value;
-  if (citiesToLight > city) return DisplayPowerplantErrMsg(city);
+  const cities = document.getElementById("lighted-cities").value;
+  if(cities > cityCount) return displayCityErrMsg();
+  if (cities > playerCities) return DisplayPowerplantErrMsg(playerCities);
   allResources.forEach(resource => {
     const hasResource = playerAssets[resource] > resources[resource];
     if (hasResource) isCityCountValid = displayUnsufficientResources();
@@ -83,23 +83,22 @@ const validatePlayerResources = function(userInfo) {
   const hasHybridResource =
     resources["Oil"] < hybridResource && resources["Coal"] < hybridResource;
   if (hasHybridResource) isCityCountValid = displayUnsufficientResources();
-  isCityCountValid && updateUserResources(resources, hybridResource);
+  isCityCountValid && updateUserResources(resources, hybridResource, cities);
 };
 
-const updateUserResources = function(resources, hybridResource) {
+const updateUserResources = function(resources, hybridResource, cityCount) {
   let hasDeducted = false;
   document.getElementById("err-msg").innerText = "";
-  document.getElementById("submit").style.visibility = "visible";
-  document.getElementById("submit").onclick = lightCities;
   selectedPowerPlant.splice(0);
   if (resources.Coal >= hybridResource) {
     resources.Coal -= hybridResource;
     hasDeducted = true;
   }
   !hasDeducted && (resources.Oil -= hybridResource);
-  const body = `resources=${JSON.stringify(resources)}`;
+  const body = `resources=${JSON.stringify(resources)}&cityCount=${cityCount}`;
   const headers = { "Content-Type": "application/x-www-form-urlencoded" };
   fetch("/returnResources", { method: "POST", headers, body });
+  updateCurrentPlayer();
 };
 
 const updatePowerplantInfo = function(powerplants) {
