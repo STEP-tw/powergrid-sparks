@@ -1,14 +1,16 @@
 const selectedPowerPlant = [];
 
 const getLightedCities = function() {
-  const buildingPhase = document.getElementById("building-phase");
+  const buildingPhase = document.getElementById("bidding-section");
+  const heading = "<span>Select No. Of Cites :</span>";
   buildingPhase.innerHTML =
-    '<input class="city-count" autocomplete="off" type="text" id="lighted-cities" placeholder="Enter number of cities to light">';
+    heading+'<input min="0" max="21" class="city-count" value="0" autocomplete="off" type="number" id="lighted-cities">';
   buildingPhase.innerHTML +=
     '<div class="select-powerplant" id="select-powerplant"></div>';
   buildingPhase.innerHTML += '<button class="bid-option" id="submit">Submit</button>';
-  buildingPhase.innerHTML += '<div id="err-msg"></div>';
+  buildingPhase.innerHTML += '<div class="bureaucracy-err-msg" id="err-msg"></div>';
   document.getElementById("submit").onclick = validatePlayerAssets;
+  document.getElementById("err-msg").style.visibility = "hidden";
 };
 
 const validatePlayerAssets = function() {
@@ -22,6 +24,7 @@ const validateLightedCities = function(bureaucracy) {
     document.getElementById("building-phase").innerHTML = "";
     return;
   }
+  document.getElementById("err-msg").style.visibility = "visible";
   document.getElementById("err-msg").innerText = " you dont have enough cities";
   document.getElementById("lighted-cities").value = "";
 };
@@ -45,6 +48,7 @@ const getPlayerAssets = function(powerplants) {
 };
 
 const displayUnsufficientResources = function(isCityCountValid) {
+  document.getElementById("err-msg").style.visibility = "visible";
   document.getElementById("err-msg").innerText = "insufficient resources";
   const powerplantDiv = document.getElementById("select-powerplant");
   const allPowerplants = powerplantDiv.childNodes;
@@ -57,11 +61,13 @@ const DisplayPowerplantErrMsg = function(city) {
   const allPowerplants = powerplantDiv.childNodes;
   allPowerplants.forEach(powerplant => (powerplant.onclick = selectDiv));
   const errMsg = `selected powerplant can not light more than ${city} city`;
+  document.getElementById("err-msg").style.visibility = "visible";
   document.getElementById("err-msg").innerText = errMsg;
 };
 
 const displayCityErrMsg = function(){
   const errMsg = `You don't have enough cities`;
+  document.getElementById("err-msg").style.visibility = "visible";
   document.getElementById("err-msg").innerText = errMsg;
 }
 
@@ -88,7 +94,7 @@ const validatePlayerResources = function(userInfo) {
 
 const updateUserResources = function(resources, hybridResource, cityCount) {
   let hasDeducted = false;
-  document.getElementById("err-msg").innerText = "";
+  document.getElementById("err-msg").style.visibility = "hidden";
   selectedPowerPlant.splice(0);
   if (resources.Coal >= hybridResource) {
     resources.Coal -= hybridResource;

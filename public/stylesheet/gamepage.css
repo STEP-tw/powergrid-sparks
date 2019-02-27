@@ -8,6 +8,7 @@ body {
   color: #b0d8eb;
   height: 100%;
   background-color: #2d303d;
+  font-family: Avenir Next !important;
 }
 
 .player-name {
@@ -292,7 +293,7 @@ td {
   justify-content: space-around;
   align-items: center;
   width: 98%;
-  height: 20%;
+  height: 25%;
   border: solid 1px #5e7886;
 }
 
@@ -414,7 +415,7 @@ td {
 }
 
 .bidding-section {
-  background-color: white;
+  background-color: #4c5061;
   border-radius: 10px;
   height: 85%;
   width: 80%;
@@ -422,8 +423,9 @@ td {
   flex-direction: column;
   align-items: center;
   justify-content: space-evenly;
-  color: #3e4346;
+  color: #b9d8e7;
   font-size: 20px;
+  box-shadow: 0px 0px 42px 3px rgba(2, 2, 2, 0.52);
 }
 
 .increase-bid {
@@ -449,7 +451,7 @@ td {
 }
 
 .power-plant-cards {
-  height: 80%;
+  height: 74%;
   width: 100%;
   display: flex;
   flex-wrap: wrap;
@@ -461,10 +463,12 @@ td {
 .bid-option {
   height: 10%;
   width: 60%;
-  border-radius: 5px;
-  background: #b5d7eb;
+  border-radius: 8px;
+  font-family: Avenir;
+  background: #2d303e;
   font-size: 20px;
-  color: #2d303e;
+  color: #b7d7ea;
+  border: none;
 }
 
 .increase-bid-button {
@@ -481,6 +485,8 @@ header {
   display: flex;
   justify-content: flex-end;
   font-size: 22px;
+  border-bottom: 1px solid;
+  margin-bottom: 8px;
 }
 
 .header-option {
@@ -507,8 +513,8 @@ header {
 
 .select-powerplant {
   height: 50%;
-  width: 100%;
-  border: 1px solid #4c5061;
+  width: 90%;
+  border: 1px solid #6a7a89;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
@@ -529,12 +535,19 @@ header {
 }
 
 .city-count {
-  width: 100%;
-  font-size: 20px;
+  width: 20%;
   border: none;
   font-weight: lighter;
   text-align: center;
-  border-bottom: 1px solid #4c5061;
+  border-bottom: 1px solid #b9d8e7;
+  color: aliceblue;
+  font-size: 22px;
+  background: inherit;
+  border-radius: 8px;
+}
+
+.city-count:hover {
+  background: #2d313d;
 }
 
 .city-count:focus {
@@ -547,4 +560,12 @@ header {
   right: 3%;
   cursor: pointer;
   font-size: 25px;
+}
+
+.bureaucracy-err-msg {
+  color: #de7272;
+  box-sizing: border-box;
+  padding: 10px;
+  border: #d47670;
+  border-radius: 8px;
 }
