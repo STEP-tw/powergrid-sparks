@@ -7,7 +7,7 @@ const getBiddingSectionTemplate = function() {
     <div class="increase-bid auction">Increase bid : 
     <span id="bid-amount"></span>&nbsp
     <button class='increase-bid-button button' id="increase_bid" onclick = 'increaseBid()'>&#x2b</button></div>
-    <button class = 'bid-option' onclick="makeBid()">Make Bid</button>&nbsp<button class='bid-option' onclick="pass()">Pass</button>
+    <button class = 'auction bid-option' onclick="makeBid()">Make Bid</button>&nbsp<button class='auction bid-option' onclick="pass()">Pass</button>
     <button class="bid-option" onclick = "startBuyingResources()" id="buy-resources-button" style="visibility:hidden" >Buy Resources</button>
     
     <div id="selected-resource-amount" style="visibility:hidden">
