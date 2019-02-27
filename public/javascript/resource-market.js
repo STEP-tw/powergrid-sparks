@@ -26,7 +26,6 @@ const displayResource = function(resources, resource, cost, id) {
         "fas fa-radiation-alt filled resource middle-resource";
       return;
     }
-    console.log(resource, cost, id);
     element.className = `${market_resources[resource]}`;
     return;
   }

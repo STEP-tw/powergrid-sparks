@@ -86,6 +86,16 @@ const generateMarket = function(powerPlants, startingIndex, endingIndex, id) {
   return marketDiv;
 };
 
+const startBuyResourcePhase = function() {
+  document.getElementById("buy-resources-button").style.visibility = "visible";
+  const auction = document.querySelectorAll(".auction");
+  const powerPlants = document.querySelectorAll(".unselected-card");
+  auction.forEach(element => {
+    element.style.visibility = "hidden";
+  });
+  powerPlants.forEach(powerPlant => (powerPlant.onclick = ""));
+};
+
 const persistCardClass = function(powerPlants, currentMarketDiv) {
   const selectedPowerPlant = Object.keys(powerPlants).filter(
     powerPlantCost => powerPlants[powerPlantCost].isSelected
@@ -98,18 +108,15 @@ const persistCardClass = function(powerPlants, currentMarketDiv) {
   fetch("/currentBid")
     .then(res => res.json())
     .then(auction => {
-      const { currentBid, players } = auction;
+      const { currentBid, isAuctionOver, players } = auction;
+      if (isAuctionOver) {
+        startBuyResourcePhase();
+        return;
+      }
       const cost = document.getElementById("bid-amount").innerText;
       fetch("/currentPlayer")
         .then(res => res.json())
         .then(player => {
-          // if (isBidOver) {
-          //   currentMarketDiv.childNodes.forEach(node => {
-          //     node.className = "unselected-card";
-          //   });
-          //   buyPowerplant();
-          // return;
-          // }
           if (players.includes(+player.id)) {
             if (+currentBid >= +cost) return updatePriceDiv(currentBid);
             return updatePriceDiv(cost);

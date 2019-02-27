@@ -32,6 +32,11 @@ class Game {
     }
   }
 
+  isAuctionOver() {
+    if (this.auction == undefined) return false;
+    return this.auction.isAuctionOver();
+  }
+
   getPlayersOrder() {
     if (this.auction == undefined) {
       this.playerOrder = this.players;

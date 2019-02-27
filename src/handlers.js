@@ -298,14 +298,25 @@ const getCurrentBid = function(req, res) {
   const game = initializeGame(req, res);
   const currentBid = game.getCurrentBid();
   const isBidOver = game.isBidOver();
+  const isAuctionOver = game.isAuctionOver();
   const bidPlayers = game.getBidPlayers();
   const auctionPlayers = game.getAuctionPlayers();
   if (isBidOver) {
     return res.send(
-      JSON.stringify({ currentBid: currentBid, players: auctionPlayers })
+      JSON.stringify({
+        currentBid: currentBid,
+        isAuctionOver: isAuctionOver,
+        players: auctionPlayers
+      })
     );
   }
-  res.send(JSON.stringify({ currentBid: currentBid, players: bidPlayers }));
+  res.send(
+    JSON.stringify({
+      currentBid: currentBid,
+      isAuctionOver: isAuctionOver,
+      players: bidPlayers
+    })
+  );
 };
 
 module.exports = {

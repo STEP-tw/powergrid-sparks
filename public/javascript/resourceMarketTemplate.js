@@ -1,19 +1,18 @@
 const getBiddingSectionTemplate = function() {
   return `
-    <div>
+    <div class='auction'>
       Initial bid amount :
           <span id="current-bid-amount"></span>
     </div>
-    <div class="increase-bid">Increase bid : 
+    <div class="increase-bid auction">Increase bid : 
     <span id="bid-amount"></span>&nbsp
-    <button class='increase-bid-button' id="increase_bid" onclick = 'increaseBid()'>&#x2b</button></div>
-    <button onclick="makeBid()">Make Bid</button>&nbsp<button onclick="pass()">Pass</button>
-    <button class="bid-option" onclick = "startBuyingResources() ">Buy Resources</button>
+    <button class='increase-bid-button button' id="increase_bid" onclick = 'increaseBid()'>&#x2b</button></div>
+    <button class = 'auction' onclick="makeBid()">Make Bid</button>&nbsp<button class='auction' onclick="pass()">Pass</button>
+    <button class="bid-option" onclick = "startBuyingResources()" id="buy-resources-button" style="visibility:hidden" >Buy Resources</button>
     
-    <button onclick = "startBuyingResources() ">Start Buying Resources</button>
     <div id="selected-resource-amount" style="visibility:hidden">
     Selected Resource Amount : <span id="resource-amount">0</span>
-    <button onclick="buyResources()">Buy Resources</button></div>
+    <button onclick="buyResources()" >Buy Resources</button></div>
     <div id="insufficient-money" style="display:hidden"></div>
     </div>
   `;
