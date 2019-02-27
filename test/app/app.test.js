@@ -416,6 +416,46 @@ describe("POST /cities/light", () => {
   });
 });
 
+describe("GET /currentBid", function() {
+  it("should respond with 200", function(done) {
+    app.activeGames["52"] = new Game(2);
+    app.cookies["1234567"] = "Ankon";
+    request(app)
+      .get("/currentBid")
+      .set("Cookie", ["gameId=52;playerId=1234567"])
+      .expect(200, done);
+  });
+
+  it("should respond with 200", function(done) {
+    app.activeGames["52"] = new Game(1);
+    app.cookies["1234567"] = "Ankon";
+    const player1 = new Player("green", "naman");
+    app.activeGames["52"].addPlayer(player1);
+    app.activeGames["52"].powerPlantMarket = {
+      cards: {
+        "13": {
+          resource: { type: "Oil", quantity: 2 },
+          city: 1,
+          inDeck: true,
+          isSelected: false
+        },
+        "19": {
+          resource: { type: "Garbage", quantity: 1 },
+          city: 3,
+          inDeck: true,
+          isSelected: false
+        }
+      }
+    };
+    app.activeGames["52"].conductAuction("13");
+    app.activeGames["52"].auction.continue("13");
+    request(app)
+      .get("/currentBid")
+      .set("Cookie", ["gameId=52;playerId=1234567"])
+      .expect(200, done);
+  });
+});
+
 describe("GET /player/powerplants", function() {
   it("should respond with 200", function(done) {
     app.activeGames["5"] = new Game(2);
@@ -475,6 +515,60 @@ describe("POST /returnResources", function() {
       .post("/returnResources")
       .set("Cookie", ["gameId=420;playerId=7351"])
       .send(`resources=${JSON.stringify(resources)}`)
+      .expect(200, done);
+  });
+});
+
+describe("POST /powerPlant/select", function() {
+  it("should respond with 200", function(done) {
+    app.activeGames["53"] = new Game(1);
+    app.cookies["1234567"] = "Ankon";
+    app.activeGames["53"].powerPlantMarket = new PowerPlantMarket({
+      "13": {
+        resource: { type: "Oil", quantity: 2 },
+        city: 1,
+        inDeck: true,
+        isSelected: false
+      },
+      "19": {
+        resource: { type: "Garbage", quantity: 1 },
+        city: 3,
+        inDeck: true,
+        isSelected: false
+      }
+    });
+
+    request(app)
+      .post("/powerPlant/select")
+      .send("powerPlantCost=13")
+      .set("Cookie", ["gameId=53;playerId=1234567"])
+      .expect(200, done);
+  });
+});
+
+describe("POST /auction/bid", function() {
+  it("should respond with 200", function(done) {
+    app.activeGames["53"] = new Game(1);
+    app.cookies["1234567"] = "Ankon";
+    app.activeGames["53"].powerPlantMarket = new PowerPlantMarket({
+      "13": {
+        resource: { type: "Oil", quantity: 2 },
+        city: 1,
+        inDeck: true,
+        isSelected: false
+      },
+      "19": {
+        resource: { type: "Garbage", quantity: 1 },
+        city: 3,
+        inDeck: true,
+        isSelected: false
+      }
+    });
+
+    request(app)
+      .post("/auction/bid")
+      .send("bidAmount=13")
+      .set("Cookie", ["gameId=53;playerId=1234567"])
       .expect(200, done);
   });
 });

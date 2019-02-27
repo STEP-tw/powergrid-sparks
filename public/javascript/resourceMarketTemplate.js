@@ -7,8 +7,15 @@ const getBiddingSectionTemplate = function() {
     <div class="increase-bid">Increase bid : 
     <span id="bid-amount"></span>&nbsp
     <button class='increase-bid-button' id="increase_bid" onclick = 'increaseBid()'>&#x2b</button></div>
-    <button class="bid-option" onclick="buyPowerplant()">Buy Powerplant</button>
+    <button onclick="makeBid()">Make Bid</button>&nbsp<button onclick="pass()">Pass</button>
     <button class="bid-option" onclick = "startBuyingResources() ">Buy Resources</button>
+    
+    <button onclick = "startBuyingResources() ">Start Buying Resources</button>
+    <div id="selected-resource-amount" style="visibility:hidden">
+    Selected Resource Amount : <span id="resource-amount">0</span>
+    <button onclick="buyResources()">Buy Resources</button></div>
+    <div id="insufficient-money" style="display:hidden"></div>
+    </div>
   `;
 };
 

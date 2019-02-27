@@ -15,7 +15,7 @@ class PowerPlantMarket {
 
   getCurrentPowerPlants() {
     const currentCards = {};
-    this.currentMarket.map(card => (currentCards[card] = this.cards[card]));
+    this.currentMarket.forEach(card => (currentCards[card] = this.cards[card]));
     return currentCards;
   }
 
@@ -23,6 +23,15 @@ class PowerPlantMarket {
     const newPowerPlant = this.deck.shift();
     this.currentMarket.push(newPowerPlant);
     this.currentMarket = this.currentMarket.sort((x, y) => x - y);
+  }
+
+  addSelectedPowerPlant(powerPlantCost) {
+    this.currentMarket.forEach(powerPlant => {
+      this.cards[powerPlant].isSelected = false;
+      if (powerPlant == powerPlantCost) {
+        this.cards[powerPlant].isSelected = true;
+      }
+    });
   }
 }
 

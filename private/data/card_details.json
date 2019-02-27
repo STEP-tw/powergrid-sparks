@@ -5,7 +5,8 @@
       "quantity": 2
     },
     "city": 1,
-    "inDeck": true
+    "inDeck": true,
+    "isSelected": false
   },
   "4": {
     "resource": {
@@ -13,7 +14,8 @@
       "quantity": 2
     },
     "city": 1,
-    "inDeck": true
+    "inDeck": true,
+    "isSelected": false
   },
   "5": {
     "resource": {
@@ -21,7 +23,8 @@
       "quantity": 2
     },
     "city": 1,
-    "inDeck": true
+    "inDeck": true,
+    "isSelected": false
   },
   "6": {
     "resource": {
@@ -29,7 +32,8 @@
       "quantity": 1
     },
     "city": 1,
-    "inDeck": true
+    "inDeck": true,
+    "isSelected": false
   },
   "7": {
     "resource": {
@@ -37,7 +41,8 @@
       "quantity": 3
     },
     "city": 2,
-    "inDeck": true
+    "inDeck": true,
+    "isSelected": false
   },
   "8": {
     "resource": {
@@ -45,7 +50,8 @@
       "quantity": 3
     },
     "city": 2,
-    "inDeck": true
+    "inDeck": true,
+    "isSelected": false
   },
   "9": {
     "resource": {
@@ -53,7 +59,8 @@
       "quantity": 1
     },
     "city": 1,
-    "inDeck": true
+    "inDeck": true,
+    "isSelected": false
   },
   "10": {
     "resource": {
@@ -61,15 +68,17 @@
       "quantity": 2
     },
     "city": 2,
-    "inDeck": true
+    "inDeck": true,
+    "isSelected": false
   },
   "11": {
-    "resource":{
+    "resource": {
       "type": "Uranium",
       "quantity": 1
     },
     "city": 2,
-    "inDeck": true
+    "inDeck": true,
+    "isSelected": false
   },
   "12": {
     "resource": {
@@ -77,13 +86,15 @@
       "quantity": 2
     },
     "city": 2,
-    "inDeck": true
+    "inDeck": true,
+    "isSelected": false
   },
   "13": {
     "type": "Ecolgical",
     "inputs": 0,
     "output": 1,
-    "inDeck": true
+    "inDeck": true,
+    "isSelected": false
   },
   "14": {
     "resource": {
@@ -91,7 +102,8 @@
       "quantity": 2
     },
     "city": 2,
-    "inDeck": true
+    "inDeck": true,
+    "isSelected": false
   },
   "15": {
     "resource": {
@@ -99,7 +111,8 @@
       "quantity": 2
     },
     "city": 3,
-    "inDeck": true
+    "inDeck": true,
+    "isSelected": false
   },
   "16": {
     "resource": {
@@ -107,7 +120,8 @@
       "quantity": 2
     },
     "city": 3,
-    "inDeck": true
+    "inDeck": true,
+    "isSelected": false
   },
   "17": {
     "resource": {
@@ -115,7 +129,8 @@
       "quantity": 1
     },
     "city": 2,
-    "inDeck": true
+    "inDeck": true,
+    "isSelected": false
   },
   "18": {
     "resource": {
@@ -123,13 +138,15 @@
       "quantity": 0
     },
     "city": 4,
-    "inDeck": true
+    "inDeck": true,
+    "isSelected": false
   },
   "19": {
     "type": "Garbage",
     "inputs": 2,
     "output": 3,
-    "inDeck": true
+    "inDeck": true,
+    "isSelected": false
   },
   "20": {
     "resource": {
@@ -137,7 +154,8 @@
       "quantity": 3
     },
     "city": 5,
-    "inDeck": true
+    "inDeck": true,
+    "isSelected": false
   },
   "21": {
     "resource": {
@@ -145,7 +163,8 @@
       "quantity": 2
     },
     "city": 4,
-    "inDeck": true
+    "inDeck": true,
+    "isSelected": false
   },
   "22": {
     "resource": {
@@ -153,7 +172,8 @@
       "quantity": 0
     },
     "city": 4,
-    "inDeck": true
+    "inDeck": true,
+    "isSelected": false
   },
   "23": {
     "resource": {
@@ -161,7 +181,8 @@
       "quantity": 1
     },
     "city": 3,
-    "inDeck": true
+    "inDeck": true,
+    "isSelected": false
   },
   "24": {
     "resource": {
@@ -169,7 +190,8 @@
       "quantity": 2
     },
     "city": 4,
-    "inDeck": true
+    "inDeck": true,
+    "isSelected": false
   },
   "25": {
     "resource": {
@@ -177,7 +199,8 @@
       "quantity": 2
     },
     "city": 5,
-    "inDeck": true
+    "inDeck": true,
+    "isSelected": false
   },
   "26": {
     "resource": {
@@ -185,7 +208,8 @@
       "quantity": 2
     },
     "city": 5,
-    "inDeck": true
+    "inDeck": true,
+    "isSelected": false
   },
   "27": {
     "resource": {
@@ -193,7 +217,8 @@
       "quantity": 0
     },
     "city": 4,
-    "inDeck": true
+    "inDeck": true,
+    "isSelected": false
   },
   "28": {
     "resource": {
@@ -201,7 +226,8 @@
       "quantity": 1
     },
     "city": 4,
-    "inDeck": true
+    "inDeck": true,
+    "isSelected": false
   },
   "29": {
     "resource": {
@@ -209,7 +235,8 @@
       "quantity": 1
     },
     "city": 4,
-    "inDeck": true
+    "inDeck": true,
+    "isSelected": false
   },
   "30": {
     "resource": {
@@ -217,7 +244,8 @@
       "quantity": 3
     },
     "city": 6,
-    "inDeck": true
+    "inDeck": true,
+    "isSelected": false
   },
   "31": {
     "resource": {
@@ -225,7 +253,8 @@
       "quantity": 3
     },
     "city": 6,
-    "inDeck": true
+    "inDeck": true,
+    "isSelected": false
   },
   "32": {
     "resource": {
@@ -233,7 +262,8 @@
       "quantity": 3
     },
     "city": 6,
-    "inDeck": true
+    "inDeck": true,
+    "isSelected": false
   },
   "33": {
     "resource": {
@@ -241,7 +271,8 @@
       "quantity": 0
     },
     "city": 4,
-    "inDeck": true
+    "inDeck": true,
+    "isSelected": false
   },
   "34": {
     "resource": {
@@ -249,7 +280,8 @@
       "quantity": 1
     },
     "city": 5,
-    "inDeck": true
+    "inDeck": true,
+    "isSelected": false
   },
   "35": {
     "resource": {
@@ -257,7 +289,8 @@
       "quantity": 1
     },
     "city": 5,
-    "inDeck": true
+    "inDeck": true,
+    "isSelected": false
   },
   "36": {
     "resource": {
@@ -265,7 +298,8 @@
       "quantity": 3
     },
     "city": 7,
-    "inDeck": true
+    "inDeck": true,
+    "isSelected": false
   },
   "37": {
     "resource": {
@@ -273,7 +307,8 @@
       "quantity": 0
     },
     "city": 4,
-    "inDeck": true
+    "inDeck": true,
+    "isSelected": false
   },
   "38": {
     "resource": {
@@ -281,7 +316,8 @@
       "quantity": 3
     },
     "city": 7,
-    "inDeck": true
+    "inDeck": true,
+    "isSelected": false
   },
   "39": {
     "resource": {
@@ -289,7 +325,8 @@
       "quantity": 1
     },
     "city": 6,
-    "inDeck": true
+    "inDeck": true,
+    "isSelected": false
   },
   "40": {
     "resource": {
@@ -297,7 +334,8 @@
       "quantity": 2
     },
     "city": 6,
-    "inDeck": true
+    "inDeck": true,
+    "isSelected": false
   },
   "42": {
     "resource": {
@@ -305,7 +343,8 @@
       "quantity": 2
     },
     "city": 6,
-    "inDeck": true
+    "inDeck": true,
+    "isSelected": false
   },
   "44": {
     "resource": {
@@ -313,7 +352,8 @@
       "quantity": 0
     },
     "city": 4,
-    "inDeck": true
+    "inDeck": true,
+    "isSelected": false
   },
   "46": {
     "resource": {
@@ -321,7 +361,8 @@
       "quantity": 3
     },
     "city": 7,
-    "inDeck": true
+    "inDeck": true,
+    "isSelected": false
   },
   "50": {
     "resource": {
@@ -329,6 +370,7 @@
       "quantity": 0
     },
     "city": 4,
-    "inDeck": true
+    "inDeck": true,
+    "isSelected": false
   }
 }

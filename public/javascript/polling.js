@@ -1,6 +1,6 @@
 const polling = function() {
-  setInterval(()=>{
-    getCurrentPlayer()
+  setInterval(() => {
+    getCurrentPlayer();
     getPlayersDetails();
     showResourceMarket();
     fetchCurrentPowerPlants();

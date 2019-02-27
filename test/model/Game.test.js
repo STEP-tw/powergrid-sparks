@@ -2,6 +2,7 @@ const chai = require("chai");
 const sinon = require("sinon");
 const Game = require("../../src/model/Game");
 const Player = require("../../src/model/player");
+const PowerPlantMarket = require("../../src/model/power_plant_cards");
 
 describe("Game", () => {
   let game;
@@ -455,6 +456,168 @@ describe("Game", () => {
         }
       };
 
+      chai.expect(expectedOutput).to.be.deep.equal(actualOutput);
+    });
+  });
+
+  describe("getPlayersOrder", function() {
+    it("should return the playing order", function() {
+      const actualOutput = game.getPlayersOrder();
+      const expectedOutput = [];
+      chai.expect(expectedOutput).to.be.deep.equal(actualOutput);
+    });
+
+    it("should return the playing order", function() {
+      const powerPlantMarket = {
+        cards: {
+          "13": {
+            resource: { type: "Oil", quantity: 2 },
+            city: 1,
+            inDeck: true,
+            isSelected: false
+          },
+          "19": {
+            resource: { type: "Garbage", quantity: 1 },
+            city: 3,
+            inDeck: true,
+            isSelected: false
+          }
+        }
+      };
+      const player1 = new Player("red", "A");
+      player1.id = 1;
+      const player2 = new Player("green", "B");
+      player2.id = 2;
+      const player3 = new Player("yellow", "C");
+      player3.id = 3;
+      game.players = [player1, player2, player3];
+      game.powerPlantMarket = powerPlantMarket;
+      game.conductAuction("13");
+      const actualOutput = game.getPlayersOrder();
+      const expectedOutput = [2, 3, 1];
+      chai.expect(expectedOutput).to.be.deep.equal(actualOutput);
+    });
+
+    it("should return the playing order", function() {
+      const powerPlantMarket = new PowerPlantMarket({
+        "13": {
+          resource: { type: "Oil", quantity: 2 },
+          city: 1,
+          inDeck: true,
+          isSelected: false
+        },
+        "19": {
+          resource: { type: "Garbage", quantity: 1 },
+          city: 3,
+          inDeck: true,
+          isSelected: false
+        }
+      });
+      const player1 = new Player("red", "A");
+      player1.id = 1;
+      const player2 = new Player("green", "B");
+      player2.id = 2;
+      const player3 = new Player("yellow", "C");
+      player3.id = 3;
+      game.powerPlantMarket = powerPlantMarket;
+      game.players = [player1, player2, player3];
+      game.conductAuction("13");
+      game.conductAuction("pass");
+      game.conductAuction("pass");
+      const actualOutput = game.getPlayersOrder();
+      const expectedOutput = [2, 3];
+      chai.expect(expectedOutput).to.be.deep.equal(actualOutput);
+    });
+
+    it("should return the playing order", function() {
+      const powerPlantMarket = new PowerPlantMarket({
+        "13": {
+          resource: { type: "Oil", quantity: 2 },
+          city: 1,
+          inDeck: true,
+          isSelected: false
+        },
+        "19": {
+          resource: { type: "Garbage", quantity: 1 },
+          city: 3,
+          inDeck: true,
+          isSelected: false
+        }
+      });
+      const player1 = new Player("red", "A");
+      player1.id = 1;
+      const player2 = new Player("green", "B");
+      player2.id = 2;
+      const player3 = new Player("yellow", "C");
+      player3.id = 3;
+      game.powerPlantMarket = powerPlantMarket;
+      game.players = [player1, player2, player3];
+      game.conductAuction("13");
+      game.conductAuction("pass");
+      game.conductAuction("pass");
+      game.conductAuction("19");
+      const actualOutput = game.getPlayersOrder();
+      const expectedOutput = [2, 3];
+      chai.expect(expectedOutput).to.be.deep.equal(actualOutput);
+    });
+
+    it("should return the playing order", function() {
+      const powerPlantMarket = new PowerPlantMarket({
+        "13": {
+          resource: { type: "Oil", quantity: 2 },
+          city: 1,
+          inDeck: true,
+          isSelected: false
+        },
+        "19": {
+          resource: { type: "Garbage", quantity: 1 },
+          city: 3,
+          inDeck: true,
+          isSelected: false
+        }
+      });
+      const game = new Game(2);
+      const player1 = new Player("red", "A");
+      player1.id = 1;
+      const player2 = new Player("green", "B");
+      player2.id = 2;
+      game.powerPlantMarket = powerPlantMarket;
+      game.players = [player1, player2];
+      game.conductAuction("13");
+      game.conductAuction("pass");
+      game.conductAuction("19");
+      const actualOutput = game.getPlayersOrder();
+      const expectedOutput = [];
+      chai.expect(expectedOutput).to.be.deep.equal(actualOutput);
+    });
+  });
+
+  describe("getBidPlayers", function() {
+    it("should return the players in the bidding", function() {
+      const player1 = new Player("red", "A");
+      player1.id = 1;
+      const player2 = new Player("green", "B");
+      player2.id = 2;
+      const player3 = new Player("yellow", "C");
+      player3.id = 3;
+      game.players = [player1, player2, player3];
+      const actualOutput = game.getBidPlayers();
+      const expectedOutput = [1, 2, 3];
+      chai.expect(expectedOutput).to.be.deep.equal(actualOutput);
+    });
+  });
+
+  describe("getAuctionPlayers", function() {
+    it("should return the players in the bidding", function() {
+      const player1 = new Player("red", "A");
+      player1.id = 1;
+      const player2 = new Player("green", "B");
+      player2.id = 2;
+      const player3 = new Player("yellow", "C");
+      player3.id = 3;
+      game.players = [player1, player2, player3];
+      const actualOutput = game.getAuctionPlayers();
+      const expectedOutput = [1, 2, 3];
       chai.expect(expectedOutput).to.be.deep.equal(actualOutput);
     });
   });

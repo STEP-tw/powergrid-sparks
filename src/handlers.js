@@ -282,6 +282,34 @@ const getActivityLogs = function(req, res) {
   res.send(JSON.stringify(game.getLogs()));
 };
 
+const makeBid = function(req, res) {
+  const bidAmount = req.body.bidAmount;
+  const game = initializeGame(req, res);
+  game.conductAuction(bidAmount);
+  res.send("");
+};
+
+const selectPowerPlant = function(req, res) {
+  const game = initializeGame(req, res);
+  const powerPlantCost = req.body.powerPlantCost;
+  game.addSelectedPowerPlant(powerPlantCost);
+  res.send("");
+};
+
+const getCurrentBid = function(req, res) {
+  const game = initializeGame(req, res);
+  const currentBid = game.getCurrentBid();
+  const isBidOver = game.isBidOver();
+  const bidPlayers = game.getBidPlayers();
+  const auctionPlayers = game.getAuctionPlayers();
+  if (isBidOver) {
+    return res.send(
+      JSON.stringify({ currentBid: currentBid, players: auctionPlayers })
+    );
+  }
+  res.send(JSON.stringify({ currentBid: currentBid, players: bidPlayers }));
+};
+
 module.exports = {
   renderHome,
   createGame,
@@ -306,5 +334,8 @@ module.exports = {
   lightCities,
   getPowerplants,
   getPlayerResources,
-  returnPlayerResources
+  returnPlayerResources,
+  makeBid,
+  selectPowerPlant,
+  getCurrentBid
 };

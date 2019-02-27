@@ -2,6 +2,8 @@ const currentMarketCards = {};
 
 const selectedPowerPlants = [];
 
+let hasBought = false;
+
 const resources = {
   Garbage: '<i class="fas fa-trash-alt"></i>',
   Coal: '<i class="fas fa-cubes"></i>',
@@ -29,23 +31,24 @@ const displayPowerPlantMarket = function(powerPlantCards) {
   market.appendChild(generatePowerPlantMarket(powerPlantCards));
 };
 
-const persistCardClass = function(currentMarketDiv) {
-  const id = selectedPowerPlants[0];
-  currentMarketDiv.childNodes.forEach(node => {
-    if (node.id == id) {
-      node.className = "selected-card";
-    }
-  });
-};
-
 const updatePriceDiv = function(price) {
   document.getElementById("current-bid-amount").innerText = price;
   document.getElementById("bid-amount").innerText = price;
 };
 
+const selectPowerPlant = function(element) {
+  const powerPlantCost = element.id.split("_")[1];
+  fetch("/powerPlant/select", {
+    method: "POST",
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    body: `powerPlantCost=${powerPlantCost}`
+  });
+  updatePriceDiv(powerPlantCost);
+};
+
 const handleMarketState = function(state, powerPlantDiv, powerPlantCost) {
   if (state == "currentMarket") {
-    powerPlantDiv.onclick = addFocus.bind(null, powerPlantDiv);
+    powerPlantDiv.onclick = selectPowerPlant.bind(null, powerPlantDiv);
     currentMarketCards[powerPlantCost] = {
       isSelected: false,
       powerplant: powerPlantDiv
@@ -83,12 +86,45 @@ const generateMarket = function(powerPlants, startingIndex, endingIndex, id) {
   return marketDiv;
 };
 
+const persistCardClass = function(powerPlants, currentMarketDiv) {
+  const selectedPowerPlant = Object.keys(powerPlants).filter(
+    powerPlantCost => powerPlants[powerPlantCost].isSelected
+  );
+  currentMarketDiv.childNodes.forEach(node => {
+    if (node.id == `powerPlant_${selectedPowerPlant[0]}`) {
+      node.className = "selected-card";
+    }
+  });
+  fetch("/currentBid")
+    .then(res => res.json())
+    .then(auction => {
+      const { currentBid, players } = auction;
+      const cost = document.getElementById("bid-amount").innerText;
+      fetch("/currentPlayer")
+        .then(res => res.json())
+        .then(player => {
+          // if (isBidOver) {
+          //   currentMarketDiv.childNodes.forEach(node => {
+          //     node.className = "unselected-card";
+          //   });
+          //   buyPowerplant();
+          // return;
+          // }
+          if (players.includes(+player.id)) {
+            if (+currentBid >= +cost) return updatePriceDiv(currentBid);
+            return updatePriceDiv(cost);
+          }
+          updateCurrentPlayer();
+        });
+    });
+};
+
 const displayPowerPlants = function(powerPlants) {
   const currentMarketDiv = generateMarket(powerPlants, 0, 4, "currentMarket");
   const futureMarketDiv = generateMarket(powerPlants, 4, 8, "futureMarket");
   const powerPlantDiv = generateDiv("power-plant-cards", "power-plant-cards");
   appendChildren(powerPlantDiv, [currentMarketDiv, futureMarketDiv]);
-  persistCardClass(currentMarketDiv);
+  persistCardClass(powerPlants, currentMarketDiv);
   const market = document.getElementById("market").children[0];
   market.replaceChild(powerPlantDiv, market.childNodes[0]);
 };
@@ -136,11 +172,28 @@ const buyPowerplant = function() {
     headers: { "Content-Type": "application/x-www-form-urlencoded" },
     body: `price=${price}`
   });
-  updateCurrentPlayer();
 };
 
 const addPowerPlantToPlayer = function(count, powerPlants, powerPlantCost) {
   const powerPlantDiv = document.getElementById(`powerplant-${count}`);
   powerPlantDiv.innerHTML = "";
   arrangeMarket(powerPlantDiv, powerPlantCost, powerPlants[powerPlantCost]);
+};
+
+const makeBid = function() {
+  const bidAmount = document.getElementById("bid-amount").innerText;
+  fetch("/auction/bid", {
+    method: "POST",
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    body: `bidAmount=${bidAmount}`
+  });
+  updateCurrentPlayer();
+};
+
+const pass = function() {
+  fetch("/auction/bid", {
+    method: "POST",
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    body: `bidAmount=pass`
+  }).then(res => updateCurrentPlayer());
 };
