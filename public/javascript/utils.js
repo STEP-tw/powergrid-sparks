@@ -19,13 +19,12 @@ const removeFirstTwoClasses = function(text) {
 const displayMap = function() {
   document.getElementById("back-button").style.display = "flex";
   document.getElementById("display-map").style.display = "none";
-  // document.getElementById("building-phase").style.visibility = "visible";
   const map = document.getElementById("map");
   const market = document.getElementById("market");
   document.getElementById(
     "bidding-section"
   ).innerHTML = getBuildCitiesTemplate();
-  map.style.display = "inline";
+  map.style.display = "inherit";
   market.style.display = "none";
 };
 

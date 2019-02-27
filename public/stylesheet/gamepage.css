@@ -11,7 +11,7 @@ body {
 }
 
 .player-name {
-  font-size: 20px;
+  font-size: 24px;
 }
 
 .players-section {
@@ -73,7 +73,6 @@ body {
 .map-section {
   box-shadow: 0px 0px 42px 3px rgba(2, 2, 2, 0.52);
   width: 100%;
-  display: flex;
   z-index: 1;
   background: #b2d8e8;
   display: flex;
@@ -107,8 +106,8 @@ button {
 }
 
 .activity-log::-webkit-scrollbar {
-  width: 0px; /* remove scrollbar space */
-  background: transparent; /* optional: just make scrollbar invisible */
+  width: 0px;
+  background: transparent;
 }
 
 .activity-log {
@@ -121,7 +120,7 @@ button {
   width: 40%;
   height: 70%;
   background-color: #2d303d;
-  font-size: 18px;
+  font-size: 22px;
   display: none;
   flex-direction: column;
   align-items: center;
@@ -151,8 +150,8 @@ button {
 }
 
 .self-details::-webkit-scrollbar {
-  width: 0px; /* remove scrollbar space */
-  background: transparent; /* optional: just make scrollbar invisible */
+  width: 0px;
+  background: transparent;
 }
 
 .self-details {
@@ -347,8 +346,8 @@ td {
   justify-content: center;
   align-items: center;
   color: #3e4346;
-  background-color: white;
-  border: 1px solid black;
+  background-color: #dfe9f4;
+  border: 1px solid #617787;
   border-radius: 50%;
   z-index: 1;
 }
@@ -406,8 +405,8 @@ td {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: white;
-  border: 1px solid black;
+  background-color: #dfe9f4;
+  border: 1px solid #617787;
   border-radius: 50%;
   z-index: 1;
   font-size: 80%;
@@ -415,24 +414,20 @@ td {
 }
 
 .bidding-section {
-  /* margin-right: 15%; */
   background-color: white;
   border-radius: 10px;
   height: 80%;
   width: 80%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-evenly;
   color: #3e4346;
-  background: white;
+  font-size: 25px;
 }
 
 .increase-bid {
   position: relative;
-  /* top: 10%; */
-  /* height: 100%; */
 }
 
 .focus {
@@ -440,8 +435,8 @@ td {
 }
 
 .selected-cities::-webkit-scrollbar {
-  width: 0px; /* remove scrollbar space */
-  background: transparent; /* optional: just make scrollbar invisible */
+  width: 0px;
+  background: transparent;
 }
 
 .selected-cities {
@@ -452,21 +447,6 @@ td {
   overflow: scroll;
   border: 1px solid #4b4f62;
 }
-
-/* .build-cities {
-  border: none;
-} */
-
-/* .build-cities > button {
-  background: none;
-  cursor: pointer;
-  border: 1px solid #4b4f62;
-  color: #b0d8eb;
-} */
-
-/* .build-cities > button:focus {
-  outline: none;
-} */
 
 .power-plant-cards {
   height: 80%;
@@ -479,13 +459,12 @@ td {
 }
 
 .bid-option {
-  padding: 0;
-  height: 9%;
+  height: 10%;
   width: 60%;
   border-radius: 5px;
-  background: #759cae;
-  font-size: 10px;
-  color: white;
+  background: #b5d7eb;
+  font-size: 20px;
+  color: #2d303e;
 }
 
 .increase-bid-button {
@@ -493,6 +472,7 @@ td {
   border-radius: 3px;
   background: #759cae;
   color: white;
+  font-size: inherit;
 }
 
 header {
@@ -500,6 +480,7 @@ header {
   width: 100%;
   display: flex;
   justify-content: flex-end;
+  font-size: 22px;
 }
 
 .header-option {
@@ -507,6 +488,7 @@ header {
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
 }
 
 .back-button {
@@ -522,24 +504,47 @@ header {
   justify-content: center;
   justify-content: space-around;
 }
+
 .select-powerplant {
   height: 50%;
   width: 100%;
-  border: 2px solid #4c5061;
+  border: 1px solid #4c5061;
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-evenly;
   align-items: center;
   box-sizing: border-box;
 }
 
 .powerplant {
-  height: 60%;
-  width: 25%;
+  height: 40%;
+  width: 33%;
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 2px solid #4c5061;
+  border: 1px solid #4c5061;
   border-radius: 50%;
   font-size: 25px;
   cursor: pointer;
+}
+
+.city-count {
+  width: 100%;
+  font-size: 20px;
+  border: none;
+  font-weight: lighter;
+  text-align: center;
+  border-bottom: 1px solid #4c5061;
+}
+
+.city-count:focus {
+  outline: none;
+}
+
+.close-activitylog{
+  position: absolute;
+  top:1%;
+  right:3%;
+  cursor: pointer;
+  font-size: 25px
 }

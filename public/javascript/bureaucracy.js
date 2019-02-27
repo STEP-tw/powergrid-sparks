@@ -3,11 +3,11 @@ const selectedPowerPlant = [];
 const getLightedCities = function() {
   const buildingPhase = document.getElementById("building-phase");
   buildingPhase.innerHTML =
-    '<input style="font-size:30px" type="text" name="select Lighted cities" id="lighted-cities" placeholder="enter number of cities to light">';
+    '<input class="city-count" autocomplete="off" type="text" id="lighted-cities" placeholder="Enter number of cities to light">';
   buildingPhase.innerHTML +=
     '<div class="select-powerplant" id="select-powerplant"></div>';
-  buildingPhase.innerHTML += '<button onclick="disableOnclick()">done</button>';
-  buildingPhase.innerHTML += '<button id="submit">Submit</button>';
+  buildingPhase.innerHTML += '<button class="bid-option" onclick="disableOnclick()">Done</button>';
+  buildingPhase.innerHTML += '<button class="bid-option" id="submit">Submit</button>';
   buildingPhase.innerHTML += '<div id="err-msg"></div>';
   document.getElementById("submit").style.visibility = "hidden";
 };
@@ -120,7 +120,7 @@ const clickPowerplant = function(powerplantDiv) {
 };
 
 const unclickPowerplant = function(powerplantDiv) {
-  const unclickBorder = "2px solid #4c5061";
+  const unclickBorder = "1px solid #4c5061";
   const powerPlantValue = powerplantDiv.innerText;
   powerplantDiv.style.border = unclickBorder;
   const indexOfPowerPlant = selectedPowerPlant.indexOf(powerPlantValue);
