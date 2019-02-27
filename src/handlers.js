@@ -231,14 +231,19 @@ const getPlayerResources = function(req, res) {
   res.send({ powerplants, resources });
 };
 
-const returnPlayerResources = function(req, res){
+const returnPlayerResources = function(req, res) {
   const game = initializeGame(req, res);
   const playerId = req.cookies.playerId;
   const updatedResources = JSON.parse(req.body.resources);
   const currentPlayer = game.players.find(player => player.id == playerId);
   currentPlayer.resources = updatedResources;
+  if (currentPlayer.name == game.players[game.players.length - 1].name) {
+    const resourceMarket = game.getResourceMarket();
+    resourceMarket.refillResourceStep1();
+    game.setPlayingOrder();
+  }
   res.send();
-}
+};
 
 const getPlayers = function(req, res) {
   const game = initializeGame(req, res);

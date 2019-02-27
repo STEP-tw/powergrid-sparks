@@ -1,13 +1,14 @@
-const Turn = require('./turn');
-const ResourceMarket = require('./resource_market');
-const ActivityLog = require('./activityLog');
+const Turn = require("./turn");
+const ResourceMarket = require("./resource_market");
+const ActivityLog = require("./activityLog");
+const PlayingOrder = require("./playing_order");
 
 class Game {
   constructor(playerCount) {
     this.active = false;
     this.players = [];
     this.maxPlayerCount = playerCount;
-    this.colors = ['red', 'blue', 'pink', 'black', 'orange', 'yellow'];
+    this.colors = ["red", "blue", "pink", "black", "orange", "yellow"];
     this.isShuffled = false;
     this.powerPlantMarket;
     this.activityLog = new ActivityLog(Date);
@@ -84,8 +85,13 @@ class Game {
     this.activityLog.addLog(log);
   }
 
-  getLogs(){
+  getLogs() {
     return this.activityLog.getLogs();
+  }
+
+  setPlayingOrder() {
+    const playingOrder = new PlayingOrder(this.players);
+    this.players = playingOrder.getOrder();
   }
 }
 
