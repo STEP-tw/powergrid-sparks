@@ -11,7 +11,14 @@ const setInnerText = function(id, text) {
 const setInnerHTML = function(id, cities) {
   document.getElementById(id).innerHTML = "Selected Cities: ";
   cities.forEach(city => {
-    document.getElementById(id).innerHTML += `&nbsp<div>${city}</div>`;
+    const cityName = city.split("_");
+    cityName.pop();
+    let formattedCityName = cityName
+      .map(name => name.charAt(0).toUpperCase() + name.slice(1))
+      .join(" ");
+    document.getElementById(
+      id
+    ).innerHTML += `&nbsp<div>${formattedCityName}</div>`;
   });
 };
 
@@ -62,7 +69,7 @@ const takeBuildAction = function(player) {
     reset();
     updateCurrentPlayer();
     getLightedCities();
-    selectPowerplant()
+    selectPowerplant();
     return;
   }
   setInnerText("payment-failed", "Building failed!!! Insuffient money");
