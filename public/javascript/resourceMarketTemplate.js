@@ -38,7 +38,7 @@ const getBuildCitiesTemplate = function() {
 
 const getResourceMarketTemplate = function() {
   return `
-  <div class="resource-grid">
+  <div class="resource-grid" id = "resource-grid">
     <div class="cost">1</div>
     <div class="resource" id="Coal_1_2">
     </div>
@@ -61,7 +61,7 @@ const getResourceMarketTemplate = function() {
     <div class="resource" id="Garbage_1_0">
     </div>
   </div>
-  <div class="resource-grid">
+  <div class="resource-grid" id = "resource-grid">
     <div class="cost">2</div>
     <div class="resource" id="Coal_2_2">
     </div>
@@ -84,7 +84,7 @@ const getResourceMarketTemplate = function() {
     <div class="resource" id="Garbage_2_0">
     </div>
   </div>
-  <div class="resource-grid">
+  <div class="resource-grid" id = "resource-grid">
     <div class="cost">3</div>
     <div class="resource" id="Coal_3_2">
     </div>
@@ -107,7 +107,7 @@ const getResourceMarketTemplate = function() {
     <div class="resource" id="Garbage_3_0">
     </div>
   </div>
-  <div class="resource-grid">
+  <div class="resource-grid" id = "resource-grid">
     <div class="cost">4</div>
     <div class="resource" id="Coal_4_2">
     </div>
@@ -130,7 +130,7 @@ const getResourceMarketTemplate = function() {
     <div class="resource" id="Garbage_4_0">
     </div>
   </div>
-  <div class="resource-grid">
+  <div class="resource-grid" id = "resource-grid">
     <div class="cost">5</div>
     <div class="resource" id="Coal_5_2">
     </div>
@@ -153,7 +153,7 @@ const getResourceMarketTemplate = function() {
     <div class="resource" id="Garbage_5_0">
     </div>
   </div>
-  <div class="resource-grid">
+  <div class="resource-grid" id = "resource-grid">
     <div class="cost">6</div>
     <div class="resource" id="Coal_6_2">
     </div>
@@ -176,7 +176,7 @@ const getResourceMarketTemplate = function() {
     <div class="resource" id="Garbage_6_0">
     </div>
   </div>
-  <div class="resource-grid">
+  <div class="resource-grid" id = "resource-grid">
     <div class="cost">7</div>
     <div class="resource" id="Coal_7_2">
     </div>
@@ -199,7 +199,7 @@ const getResourceMarketTemplate = function() {
     <div class="resource" id="Garbage_7_0">
     </div>
   </div>
-  <div class="resource-grid">
+  <div class="resource-grid" id = "resource-grid">
     <div class="cost">8</div>
     <div class="resource" id="Coal_8_2">
     </div>
@@ -221,7 +221,7 @@ const getResourceMarketTemplate = function() {
     </div>
     <div class="resource" id="Garbage_8_0"></div>
   </div>
-  <div class="resource-grid">
+  <div class="resource-grid" id = "resource-grid">
   <div class="last-uranium" id="Uranium_10_0">
   <div class = "uranium-cost">10</div>
     </div>

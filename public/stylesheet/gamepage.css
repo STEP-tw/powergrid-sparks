@@ -553,7 +553,6 @@ header {
 .city-count:focus {
   outline: none;
 }
-
 .close-activitylog {
   position: absolute;
   top: 1%;
@@ -568,4 +567,16 @@ header {
   padding: 10px;
   border: #d47670;
   border-radius: 8px;
+}
+
+.resource-market-phase {
+  flex-wrap: wrap;
+  width: 90%;
+  height: 85%;
+  border: none;
+}
+
+.new-resource-grid {
+  width: 20%;
+  height: 30%;
 }

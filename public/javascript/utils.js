@@ -42,11 +42,11 @@ const generateDiv = function(className, id) {
   return divElement;
 };
 
-const addFocus = function(element) {
-  const price = element.id.split("_")[1];
-  selectedPowerPlants.pop();
-  selectedPowerPlants.push(element.id);
-  currentMarketCards[price].isSelected = true;
-  element.className = "selected-card";
-  updatePriceDiv(price);
-};
+// const addFocus = function(element) {
+//   const price = element.id.split("_")[1];
+//   selectedPowerPlants.pop();
+//   selectedPowerPlants.push(element.id);
+//   currentMarketCards[price].isSelected = true;
+//   element.className = "selected-card";
+//   updatePriceDiv(price);
+// };

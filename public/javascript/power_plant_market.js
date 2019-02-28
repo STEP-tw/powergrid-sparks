@@ -1,4 +1,22 @@
 const currentMarketCards = {};
+const phases = {
+  buyPowerPlant: true,
+  buyResource: false,
+  buildCities: false,
+  bureaucracy: false
+};
+
+const makePhaseActive = function(currentPhase) {
+  Object.keys(phases).forEach(phase => {
+    phases[phase] = false;
+  });
+  phases[currentPhase] = true;
+};
+
+const isBuyPowerPlantPhase = () => phases.buyPowerPlant;
+const isBuyResourcePhase = () => phases.buyResource;
+const isBuildCitiesPhase = () => phases.buildCities;
+const isBureaucracyPhase = () => phases.bureaucracy;
 
 const selectedPowerPlants = [];
 
@@ -88,12 +106,23 @@ const generateMarket = function(powerPlants, startingIndex, endingIndex, id) {
 
 const startBuyResourcePhase = function() {
   document.getElementById("buy-resources-button").style.visibility = "visible";
+  document.getElementById("power-plant-cards").style.display = "none";
+  document.getElementById("market-div").style.width = "95%";
   const auction = document.querySelectorAll(".auction");
   const powerPlants = document.querySelectorAll(".unselected-card");
   auction.forEach(element => {
     element.style.visibility = "hidden";
   });
   powerPlants.forEach(powerPlant => (powerPlant.onclick = ""));
+};
+
+const designResourceMarket = function() {
+  const resourceMarket = document.getElementById("resourceMarket");
+  resourceMarket.className += " resource-market-phase";
+  const resourceGrids = document.getElementsByClassName("resource-grid");
+  Object.keys(resourceGrids).forEach(index => {
+    resourceGrids[index].className += " new-resource-grid";
+  });
 };
 
 const persistCardClass = function(powerPlants, currentMarketDiv) {
@@ -110,6 +139,8 @@ const persistCardClass = function(powerPlants, currentMarketDiv) {
     .then(auction => {
       const { currentBid, isAuctionOver, players } = auction;
       if (isAuctionOver) {
+        makePhaseActive("buyResource");
+        designResourceMarket();
         startBuyResourcePhase();
         return;
       }
@@ -127,13 +158,15 @@ const persistCardClass = function(powerPlants, currentMarketDiv) {
 };
 
 const displayPowerPlants = function(powerPlants) {
-  const currentMarketDiv = generateMarket(powerPlants, 0, 4, "currentMarket");
-  const futureMarketDiv = generateMarket(powerPlants, 4, 8, "futureMarket");
-  const powerPlantDiv = generateDiv("power-plant-cards", "power-plant-cards");
-  appendChildren(powerPlantDiv, [currentMarketDiv, futureMarketDiv]);
-  persistCardClass(powerPlants, currentMarketDiv);
-  const market = document.getElementById("market").children[0];
-  market.replaceChild(powerPlantDiv, market.childNodes[0]);
+  if (isBuyPowerPlantPhase()) {
+    const currentMarketDiv = generateMarket(powerPlants, 0, 4, "currentMarket");
+    const futureMarketDiv = generateMarket(powerPlants, 4, 8, "futureMarket");
+    const powerPlantDiv = generateDiv("power-plant-cards", "power-plant-cards");
+    appendChildren(powerPlantDiv, [currentMarketDiv, futureMarketDiv]);
+    persistCardClass(powerPlants, currentMarketDiv);
+    const market = document.getElementById("market").children[0];
+    market.replaceChild(powerPlantDiv, market.childNodes[0]);
+  }
 };
 
 const fetchCurrentPowerPlants = function() {
@@ -158,6 +191,7 @@ const generatePowerPlantMarket = function(powerPlantCards) {
   generateBidDiv();
   const marketDiv = document.createElement("div");
   marketDiv.className = "market-div";
+  marketDiv.id = "market-div";
   appendChildren(marketDiv, [powerPlantDiv, resourceMarketDiv]);
   return marketDiv;
 };
