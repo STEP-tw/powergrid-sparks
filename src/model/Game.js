@@ -28,7 +28,7 @@ class Game {
     if (isBidOver) {
       this.sellPowerPlant(value);
       this.updatePowerPlants();
-      // this.addLog();
+
     }
   }
 

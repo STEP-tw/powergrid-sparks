@@ -26,7 +26,7 @@ const getBuyResourceTemplate = function() {
 };
 
 const getBuildCitiesTemplate = function() {
-  return `<div id="building-phase" class="build-cities bidding-section" >
+  return `<div id="building-phase" class="build-cities" >
         <div>Building Cost : <span id="building-cost">0</span></div>Selected Cities 
         <div id="selected-cities" class="selected-cities"></div>
         <div>Number of Cities :<span id = "city-count"> 0</span></div>

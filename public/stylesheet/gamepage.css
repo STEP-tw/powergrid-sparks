@@ -5,9 +5,16 @@ html {
 
 body {
   margin: 0;
-  color: #b0d8eb;
+  color: #1c1c11;
   height: 100%;
-  background-color: #2d303d;
+  background: #a3a182;
+  background: -moz-radial-gradient(center, ellipse cover, #a3a182 0%, #7a7959 69%, #7a7959 100%);
+  background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%, #a3a182), color-stop(69%, #7a7959), color-stop(100%, #7a7959));
+  background: -webkit-radial-gradient(center, ellipse cover, #a3a182 0%, #7a7959 69%, #7a7959 100%);
+  background: -o-radial-gradient(center, ellipse cover, #a3a182 0%, #7a7959 69%, #7a7959 100%);
+  background: -ms-radial-gradient(center, ellipse cover, #a3a182 0%, #7a7959 69%, #7a7959 100%);
+  background: radial-gradient(ellipse at center, #a3a182 0%, #7a7959 69%, #7a7959 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a3a182', endColorstr='#7a7959', GradientType=1 );
   font-family: Avenir Next !important;
 }
 
@@ -21,28 +28,27 @@ body {
   height: 25%;
   width: 100%;
   align-items: center;
-  background-color: #2d303d;
 }
 
 .player-color-red {
-  border-top: 10px solid red;
+  border-top: 10px solid #d55a11d1;
 }
 
 .player-color-blue {
-  border-top: 10px solid blue;
+  border-top: 10px solid #d51313cf;
 }
 
 .player-color-orange {
-  border-top: 10px solid orange;
+  border-top: 10px solid #3e68e0e0;
 }
 .player-color-pink {
-  border-top: 10px solid pink;
+  border-top: 10px solid #588342;
 }
 .player-color-black {
-  border-top: 10px solid black;
+  border-top: 10px solid #765192b8;
 }
 .player-color-yellow {
-  border-top: 10px solid yellow;
+  border-top: 10px solid #cf9f1634;
 }
 
 .player-profile {
@@ -54,7 +60,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  background-color: #4b4f62;
+  background-color: #aaa988;
 }
 
 .highlighted {
@@ -72,10 +78,8 @@ body {
 }
 
 .map-section {
-  box-shadow: 0px 0px 42px 3px rgba(2, 2, 2, 0.52);
   width: 100%;
   z-index: 1;
-  background: #b2d8e8;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -103,7 +107,6 @@ button {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #2d303d;
 }
 
 .activity-log::-webkit-scrollbar {
@@ -144,7 +147,7 @@ button {
 .player-header {
   width: 100%;
   margin-top: 2%;
-  border-bottom: 1px solid #6f717f;
+  border-bottom: 1px solid #878662;
 
   display: flex;
   justify-content: space-between;
@@ -162,20 +165,19 @@ button {
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
-  background-color: #2d303d;
 }
 
 .self-cash {
-  border: 1px solid #4c4d64;
+  border: 1px solid #a3a17f;
   text-align: center;
-  background: #605d6842;
+  background: #6c7d3761;
   width: 80%;
 }
 
 .power-plant {
   width: 70%;
   height: 155px;
-  border: 1px solid #4b4f62;
+  border: 1px solid #a3a17f;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -189,23 +191,38 @@ table {
 }
 
 th {
-  background: #605d6842;
+  background: #a3a17f;
 }
 
 th,
 td {
-  border: 1px solid #4b4f62;
+  border: 1px solid #a3a17f;
 }
 
 .unselected-card {
-  height: 95%;
+  height: 90%;
   width: 150px;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   font-size: 25px;
   border-radius: 9px;
-  background: #759cae;
+  background: #aaa98b;
+  box-sizing: border-box;
+}
+
+.selected-card {
+  height: 90%;
+  width: 150px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  font-size: 25px;
+  border-radius: 9px;
+  border: 1px solid #b7d7ea;
+  box-sizing: border-box;
+  background: #aaa98b;
+  box-shadow: 0 0 20px 5px #2d303e;
 }
 
 .player-power-plant {
@@ -243,18 +260,6 @@ td {
   align-items: center;
 }
 
-.selected-card {
-  height: 90%;
-  width: 150px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  font-size: 25px;
-  border-radius: 9px;
-  border: 2px solid orangered;
-  background: #759cae;
-}
-
 .price {
   height: 55%;
   width: 45%;
@@ -264,8 +269,7 @@ td {
   border: 2px solid #3e43475e;
   border-radius: 50%;
   color: #3e4346;
-
-  background: #f0f8ffd6;
+  background: #e6e6c1;
 }
 
 .card-details {
@@ -274,7 +278,7 @@ td {
   justify-content: space-evenly;
   font-size: 17px;
   text-align: center;
-  background: #21353f57;
+  background: #878664;
   height: 20%;
 }
 
@@ -294,7 +298,8 @@ td {
   align-items: center;
   width: 98%;
   height: 25%;
-  border: solid 1px #5e7886;
+  border: solid 1px #a3a17f;
+  background: #7A7959;
 }
 
 .price-details {
@@ -324,14 +329,14 @@ td {
   flex-wrap: wrap;
   width: 10%;
   height: 90%;
-  border: solid 1px #5e7886;
+  border: solid 1px #a3a17f;
 }
 
 .resource {
   width: 30%;
   height: 30%;
-  border: solid 1px #759cae;
-  color: #3e4346;
+  border: solid 1px #a3a17f !important;
+  color: #2d2d1b;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -346,9 +351,9 @@ td {
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #3e4346;
-  background-color: #dfe9f4;
-  border: 1px solid #617787;
+  color: #b5b3a0;
+  background-color: #41432e;
+  border: 1px solid #a3a17c;
   border-radius: 50%;
   z-index: 1;
 }
@@ -357,11 +362,11 @@ td {
   position: relative;
   width: 40%;
   height: 40%;
-  border: solid 1px #759cae;
+  border: solid 1px #a3a17f !important;
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #3e4346;
+  color: #2d2d1b;
 }
 
 .fa-radiation-alt:before {
@@ -395,6 +400,7 @@ td {
 
 .resource.middle-resource {
   width: 22%;
+  border: 1px solid #a3a17f;
 }
 
 .uranium-cost {
@@ -406,16 +412,16 @@ td {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #dfe9f4;
-  border: 1px solid #617787;
+  color: #b5b3a0;
+  background-color: #41432e;
+  border: 1px solid #a3a17c;
   border-radius: 50%;
   z-index: 1;
   font-size: 80%;
-  color: #3e4346;
 }
 
 .bidding-section {
-  background-color: #4c5061;
+  background-color: #aaa985;
   border-radius: 10px;
   height: 85%;
   width: 80%;
@@ -423,7 +429,7 @@ td {
   flex-direction: column;
   align-items: center;
   justify-content: space-evenly;
-  color: #b9d8e7;
+  color: #41432c;
   font-size: 20px;
   box-shadow: 0px 0px 42px 3px rgba(2, 2, 2, 0.52);
 }
@@ -444,10 +450,12 @@ td {
 .selected-cities {
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: 90%;
   height: 50%;
   overflow: scroll;
-  border: 1px solid #4b4f62;
+  border: 1px solid #6a7a89;
+  box-sizing: border-box;
+  padding: 10px;
 }
 
 .power-plant-cards {
@@ -461,22 +469,32 @@ td {
 }
 
 .bid-option {
-  height: 10%;
+  height: 8%;
   width: 60%;
   border-radius: 8px;
   font-family: Avenir;
-  background: #2d303e;
-  font-size: 20px;
-  color: #b7d7ea;
+  background: #24251cd1;
+  font-size: 18px;
+  color: #bbbaa1;
   border: none;
+}
+
+.bid-option:hover {
+  font-size: 19px;
+  background: #1d1d17d1;
+}
+
+.bid-option:focus {
+  outline: none;
 }
 
 .increase-bid-button {
   width: 30px;
   border-radius: 3px;
-  background: #759cae;
-  color: white;
+  background: #3c3c2e;
+  color: #e7e6bd;
   font-size: inherit;
+  border: none;
 }
 
 header {
@@ -485,7 +503,8 @@ header {
   display: flex;
   justify-content: flex-end;
   font-size: 22px;
-  border-bottom: 1px solid;
+  background: #6d6c4f;
+  box-shadow: 0 0 16px 0px;
   margin-bottom: 8px;
 }
 
@@ -528,10 +547,12 @@ header {
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 1px solid #4c5061;
   border-radius: 50%;
-  font-size: 25px;
+  font-size: 35px;
   cursor: pointer;
+  border: 3px double rgb(122, 155, 175);
+  background: #dfe9f4;
+  color: #3d4358;
 }
 
 .city-count {
@@ -565,7 +586,7 @@ header {
   color: #de7272;
   box-sizing: border-box;
   padding: 10px;
-  border: #d47670;
+  border: 1px solid #d47670;
   border-radius: 8px;
 }
 
@@ -579,4 +600,15 @@ header {
 .new-resource-grid {
   width: 20%;
   height: 30%;
+}
+
+.build-cities {
+  border-radius: 10px;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  color: inherit;
 }
