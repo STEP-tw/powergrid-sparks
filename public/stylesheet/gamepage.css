@@ -127,6 +127,7 @@ body {
   display: flex;
   flex-wrap: wrap;
   height: 100%;
+  width: 100%;
 }
 
 button {
@@ -141,7 +142,7 @@ button {
 }
 
 .info {
-  width: 35%;
+  width: 30%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -213,12 +214,13 @@ button {
 }
 
 .power-plant {
-  width: 70%;
+  width: 80%;
   height: 155px;
   border: 1px solid #a3a17f;
   display: flex;
   justify-content: center;
   align-items: center;
+  box-sizing: border-box;
 }
 
 table {
@@ -462,7 +464,7 @@ td {
   background-color: #aaa985;
   border-radius: 10px;
   height: 85%;
-  width: 80%;
+  width: 90%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -668,7 +670,8 @@ header {
   color: #1c1b11;
   border: 1px solid #a3a17f;
   background: #6c7d3761;
-  width: 70%;
+  width: 80%;
+  box-sizing: border-box;
 }
 .north-west-top{
   fill: #999FA0;
