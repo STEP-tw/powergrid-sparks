@@ -8,12 +8,50 @@ body {
   color: #1c1c11;
   height: 100%;
   background: #a3a182;
-  background: -moz-radial-gradient(center, ellipse cover, #a3a182 0%, #7a7959 69%, #7a7959 100%);
-  background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%, #a3a182), color-stop(69%, #7a7959), color-stop(100%, #7a7959));
-  background: -webkit-radial-gradient(center, ellipse cover, #a3a182 0%, #7a7959 69%, #7a7959 100%);
-  background: -o-radial-gradient(center, ellipse cover, #a3a182 0%, #7a7959 69%, #7a7959 100%);
-  background: -ms-radial-gradient(center, ellipse cover, #a3a182 0%, #7a7959 69%, #7a7959 100%);
-  background: radial-gradient(ellipse at center, #a3a182 0%, #7a7959 69%, #7a7959 100%);
+  background: -moz-radial-gradient(
+    center,
+    ellipse cover,
+    #a3a182 0%,
+    #7a7959 69%,
+    #7a7959 100%
+  );
+  background: -webkit-gradient(
+    radial,
+    center center,
+    0px,
+    center center,
+    100%,
+    color-stop(0%, #a3a182),
+    color-stop(69%, #7a7959),
+    color-stop(100%, #7a7959)
+  );
+  background: -webkit-radial-gradient(
+    center,
+    ellipse cover,
+    #a3a182 0%,
+    #7a7959 69%,
+    #7a7959 100%
+  );
+  background: -o-radial-gradient(
+    center,
+    ellipse cover,
+    #a3a182 0%,
+    #7a7959 69%,
+    #7a7959 100%
+  );
+  background: -ms-radial-gradient(
+    center,
+    ellipse cover,
+    #a3a182 0%,
+    #7a7959 69%,
+    #7a7959 100%
+  );
+  background: radial-gradient(
+    ellipse at center,
+    #a3a182 0%,
+    #7a7959 69%,
+    #7a7959 100%
+  );
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a3a182', endColorstr='#7a7959', GradientType=1 );
   font-family: Avenir Next !important;
 }
@@ -299,7 +337,7 @@ td {
   width: 98%;
   height: 25%;
   border: solid 1px #a3a17f;
-  background: #7A7959;
+  background: #7a7959;
 }
 
 .price-details {
@@ -611,4 +649,24 @@ header {
   align-items: center;
   justify-content: space-evenly;
   color: inherit;
+}
+
+.my-cash {
+  color: #1c1b11;
+  width: 100%;
+  height: 13px;
+  background: #6c7d3761;
+  font-size: 12px;
+}
+
+.player-money {
+  height: 45px;
+  font-size: 26px;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  color: #1c1b11;
+  border: 1px solid #a3a17f;
+  background: #6c7d3761;
+  width: 70%;
 }

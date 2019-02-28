@@ -29,6 +29,7 @@
   </header>
   <main style="height:78%; width:100%; display: flex">
       <section class='self-details' >
+      <div class="player-money"><span class="my-cash">Balance</span> $ <span id="player-money"></span></div>
       <div class="power-plant" id="powerplant-1"></div>
       <div class="power-plant" id="powerplant-2"></div>
       <div class="power-plant" id="powerplant-3"></div>
@@ -56,7 +57,6 @@
         </tbody>
       </table>
       <div class="self-cash"><i class="fas fa-house-damage"> </i><span id="player-cities"> 4</span></div>
-      <div class="self-cash" > $ <span id="player-money"></span></div>
     </section>
     <section id="map" class = "map-section" style="display: none">
       <svg  onload="fetchMarket()" width="941" height="100%">
