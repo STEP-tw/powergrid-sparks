@@ -670,3 +670,32 @@ header {
   background: #6c7d3761;
   width: 70%;
 }
+.north-west-top{
+  fill: #999FA0;
+  stroke: #999FA0;
+}
+
+.north-west-bottom{
+  fill: #858B8E;
+  stroke: #858B8E;
+}
+
+.middle-south{
+  fill: #6E7376;
+  stroke: #6E7376;
+}
+
+.middle-north{
+  fill: #858B8E;
+  stroke: #858B8E;
+}
+
+.north-east-top{
+  fill: #6E7376;
+  stroke: #6E7376;
+}
+
+.north-east-bottom{
+  fill: #999FA0;
+  stroke: #999FA0;
+}
