@@ -79,7 +79,7 @@ const takeBuildAction = function(player) {
 const getSelectedCitiesDetails = function() {
   const price = +getInnerText("building-cost");
   const cityCount = getInnerText("city-count");
-  const cityNames = getInnerText("selected-cities");
+  const cityNames = 'Selected Cities: \n' +selectedCities.map(city => city.id).join('\n');
   return { price, cityCount, cityNames };
 };
 
