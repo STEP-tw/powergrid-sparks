@@ -22,6 +22,27 @@
 <body onload="showPlayerAssets('<%= JSON.stringify(players) %>')">
   
   <header>
+    <div class="all-phases">
+      <div class="phases">
+        <div id="auction-phase" class="phase" style="margin-left:0">Auction</div>
+        <div class="arrow-right"></div>
+      </div>
+      <div class="phases">
+        <div class="arrow-right white-arrow"></div>
+        <div id="buy-resource-phase" class="phase">Buy Resources</div>
+        <div class="arrow-right"></div>
+      </div>
+      <div id="auction-div" class="phases">
+      <div class="arrow-right white-arrow "></div>
+        <div id="build-city-phase" class="phase">Building Cities</div>
+        <div class="arrow-right"></div>
+      </div>
+      <div id="auction-div" class="phases">
+        <div class="arrow-right white-arrow "></div>
+        <div id="bureaucracy-phase" class="phase">Bureaucracy</div>
+        <div class="arrow-right"></div>
+      </div>
+    </div>
     <div class="header-option" id='activity-log-button' onclick="displayActivityLogs()">Activity log</div>
     <div class="header-option back-button" id="back-button" onclick="window.location.reload(true)" >Back</div>
     <div class="header-option" id='display-map'  onclick="displayMap()">Map</div>
@@ -34,9 +55,6 @@
       <div class="power-plant" id="powerplant-2"></div>
       <div class="power-plant" id="powerplant-3"></div>
       <table>
-        <!-- <tr>
-          <td colspan="2">Resources</td>
-        </tr> -->
         <tbody>
           <tr>
             <td><i class="fas fa-cubes"></i></td>

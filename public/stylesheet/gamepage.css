@@ -705,3 +705,46 @@ header {
 	fill: #77715f;
 	stroke: #77715f;
 }
+
+.phases {
+  height: 100%;
+  width: 28%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.phase{
+  width: 80%;
+  height: 80%;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left:-20px;
+  border-radius: 2px;
+  padding-left: 17%;
+  background: #42422fad;
+}
+
+.arrow-right {
+  border-top: 15px solid transparent;
+  border-bottom: 15px solid transparent;
+  border-left: 18px solid #42422fad;
+  border-radius: 2px;
+}
+
+.white-arrow {
+  border-left: 24px solid #6d6a50;
+  position: relative;
+}
+
+.all-phases{
+  width: 60%;
+  height: 100%;
+  display: flex;
+  font-size: 16px;
+  background-color: inherit;
+  margin-right: 15%;
+  color: #e7e3c2e6;
+}
