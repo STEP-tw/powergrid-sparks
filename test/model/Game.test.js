@@ -78,7 +78,7 @@ describe("Game", () => {
   describe("getPlayerColor", () => {
     it("It should return a color", () => {
       const actualOutput = game.getPlayerColor();
-      const expectedOutput = "red";
+      const expectedOutput = "gd55a11d1";
       chai.expect(expectedOutput).to.be.deep.equal(actualOutput);
     });
   });
