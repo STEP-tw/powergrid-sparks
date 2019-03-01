@@ -68,25 +68,28 @@ body {
 	align-items: center;
 }
 
-.player-color-red {
-	border-top: 10px solid #d55a11d1;
+.player-color-gd55a11d1 {
+  border-top: 10px solid #d55a11d1;
 }
 
-.player-color-blue {
-	border-top: 10px solid #d51313cf;
+.player-color-gffbf46 {
+  border-top: 10px solid #ffbf46;
 }
 
-.player-color-orange {
-	border-top: 10px solid #3e68e0e0;
+.player-color-g575761 {
+  border-top: 10px solid #575761;
 }
-.player-color-pink {
-	border-top: 10px solid #588342;
+
+.player-color-g648381 {
+  border-top: 10px solid #648381;
 }
-.player-color-black {
-	border-top: 10px solid #765192b8;
+
+.player-color-g765192b8 {
+  border-top: 10px solid #765192b8;
 }
-.player-color-yellow {
-	border-top: 10px solid #cf9f1634;
+
+.player-color-gcf9f1634 {
+  border-top: 10px solid #cf9f1634;
 }
 
 .player-profile {

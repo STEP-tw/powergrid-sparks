@@ -42,7 +42,7 @@ const displayCurrentPlayer = function(color) {
   const allPlayerElements = document.querySelectorAll(".player-profile");
   const currentPlayerElement = document.querySelector(`.player-color-${color}`);
   allPlayerElements.forEach(element => (element.style.borderBottom = "none"));
-  currentPlayerElement.style.borderBottom = `10px solid ${color}`;
+  currentPlayerElement.style.borderBottom = `10px solid #${color.slice(1)}`;
 };
 
 const handleInteraction = function(currentId, reqId) {

@@ -9,7 +9,7 @@ class Game {
     this.active = false;
     this.players = [];
     this.maxPlayerCount = playerCount;
-    this.colors = ["red", "blue", "pink", "black", "orange", "yellow"];
+    this.colors = ["gd55a11d1", "gffbf46", "g575761", "g765192b8", "g648381", "gcf9f1634"];
     this.isShuffled = false;
     this.activityLog = new ActivityLog(Date);
     this.playerOrder = this.players;

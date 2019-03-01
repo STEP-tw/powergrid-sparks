@@ -98,7 +98,7 @@ const updateCity = function(cityName, playerColor) {
 };
 
 const updateMap = function(player) {
-  const playerColor = player.color;
+  const playerColor = '#'+player.color.slice(1);
   const cityNames = player.cityNames;
   cityNames.forEach(cityName => {
     updateCity(cityName, playerColor);
