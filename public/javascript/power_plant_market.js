@@ -34,7 +34,6 @@ const displayPowerPlantMarket = function(powerPlantCards) {
 const updatePriceDiv = function(price) {
   document.getElementById("current-bid-amount").innerText = price;
   document.getElementById("bid-amount").innerText = price;
-  console.log(document.getElementById("bid-amount").innerText);
 };
 
 const selectPowerPlant = function(element) {

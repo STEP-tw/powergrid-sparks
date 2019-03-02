@@ -7,5 +7,6 @@ const polling = function() {
     getPlayerStatsDiv();
     refreshMap();
     getActivityLogs();
+    getCurrentPhase();
   }, 1100);
 };
