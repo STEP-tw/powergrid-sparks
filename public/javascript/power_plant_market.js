@@ -148,6 +148,7 @@ const persistCardClass = function(powerPlants, currentMarketDiv) {
         .then(res => res.json())
         .then(player => {
           if (players.includes(+player.id)) {
+            console.log(cost);
             if (+currentBid >= +cost) return updatePriceDiv(currentBid);
             return;
           }
