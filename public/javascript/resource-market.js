@@ -161,11 +161,21 @@ const generateResourceValue = function() {
   }
 };
 
+const currentPhase = { phase: "" };
+
 const getCurrentPhase = function() {
   fetch("/currentPhase")
     .then(res => res.text())
     .then(phase => {
-      if (phase == "buyResources") startBuyResourcePhase();
-      if (phase == "buildCities") displayMap();
+      if (phase == "buyResources" && currentPhase.phase != "buyResources") {
+        designResourceMarket();
+        startBuyResourcePhase();
+        currentPhase.phase = "buyResources";
+      }
+      if (phase == "buildCities" && currentPhase.phase != "buildCities") {
+        displayMap();
+        refreshMap();
+        currentPhase.phase = "buildCities";
+      }
     });
 };
