@@ -150,7 +150,7 @@ const unselectResource = function(resourceDiv, amount, resourceDetails) {
 const generateResourceValue = function() {
   const resourceDiv = event.target;
   if (resourceDiv.id) {
-    const clickBorder = "1px solid black";
+    const clickBorder = "2px solid black";
     const resourceDetails = splitByHyphen(resourceDiv.id);
     const amountDiv = document.getElementById("resource-amount");
     const currentAmount = convertToNumber(amountDiv.innerText);
