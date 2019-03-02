@@ -13,7 +13,7 @@ const hideSoldResource = function(resource) {
   let newClass = removeFirstTwoClasses(resource.className);
   resource.className = newClass;
   resource.onclick = "";
-  resource.style.border = "1px solid #759cae";
+  resource.style.border = "1px solid #a3a17f";
 };
 
 const displayResource = function(resources, resource, cost, id) {
@@ -64,7 +64,7 @@ const showFailedPaymentMessage = function() {
 };
 
 const resetSelection = function(resource) {
-  document.getElementById(resource).style.border = "1px solid #759cae";
+  document.getElementById(resource).style.border = "1px solid #a3a17f";
 };
 
 const showFailedPayment = function() {
@@ -75,10 +75,10 @@ const showFailedPayment = function() {
 };
 
 const handleSellResources = function(player) {
-  const resourceMarket = document.querySelectorAll(".filled");
+  // const resourceMarket = document.querySelectorAll(".filled");
   if (!player.isPaymentSuccess) return showFailedPayment();
   resetTurn();
-  resourceMarket.forEach(resource => (resource.onclick = ""));
+  // resourceMarket.forEach(resource => (resource.onclick = ""));
 };
 
 const getResourceDetails = function() {
@@ -135,7 +135,7 @@ const selectResource = function(resourceDiv, amount, resourceDetails) {
 };
 
 const unselectResource = function(resourceDiv, amount, resourceDetails) {
-  const unclickBorder = "1px solid #759cae";
+  const unclickBorder = "1px solid #a3a17f";
   resourceDiv.style.border = unclickBorder;
   const amountDiv = document.getElementById("resource-amount");
   amountDiv.innerText = amount - convertToNumber(resourceDetails[1]);

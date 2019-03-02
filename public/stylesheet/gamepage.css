@@ -378,7 +378,7 @@ td {
 .resource {
 	width: 30%;
 	height: 30%;
-	border: solid 1px #a3a17f !important;
+	border: solid 1px #a3a17f ;
 	color: #2d2d1b;
 	display: flex;
 	justify-content: center;
