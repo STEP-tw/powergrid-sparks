@@ -50,6 +50,7 @@ const displayPowerPlantMarket = function(powerPlantCards) {
 };
 
 const updatePriceDiv = function(price) {
+  console.log(price)
   document.getElementById("current-bid-amount").innerText = price;
   document.getElementById("bid-amount").innerText = price;
 };
@@ -147,7 +148,6 @@ const persistCardClass = function(powerPlants, currentMarketDiv) {
         .then(res => res.json())
         .then(player => {
           if (players.includes(+player.id)) {
-            console.log(currentBid,cost,+currentBid >= +cost);
             if (+currentBid >= +cost) return updatePriceDiv(currentBid);
             return updatePriceDiv(cost);
           }
