@@ -50,9 +50,9 @@ const displayPowerPlantMarket = function(powerPlantCards) {
 };
 
 const updatePriceDiv = function(price) {
-  console.log(price);
   document.getElementById("current-bid-amount").innerText = price;
   document.getElementById("bid-amount").innerText = price;
+  console.log('updated');
 };
 
 const selectPowerPlant = function(element) {
