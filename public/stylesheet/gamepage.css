@@ -56,11 +56,6 @@ body {
   font-family: Avenir Next !important;
 }
 
-.player-name {
-	font-size: 25px;
-  margin-right: 38%;
-}
-
 .players-section {
   display: flex;
   justify-content: space-around;
@@ -665,15 +660,16 @@ header {
 
 .player-money {
   height: 45px;
-  font-size: 26px;
+  font-size: 140%;
   display: flex;
-  justify-content: center;
-  align-content: center;
+  justify-content: space-between;
+  align-items: center;
   color: #1c1b11;
   border: 1px solid #a3a17f;
   background: #6c7d3761;
   width: 80%;
   box-sizing: border-box;
+  padding: 1px;
 }
 .north-west-top {
   fill: #77715f;
