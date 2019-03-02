@@ -1,28 +1,4 @@
 const currentMarketCards = {};
-// const phases = {
-//   buyPowerPlant: true,
-//   buyResource: false,
-//   buildCities: false,
-//   bureaucracy: false
-// };
-
-// const makePhaseActive = function(currentPhase) {
-//   Object.keys(phases).forEach(phase => {
-//     phases[phase] = false;
-//   });
-//   phases[currentPhase] = true;
-// };
-
-// const isBuyPowerPlantPhase = () => phases.buyPowerPlant;
-// const isBuyResourcePhase = () => phases.buyResource;
-// const isBuildCitiesPhase = () => phases.buildCities;
-// const isBureaucracyPhase = () => phases.bureaucracy;
-
-// const checkForBuildCityPhase = function() {
-//   if (isBuildCitiesPhase()) {
-//     displayMap();
-//   }
-// };
 
 const selectedPowerPlants = [];
 
@@ -58,7 +34,7 @@ const displayPowerPlantMarket = function(powerPlantCards) {
 const updatePriceDiv = function(price) {
   document.getElementById("current-bid-amount").innerText = price;
   document.getElementById("bid-amount").innerText = price;
-  console.log(document.getElementById('bid-amount').innerText);
+  console.log(document.getElementById("bid-amount").innerText);
 };
 
 const selectPowerPlant = function(element) {
