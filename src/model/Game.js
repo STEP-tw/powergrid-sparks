@@ -3,6 +3,7 @@ const ResourceMarket = require("./resource_market");
 const ActivityLog = require("./activityLog");
 const PlayingOrder = require("./playing_order");
 const { Auction } = require("./auction");
+const Phase = require("./phase");
 
 class Game {
   constructor(playerCount) {
@@ -13,6 +14,7 @@ class Game {
     this.isShuffled = false;
     this.activityLog = new ActivityLog(Date);
     this.playerOrder = this.players;
+    this.phase = new Phase();
   }
 
   conductAuction(cost) {
@@ -28,7 +30,6 @@ class Game {
     if (isBidOver) {
       this.sellPowerPlant(value);
       this.updatePowerPlants();
-
     }
   }
 
@@ -91,6 +92,10 @@ class Game {
       this.turn = new Turn(players);
     }
     return this.turn;
+  }
+
+  resetTurn() {
+    this.turn.resetTurn();
   }
 
   hasStarted() {
@@ -161,6 +166,14 @@ class Game {
 
   rearrangePowerPlants() {
     this.powerPlantMarket.rearrange();
+  }
+
+  changePhaseTo(phase) {
+    this.phase.changePhaseTo(phase);
+  }
+
+  currentPhase() {
+    return this.phase.currentPhase();
   }
 }
 

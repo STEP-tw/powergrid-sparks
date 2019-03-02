@@ -290,8 +290,10 @@ describe("POST /resources/buy", function() {
 
   it("should return code 200 if resource data is registered succesfully", done => {
     const player1 = new Player("blue", "deepika");
+    const player2 = new Player("green", "naman");
     app.activeGames["55"] = new Game(2);
     app.activeGames["55"].addPlayer(player1);
+    app.activeGames["55"].addPlayer(player2);
     app.cookies["555"] = "Leela";
     request(app)
       .post("/resources/buy")
@@ -418,6 +420,7 @@ describe("GET /currentBid", function() {
   it("should respond with 200", function(done) {
     app.activeGames["52"] = new Game(2);
     app.cookies["1234567"] = "Ankon";
+
     request(app)
       .get("/currentBid")
       .set("Cookie", ["gameId=52;playerId=1234567"])
@@ -447,6 +450,10 @@ describe("GET /currentBid", function() {
     };
     app.activeGames["52"].conductAuction("13");
     app.activeGames["52"].auction.continue("13");
+    const player = new Player("red", "Ankon");
+    app.activeGames["52"].addPlayer(player);
+    app.activeGames["52"].getTurn([player]);
+
     request(app)
       .get("/currentBid")
       .set("Cookie", ["gameId=52;playerId=1234567"])
@@ -557,6 +564,39 @@ describe("POST /auction/bid", function() {
       .post("/auction/bid")
       .send("bidAmount=13")
       .set("Cookie", ["gameId=53;playerId=1234567"])
+      .expect(200, done);
+  });
+});
+
+describe("GET /currentPhase", function() {
+  it("should respond with 200", function(done) {
+    app.activeGames["531"] = new Game(3);
+    app.cookies["1234567"] = "Ankon";
+
+    const player1 = new Player("green", "gaurav");
+    const player2 = new Player("black", "naman");
+    const player3 = new Player("green", "chandan");
+
+    app.activeGames["531"].addPlayer(player1);
+    app.activeGames["531"].addPlayer(player2);
+    app.activeGames["531"].addPlayer(player3);
+
+    request(app)
+      .get("/currentPhase")
+      .set("Cookie", ["gameId=531;playerId=1234567"])
+      .expect(200, done);
+  });
+
+  it("should respond with 200", function(done) {
+    app.activeGames["532"] = new Game(1);
+    app.cookies["1234567"] = "Ankon";
+
+    const player1 = new Player("green", "gaurav");
+    app.activeGames["532"].addPlayer(player1);
+
+    request(app)
+      .get("/currentPhase")
+      .set("Cookie", ["gameId=532;playerId=1234567"])
       .expect(200, done);
   });
 });

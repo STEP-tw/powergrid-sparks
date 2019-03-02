@@ -79,7 +79,10 @@ const handleSellResources = function(player) {
   // const resourceMarket = document.querySelectorAll(".filled");
   if (!player.isPaymentSuccess) return showFailedPayment();
   resetTurn();
-  // resourceMarket.forEach(resource => (resource.onclick = ""));
+  resourceMarket.forEach(resource => (resource.onclick = ""));
+  if (player.isLastPlayer) {
+    displayMap();
+  }
 };
 
 const getResourceDetails = function() {
@@ -128,7 +131,7 @@ const generateResourceMarketDiv = function() {
 };
 
 const selectResource = function(resourceDiv, amount, resourceDetails) {
-  const clickBorder = "1px solid black";
+  const clickBorder = "2px solid black";
   resourceDiv.style.border = clickBorder;
   const amountDiv = document.getElementById("resource-amount");
   amountDiv.innerText = amount + convertToNumber(resourceDetails[1]);
@@ -156,4 +159,13 @@ const generateResourceValue = function() {
     }
     unselectResource(resourceDiv, currentAmount, resourceDetails);
   }
+};
+
+const getCurrentPhase = function() {
+  fetch("/currentPhase")
+    .then(res => res.text())
+    .then(phase => {
+      if (phase == "buyResources") startBuyResourcePhase();
+      if (phase == "buildCities") displayMap();
+    });
 };

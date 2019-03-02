@@ -1,22 +1,28 @@
 const currentMarketCards = {};
-const phases = {
-  buyPowerPlant: true,
-  buyResource: false,
-  buildCities: false,
-  bureaucracy: false
-};
+// const phases = {
+//   buyPowerPlant: true,
+//   buyResource: false,
+//   buildCities: false,
+//   bureaucracy: false
+// };
 
-const makePhaseActive = function(currentPhase) {
-  Object.keys(phases).forEach(phase => {
-    phases[phase] = false;
-  });
-  phases[currentPhase] = true;
-};
+// const makePhaseActive = function(currentPhase) {
+//   Object.keys(phases).forEach(phase => {
+//     phases[phase] = false;
+//   });
+//   phases[currentPhase] = true;
+// };
 
-const isBuyPowerPlantPhase = () => phases.buyPowerPlant;
-const isBuyResourcePhase = () => phases.buyResource;
-const isBuildCitiesPhase = () => phases.buildCities;
-const isBureaucracyPhase = () => phases.bureaucracy;
+// const isBuyPowerPlantPhase = () => phases.buyPowerPlant;
+// const isBuyResourcePhase = () => phases.buyResource;
+// const isBuildCitiesPhase = () => phases.buildCities;
+// const isBureaucracyPhase = () => phases.bureaucracy;
+
+// const checkForBuildCityPhase = function() {
+//   if (isBuildCitiesPhase()) {
+//     displayMap();
+//   }
+// };
 
 const selectedPowerPlants = [];
 
@@ -136,9 +142,8 @@ const persistCardClass = function(powerPlants, currentMarketDiv) {
   fetch("/currentBid")
     .then(res => res.json())
     .then(auction => {
-      const { currentBid, isAuctionOver, players } = auction;
-      if (isAuctionOver) {
-        makePhaseActive("buyResource");
+      const { currentBid, isAuctionOver, players, phase } = auction;
+      if (phase == "buyResources") {
         designResourceMarket();
         startBuyResourcePhase();
         return;
@@ -157,8 +162,9 @@ const persistCardClass = function(powerPlants, currentMarketDiv) {
     });
 };
 
-const displayPowerPlants = function(powerPlants) {
-  if (isBuyPowerPlantPhase()) {
+const displayPowerPlants = function({ powerPlants, phase }) {
+  powerPlants = JSON.parse(powerPlants);
+  if (phase == "buyPowerPlant") {
     const currentMarketDiv = generateMarket(powerPlants, 0, 4, "currentMarket");
     const futureMarketDiv = generateMarket(powerPlants, 4, 8, "futureMarket");
     const powerPlantDiv = generateDiv("power-plant-cards", "power-plant-cards");

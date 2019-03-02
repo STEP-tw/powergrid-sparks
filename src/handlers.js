@@ -174,13 +174,15 @@ const buyResources = function(req, res) {
   const players = game.getPlayers();
   const turn = game.getTurn(players);
   const currentPlayer = turn.getCurrentPlayer();
+  const isLastPlayer = turn.isLastPlayer();
+  if (isLastPlayer) game.changePhaseTo("buildCities");
   const isPaymentSuccess = currentPlayer.payMoney(resourcesDetail.Cost);
   if (isPaymentSuccess) {
     currentPlayer.addResources(resourcesDetail);
     updateResourceMarket(resourcesDetail, game);
     createBuyResourceLog(game, turn, resourcesDetail);
   }
-  res.send({ currentPlayer, isPaymentSuccess });
+  res.send({ currentPlayer, isPaymentSuccess, isLastPlayer });
 };
 
 const buildCities = function(req, res) {
@@ -259,7 +261,12 @@ const getPlayerStats = function(req, res) {
 const getCurrentPowerPlants = function(req, res) {
   const game = initializeGame(req, res);
   const powerPlants = game.getPowerPlantMarket();
-  res.send(JSON.stringify(powerPlants));
+  res.send(
+    JSON.stringify({
+      powerPlants: JSON.stringify(powerPlants),
+      phase: game.currentPhase()
+    })
+  );
 };
 
 const getResources = function(req, res) {
@@ -301,12 +308,17 @@ const getCurrentBid = function(req, res) {
   const isAuctionOver = game.isAuctionOver();
   const bidPlayers = game.getBidPlayers();
   const auctionPlayers = game.getAuctionPlayers();
+  if (isAuctionOver) {
+    game.resetTurn();
+    game.changePhaseTo("buyResources");
+  }
   if (isBidOver) {
     return res.send(
       JSON.stringify({
         currentBid: currentBid,
         isAuctionOver: isAuctionOver,
-        players: auctionPlayers
+        players: auctionPlayers,
+        phase: game.currentPhase()
       })
     );
   }
@@ -317,6 +329,11 @@ const getCurrentBid = function(req, res) {
       players: bidPlayers
     })
   );
+};
+
+const getCurrentPhase = function(req, res) {
+  const game = initializeGame(req, res);
+  res.send(game.currentPhase());
 };
 
 module.exports = {
@@ -346,5 +363,6 @@ module.exports = {
   makeBid,
   selectPowerPlant,
   getCurrentBid,
-  returnPlayerResources
+  returnPlayerResources,
+  getCurrentPhase
 };

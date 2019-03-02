@@ -32,7 +32,8 @@ const {
   returnPlayerResources,
   makeBid,
   selectPowerPlant,
-  getCurrentBid
+  getCurrentBid,
+  getCurrentPhase
 } = require("./src/handlers");
 
 app.set("views", __dirname + "/public/html");
@@ -68,6 +69,7 @@ app.get("/currentBid", getCurrentBid);
 app.get("/cities/light", lightCities);
 app.get("/player/powerplants", getPowerplants);
 app.post("/returnResources", returnPlayerResources);
+app.get("/currentPhase", getCurrentPhase);
 
 app.use(express.static("public/html"));
 app.use(express.static("public/stylesheet"));
