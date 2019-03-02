@@ -57,7 +57,8 @@ body {
 }
 
 .player-name {
-  font-size: 24px;
+	font-size: 25px;
+  margin-right: 38%;
 }
 
 .players-section {
@@ -730,9 +731,9 @@ header {
 }
 
 .arrow-right {
-  border-top: 15px solid transparent;
-  border-bottom: 15px solid transparent;
-  border-left: 18px solid #42422fad;
+  border-top: 2vh solid transparent;
+  border-bottom: 2vh solid transparent;
+  border-left: 1vw solid #42422fad;
   border-radius: 2px;
 }
 
@@ -747,7 +748,7 @@ header {
   display: flex;
   font-size: 16px;
   background-color: inherit;
-  margin-right: 15%;
+  margin-right: 23%;
   color: #e7e3c2e6;
 }
 
