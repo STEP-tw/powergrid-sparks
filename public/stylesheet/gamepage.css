@@ -542,7 +542,7 @@ header {
   height: 5%;
   width: 100%;
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   font-size: 22px;
   background: #6d6c4f;
   box-shadow: 0 0 16px 0px;
