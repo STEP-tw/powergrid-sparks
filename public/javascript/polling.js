@@ -7,5 +7,5 @@ const polling = function() {
     getPlayerStatsDiv();
     refreshMap();
     getActivityLogs();
-  }, 500);
+  }, 1200);
 };
