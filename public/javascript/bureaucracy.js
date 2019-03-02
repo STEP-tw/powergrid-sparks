@@ -113,12 +113,10 @@ const updatePowerplantInfo = function(powerplants) {
   const heading = generateDiv("bureaucracy-heading","");
   heading.innerText = "Select powerplant to light cities";
   bureaucracyDiv.innerHTML = "";
-  bureaucracyDiv.appendChild(heading);
-  bureaucracyDiv.appendChild(allPowerplants);
   const msgDiv = generateDiv("bureaucracy-err-msg","err-msg");
-  bureaucracyDiv.appendChild(msgDiv);
+  appendChildren(bureaucracyDiv,[heading,allPowerplants,msgDiv]);
   const market = bureaucracyDiv.childNodes;
-  const playersPowerplant = market[0].childNodes;
+  const playersPowerplant = market[1].childNodes;
   playersPowerplant.forEach(powerplant => {
     powerplant.onclick = selectDiv.bind(null, powerplant);
   });
