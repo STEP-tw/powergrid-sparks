@@ -161,9 +161,24 @@ const generateResourceValue = function() {
   }
 };
 
-const currentPhase = { phase: "" };
+const phases = {
+  buyPowerPlant: "auction-phase",
+  buyResources: "buy-resource-phase",
+  buildCities: "build-city-phase",
+  bureaucracy: "bureaucracy-phase"
+};
+
+const highlightPhase = function(currentPhase) {
+  Object.keys(phases).forEach(phase => {
+    document.getElementById(phases[phase]).className = "phase";
+  });
+  document.getElementById(phases[currentPhase]).className = "current-phase";
+};
+
+const currentPhase = { phase: "buyPowerPlant" };
 
 const getCurrentPhase = function() {
+  highlightPhase(currentPhase.phase);
   fetch("/currentPhase")
     .then(res => res.text())
     .then(phase => {

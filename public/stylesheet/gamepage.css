@@ -710,7 +710,7 @@ header {
 }
 
 .phase {
-  width: 80%;
+  width: 40%;
   height: 80%;
   text-align: center;
   display: flex;
@@ -718,12 +718,8 @@ header {
   align-items: center;
   margin-left: -20px;
   border-radius: 2px;
-  padding-left: 17%;
+  padding-left: 10%;
   background: #42422fad;
-}
-
-.phase:hover {
-  font-size: 23px;
 }
 
 .arrow-right {
@@ -744,10 +740,25 @@ header {
   display: flex;
   font-size: 16px;
   background-color: inherit;
-  margin-right: 23%;
+  margin-right: 40%;
   color: #e7e3c2e6;
 }
 
 .bureaucracy-heading {
   font-size: 32px;
+}
+
+.current-phase {
+  width: 40%;
+  height: 80%;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: -20px;
+  border-radius: 2px;
+  padding-left: 10%;
+  background: #42422fad;
+  color: white;
+  font-size: 110%;
 }
