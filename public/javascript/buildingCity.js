@@ -9,21 +9,21 @@ const setInnerText = function(id, text) {
 };
 
 const setInnerHTML = function(id, cities) {
-  document.getElementById(id).innerHTML = '';
+  document.getElementById(id).innerHTML = "";
   cities.forEach(city => {
-    const cityName = city.split('_');
+    const cityName = city.split("_");
     cityName.pop();
     let formattedCityName = cityName
       .map(name => name.charAt(0).toUpperCase() + name.slice(1))
-      .join(' ');
+      .join(" ");
     document.getElementById(id).innerHTML += `<div>${formattedCityName}</div>`;
   });
 };
 
 const generateHTML = function(totalCost, cities) {
-  setInnerText('building-cost', totalCost);
-  setInnerHTML('selected-cities', cities);
-  setInnerText('city-count', cities.length);
+  setInnerText("building-cost", totalCost);
+  setInnerHTML("selected-cities", cities);
+  setInnerText("city-count", cities.length);
 };
 
 const deselectCity = function(currentCost, cityCost) {
@@ -37,7 +37,7 @@ const deselectCity = function(currentCost, cityCost) {
 
 const selectCity = function(cityCost, currentCost) {
   selectedCities.push(event.target);
-  event.target.className.baseVal = 'highlighted';
+  event.target.className.baseVal = "highlighted";
   const totalCost = cityCost + currentCost;
   const cities = [];
   selectedCities.forEach(selectedCity => cities.push(selectedCity.id));
@@ -45,10 +45,10 @@ const selectCity = function(cityCost, currentCost) {
 };
 
 const updateCost = function() {
-  const selectedHouse = event.target.id.split('_');
+  const selectedHouse = event.target.id.split("_");
   const cityCost = +selectedHouse[selectedHouse.length - 1];
-  const currentCost = +getInnerText('building-cost');
-  if (event.target.className.baseVal == 'highlighted') {
+  const currentCost = +getInnerText("building-cost");
+  if (event.target.className.baseVal == "highlighted") {
     return deselectCity(currentCost, cityCost);
   }
   selectCity(cityCost, currentCost);
@@ -70,23 +70,23 @@ const takeBuildAction = function(player) {
     selectPowerplant();
     return;
   }
-  setInnerText('payment-failed', 'Building failed!!! Insuffient money');
+  setInnerText("payment-failed", "Building failed!!! Insuffient money");
   reset();
 };
 
 const getSelectedCitiesDetails = function() {
-  const price = +getInnerText('building-cost');
-  const cityCount = getInnerText('city-count');
+  const price = +getInnerText("building-cost");
+  const cityCount = getInnerText("city-count");
   const cityNames =
-    'Selected Cities: \n' + selectedCities.map(city => city.id).join('\n');
+    "Selected Cities: \n" + selectedCities.map(city => city.id).join("\n");
   return { price, cityCount, cityNames };
 };
 
 const buildCities = function() {
   const { price, cityCount, cityNames } = getSelectedCitiesDetails();
   const body = `price=${price}&cityCount=${cityCount}&cityNames=${cityNames}`;
-  const headers = { 'Content-Type': 'application/x-www-form-urlencoded' };
-  fetch('/cities/build', { method: 'POST', headers, body })
+  const headers = { "Content-Type": "application/x-www-form-urlencoded" };
+  fetch("/cities/build", { method: "POST", headers, body })
     .then(res => res.json())
     .then(takeBuildAction);
 };
@@ -94,11 +94,11 @@ const buildCities = function() {
 const updateCity = function(cityName, playerColor) {
   if (cityName.length < 2) return;
   document.getElementById(cityName).style.fill = playerColor;
-  document.getElementById(cityName).onclick = '';
+  document.getElementById(cityName).onclick = "";
 };
 
 const updateMap = function(player) {
-  const playerColor = '#'+player.color.slice(1);
+  const playerColor = "#" + player.color.slice(1);
   const cityNames = player.cityNames;
   cityNames.forEach(cityName => {
     updateCity(cityName, playerColor);
@@ -106,7 +106,7 @@ const updateMap = function(player) {
 };
 
 const refreshMap = function() {
-  fetch('/players')
+  fetch("/players")
     .then(res => res.json())
     .then(players => {
       players.forEach(player => updateMap(player));
