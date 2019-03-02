@@ -94,7 +94,9 @@ const validatePlayerResources = function(userInfo) {
 
 const updateUserResources = function(resources, hybridResource, cityCount) {
   let hasDeducted = false;
-  document.getElementById("err-msg").style.visibility = "hidden";
+  const cities = {1:"city", 2:"cities"}
+  const msg = `${cityCount} ${cities[cityCount] || cities} lighted successfully`;
+  document.getElementById("err-msg").innerText = msg;
   selectedPowerPlant.splice(0);
   if (resources.Coal >= hybridResource) {
     resources.Coal -= hybridResource;
@@ -105,6 +107,14 @@ const updateUserResources = function(resources, hybridResource, cityCount) {
   const headers = { "Content-Type": "application/x-www-form-urlencoded" };
   fetch("/returnResources", { method: "POST", headers, body });
   updateCurrentPlayer();
+};
+
+const displayLightedCities = function(city) {
+  document.getElementById("err-msg").innerText = msg;
+  setTimeout(() => {
+    messageContainer.innerText = "";
+  }, 5000);
+  messageContainer.innerText = "insufficient money";
 };
 
 const updatePowerplantInfo = function(powerplants) {

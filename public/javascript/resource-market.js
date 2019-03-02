@@ -64,7 +64,7 @@ const showFailedPaymentMessage = function() {
 };
 
 const resetSelection = function(resource) {
-  document.getElementById(resource).style.border = "1px solid #a3a17f";
+  document.getElementById(resource).style.border = "1px solid #a3a17f ";
 };
 
 const showFailedPayment = function() {
@@ -135,7 +135,7 @@ const selectResource = function(resourceDiv, amount, resourceDetails) {
 };
 
 const unselectResource = function(resourceDiv, amount, resourceDetails) {
-  const unclickBorder = "1px solid #a3a17f";
+  const unclickBorder = "1px solid #a3a17f ";
   resourceDiv.style.border = unclickBorder;
   const amountDiv = document.getElementById("resource-amount");
   amountDiv.innerText = amount - convertToNumber(resourceDetails[1]);
