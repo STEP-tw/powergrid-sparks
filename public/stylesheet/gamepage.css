@@ -122,8 +122,9 @@ body {
 	width: 100%;
 	z-index: 1;
 	display: flex;
-	justify-content: center;
-	align-items: center;
+	justify-content: space-evenly;
+  align-items: center;
+  flex-direction: column;
 }
 
 .market-div {
@@ -629,8 +630,8 @@ header {
 	color: #3c3b2f;
 	box-sizing: border-box;
 	padding: 10px;
-	border: 1px solid #d47670;
-	border-radius: 8px;
+  border-radius: 8px;
+  font-size: 25px;
 }
 
 .resource-market-phase {
@@ -751,4 +752,9 @@ header {
   background-color: inherit;
   margin-right: 15%;
   color: #e7e3c2e6;
+}
+
+
+.bureaucracy-heading {
+  font-size: 32px;
 }

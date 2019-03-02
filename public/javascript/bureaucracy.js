@@ -4,19 +4,17 @@ const getLightedCities = function() {
   const buildingPhase = document.getElementById("bidding-section");
   const heading = "<span>Select No. Of Cites :</span>";
   buildingPhase.innerHTML =
-    heading+'<input min="0" max="21" class="city-count" value="0" autocomplete="off" type="number" id="lighted-cities">';
+    heading +
+    '<input min="0" max="21" class="city-count" value="0" autocomplete="off" type="number" id="lighted-cities">';
   buildingPhase.innerHTML +=
-    '<div class="select-powerplant" id="select-powerplant"></div>';
-  buildingPhase.innerHTML += '<button class="bid-option" id="submit">Submit</button>';
-  buildingPhase.innerHTML += '<div class="bureaucracy-err-msg" id="err-msg"></div>';
+    '<button class="bid-option" id="submit">Submit</button>';
   document.getElementById("submit").onclick = validatePlayerAssets;
-  document.getElementById("err-msg").style.visibility = "hidden";
 };
 
 const validatePlayerAssets = function() {
   fetch("/cities/light")
     .then(res => res.json())
-    .then(validatePlayerResources)
+    .then(validatePlayerResources);
 };
 
 const validateLightedCities = function(bureaucracy) {
@@ -24,8 +22,7 @@ const validateLightedCities = function(bureaucracy) {
     document.getElementById("building-phase").innerHTML = "";
     return;
   }
-  document.getElementById("err-msg").style.visibility = "visible";
-  document.getElementById("err-msg").innerText = " you dont have enough cities";
+   document.getElementById("err-msg").innerText = " you dont have enough cities";
   document.getElementById("lighted-cities").value = "";
 };
 
@@ -48,7 +45,6 @@ const getPlayerAssets = function(powerplants) {
 };
 
 const displayUnsufficientResources = function(isCityCountValid) {
-  document.getElementById("err-msg").style.visibility = "visible";
   document.getElementById("err-msg").innerText = "insufficient resources";
   const powerplantDiv = document.getElementById("select-powerplant");
   const allPowerplants = powerplantDiv.childNodes;
@@ -57,19 +53,14 @@ const displayUnsufficientResources = function(isCityCountValid) {
 };
 
 const DisplayPowerplantErrMsg = function(city) {
-  const powerplantDiv = document.getElementById("select-powerplant");
-  const allPowerplants = powerplantDiv.childNodes;
-  allPowerplants.forEach(powerplant => (powerplant.onclick = selectDiv));
   const errMsg = `selected powerplant can not light more than ${city} city`;
-  document.getElementById("err-msg").style.visibility = "visible";
   document.getElementById("err-msg").innerText = errMsg;
 };
 
-const displayCityErrMsg = function(){
+const displayCityErrMsg = function() {
   const errMsg = `You don't have enough cities`;
-  document.getElementById("err-msg").style.visibility = "visible";
   document.getElementById("err-msg").innerText = errMsg;
-}
+};
 
 const validatePlayerResources = function(userInfo) {
   let isCityCountValid = true;
@@ -79,7 +70,7 @@ const validatePlayerResources = function(userInfo) {
   const playerCities = playerAssets[allResources.pop()];
   const hybridResource = playerAssets[allResources.pop()];
   const cities = document.getElementById("lighted-cities").value;
-  if(cities > cityCount) return displayCityErrMsg();
+  if (cities > cityCount) return displayCityErrMsg();
   if (cities > playerCities) return DisplayPowerplantErrMsg(playerCities);
   allResources.forEach(resource => {
     const hasResource = playerAssets[resource] > resources[resource];
@@ -94,8 +85,7 @@ const validatePlayerResources = function(userInfo) {
 
 const updateUserResources = function(resources, hybridResource, cityCount) {
   let hasDeducted = false;
-  const cities = {1:"city", 2:"cities"}
-  const msg = `${cityCount} ${cities[cityCount] || cities} lighted successfully`;
+  const msg = `${cityCount} cities lighted successfully`;
   document.getElementById("err-msg").innerText = msg;
   selectedPowerPlant.splice(0);
   if (resources.Coal >= hybridResource) {
@@ -118,33 +108,38 @@ const displayLightedCities = function(city) {
 };
 
 const updatePowerplantInfo = function(powerplants) {
-  let html = "";
-  const powerplantVelue = Object.keys(powerplants);
-  powerplantVelue.forEach(
-    powerplant =>
-      (html += `<div class="powerplant" onclick="selectDiv()">${powerplant}</div>`)
-  );
-  document.getElementById("select-powerplant").innerHTML = html;
+  const allPowerplants = generateMarket(powerplants, 0, 3, "map123");
+  const bureaucracyDiv = document.getElementById("map");
+  const heading = generateDiv("bureaucracy-heading","");
+  heading.innerText = "Select powerplant to light cities";
+  bureaucracyDiv.innerHTML = "";
+  bureaucracyDiv.appendChild(heading);
+  bureaucracyDiv.appendChild(allPowerplants);
+  const msgDiv = generateDiv("bureaucracy-err-msg","err-msg");
+  bureaucracyDiv.appendChild(msgDiv);
+  const market = bureaucracyDiv.childNodes;
+  const playersPowerplant = market[0].childNodes;
+  playersPowerplant.forEach(powerplant => {
+    powerplant.onclick = selectDiv.bind(null, powerplant);
+  });
 };
 
 const clickPowerplant = function(powerplantDiv) {
   const clickBorder = "2px solid black";
-  const powerPlantValue = powerplantDiv.innerText;
+  const powerPlantValue = powerplantDiv.childNodes[0].childNodes[0].innerText;
   powerplantDiv.style.border = clickBorder;
   selectedPowerPlant.push(powerPlantValue);
 };
 
 const unclickPowerplant = function(powerplantDiv) {
-  const unclickBorder = "1px solid #4c5061";
-  const powerPlantValue = powerplantDiv.innerText;
-  powerplantDiv.style.border = unclickBorder;
+  const powerPlantValue = powerplantDiv.childNodes[0].childNodes[0].innerText;
+  powerplantDiv.style.border = null;
   const indexOfPowerPlant = selectedPowerPlant.indexOf(powerPlantValue);
   selectedPowerPlant.splice(indexOfPowerPlant, 1);
 };
 
-const selectDiv = function() {
+const selectDiv = function(powerplantDiv) {
   const clickBorder = "2px solid black";
-  const powerplantDiv = event.target;
   if (powerplantDiv.style.border == clickBorder) {
     return unclickPowerplant(powerplantDiv);
   }
