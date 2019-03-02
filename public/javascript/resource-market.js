@@ -19,6 +19,7 @@ const hideSoldResource = function(resource) {
 const displayResource = function(resources, resource, cost, id) {
   const index = `${resource}_${cost}_${id}`;
   const element = document.getElementById(index);
+  addOnClick(element);
 
   if (resources[resource][cost][id]) {
     if (resource == "Uranium" && cost < 10) {
