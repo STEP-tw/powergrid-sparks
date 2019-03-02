@@ -89,7 +89,7 @@ body {
 }
 
 .player-profile {
-  box-shadow: 0px 0px 42px 3px rgba(2, 2, 2, 0.52);
+  box-shadow: 0px 0px 2px 3px rgba(2, 2, 2, 0.267);
   border-radius: 5%;
   height: 135px;
   align-items: center;
@@ -472,7 +472,7 @@ td {
   justify-content: space-evenly;
   color: #41432c;
   font-size: 20px;
-  box-shadow: 0px 0px 42px 3px rgba(2, 2, 2, 0.52);
+  box-shadow: 0px 0px 2px 3px rgba(2, 2, 2, 0.283);
 }
 
 .increase-bid {
@@ -660,7 +660,7 @@ header {
 
 .player-money {
   height: 45px;
-  font-size: 140%;
+  font-size: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
