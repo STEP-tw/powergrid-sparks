@@ -145,7 +145,8 @@ const updateCurrentPlayer = function(req, res) {
   const game = initializeGame(req, res);
   const players = game.getPlayers();
   const turn = game.getTurn(players);
-  res.send(turn.updateCurrentPlayer());
+  turn.updateCurrentPlayer();
+  res.send("");
 };
 
 const buyPowerplant = function(req, res) {

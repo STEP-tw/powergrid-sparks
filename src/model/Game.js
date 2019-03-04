@@ -1,16 +1,23 @@
-const Turn = require("./turn");
-const ResourceMarket = require("./resource_market");
-const ActivityLog = require("./activityLog");
-const PlayingOrder = require("./playing_order");
-const { Auction } = require("./auction");
-const Phase = require("./phase");
+const Turn = require('./turn');
+const ResourceMarket = require('./resource_market');
+const ActivityLog = require('./activityLog');
+const PlayingOrder = require('./playing_order');
+const { Auction } = require('./auction');
+const Phase = require('./phase');
 
 class Game {
   constructor(playerCount) {
     this.active = false;
     this.players = [];
     this.maxPlayerCount = playerCount;
-    this.colors = ["gd55a11d1", "gffbf46", "g575761", "g765192b8", "g648381", "gcf9f1634"];
+    this.colors = [
+      'gd55a11d1',
+      'gffbf46',
+      'g575761',
+      'g765192b8',
+      'g648381',
+      'gcf9f1634'
+    ];
     this.isShuffled = false;
     this.activityLog = new ActivityLog(Date);
     this.playerOrder = this.players;
@@ -23,8 +30,9 @@ class Game {
       this.auction.selectPowerPlant(cost);
       return;
     }
-    if (this.auction.biddingResult != undefined) {
+    if (this.auction.isBidOver) {
       this.auction.selectPowerPlant(cost);
+      return;
     }
     const { isBidOver, value } = this.auction.continue(cost);
     if (isBidOver) {

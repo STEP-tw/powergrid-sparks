@@ -218,4 +218,13 @@ describe("Auction", () => {
       chai.expect(actualOutput).to.be.eql(expectedOutput);
     });
   });
+
+  describe("getBidPlayers", function () {
+    it("should update the playing order", function () {
+      auction.getBidPlayers();
+      const actualOutput = auction.getBidPlayers();
+      const expectedOutput = [1, 2, 3];
+      chai.expect(actualOutput).to.be.eql(expectedOutput);
+    });
+  });
 });
