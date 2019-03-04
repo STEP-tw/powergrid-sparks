@@ -86,25 +86,6 @@ const generateMarket = function(powerPlants, startingIndex, endingIndex, id) {
   return marketDiv;
 };
 
-const startBuyResourcePhase = function() {
-  document.getElementById("power-plant-cards").style.display = "none";
-  document.getElementById("market-div").style.width = "100%";
-  const auction = document.querySelectorAll(".auction");
-  auction.forEach(element => {
-    element.style.visibility = "hidden";
-  });
-  startBuyingResources();
-};
-
-const designResourceMarket = function() {
-  const resourceMarket = document.getElementById("resourceMarket");
-  resourceMarket.className += " resource-market-phase";
-  const resourceGrids = document.getElementsByClassName("resource-grid");
-  Object.keys(resourceGrids).forEach(index => {
-    resourceGrids[index].className += " new-resource-grid";
-  });
-};
-
 const persistCardClass = function(powerPlants, currentMarketDiv) {
   const selectedPowerPlant = Object.keys(powerPlants).filter(
     powerPlantCost => powerPlants[powerPlantCost].isSelected

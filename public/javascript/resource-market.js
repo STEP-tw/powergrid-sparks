@@ -19,7 +19,6 @@ const hideSoldResource = function(resource) {
 const displayResource = function(resources, resource, cost, id) {
   const index = `${resource}_${cost}_${id}`;
   const element = document.getElementById(index);
-  addOnClick(element);
 
   if (resources[resource][cost][id]) {
     if (resource == "Uranium" && cost < 10) {
@@ -109,18 +108,26 @@ const buyResources = function() {
 
 const addOnClick = resource => (resource.onclick = generateResourceValue);
 
-const initializeResources = function(player) {
-  const playerId = readCookie(document.cookie).playerId;
-  const resourceMarket = document.querySelectorAll(".filled");
-  if (player.id == playerId) resourceMarket.forEach(addOnClick);
-};
-
-const startBuyingResources = function() {
+const startBuyResourcePhase = function() {
+  document.getElementById("power-plant-cards").style.display = "none";
+  document.getElementById("market-div").style.width = "100%";
+  const auction = document.querySelectorAll(".auction");
+  auction.forEach(element => {
+    element.style.visibility = "hidden";
+  });
   const resourceDiv = getBuyResourceTemplate();
   document.getElementById("bidding-section").innerHTML = resourceDiv;
-  fetch("/currentPlayer")
-    .then(res => res.json())
-    .then(initializeResources);
+};
+
+const designResourceMarket = function() {
+  const resourceMarket = document.getElementById("resourceMarket");
+  resourceMarket.className += " resource-market-phase";
+  const resourceGrids = document.getElementsByClassName("resource-grid");
+  Object.keys(resourceGrids).forEach(index => {
+    resourceGrids[index].className += " new-resource-grid";
+  });
+  const filledResources = document.querySelectorAll(".filled");
+  filledResources.forEach(addOnClick);
 };
 
 const generateResourceMarketDiv = function() {
