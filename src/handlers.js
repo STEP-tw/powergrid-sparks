@@ -191,6 +191,7 @@ const buildCities = function(req, res) {
   const game = initializeGame(req, res);
   const players = game.getPlayers();
   const turn = game.getTurn(players);
+  if(turn.isLastPlayer()) game.changePhaseTo('bureaucracy');
   const currentPlayer = turn.getCurrentPlayer();
   const isPaymentSuccess = currentPlayer.payMoney(price);
   if (isPaymentSuccess) {

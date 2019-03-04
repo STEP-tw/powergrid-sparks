@@ -76,7 +76,6 @@ const showFailedPayment = function() {
 };
 
 const handleSellResources = function(player) {
-  // const resourceMarket = document.querySelectorAll(".filled");
   if (!player.isPaymentSuccess) return showFailedPayment();
   resetTurn();
   resourceMarket.forEach(resource => (resource.onclick = ""));
@@ -191,6 +190,11 @@ const getCurrentPhase = function() {
         displayMap();
         refreshMap();
         currentPhase.phase = "buildCities";
+      }
+      if (phase == "bureaucracy" && currentPhase.phase != "bureaucracy") {
+        getLightedCities();
+        selectPowerplant();
+        currentPhase.phase = "bureaucracy";
       }
     });
 };

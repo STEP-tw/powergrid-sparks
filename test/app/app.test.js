@@ -305,10 +305,12 @@ describe("POST /resources/buy", function() {
 
 describe("POST /cities/build", () => {
   it("should  add the city details to the player who buys if player has enough money", done => {
-    app.activeGames["99"] = new Game(3);
+    app.activeGames["99"] = new Game(2);
     app.cookies["999"] = "Ankon";
-    const player = new Player("red", "Ankon");
-    app.activeGames[99].addPlayer(player);
+    const player1 = new Player("red", "Ankon");
+    const player2 = new Player("black", "Gaurav");
+    app.activeGames[99].addPlayer(player1);
+    app.activeGames[99].addPlayer(player2);
     request(app)
       .post("/cities/build")
       .send(`price=10&cityCount=2&cityNames=maimi_10`)
@@ -317,7 +319,7 @@ describe("POST /cities/build", () => {
   });
 
   it("should not  add the city details to the player who buys if player has not enough money", done => {
-    app.activeGames["99"] = new Game(3);
+    app.activeGames["99"] = new Game(1);
     app.cookies["999"] = "Ankon";
     const player = new Player("red", "Ankon");
     app.activeGames[99].addPlayer(player);
@@ -331,7 +333,7 @@ describe("POST /cities/build", () => {
 
 describe("GET /players", () => {
   it("should return the details of the players with response code 200", done => {
-    app.activeGames["99"] = new Game(3);
+    app.activeGames["99"] = new Game(1);
     app.cookies["999"] = "Ankon";
     const player = new Player("red", "Ankon");
     app.activeGames[99].addPlayer(player);
