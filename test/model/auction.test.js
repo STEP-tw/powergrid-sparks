@@ -219,8 +219,8 @@ describe("Auction", () => {
     });
   });
 
-  describe("getBidPlayers", function () {
-    it("should update the playing order", function () {
+  describe("getBidPlayers", function() {
+    it("should update the playing order", function() {
       auction.getBidPlayers();
       const actualOutput = auction.getBidPlayers();
       const expectedOutput = [1, 2, 3];

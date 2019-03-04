@@ -335,6 +335,7 @@ const getCurrentBid = function(req, res) {
 
 const getCurrentPhase = function(req, res) {
   const game = initializeGame(req, res);
+  console.log(game.currentPhase());
   res.send(game.currentPhase());
 };
 

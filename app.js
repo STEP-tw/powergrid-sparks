@@ -40,7 +40,7 @@ app.set("views", __dirname + "/public/html");
 app.engine("html", view.renderFile);
 app.set("view engine", "html");
 
-app.use(logger("dev"));
+// app.use(logger("dev"));
 app.use(bodyParser.text());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());

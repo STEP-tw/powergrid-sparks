@@ -11,7 +11,7 @@ class Bid {
 
   makeBid(bid) {
     this.currentBidder = this.players[0];
-    if (bid == 'pass') {
+    if (bid == "pass") {
       this.updatePlayers();
       this.currentBidder = this.players[0];
       return this.isBidOver();
@@ -54,7 +54,7 @@ class Auction {
   selectPowerPlant(powerPlantCost) {
     this.biddingResult = undefined;
     this.isBidOver = false;
-    if (powerPlantCost == 'pass') {
+    if (powerPlantCost == "pass") {
       this.updatePlayers();
       this.isBidOver = true;
       this.currentPlayer = this.players[0];
@@ -93,7 +93,7 @@ class Auction {
 
   continue(bid) {
     this.isBidOver = this.bid.makeBid(bid);
-    if (bid != 'pass') {
+    if (bid != "pass") {
       this.currentBidAmount = bid;
     }
     if (this.isBidOver) {
@@ -125,7 +125,7 @@ class Auction {
   }
 
   getBidPlayers() {
-    if (this.bid != undefined && !this.isBidOver) {
+    if (this.bid != undefined) {
       const playerIds = this.bid.players.map(player => player.id);
       return playerIds;
     }

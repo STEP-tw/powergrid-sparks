@@ -1,9 +1,9 @@
-const Turn = require('./turn');
-const ResourceMarket = require('./resource_market');
-const ActivityLog = require('./activityLog');
-const PlayingOrder = require('./playing_order');
-const { Auction } = require('./auction');
-const Phase = require('./phase');
+const Turn = require("./turn");
+const ResourceMarket = require("./resource_market");
+const ActivityLog = require("./activityLog");
+const PlayingOrder = require("./playing_order");
+const { Auction } = require("./auction");
+const Phase = require("./phase");
 
 class Game {
   constructor(playerCount) {
@@ -11,12 +11,12 @@ class Game {
     this.players = [];
     this.maxPlayerCount = playerCount;
     this.colors = [
-      'gd55a11d1',
-      'gffbf46',
-      'g575761',
-      'g765192b8',
-      'g648381',
-      'gcf9f1634'
+      "gd55a11d1",
+      "gffbf46",
+      "g575761",
+      "g765192b8",
+      "g648381",
+      "gcf9f1634"
     ];
     this.isShuffled = false;
     this.activityLog = new ActivityLog(Date);
