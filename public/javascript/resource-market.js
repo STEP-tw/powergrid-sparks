@@ -78,9 +78,7 @@ const handleSellResources = function(player) {
   if (!player.isPaymentSuccess) return showFailedPayment();
   resetTurn();
   resourceMarket.forEach(resource => (resource.onclick = ""));
-  if (player.isLastPlayer) {
-    displayMap();
-  }
+  if (player.isLastPlayer) displayMap();
 };
 
 const getResourceDetails = function() {

@@ -277,27 +277,43 @@ describe("POST /powerPlant/buy", () => {
 
 describe("POST /resources/buy", function() {
   it("should return code 200 if resource data is registered succesfully", done => {
-    const player1 = new Player("green", "naman");
-    app.activeGames["5"] = new Game(2);
-    app.activeGames["5"].addPlayer(player1);
-    app.cookies["1234"] = "Ankon";
+    app.activeGames["9"] = new Game(2);
+    app.cookies["99"] = "Ankon";
+    const player1 = new Player("red", "Ankon");
+    const player2 = new Player("black", "Gaurav");
+    app.activeGames["9"].addPlayer(player1);
+    app.activeGames["9"].addPlayer(player2);
+    const turn = app.activeGames["9"].getTurn([player1, player2]);
+    turn.currentPlayerIndex = 0;
     request(app)
       .post("/resources/buy")
-      .set("Cookie", ["gameId=5;playerId=1234"])
-      .send("Coal=1&Uranium=1&Oil=1&Garbage=1")
+      .set("Cookie", ["gameId=9;playerId=99"])
+      .send("Coal=1&Uranium=1&Oil=1&Garbage=1&Cost=10")
       .expect(200, done);
   });
 
   it("should return code 200 if resource data is registered succesfully", done => {
-    const player1 = new Player("blue", "deepika");
-    const player2 = new Player("green", "naman");
-    app.activeGames["55"] = new Game(2);
-    app.activeGames["55"].addPlayer(player1);
-    app.activeGames["55"].addPlayer(player2);
-    app.cookies["555"] = "Leela";
+    app.activeGames["9"] = new Game(1);
+    app.cookies["99"] = "Ankon";
+    const player1 = new Player("red", "Ankon");
+    app.activeGames["9"].addPlayer(player1);
     request(app)
       .post("/resources/buy")
-      .set("Cookie", ["gameId=55;playerId=555"])
+      .set("Cookie", ["gameId=9;playerId=99"])
+      .send("Coal=1&Uranium=1&Oil=1&Garbage=1&Cost=10")
+      .expect(200, done);
+  });
+
+  it("should return code 200 if resource data is registered succesfully", done => {
+    app.activeGames["99"] = new Game(2);
+    app.cookies["999"] = "Ankon";
+    const player1 = new Player("red", "Ankon");
+    const player2 = new Player("black", "Gaurav");
+    app.activeGames[99].addPlayer(player1);
+    app.activeGames[99].addPlayer(player2);
+    request(app)
+      .post("/resources/buy")
+      .set("Cookie", ["gameId=99;playerId=999"])
       .send("Coal=1&Uranium=1&Oil=1&Garbage=10&Cost=100")
       .expect(200, done);
   });
@@ -315,6 +331,18 @@ describe("POST /cities/build", () => {
       .post("/cities/build")
       .send(`price=10&cityCount=2&cityNames=maimi_10`)
       .set("Cookie", ["gameId=99;playerId=999"])
+      .expect(200, done);
+  });
+
+  it("should return code 200 if resource data is registered succesfully", done => {
+    app.activeGames["9"] = new Game(1);
+    app.cookies["99"] = "Ankon";
+    const player1 = new Player("red", "Ankon");
+    app.activeGames["9"].addPlayer(player1);
+    request(app)
+      .post("/cities/build")
+      .set("Cookie", ["gameId=9;playerId=99"])
+      .send(`price=10&cityCount=2&cityNames=maimi_10`)
       .expect(200, done);
   });
 

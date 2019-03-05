@@ -176,12 +176,12 @@ const buyResources = function(req, res) {
   const turn = game.getTurn(players);
   const currentPlayer = turn.getCurrentPlayer();
   const isLastPlayer = turn.isLastPlayer();
-  if (isLastPlayer) game.changePhaseTo("buildCities");
   const isPaymentSuccess = currentPlayer.payMoney(resourcesDetail.Cost);
   if (isPaymentSuccess) {
     currentPlayer.addResources(resourcesDetail);
     updateResourceMarket(resourcesDetail, game);
     createBuyResourceLog(game, turn, resourcesDetail);
+    if (isLastPlayer) game.changePhaseTo("buildCities");
   }
   res.send({ currentPlayer, isPaymentSuccess, isLastPlayer });
 };
@@ -192,13 +192,14 @@ const buildCities = function(req, res) {
   const game = initializeGame(req, res);
   const players = game.getPlayers();
   const turn = game.getTurn(players);
-  if(turn.isLastPlayer()) game.changePhaseTo('bureaucracy');
   const currentPlayer = turn.getCurrentPlayer();
   const isPaymentSuccess = currentPlayer.payMoney(price);
+  const isLastPlayer = turn.isLastPlayer();
   if (isPaymentSuccess) {
     const cities = cityNames.filter(city => city.length > 1);
     createBuildCityLog(game, turn, cities.length - 1);
     currentPlayer.addCityNames(cities);
+    if (isLastPlayer) game.changePhaseTo("bureaucracy");
   }
   res.send({ isPaymentSuccess, currentPlayer });
 };
