@@ -17,7 +17,6 @@ const hideSoldResource = function(resource) {
 };
 
 const displayResource = function(resources, resource, cost, id) {
-<<<<<<< HEAD
   const index = `${resource}_${cost}_${id}`;
   const element = document.getElementById(index);
 
@@ -31,22 +30,6 @@ const displayResource = function(resources, resource, cost, id) {
     return;
   }
   hideSoldResource(element);
-=======
-	const index = `${resource}_${cost}_${id}`;
-	const element = document.getElementById(index);
-	addOnClick(element);
-
-	if (resources[resource][cost][id]) {
-		if (resource == "Uranium" && cost < 10) {
-			element.className =
-				"fas fa-radiation-alt filled resource middle-resource";
-			return;
-		}
-		element.className = `${market_resources[resource]}`;
-		return;
-	}
-	hideSoldResource(element);
->>>>>>> [#15] Deepika/Leela - Buy Resources
 };
 
 const showResourceMarket = function() {
@@ -155,7 +138,6 @@ const buyResources = function() {
 
 const addOnClick = resource => (resource.onclick = generateResourceValue);
 
-<<<<<<< HEAD
 const startBuyResourcePhase = function() {
   document.getElementById("power-plant-cards").style.display = "none";
   document.getElementById("market-div").style.width = "100%";
@@ -176,7 +158,6 @@ const designResourceMarket = function() {
   });
   const filledResources = document.querySelectorAll(".filled");
   filledResources.forEach(addOnClick);
-=======
 const initializeResources = function(player) {
 	const playerId = readCookie(document.cookie).playerId;
 	const resourceMarket = document.querySelectorAll(".filled");
@@ -189,7 +170,6 @@ const startBuyingResources = function() {
 	fetch("/currentPlayer")
 		.then(res => res.json())
 		.then(initializeResources);
->>>>>>> [#15] Deepika/Leela - Buy Resources
 };
 
 const generateResourceMarketDiv = function() {
@@ -246,7 +226,6 @@ const highlightPhase = function(currentPhase) {
 const currentPhase = { phase: "buyPowerPlant" };
 
 const getCurrentPhase = function() {
-<<<<<<< HEAD
   highlightPhase(currentPhase.phase);
   fetch("/currentPhase")
     .then(res => res.text())
@@ -267,21 +246,4 @@ const getCurrentPhase = function() {
         currentPhase.phase = "bureaucracy";
       }
     });
-=======
-	highlightPhase(currentPhase.phase);
-	fetch("/currentPhase")
-		.then(res => res.text())
-		.then(phase => {
-			if (phase == "buyResources" && currentPhase.phase != "buyResources") {
-				designResourceMarket();
-				startBuyResourcePhase();
-				currentPhase.phase = "buyResources";
-			}
-			if (phase == "buildCities" && currentPhase.phase != "buildCities") {
-				displayMap();
-				refreshMap();
-				currentPhase.phase = "buildCities";
-			}
-		});
->>>>>>> [#15] Deepika/Leela - Buy Resources
 };
