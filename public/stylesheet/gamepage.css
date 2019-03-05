@@ -551,6 +551,8 @@ header {
 
 .header-option {
   width: 8%;
+  font-family: inherit;
+  font-size: 15px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -710,7 +712,9 @@ header {
 }
 
 .phase {
-  width: 40%;
+  font-family: inherit;
+  font-size: 15px;
+  width: 95%;
   height: 80%;
   text-align: center;
   display: flex;
@@ -749,7 +753,7 @@ header {
 }
 
 .current-phase {
-  width: 40%;
+  width: 100%;
   height: 80%;
   text-align: center;
   display: flex;

@@ -10,7 +10,7 @@ html,
 body {
   width: 100%;
   height: 100%;
-  font-family: Avenir Next !important;
+  font-family: inherit;
   background-image: url("https://bit.ly/2S7mJsU");
   background-size: cover;
   margin: 0;
@@ -34,7 +34,7 @@ header {
   align-items: center;
   font-weight: bold;
   font-size: 50px;
-  text-shadow: 2px 4px gray;
+  /* text-shadow: 2px 4px gray; */
   text-align: center;
   justify-content: center;
 }
@@ -56,6 +56,7 @@ header {
 
 .options > button {
   height: 65px;
+  font-family: inherit;
   border-radius: 6px;
   font-size: 20px;
   font-weight: bolder;
