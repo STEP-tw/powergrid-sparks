@@ -427,6 +427,5 @@ module.exports = {
   selectPowerPlant,
   getCurrentBid,
   returnPlayerResources,
-  getGameDetails,
-  getCurrentPhase
+  getGameDetails
 };
