@@ -157,7 +157,9 @@ const designResourceMarket = function() {
     resourceGrids[index].className += " new-resource-grid";
   });
   const filledResources = document.querySelectorAll(".filled");
-  filledResources.forEach(addOnClick);
+	filledResources.forEach(addOnClick);
+}
+
 const initializeResources = function(player) {
 	const playerId = readCookie(document.cookie).playerId;
 	const resourceMarket = document.querySelectorAll(".filled");
