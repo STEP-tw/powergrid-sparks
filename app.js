@@ -23,17 +23,12 @@ const {
   buyResources,
   buildCities,
   getPlayers,
-  // getPlayerStats,
-  // getResources,
-  // getCurrentPowerPlants,
-  // getActivityLogs,
   lightCities,
   getPowerplants,
   returnPlayerResources,
   makeBid,
   selectPowerPlant,
   getCurrentBid,
-  // getCurrentPhase,
   getGameDetails
 } = require("./src/handlers");
 
@@ -41,7 +36,7 @@ app.set("views", __dirname + "/public/html");
 app.engine("html", view.renderFile);
 app.set("view engine", "html");
 
-// app.use(logger("dev"));
+app.use(logger("dev"));
 app.use(bodyParser.text());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
@@ -60,18 +55,12 @@ app.post("/powerPlant/buy", buyPowerplant);
 app.post("/resources/buy", buyResources);
 app.post("/cities/build", buildCities);
 app.get("/players", getPlayers);
-// app.get("/players/stats", getPlayerStats);
-// app.get("/resources", getResources);
-// app.get("/currentPowerPlants", getCurrentPowerPlants);
-// app.get("/logs", getActivityLogs);
 app.post("/auction/bid", makeBid);
 app.post("/powerPlant/select", selectPowerPlant);
 app.get("/currentBid", getCurrentBid);
 app.get("/cities/light", lightCities);
 app.get("/player/powerplants", getPowerplants);
 app.post("/returnResources", returnPlayerResources);
-// app.get("/currentPhase", getCurrentPhase);
-
 app.get("/getGameDetails", getGameDetails);
 
 app.use(express.static("public/html"));
