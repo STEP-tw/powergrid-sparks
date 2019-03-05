@@ -226,6 +226,23 @@ const highlightPhase = function(currentPhase) {
 
 // const currentPhase = { phase: "buyPowerPlant" };
 
+const displayMarket = function() {
+  document.getElementById("market").style.display = "inherit";
+  document.getElementById("power-plant-cards").style.display = "inherit";
+  document.getElementById("map").style.display = "none";
+  currentPhase.phase = "buyPowerPlant";
+  const resourceMarket = document.getElementById("resourceMarket");
+  resourceMarket.className = resourceMarket.className.split(" ")[0];
+  const resourceGrids = document.getElementsByClassName("resource-grid");
+  Object.keys(resourceGrids).forEach(index => {
+    const currClass = resourceGrids[index].className;
+    const newClass = currClass.split(" ")[0];
+    resourceGrids[index].className = newClass;
+  });
+  const biddingSection = getBiddingSectionTemplate();
+  document.getElementById("bidding-section").innerHTML = biddingSection;
+};
+
 const getCurrentPhase = function() {
   highlightPhase(currentPhase.phase);
   fetch("/currentPhase")
@@ -245,6 +262,9 @@ const getCurrentPhase = function() {
         getLightedCities();
         selectPowerplant();
         currentPhase.phase = "bureaucracy";
+      }
+      if (phase == "buyPowerPlant" && currentPhase.phase != "buyPowerPlant") {
+        displayMarket();
       }
     });
 };

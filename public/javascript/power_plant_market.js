@@ -98,8 +98,7 @@ const persistCardClass = function(powerPlants, currentMarketDiv) {
   fetch("/currentBid")
     .then(res => res.json())
     .then(auction => {
-      const { currentBid, isAuctionOver, players, phase } = auction;
-      console.log(players);
+      const { currentBid, players, phase } = auction;
       if (phase == "buyResources") {
         designResourceMarket();
         startBuyResourcePhase();

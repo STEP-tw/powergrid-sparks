@@ -298,6 +298,7 @@ const returnPlayerResources = function(req, res) {
   bureaucracy.setLightedCity(+cityCount);
   bureaucracy.payForLightedCities(JSON.parse(paymentOrder));
   refillResources(currentPlayer, game);
+  game.changePhaseTo("buyPowerPlant");
   res.send();
 };
 
@@ -349,6 +350,7 @@ const getCurrentBid = function(req, res) {
   if (isAuctionOver) {
     game.resetTurn();
     game.changePhaseTo("buyResources");
+    game.initiateAuction();
   }
   if (isBidOver) {
     return res.send(
@@ -425,5 +427,6 @@ module.exports = {
   selectPowerPlant,
   getCurrentBid,
   returnPlayerResources,
-  getGameDetails
+  getGameDetails,
+  getCurrentPhase
 };

@@ -24,6 +24,10 @@ class Game {
     this.phase = new Phase();
   }
 
+  initiateAuction() {
+    this.auction = new Auction(this.players, this.powerPlantMarket);
+  }
+
   conductAuction(cost) {
     if (this.auction == undefined) {
       const auctionPlayers = this.players.slice();
