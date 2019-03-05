@@ -26,7 +26,8 @@ class Game {
 
   conductAuction(cost) {
     if (this.auction == undefined) {
-      this.auction = new Auction(this.players, this.powerPlantMarket);
+      const auctionPlayers = this.players.slice();
+      this.auction = new Auction(auctionPlayers, this.powerPlantMarket);
       this.auction.selectPowerPlant(cost);
       return;
     }
@@ -48,7 +49,7 @@ class Game {
 
   getPlayersOrder() {
     if (this.auction == undefined) {
-      this.playerOrder = this.players;
+      this.playerOrder = this.players.slice();
       return this.playerOrder;
     }
 

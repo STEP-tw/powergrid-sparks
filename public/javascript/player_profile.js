@@ -66,13 +66,13 @@ const getCurrentPlayer = function() {
     });
 };
 
-const getPlayersDetails = function() {
-  fetch("/players")
-    .then(res => res.text())
-    .then(players => {
-      showPlayerDetails(players);
-    });
-};
+// const getPlayersDetails = function() {
+//   fetch("/players")
+//     .then(res => res.text())
+//     .then(players => {
+//       showPlayerDetails(players);
+//     });
+// };
 
 const readCookie = text => {
   let args = {};
@@ -86,7 +86,7 @@ const readCookie = text => {
 };
 
 const showPlayerAssets = function(players) {
-  showPlayerDetails(players);
+  //showPlayerDetails(players);
   polling();
 };
 
@@ -103,7 +103,7 @@ const getElementById = function(id) {
 };
 
 const showPlayerDetails = function(players) {
-  const users = JSON.parse(players);
+  const users = players;
   users.forEach(player => {
     const powerplantHTML = generatePowerplantHTML(player.powerplants);
     const resourceHTML = generateResourcesHTML(player.resources);

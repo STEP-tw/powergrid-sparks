@@ -87,6 +87,12 @@ class Auction {
   }
 
   start() {
+    if (this.isOnePlayer()) {
+      this.bid = new Bid([...this.players], this.currentBidAmount);
+      this.bid.makeBid(this.currentBidAmount);
+      this.continue(this.currentBidAmount);
+      return;
+    }
     this.bid = new Bid([...this.players], this.currentBidAmount);
     this.bid.makeBid(this.currentBidAmount);
   }
@@ -103,6 +109,7 @@ class Auction {
       );
       winner[0].addPowerplant(this.selectedPowerPlant);
       winner[0].payMoney(this.biddingResult.biddingAmount);
+      this.players.push(this.players.shift());
       this.players = this.players.filter(
         player => player.name != this.biddingResult.winner.name
       );

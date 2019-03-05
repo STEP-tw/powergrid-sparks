@@ -99,6 +99,7 @@ const persistCardClass = function(powerPlants, currentMarketDiv) {
     .then(res => res.json())
     .then(auction => {
       const { currentBid, isAuctionOver, players, phase } = auction;
+      console.log(players);
       if (phase == "buyResources") {
         designResourceMarket();
         startBuyResourcePhase();
@@ -188,8 +189,7 @@ const makeBid = function() {
     method: "POST",
     headers: { "Content-Type": "application/x-www-form-urlencoded" },
     body: `bidAmount=${bidAmount}`
-  });
-  updateCurrentPlayer();
+  }).then(res => updateCurrentPlayer());
 };
 
 const pass = function() {

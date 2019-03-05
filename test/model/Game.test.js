@@ -594,9 +594,9 @@ describe("Game", () => {
       game.players = [player1, player2];
       game.conductAuction("13");
       game.conductAuction("pass");
-      // game.conductAuction("19");
+      game.conductAuction("19");
       const actualOutput = game.getPlayersOrder();
-      const expectedOutput = [2];
+      const expectedOutput = [];
       chai.expect(expectedOutput).to.be.deep.equal(actualOutput);
     });
   });

@@ -23,17 +23,18 @@ const {
   buyResources,
   buildCities,
   getPlayers,
-  getPlayerStats,
-  getResources,
-  getCurrentPowerPlants,
-  getActivityLogs,
+  // getPlayerStats,
+  // getResources,
+  // getCurrentPowerPlants,
+  // getActivityLogs,
   lightCities,
   getPowerplants,
   returnPlayerResources,
   makeBid,
   selectPowerPlant,
   getCurrentBid,
-  getCurrentPhase
+  // getCurrentPhase,
+  getGameDetails
 } = require("./src/handlers");
 
 app.set("views", __dirname + "/public/html");
@@ -59,17 +60,19 @@ app.post("/powerPlant/buy", buyPowerplant);
 app.post("/resources/buy", buyResources);
 app.post("/cities/build", buildCities);
 app.get("/players", getPlayers);
-app.get("/players/stats", getPlayerStats);
-app.get("/resources", getResources);
-app.get("/currentPowerPlants", getCurrentPowerPlants);
-app.get("/logs", getActivityLogs);
+// app.get("/players/stats", getPlayerStats);
+// app.get("/resources", getResources);
+// app.get("/currentPowerPlants", getCurrentPowerPlants);
+// app.get("/logs", getActivityLogs);
 app.post("/auction/bid", makeBid);
 app.post("/powerPlant/select", selectPowerPlant);
 app.get("/currentBid", getCurrentBid);
 app.get("/cities/light", lightCities);
 app.get("/player/powerplants", getPowerplants);
 app.post("/returnResources", returnPlayerResources);
-app.get("/currentPhase", getCurrentPhase);
+// app.get("/currentPhase", getCurrentPhase);
+
+app.get("/getGameDetails", getGameDetails);
 
 app.use(express.static("public/html"));
 app.use(express.static("public/stylesheet"));
