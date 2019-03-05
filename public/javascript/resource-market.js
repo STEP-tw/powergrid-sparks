@@ -120,12 +120,6 @@ const showInvalidQuantityError = function() {
 };
 
 const handleSellResources = function(player) {
-<<<<<<< HEAD
-  if (!player.isPaymentSuccess) return showFailedPayment();
-  resetTurn();
-  resourceMarket.forEach(resource => (resource.onclick = ""));
-  if (player.isLastPlayer) displayMap();
-=======
 	if (!player.areValidType) return ShowInvalidResource();
 	if (!player.areValidQuantities) return showInvalidQuantity();
 	if (!player.isPurchaseSuccess) return showFailedPayment();
@@ -134,7 +128,6 @@ const handleSellResources = function(player) {
 	if (player.isLastPlayer) {
 		displayMap();
 	}
->>>>>>> [#15] Deepika/Leela - Buy Resources
 };
 
 const getResourceDetails = function() {
