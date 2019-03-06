@@ -614,6 +614,20 @@ describe("Game", () => {
       const expectedOutput = [1, 2, 3];
       chai.expect(expectedOutput).to.be.deep.equal(actualOutput);
     });
+
+    it("should return the players in the bidding", function() {
+      const player1 = new Player("red", "A");
+      player1.id = 1;
+      const player2 = new Player("green", "B");
+      player2.id = 2;
+      const player3 = new Player("yellow", "C");
+      player3.id = 3;
+      game.conductAuction("pass");
+      game.players = [player1, player2, player3];
+      const actualOutput = game.getBidPlayers();
+      const expectedOutput = [];
+      chai.expect(expectedOutput).to.be.deep.equal(actualOutput);
+    });
   });
 
   describe("getAuctionPlayers", function() {
@@ -653,6 +667,20 @@ describe("Game", () => {
       game.conductAuction("pass");
       const actualOutput = game.getPlayersOrder();
       const expectedOutput = [];
+      chai.expect(expectedOutput).to.be.deep.equal(actualOutput);
+    });
+  });
+
+  describe("isAuctionOver", function() {
+    it("should return false if the auction is not over", function() {
+      const player1 = new Player("red", "A");
+      const player2 = new Player("green", "B");
+      player1.id = 1;
+      player2.id = 2;
+      game.players = [player1, player2];
+      game.conductAuction("pass");
+      const actualOutput = game.isAuctionOver();
+      const expectedOutput = false;
       chai.expect(expectedOutput).to.be.deep.equal(actualOutput);
     });
   });

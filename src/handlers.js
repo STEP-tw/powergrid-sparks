@@ -383,13 +383,13 @@ const getGameDetails = function(req, res) {
   const turn = game.getTurn(players);
   let player = turn.getCurrentPlayer();
   const resourceMarket = game.getResourceMarket();
-  if (game.currentPhase() == "buyPowerPlant" && game.auction) {
+  if (game.currentPhase() == "buyPowerPlant" && game.isAuctionStarted) {
     if (game.isBidOver()) {
       if (game.auction.players.length) {
         player = game.auction.players[0];
       }
     } else {
-      game.isAuctionOver() && (player = game.auction.bid.currentBidder);
+      player = game.auction.bid.currentBidder;
     }
   }
   const resources = resourceMarket.getResources();
@@ -404,7 +404,7 @@ const getGameDetails = function(req, res) {
       powerPlants: JSON.stringify(powerPlants),
       phase: game.currentPhase(),
       playerStats,
-      logs: game.getLogs(),
+      logs: game.getLogs()
     })
   );
 };

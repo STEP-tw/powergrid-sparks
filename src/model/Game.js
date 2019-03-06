@@ -50,7 +50,12 @@ class Game {
 
   isAuctionOver() {
     if (this.auction == undefined) return false;
-    return this.auction.isAuctionOver();
+    if (this.auction.isAuctionOver()) {
+      this.isAuctionStarted = false;
+      this.auction = undefined;
+      return true;
+    }
+    return false;
   }
 
   getPlayersOrder() {
