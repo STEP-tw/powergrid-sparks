@@ -22,7 +22,7 @@ const validateLightedCities = function(bureaucracy) {
     document.getElementById("building-phase").innerHTML = "";
     return;
   }
-   document.getElementById("err-msg").innerText = " you dont have enough cities";
+  setInnerText("err-msg", " you dont have enough cities");
   document.getElementById("lighted-cities").value = "";
 };
 
@@ -45,7 +45,7 @@ const getPlayerAssets = function(powerplants) {
 };
 
 const displayUnsufficientResources = function(isCityCountValid) {
-  document.getElementById("err-msg").innerText = "insufficient resources";
+  setInnerText("err-msg", "insufficient resources");
   const powerplantDiv = document.getElementById("select-powerplant");
   const allPowerplants = powerplantDiv.childNodes;
   allPowerplants.forEach(powerplant => (powerplant.onclick = selectDiv));
@@ -54,12 +54,12 @@ const displayUnsufficientResources = function(isCityCountValid) {
 
 const DisplayPowerplantErrMsg = function(city) {
   const errMsg = `selected powerplant can not light more than ${city} city`;
-  document.getElementById("err-msg").innerText = errMsg;
+  setInnerText("err-msg", errMsg);
 };
 
 const displayCityErrMsg = function() {
   const errMsg = `You don't have enough cities`;
-  document.getElementById("err-msg").innerText = errMsg;
+  setInnerText("err-msg", errMsg);
 };
 
 const validatePlayerResources = function(userInfo) {
@@ -86,7 +86,7 @@ const validatePlayerResources = function(userInfo) {
 const updateUserResources = function(resources, hybridResource, cityCount) {
   let hasDeducted = false;
   const msg = `${cityCount} cities lighted successfully`;
-  document.getElementById("err-msg").innerText = msg;
+  setInnerText("err-msg", msg);
   selectedPowerPlant.splice(0);
   if (resources.Coal >= hybridResource) {
     resources.Coal -= hybridResource;
@@ -99,22 +99,14 @@ const updateUserResources = function(resources, hybridResource, cityCount) {
   updateCurrentPlayer();
 };
 
-const displayLightedCities = function(city) {
-  document.getElementById("err-msg").innerText = msg;
-  setTimeout(() => {
-    messageContainer.innerText = "";
-  }, 5000);
-  messageContainer.innerText = "insufficient money";
-};
-
 const updatePowerplantInfo = function(powerplants) {
   const allPowerplants = generateMarket(powerplants, 0, 3, "map123");
   const bureaucracyDiv = document.getElementById("map");
-  const heading = generateDiv("bureaucracy-heading","");
+  const heading = generateDiv("bureaucracy-heading", "");
   heading.innerText = "Select powerplant to light cities";
   bureaucracyDiv.innerHTML = "";
-  const msgDiv = generateDiv("bureaucracy-err-msg","err-msg");
-  appendChildren(bureaucracyDiv,[heading,allPowerplants,msgDiv]);
+  const msgDiv = generateDiv("bureaucracy-err-msg", "err-msg");
+  appendChildren(bureaucracyDiv, [heading, allPowerplants, msgDiv]);
   const market = bureaucracyDiv.childNodes;
   const playersPowerplant = market[1].childNodes;
   playersPowerplant.forEach(powerplant => {
