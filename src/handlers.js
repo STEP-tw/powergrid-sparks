@@ -347,6 +347,8 @@ const getCurrentBid = function(req, res) {
   const isAuctionOver = game.isAuctionOver();
   const bidPlayers = game.getBidPlayers();
   const auctionPlayers = game.getAuctionPlayers();
+  const phase = game.currentPhase();
+  const isAuctionStarted = game.isAuctionStarted;
   if (isAuctionOver) {
     game.resetTurn();
     game.changePhaseTo("buyResources");
@@ -355,17 +357,21 @@ const getCurrentBid = function(req, res) {
   if (isBidOver) {
     return res.send(
       JSON.stringify({
-        currentBid: currentBid,
-        isAuctionOver: isAuctionOver,
-        players: auctionPlayers,
-        phase: game.currentPhase()
+        currentBid,
+        isAuctionOver,
+        isBidOver,
+        phase,
+        isAuctionStarted,
+        players: auctionPlayers
       })
     );
   }
   res.send(
     JSON.stringify({
-      currentBid: currentBid,
-      isAuctionOver: isAuctionOver,
+      currentBid,
+      isAuctionOver,
+      isBidOver,
+      isAuctionStarted,
       players: bidPlayers
     })
   );

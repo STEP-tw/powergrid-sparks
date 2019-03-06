@@ -224,8 +224,6 @@ const highlightPhase = function(currentPhase) {
   document.getElementById(phases[currentPhase]).className = "current-phase";
 };
 
-// const currentPhase = { phase: "buyPowerPlant" };
-
 const displayMarket = function() {
   document.getElementById("market").style.display = "inherit";
   document.getElementById("power-plant-cards").style.display = "inherit";

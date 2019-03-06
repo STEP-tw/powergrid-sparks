@@ -66,14 +66,6 @@ const getCurrentPlayer = function() {
     });
 };
 
-// const getPlayersDetails = function() {
-//   fetch("/players")
-//     .then(res => res.text())
-//     .then(players => {
-//       showPlayerDetails(players);
-//     });
-// };
-
 const readCookie = text => {
   let args = {};
   const splitKeyValue = pair => pair.split("=");
@@ -86,7 +78,6 @@ const readCookie = text => {
 };
 
 const showPlayerAssets = function(players) {
-  //showPlayerDetails(players);
   polling();
 };
 

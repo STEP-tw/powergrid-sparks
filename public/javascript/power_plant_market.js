@@ -99,11 +99,19 @@ const persistCardClass = function(powerPlants, currentMarketDiv) {
   fetch("/currentBid")
     .then(res => res.json())
     .then(auction => {
-      const { currentBid, players, phase } = auction;
+      const { currentBid, players, phase, isBidOver, isAuctionStarted } = auction;
       if (phase == "buyResources") {
         designResourceMarket();
         startBuyResourcePhase();
         return;
+      }
+      const powerPlantCards = document.getElementById("currentMarket").childNodes;
+      if(!isBidOver && isAuctionStarted){
+        powerPlantCards.forEach(powerplantCard => powerplantCard.onclick = null);
+      }
+      else{
+        powerPlantCards.forEach(powerPlantCard =>
+        powerPlantCard.onclick = selectPowerPlant.bind(null, powerPlantCard));
       }
       const cost = document.getElementById("bid-amount").innerText;
       fetch("/currentPlayer")
@@ -179,6 +187,7 @@ const addPowerPlantToPlayer = function(count, powerPlants, powerPlantCost) {
 
 const makeBid = function() {
   const bidAmount = document.getElementById("bid-amount").innerText;
+  document.getElementsByClassName;
   fetch("/auction/bid", {
     method: "POST",
     headers: { "Content-Type": "application/x-www-form-urlencoded" },
