@@ -383,7 +383,7 @@ const getGameDetails = function(req, res) {
         player = game.auction.players[0];
       }
     } else {
-      player = game.auction.bid.currentBidder;
+      game.isAuctionOver() && (player = game.auction.bid.currentBidder);
     }
   }
   const resources = resourceMarket.getResources();

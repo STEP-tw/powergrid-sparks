@@ -740,6 +740,37 @@ describe("GET /getGameDetails", function() {
         isSelected: false
       }
     });
+    app.activeGames["55"].initiateAuction();
+    const auction = app.activeGames["55"].auction;
+    auction.players = [player1];
+    auction.selectPowerPlant("13");
+    auction.continue("pass");
+
+    request(app)
+      .get("/getGameDetails")
+      .set("Cookie", ["gameId=55;playerId=1234567"])
+      .expect(200, done);
+  });
+
+  it("should respond with 200", function(done) {
+    app.activeGames["55"] = new Game(1);
+    const player1 = new Player("green", "gaurav");
+    app.activeGames["55"].addPlayer(player1);
+    app.cookies["1234567"] = "Ankon";
+    app.activeGames["55"].powerPlantMarket = new PowerPlantMarket({
+      "13": {
+        resource: { type: "Oil", quantity: 2 },
+        city: 1,
+        inDeck: true,
+        isSelected: false
+      },
+      "19": {
+        resource: { type: "Garbage", quantity: 1 },
+        city: 3,
+        inDeck: true,
+        isSelected: false
+      }
+    });
 
     request(app)
       .get("/getGameDetails")
