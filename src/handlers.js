@@ -183,7 +183,7 @@ const buyResources = function(req, res) {
   const playerPowerplants = currentPlayer.getPowerplants();
   const isLastPlayer = turn.isLastPlayer();
   const areValidType = areValidTypes(playerPowerplants, resourcesDetail);
-  const areValidQuantities = isValidQuantity(
+  const areValidQuantities = hasCapacity(
     playerPowerplants,
     resourcesDetail
   );
@@ -248,7 +248,7 @@ const areValidTypes = function(playerPowerplants, selectedResourceDetails) {
   );
 };
 
-const isValidQuantity = function(playerPowerplants, selectedResourceDetails) {
+const hasCapacity = function(playerPowerplants, selectedResourceDetails) {
   const requiredResDetails = getRequiredResDetails(playerPowerplants);
   const selectedResources = parseResourceDetails(selectedResourceDetails);
   const selectedResourceTypes = Object.keys(selectedResources);
