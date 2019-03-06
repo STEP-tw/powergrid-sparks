@@ -49,8 +49,8 @@ const resetTurn = function() {
   updateCurrentPlayer();
   document.getElementById("selected-resource-amount").style.visibility =
     "hidden";
-  document.getElementById("resource-amount").innerText = 0;
-  document.getElementById("insufficient-money").innerText = "";
+  setInnerText("resource-amount", 0);
+  setInnerText("insufficient-money", "");
   boughtResources.resourcesID = [];
 };
 
@@ -68,6 +68,7 @@ const resetSelection = function(resource) {
 };
 
 const showFailedPayment = function() {
+  setInnerText("resource-amount",0);
   document.getElementById("resource-amount").innerText = 0;
   showFailedPaymentMessage();
   boughtResources.resourcesID.forEach(resetSelection);
@@ -75,7 +76,7 @@ const showFailedPayment = function() {
 };
 
 const ShowInvalidResource = function() {
-  document.getElementById("resource-amount").innerText = 0;
+  setInnerText("resource-amount",0);
   showInvalidResourceError();
   boughtResources.resourcesID.forEach(resetSelection);
   boughtResources.resourcesID = [];
@@ -106,7 +107,6 @@ const handleSellResources = function(player) {
   if (!player.areValidQuantities) return showInvalidQuantity();
   if (!player.isPurchaseSuccess) return showFailedPayment();
   resetTurn();
-  resourceMarket.forEach(resource => (resource.onclick = ""));
   if (player.isLastPlayer) {
     displayMap();
   }
@@ -124,8 +124,7 @@ const getResourceDetails = function() {
 
 const buyResources = function() {
   const { Coal, Oil, Uranium, Garbage } = getResourceDetails();
-  const cost = +document.getElementById("resource-amount").innerText;
-
+  const cost = +getInnerText("resource-amount");
   fetch("/resources/buy", {
     method: "POST",
     headers: { "Content-Type": "application/x-www-form-urlencoded" },
