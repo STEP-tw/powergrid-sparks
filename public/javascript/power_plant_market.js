@@ -15,7 +15,7 @@ const resources = {
 
 const increaseBid = function() {
   const currentBid = getInnerText("bid-amount");
-  InnersetText("bid-amount", +currentBid + 1);
+  setInnerText("bid-amount", +currentBid + 1);
 };
 
 const fetchMarket = function() {
