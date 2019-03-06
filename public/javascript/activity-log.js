@@ -1,11 +1,15 @@
+const setDiplay = function(id,style){
+  document.getElementById(id).style.display = style
+}
+
 const displayActivityLogs = function() {
-  document.getElementById("activity-log-overlay").style.display = "flex";
-  document.getElementById("activity-log").style.display = "flex";
+  setDiplay("activity-log-overlay","flex");
+  setDiplay("activity-log","flex");
 };
 
 const closeActivityLog = function() {
-  document.getElementById("activity-log-overlay").style.display = "none";
-  document.getElementById("activity-log").style.display = "none";
+  setDiplay("activity-log-overlay","none");  
+  setDiplay("activity-log","none");  
 };
 
 const showActivityLogs = function(logs) {
