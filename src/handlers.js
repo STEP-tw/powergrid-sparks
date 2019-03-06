@@ -142,7 +142,8 @@ const getCurrentPlayer = function(req, res) {
   const game = initializeGame(req, res);
   const players = game.getPlayers();
   const turn = game.getTurn(players);
-  res.send(turn.getCurrentPlayer());
+  const currentPlayer = turn.getCurrentPlayer();
+  res.send(currentPlayer);
 };
 
 const updateCurrentPlayer = function(req, res) {
@@ -228,9 +229,10 @@ const getRequiredResDetails = function(powerPlants) {
 
 const parseResourceDetails = function(selectedResourceDetails) {
   const selectedResources = {};
-  ["Coal", "Oil", "Uranium", "Garbage"].filter(x => {
-    if (selectedResourceDetails[x].length > 2) {
-      selectedResources[x] = selectedResourceDetails[x].split(",").length;
+  const resources = ["Coal", "Oil", "Uranium", "Garbage"];
+  resources.filter(resource => {
+    if (selectedResourceDetails[resource].length > 2) {
+      selectedResources[resource] = selectedResourceDetails[resource].split(",").length;
     }
   });
   return selectedResources;
@@ -245,6 +247,7 @@ const areValidTypes = function(playerPowerplants, selectedResourceDetails) {
     requiredResTypes.includes(resourceType)
   );
 };
+
 const isValidQuantity = function(playerPowerplants, selectedResourceDetails) {
   const requiredResDetails = getRequiredResDetails(playerPowerplants);
   const selectedResources = parseResourceDetails(selectedResourceDetails);
