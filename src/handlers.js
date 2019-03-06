@@ -16,19 +16,23 @@ const paymentOrder = fs.readFileSync(
   "UTF8"
 );
 
-const getGameID = function(req) {
+const getGameId = function(req) {
   return req.cookies.gameId;
 };
 
+const getPlayerId = function(req) {
+  return req.cookies.playerId;
+};
+
 const initializeGame = function(req, res) {
-  const gameId = getGameID(req);
+  const gameId = getGameId(req);
   const game = res.app.activeGames[+gameId];
   return game;
 };
 
 const renderHome = function(req, res) {
   if (res.app.cookies[req.cookies.playerId]) {
-    const gameId = getGameID(req);
+    const gameId = getGameId(req);
     const game = res.app.activeGames[+gameId];
     if (game.getCurrentPlayersCount() == game.getMaxPlayersCount()) {
       return res.redirect("/gameplay");
@@ -67,7 +71,7 @@ const createGame = function(req, res) {
 };
 
 const renderWaitingPage = function(req, res) {
-  const gameId = getGameID(req);
+  const gameId = getGameId(req);
   const game = res.app.activeGames[+gameId];
   res.render("createdGame.html", { users: game.getPlayers(), gameId });
 };
@@ -83,7 +87,7 @@ const renderGamePage = function(req, res) {
 };
 
 const renderGameplay = function(req, res) {
-  const gameId = getGameID(req);
+  const gameId = getGameId(req);
   const game = res.app.activeGames[+gameId];
   res.render("gameplay.html", { players: game.getPlayers() });
 };
@@ -183,10 +187,7 @@ const buyResources = function(req, res) {
   const playerPowerplants = currentPlayer.getPowerplants();
   const isLastPlayer = turn.isLastPlayer();
   const areValidType = areValidTypes(playerPowerplants, resourcesDetail);
-  const areValidQuantities = hasCapacity(
-    playerPowerplants,
-    resourcesDetail
-  );
+  const areValidQuantities = hasCapacity(playerPowerplants, resourcesDetail);
   if (!areValidType) {
     res.send({ currentPlayer, areValidType, isLastPlayer });
     return;
@@ -232,7 +233,9 @@ const parseResourceDetails = function(selectedResourceDetails) {
   const resources = ["Coal", "Oil", "Uranium", "Garbage"];
   resources.filter(resource => {
     if (selectedResourceDetails[resource].length > 2) {
-      selectedResources[resource] = selectedResourceDetails[resource].split(",").length;
+      selectedResources[resource] = selectedResourceDetails[resource].split(
+        ","
+      ).length;
     }
   });
   return selectedResources;
@@ -278,7 +281,7 @@ const buildCities = function(req, res) {
 
 const lightCities = function(req, res) {
   const game = initializeGame(req, res);
-  const playerId = req.cookies.playerId;
+  const playerId = getPlayerId(req);
   const currentPlayer = game.players.find(player => player.id == playerId);
   const cityCount = currentPlayer.getCityCount();
   const resources = currentPlayer.getResources();
@@ -288,7 +291,7 @@ const lightCities = function(req, res) {
 
 const getPowerplants = function(req, res) {
   const game = initializeGame(req, res);
-  const playerId = req.cookies.playerId;
+  const playerId = getPlayerId(req);
   const currentPlayer = game.players.find(player => player.id == playerId);
   const powerplants = currentPlayer.getPowerplants();
   res.send(powerplants);
@@ -297,7 +300,7 @@ const getPowerplants = function(req, res) {
 const returnPlayerResources = function(req, res) {
   const game = initializeGame(req, res);
   const { cityCount, resources } = req.body;
-  const playerId = req.cookies.playerId;
+  const playerId = getPlayerId(req);
   const updatedResources = JSON.parse(resources);
   const currentPlayer = game.players.find(player => player.id == playerId);
 
@@ -405,7 +408,7 @@ const getGameDetails = function(req, res) {
   }
   const resources = resourceMarket.getResources();
   const powerPlants = game.getPowerPlantMarket();
-  const playerId = req.cookies.playerId;
+  const playerId = getPlayerId(req);
   const playerStats = game.players.find(player => player.id == playerId);
   res.send(
     JSON.stringify({
