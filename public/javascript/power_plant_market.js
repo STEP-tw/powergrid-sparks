@@ -14,8 +14,8 @@ const resources = {
 };
 
 const increaseBid = function() {
-  const currentBid = document.getElementById("bid-amount").innerText;
-  document.getElementById("bid-amount").innerText = +currentBid + 1;
+  const currentBid = getInnerText("bid-amount");
+  setInnerText("bid-amount", +currentBid + 1);
 };
 
 const fetchMarket = function() {
@@ -32,8 +32,8 @@ const displayPowerPlantMarket = function(powerPlantCards) {
 };
 
 const updatePriceDiv = function(price) {
-  document.getElementById("current-bid-amount").innerText = price;
-  document.getElementById("bid-amount").innerText = price;
+  setInnerText("current-bid-amount", price);
+  setInnerText("bid-amount", price);
 };
 
 const selectPowerPlant = function(element) {
@@ -99,19 +99,32 @@ const persistCardClass = function(powerPlants, currentMarketDiv) {
   fetch("/currentBid")
     .then(res => res.json())
     .then(auction => {
-      const { currentBid, players, phase, isBidOver, isAuctionStarted } = auction;
+      const {
+        currentBid,
+        players,
+        phase,
+        isBidOver,
+        isAuctionStarted
+      } = auction;
       if (phase == "buyResources") {
         designResourceMarket();
         startBuyResourcePhase();
         return;
       }
-      const powerPlantCards = document.getElementById("currentMarket").childNodes;
-      if(!isBidOver && isAuctionStarted){
-        powerPlantCards.forEach(powerplantCard => powerplantCard.onclick = null);
-      }
-      else{
-        powerPlantCards.forEach(powerPlantCard =>
-        powerPlantCard.onclick = selectPowerPlant.bind(null, powerPlantCard));
+      const powerPlantCards = document.getElementById("currentMarket")
+        .childNodes;
+      if (!isBidOver && isAuctionStarted) {
+        powerPlantCards.forEach(
+          powerplantCard => (powerplantCard.onclick = null)
+        );
+      } else {
+        powerPlantCards.forEach(
+          powerPlantCard =>
+            (powerPlantCard.onclick = selectPowerPlant.bind(
+              null,
+              powerPlantCard
+            ))
+        );
       }
       const cost = document.getElementById("bid-amount").innerText;
       fetch("/currentPlayer")
@@ -186,7 +199,7 @@ const addPowerPlantToPlayer = function(count, powerPlants, powerPlantCost) {
 };
 
 const makeBid = function() {
-  const bidAmount = document.getElementById("bid-amount").innerText;
+  const bidAmount = getInnerText("bid-amount");
   document.getElementsByClassName;
   fetch("/auction/bid", {
     method: "POST",
