@@ -70,6 +70,7 @@ const validatePlayerResources = function(userInfo) {
   const playerCities = playerAssets[allResources.pop()];
   const hybridResource = playerAssets[allResources.pop()];
   const cities = document.getElementById("lighted-cities").value;
+  if (cities < 1) return updateUserResources(resources, hybridResource, cities);
   if (cities > cityCount) return displayCityErrMsg();
   if (cities > playerCities) return DisplayPowerplantErrMsg(playerCities);
   allResources.forEach(resource => {

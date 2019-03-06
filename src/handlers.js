@@ -293,12 +293,16 @@ const returnPlayerResources = function(req, res) {
   const playerId = req.cookies.playerId;
   const updatedResources = JSON.parse(resources);
   const currentPlayer = game.players.find(player => player.id == playerId);
+
+  const players = game.getPlayers();
+  const turn = game.getTurn(players);
+
   currentPlayer.resources = updatedResources;
   const bureaucracy = new Bureaucracy(currentPlayer);
   bureaucracy.setLightedCity(+cityCount);
   bureaucracy.payForLightedCities(JSON.parse(paymentOrder));
   refillResources(currentPlayer, game);
-  game.changePhaseTo("buyPowerPlant");
+  turn.isLastPlayer() && game.changePhaseTo("buyPowerPlant");
   res.send();
 };
 
