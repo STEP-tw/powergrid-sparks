@@ -16,15 +16,19 @@ const paymentOrder = fs.readFileSync(
   "UTF8"
 );
 
+const getGameID = function(req) {
+  return req.cookies.gameId;
+};
+
 const initializeGame = function(req, res) {
-  const gameId = req.cookies.gameId;
+  const gameId = getGameID(req);
   const game = res.app.activeGames[+gameId];
   return game;
 };
 
 const renderHome = function(req, res) {
   if (res.app.cookies[req.cookies.playerId]) {
-    const gameId = req.cookies.gameId;
+    const gameId = getGameID(req);
     const game = res.app.activeGames[+gameId];
     if (game.getCurrentPlayersCount() == game.getMaxPlayersCount()) {
       return res.redirect("/gameplay");
@@ -63,7 +67,7 @@ const createGame = function(req, res) {
 };
 
 const renderWaitingPage = function(req, res) {
-  const gameId = req.cookies.gameId;
+  const gameId = getGameID(req);
   const game = res.app.activeGames[+gameId];
   res.render("createdGame.html", { users: game.getPlayers(), gameId });
 };
@@ -79,7 +83,7 @@ const renderGamePage = function(req, res) {
 };
 
 const renderGameplay = function(req, res) {
-  const gameId = req.cookies.gameId;
+  const gameId = getGameID(req);
   const game = res.app.activeGames[+gameId];
   res.render("gameplay.html", { players: game.getPlayers() });
 };
