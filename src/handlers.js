@@ -398,7 +398,7 @@ const getGameDetails = function(req, res) {
       powerPlants: JSON.stringify(powerPlants),
       phase: game.currentPhase(),
       playerStats,
-      logs: game.getLogs()
+      logs: game.getLogs(),
     })
   );
 };

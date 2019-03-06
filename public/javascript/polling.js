@@ -6,7 +6,14 @@ const polling = function() {
     fetch("/getGameDetails")
       .then(res => res.json())
       .then(gameDetails => {
-        const { player, players, resources, phase, playerStats, logs } = gameDetails;
+        const {
+          player,
+          players,
+          resources,
+          phase,
+          playerStats,
+          logs
+        } = gameDetails;
         handleTurn(player);
         showPlayerDetails(gameDetails.players);
         Object.keys(resources).forEach(resource => {

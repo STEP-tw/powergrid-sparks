@@ -43,6 +43,7 @@ const selectPowerPlant = function(element) {
     headers: { "Content-Type": "application/x-www-form-urlencoded" },
     body: `powerPlantCost=${powerPlantCost}`
   });
+  resetBidAmount();
   updatePriceDiv(powerPlantCost);
 };
 
@@ -165,15 +166,9 @@ const generatePowerPlantPriceDiv = function(powerPlantCost) {
   return priceDiv;
 };
 
-const buyPowerplant = function() {
-  const price = document.getElementById("current-bid-amount").innerText;
+const resetBidAmount = function() {
   document.getElementById("current-bid-amount").innerText = 0;
   document.getElementById("bid-amount").innerText = 0;
-  fetch("/powerPlant/buy", {
-    method: "POST",
-    headers: { "Content-Type": "application/x-www-form-urlencoded" },
-    body: `price=${price}`
-  });
 };
 
 const addPowerPlantToPlayer = function(count, powerPlants, powerPlantCost) {
