@@ -239,29 +239,3 @@ const displayMarket = function() {
   const biddingSection = getBiddingSectionTemplate();
   document.getElementById("bidding-section").innerHTML = biddingSection;
 };
-
-const getCurrentPhase = function() {
-  highlightPhase(currentPhase.phase);
-  fetch("/currentPhase")
-    .then(res => res.text())
-    .then(phase => {
-      if (phase == "buyResources" && currentPhase.phase != "buyResources") {
-        designResourceMarket();
-        startBuyResourcePhase();
-        currentPhase.phase = "buyResources";
-      }
-      if (phase == "buildCities" && currentPhase.phase != "buildCities") {
-        displayMap();
-        refreshMap();
-        currentPhase.phase = "buildCities";
-      }
-      if (phase == "bureaucracy" && currentPhase.phase != "bureaucracy") {
-        getLightedCities();
-        selectPowerplant();
-        currentPhase.phase = "bureaucracy";
-      }
-      if (phase == "buyPowerPlant" && currentPhase.phase != "buyPowerPlant") {
-        displayMarket();
-      }
-    });
-};

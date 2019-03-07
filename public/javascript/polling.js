@@ -42,6 +42,10 @@ const polling = function() {
           selectPowerplant();
           currentPhase.phase = "bureaucracy";
         }
+        if (phase == "buyPowerPlant" && currentPhase.phase != "buyPowerPlant") {
+          displayMarket();
+          currentPhase.phase = "buyPowerPlant";
+        }
       });
   }, 500);
 };
