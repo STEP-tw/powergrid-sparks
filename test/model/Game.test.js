@@ -679,6 +679,7 @@ describe("Game", () => {
       player2.id = 2;
       game.players = [player1, player2];
       game.conductAuction("pass");
+
       const actualOutput = game.isAuctionOver();
       const expectedOutput = false;
       chai.expect(expectedOutput).to.be.deep.equal(actualOutput);

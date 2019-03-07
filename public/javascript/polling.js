@@ -23,10 +23,6 @@ const polling = function() {
             });
           });
         });
-        displayPowerPlants(gameDetails);
-        updatePlayerStatsDiv(playerStats);
-        players.forEach(player => updateMap(player));
-        showActivityLogs(logs);
         if (phase == "buyResources" && currentPhase.phase != "buyResources") {
           designResourceMarket();
           startBuyResourcePhase();
@@ -46,6 +42,10 @@ const polling = function() {
           displayMarket();
           currentPhase.phase = "buyPowerPlant";
         }
+        displayPowerPlants(gameDetails);
+        updatePlayerStatsDiv(playerStats);
+        showActivityLogs(logs);
+        players.forEach(player => updateMap(player));
       });
   }, 500);
 };

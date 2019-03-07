@@ -68,7 +68,7 @@ const resetSelection = function(resource) {
 };
 
 const showFailedPayment = function() {
-  setInnerText("resource-amount",0);
+  setInnerText("resource-amount", 0);
   document.getElementById("resource-amount").innerText = 0;
   showFailedPaymentMessage();
   boughtResources.resourcesID.forEach(resetSelection);
@@ -76,7 +76,7 @@ const showFailedPayment = function() {
 };
 
 const ShowInvalidResource = function() {
-  setInnerText("resource-amount",0);
+  setInnerText("resource-amount", 0);
   showInvalidResourceError();
   boughtResources.resourcesID.forEach(resetSelection);
   boughtResources.resourcesID = [];
@@ -227,7 +227,6 @@ const displayMarket = function() {
   document.getElementById("market").style.display = "inherit";
   document.getElementById("power-plant-cards").style.display = "inherit";
   document.getElementById("map").style.display = "none";
-  currentPhase.phase = "buyPowerPlant";
   const resourceMarket = document.getElementById("resourceMarket");
   resourceMarket.className = resourceMarket.className.split(" ")[0];
   const resourceGrids = document.getElementsByClassName("resource-grid");

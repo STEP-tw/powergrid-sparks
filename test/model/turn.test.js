@@ -22,8 +22,9 @@ describe("Turn", () => {
   describe("updateCurrentPlayer", () => {
     it("should update the current player index", () => {
       turn.updateCurrentPlayer();
+      turn.resetTurn();
       const actualOutput = turn.currentPlayerIndex;
-      const expectedOutput = 1;
+      const expectedOutput = 0;
       chai.expect(actualOutput).to.be.deep.equal(expectedOutput);
     });
   });

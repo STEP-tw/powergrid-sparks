@@ -89,7 +89,6 @@ class Auction {
   start() {
     if (this.isOnePlayer()) {
       this.bid = new Bid([...this.players], this.currentBidAmount);
-      this.bid.makeBid(this.currentBidAmount);
       this.continue(this.currentBidAmount);
       return;
     }

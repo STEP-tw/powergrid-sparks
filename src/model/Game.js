@@ -25,10 +25,6 @@ class Game {
     this.isAuctionStarted = false;
   }
 
-  initiateAuction() {
-    this.auction = new Auction(this.players, this.powerPlantMarket);
-  }
-
   conductAuction(cost) {
     if (this.auction == undefined) {
       const auctionPlayers = this.players.slice();
@@ -37,11 +33,14 @@ class Game {
       this.isAuctionStarted = true;
       return;
     }
+
     if (this.auction.isBidOver) {
       this.auction.selectPowerPlant(cost);
       return;
     }
+
     const { isBidOver, value } = this.auction.continue(cost);
+
     if (isBidOver) {
       this.sellPowerPlant(value);
       this.updatePowerPlants();

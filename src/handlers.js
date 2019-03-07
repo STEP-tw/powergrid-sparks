@@ -158,26 +158,6 @@ const updateCurrentPlayer = function(req, res) {
   res.send("");
 };
 
-const buyPowerplant = function(req, res) {
-  const price = req.body.price;
-  const game = initializeGame(req, res);
-  const players = game.getPlayers();
-  const turn = game.getTurn(players);
-  const currentPlayer = turn.getCurrentPlayer();
-  const cardDetails = JSON.parse(powerPlantCards)[price];
-  const powerplant = {
-    value: price,
-    resource: cardDetails.resource,
-    city: cardDetails.city
-  };
-  currentPlayer.addPowerplant(powerplant);
-  currentPlayer.payMoney(price);
-  game.sellPowerPlant(price);
-  game.updatePowerPlants();
-  createBuyPowerPlantLog(game, turn, powerplant);
-  res.send(players);
-};
-
 const buyResources = function(req, res) {
   const resourcesDetail = req.body;
   const game = initializeGame(req, res);
@@ -366,13 +346,12 @@ const getCurrentBid = function(req, res) {
   if (isAuctionOver) {
     game.resetTurn();
     game.changePhaseTo("buyResources");
-    game.initiateAuction();
+    return;
   }
   if (isBidOver) {
     return res.send(
       JSON.stringify({
         currentBid,
-        isAuctionOver,
         isBidOver,
         phase,
         isAuctionStarted,
@@ -383,7 +362,6 @@ const getCurrentBid = function(req, res) {
   res.send(
     JSON.stringify({
       currentBid,
-      isAuctionOver,
       isBidOver,
       isAuctionStarted,
       players: bidPlayers
@@ -435,7 +413,6 @@ module.exports = {
   renderErrorPage,
   getCurrentPlayer,
   updateCurrentPlayer,
-  buyPowerplant,
   buyResources,
   buildCities,
   getPlayers,
