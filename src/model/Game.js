@@ -23,6 +23,7 @@ class Game {
     this.playerOrder = this.players;
     this.phase = new Phase();
     this.isAuctionStarted = false;
+    this.currentPowerPlant;
   }
 
   conductAuction(cost) {
@@ -30,12 +31,14 @@ class Game {
       const auctionPlayers = this.players.slice();
       this.auction = new Auction(auctionPlayers, this.powerPlantMarket);
       this.auction.selectPowerPlant(cost);
+      this.currentPowerPlant = cost;
       this.isAuctionStarted = true;
       return;
     }
 
     if (this.auction.isBidOver) {
       this.auction.selectPowerPlant(cost);
+      this.currentPowerPlant = cost;
       return;
     }
 

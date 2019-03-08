@@ -344,6 +344,8 @@ const getCurrentBid = function(req, res) {
   const phase = game.currentPhase();
   const isAuctionStarted = game.isAuctionStarted;
   if (isAuctionOver) {
+    game.sellPowerPlant(game.currentPowerPlant);
+    game.updatePowerPlants();
     game.resetTurn();
     game.changePhaseTo("buyResources");
     return;

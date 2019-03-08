@@ -107,6 +107,7 @@ describe("Game", () => {
       const player2 = new Player("blue", "ankon");
       const players = [player1, player2];
       const actualOutput = game.getTurn(players);
+      game.resetTurn();
       const expectedOutput = { players, currentPlayerIndex: 0 };
       chai.expect(expectedOutput).to.be.deep.equal(actualOutput);
     });
@@ -120,6 +121,32 @@ describe("Game", () => {
       const actualOutput = game.getTurn(players);
       const expectedOutput = { players, currentPlayerIndex: 1 };
       chai.expect(expectedOutput).to.be.deep.equal(actualOutput);
+    });
+  });
+
+  describe("getCurrentBid", () => {
+    it("should return the current bid a,ount", () => {
+      const player1 = new Player("green", "leela");
+      const player2 = new Player("blue", "ankon");
+      const players = [player1, player2];
+      const powerPlantMarket = new PowerPlantMarket({
+        "13": {
+          resource: { type: "Oil", quantity: 2 },
+          city: 1,
+          inDeck: true,
+          isSelected: false
+        },
+        "19": {
+          resource: { type: "Garbage", quantity: 1 },
+          city: 3,
+          inDeck: true,
+          isSelected: false
+        }
+      });
+      game.powerPlantMarket = powerPlantMarket;
+      game.conductAuction("13");
+      const actualOutput = game.getCurrentBid();
+      chai.expect("13").to.be.deep.equal(actualOutput);
     });
   });
 
@@ -682,6 +709,14 @@ describe("Game", () => {
 
       const actualOutput = game.isAuctionOver();
       const expectedOutput = false;
+      chai.expect(expectedOutput).to.be.deep.equal(actualOutput);
+    });
+
+    it("should return true if the auction is  over", function() {
+      game.players = [];
+      game.conductAuction("pass");
+      const actualOutput = game.isAuctionOver();
+      const expectedOutput = true;
       chai.expect(expectedOutput).to.be.deep.equal(actualOutput);
     });
   });
