@@ -60,7 +60,10 @@ const showFailedPaymentMessage = function() {
   setTimeout(() => {
     messageContainer.innerText = "";
   }, 3000);
-  messageContainer.innerText = "insufficient money";
+  messageContainer.innerText = "You don't have enough money.";
+  messageContainer.style.textAlign = "justify"
+  messageContainer.style.padding = "6%";
+  messageContainer.style.color = "rgb(156, 47, 47)";
 };
 
 const resetSelection = function(resource) {
@@ -87,8 +90,9 @@ const showInvalidResourceError = function() {
   messageContainer.style.display = "inline";
   messageContainer.style.textAlign = "justify"
   messageContainer.style.padding = "6%";
+  messageContainer.style.color = "rgb(156, 47, 47)";
   messageContainer.innerText =
-    "You cannot buy these resources. Please select resources mentioned in your power plants only";
+    "You cannot buy these resources. Please select resources mentioned in your power plants only.";
 };
 
 const showInvalidQuantity = function() {
@@ -100,8 +104,11 @@ const showInvalidQuantity = function() {
 const showInvalidQuantityError = function() {
   const messageContainer = document.getElementById("insufficient-money");
   messageContainer.style.display = "inline";
+  messageContainer.style.textAlign = "justify";
+  messageContainer.style.padding = "6%";
+  messageContainer.style.color = "rgb(156, 47, 47)";
   messageContainer.innerText =
-    "Selected resources exceeds your storage limits. Please select only allowed amount of resources";
+    "Selected resources exceed your storage limits. Please select allowed amount of resources.";
 };
 
 const handleSellResources = function(player) {
