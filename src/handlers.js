@@ -300,6 +300,7 @@ const refillResources = function(currentPlayer, game) {
   const players = game.players;
   const lastPlayerIndex = players.length - 1;
   const lastPlayer = players[lastPlayerIndex].name;
+
   if (currentPlayer.name == lastPlayer) {
     const resourceMarket = game.getResourceMarket();
     resourceMarket.refillResourceStep1();
