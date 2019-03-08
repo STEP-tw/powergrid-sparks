@@ -45,11 +45,11 @@
     "boise": 24,
     "minneapolis": 18,
     "omaha": 14,
-    "denver": 1,
+    "denver": 0.1,
     "billings": 9
   },
   "denver": {
-    "cheyenne": 1,
+    "cheyenne": 0.1,
     "salt_lake_city": 21,
     "santa_fe": 23,
     "kansas_city": 16
@@ -91,15 +91,15 @@
   },
   "jacksonville": {
     "tampa": 4,
-    "savannah": 1,
+    "savannah": 0.1,
     "birmingham": 9,
     "new_orleans": 16
   },
   "tampa": { "jacksonville": 4, "miami": 4 },
   "miami": { "tampa": 4 },
   "boston": { "new_york": 3 },
-  "new_york": { "philadelphia": 1, "buffalo": 8 ,"boston":3},
-  "philadelphia": { "new_york": 1, "washington": 3 },
+  "new_york": { "philadelphia": 0.1, "buffalo": 8 ,"boston":3},
+  "philadelphia": { "new_york": 0.1, "washington": 3 },
   "washington": { "philadelphia": 3, "norfolk": 5, "pitsburgh": 6 },
   "norfolk": { "washington": 5, "raleigh": 3 },
   "raleigh": {

@@ -438,8 +438,8 @@ const getBuildingCost = function(req, res) {
 };
 
 const getMinimumCost = function(playerCities, selectedCity) {
-  const allPossiblePaths = playerCities.map(
-    playerCity => graph.path(playerCity, selectedCity, { cost: true }).cost
+  const allPossiblePaths = playerCities.map(playerCity =>
+    Math.floor(graph.path(playerCity, selectedCity, { cost: true }).cost)
   );
   return _.min(allPossiblePaths);
 };
