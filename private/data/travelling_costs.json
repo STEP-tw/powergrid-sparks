@@ -109,7 +109,7 @@
     "cincinnati": 15,
     "atlanta": 7
   },
-  "savannah": { "raleigh": 7, "atlanta": 7, "jacksonville": 1 },
+  "savannah": { "raleigh": 7, "atlanta": 7, "jacksonville": 0.1 },
   "atlanta": {
     "savannah": 7,
     "raleigh": 7,
