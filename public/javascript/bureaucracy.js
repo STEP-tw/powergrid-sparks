@@ -52,7 +52,7 @@ const displayUnsufficientResources = function(isCityCountValid) {
   return (isCityCountValid = false);
 };
 
-const DisplayPowerplantErrMsg = function(city) {
+const displayPowerPlantErrMsg = function(city) {
   const errMsg = `selected powerplant can not light more than ${city} city`;
   setInnerText("err-msg", errMsg);
 };
@@ -72,7 +72,7 @@ const validatePlayerResources = function(userInfo) {
   const cities = document.getElementById("lighted-cities").value;
   if (cities < 1) return updateUserResources(resources, hybridResource, cities);
   if (cities > cityCount) return displayCityErrMsg();
-  if (cities > playerCities) return DisplayPowerplantErrMsg(playerCities);
+  if (cities > playerCities) return displayPowerPlantErrMsg(playerCities);
   allResources.forEach(resource => {
     const hasResource = playerAssets[resource] > resources[resource];
     if (hasResource) isCityCountValid = displayUnsufficientResources();

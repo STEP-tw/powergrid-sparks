@@ -29,6 +29,7 @@ const polling = function() {
           currentPhase.phase = "buyResources";
         }
         if (phase == "buildCities" && currentPhase.phase != "buildCities") {
+          document.getElementById("map").innerHTML = getMapTemplate();
           displayMap();
           refreshMap();
           currentPhase.phase = "buildCities";
