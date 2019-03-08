@@ -343,6 +343,8 @@ const makeBid = function(req, res) {
   const bidAmount = req.body.bidAmount;
   const game = initializeGame(req, res);
   game.conductAuction(bidAmount);
+  const action = game.getAuctionAction();
+  game.addLog(action);
   res.send("");
 };
 

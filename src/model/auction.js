@@ -2,6 +2,7 @@ class Bid {
   constructor(players, powerPlantCost) {
     this.players = players;
     this.currentBidAmount = powerPlantCost;
+    this.action = null;
   }
 
   updateBidder() {
@@ -13,10 +14,12 @@ class Bid {
     this.currentBidder = this.players[0];
     if (bid == "pass") {
       this.updatePlayers();
+      this.action = `${this.currentBidder.name} has passed`;
       this.currentBidder = this.players[0];
       return this.isBidOver();
     }
     this.currentBidAmount = bid;
+    this.action = `${this.currentBidder.name} has make the bid ${bid}`;
     this.updateBidder();
     return this.isBidOver();
   }
@@ -44,6 +47,7 @@ class Auction {
     this.powerPlantMarket = powerPlantMarket;
     this.currentPlayer = players[0];
     this.isBidOver = false;
+    this.Action = null;
   }
 
   updatePlayer() {
@@ -57,6 +61,7 @@ class Auction {
     if (powerPlantCost == "pass") {
       this.updatePlayers();
       this.isBidOver = true;
+      this.action = `${this.currentPlayer.name} has passed`;
       this.currentPlayer = this.players[0];
       return this.isAuctionOver();
     }
@@ -65,6 +70,7 @@ class Auction {
       resource: this.powerPlantMarket.cards[powerPlantCost].resource,
       city: this.powerPlantMarket.cards[powerPlantCost].city
     };
+    this.action = `${this.currentPlayer.name} has selected the Power Plant `;
     this.currentBidAmount = powerPlantCost;
     this.start();
   }
@@ -98,6 +104,7 @@ class Auction {
 
   continue(bid) {
     this.isBidOver = this.bid.makeBid(bid);
+    this.action = this.bid.action;
     if (bid != "pass") {
       this.currentBidAmount = bid;
     }
@@ -106,6 +113,7 @@ class Auction {
       const winner = this.players.filter(
         player => player.name == this.biddingResult.winner.name
       );
+      this.action = `${winner[0].name} has got the Power Plant`;
       winner[0].addPowerplant(this.selectedPowerPlant);
       winner[0].payMoney(this.biddingResult.biddingAmount);
       this.players.push(this.players.shift());
@@ -141,6 +149,10 @@ class Auction {
   getPlayers() {
     const playerIds = this.players.map(player => player.id);
     return playerIds;
+  }
+
+  getAction() {
+    return this.action;
   }
 }
 

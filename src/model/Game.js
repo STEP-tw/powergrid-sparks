@@ -60,6 +60,10 @@ class Game {
     return false;
   }
 
+  getAuctionAction() {
+    return this.auction.getAction();
+  }
+
   getPlayersOrder() {
     if (this.auction == undefined) {
       this.playerOrder = this.players.slice();

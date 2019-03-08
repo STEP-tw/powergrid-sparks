@@ -52,6 +52,8 @@ const polling = function() {
 
         updatePlayerStatsDiv(playerStats);
         showActivityLogs(logs);
+        displayLog(logs);
+        players.forEach(player => updateMap(player));
       });
   }, 500);
 };

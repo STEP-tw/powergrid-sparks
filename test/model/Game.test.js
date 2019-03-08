@@ -144,6 +144,7 @@ describe("Game", () => {
         }
       });
       game.powerPlantMarket = powerPlantMarket;
+      game.players = players;
       game.conductAuction("13");
       const actualOutput = game.getCurrentBid();
       chai.expect("13").to.be.deep.equal(actualOutput);
@@ -649,10 +650,10 @@ describe("Game", () => {
       player2.id = 2;
       const player3 = new Player("yellow", "C");
       player3.id = 3;
-      game.conductAuction("pass");
       game.players = [player1, player2, player3];
+      game.conductAuction("pass");
       const actualOutput = game.getBidPlayers();
-      const expectedOutput = [];
+      const expectedOutput = [2, 3];
       chai.expect(expectedOutput).to.be.deep.equal(actualOutput);
     });
   });
@@ -666,6 +667,7 @@ describe("Game", () => {
       const player3 = new Player("yellow", "C");
       player3.id = 3;
       game.players = [player1, player2, player3];
+
       const actualOutput = game.getAuctionPlayers();
       const expectedOutput = [1, 2, 3];
       chai.expect(expectedOutput).to.be.deep.equal(actualOutput);
@@ -678,7 +680,6 @@ describe("Game", () => {
       player1.id = 1;
       game.players = [player1];
       game.conductAuction("pass");
-      game.conductAuction("pass");
       const actualOutput = game.getAuctionPlayers();
       const expectedOutput = [];
       chai.expect(expectedOutput).to.be.deep.equal(actualOutput);
@@ -689,8 +690,7 @@ describe("Game", () => {
     it("should return playing order of current players", function() {
       const player1 = new Player("red", "A");
       player1.id = 1;
-      game.players = [];
-      game.conductAuction("pass");
+      game.players = [player1];
       game.conductAuction("pass");
       const actualOutput = game.getPlayersOrder();
       const expectedOutput = [];
@@ -713,7 +713,9 @@ describe("Game", () => {
     });
 
     it("should return true if the auction is  over", function() {
-      game.players = [];
+      const player1 = new Player("red", "A");
+      player1.id = 1;
+      game.players = [player1];
       game.conductAuction("pass");
       const actualOutput = game.isAuctionOver();
       const expectedOutput = true;

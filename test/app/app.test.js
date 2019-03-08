@@ -652,7 +652,9 @@ describe("POST /powerPlant/select", function() {
 
 describe("POST /auction/bid", function() {
   it("should respond with 200", function(done) {
+    const player1 = new Player("green", "gaurav");
     app.activeGames["53"] = new Game(1);
+    app.activeGames["53"].addPlayer(player1);
     app.cookies["1234567"] = "Ankon";
     app.activeGames["53"].powerPlantMarket = new PowerPlantMarket({
       "13": {
@@ -751,10 +753,10 @@ describe("GET /getGameDetails", function() {
     });
 
     app.activeGames["55"].conductAuction("13");
-    const auction = app.activeGames["55"].auction;
-    auction.players = [player1];
-    auction.selectPowerPlant("13");
-    auction.continue("pass");
+    // const auction = app.activeGames["55"].auction;
+    // auction.players = [player1];
+    // auction.selectPowerPlant("13");
+    // auction.continue("pass");
 
     request(app)
       .get("/getGameDetails")
@@ -847,9 +849,9 @@ describe("GET /getGameDetails", function() {
 
   it("should respond with 200", function(done) {
     app.activeGames["111"] = new Game(3);
-    const player1 = new Player("green", "gaurav");
-    const player2 = new Player("red", "gaurav");
-    const player3 = new Player("red", "gaurav");
+    const player1 = new Player("green", "Aaurav");
+    const player2 = new Player("red", "Baurav");
+    const player3 = new Player("red", "Caurav");
     app.activeGames["111"].addPlayer(player1);
     app.activeGames["111"].addPlayer(player2);
     app.activeGames["111"].addPlayer(player3);
@@ -906,7 +908,7 @@ describe("POST /buildingCost", function() {
 
     request(app)
       .post("/buildingCost")
-      .send(`selectedCities=${JSON.stringify(['boston','buffallo'])}`)
+      .send(`selectedCities=${JSON.stringify(["boston", "buffallo"])}`)
       .set("Cookie", ["gameId=171;playerId=1234567"])
       .expect(200, done);
   });
@@ -934,7 +936,7 @@ describe("POST /buildingCost", function() {
 
     request(app)
       .post("/buildingCost")
-      .send(`selectedCities=${JSON.stringify(['boston','buffallo'])}`)
+      .send(`selectedCities=${JSON.stringify(["boston", "buffallo"])}`)
       .set("Cookie", ["gameId=172;playerId=1234567"])
       .expect(200, done);
   });

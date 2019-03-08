@@ -142,10 +142,11 @@ const persistCardClass = function(powerPlants, currentMarketDiv) {
 const displayPowerPlants = function({ powerPlants, phase }) {
   powerPlants = JSON.parse(powerPlants);
   if (phase == "buyPowerPlant") {
+    const logDiv = generateDiv("log", "log");
     const currentMarketDiv = generateMarket(powerPlants, 0, 4, "currentMarket");
     const futureMarketDiv = generateMarket(powerPlants, 4, 8, "futureMarket");
     const powerPlantDiv = generateDiv("power-plant-cards", "power-plant-cards");
-    appendChildren(powerPlantDiv, [currentMarketDiv, futureMarketDiv]);
+    appendChildren(powerPlantDiv, [logDiv, currentMarketDiv, futureMarketDiv]);
     persistCardClass(powerPlants, currentMarketDiv);
     const market = document.getElementById("market").children[0];
     market.replaceChild(powerPlantDiv, market.childNodes[0]);
@@ -214,4 +215,9 @@ const pass = function() {
     headers: { "Content-Type": "application/x-www-form-urlencoded" },
     body: `bidAmount=pass`
   }).then(res => updateCurrentPlayer());
+};
+
+const displayLog = function(logs) {
+  const log = document.getElementById("log");
+  log.innerText = logs[0].log;
 };
