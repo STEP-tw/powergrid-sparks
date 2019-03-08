@@ -85,6 +85,8 @@ const ShowInvalidResource = function() {
 const showInvalidResourceError = function() {
   const messageContainer = document.getElementById("insufficient-money");
   messageContainer.style.display = "inline";
+  messageContainer.style.textAlign = "justify"
+  messageContainer.style.padding = "6%";
   messageContainer.innerText =
     "You cannot buy these resources. Please select resources mentioned in your power plants only";
 };
