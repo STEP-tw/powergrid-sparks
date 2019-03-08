@@ -291,17 +291,25 @@ const returnPlayerResources = function(req, res) {
   const playerId = getPlayerId(req);
   const updatedResources = JSON.parse(resources);
   const currentPlayer = game.players.find(player => player.id == playerId);
-
   const players = game.getPlayers();
   const turn = game.getTurn(players);
-
   currentPlayer.resources = updatedResources;
   const bureaucracy = new Bureaucracy(currentPlayer);
   bureaucracy.setLightedCity(+cityCount);
   bureaucracy.payForLightedCities(JSON.parse(paymentOrder));
   refillResources(currentPlayer, game);
+  const winner = getWinner(game.getPlayers());
+  if (turn.isLastPlayer() && winner.length > 0) {
+    let winningMsg = winner[0].name + " won";
+    winner.length > 1 && (winningMsg = "match draw");
+    return res.send(winningMsg);
+  }
   turn.isLastPlayer() && game.changePhaseTo("buyPowerPlant");
   res.send();
+};
+
+const getWinner = function(players) {
+  return players.filter(player => player.getLightedCity() > 2);
 };
 
 const refillResources = function(currentPlayer, game) {

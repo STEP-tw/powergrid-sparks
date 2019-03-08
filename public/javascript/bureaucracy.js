@@ -84,6 +84,13 @@ const validatePlayerResources = function(userInfo) {
   isCityCountValid && updateUserResources(resources, hybridResource, cities);
 };
 
+const displayWinningMessage = function(winningMsg) {
+  if (winningMsg) {
+    const winningMessage = getWinningMsg(winningMsg);
+    document.getElementById("main").innerHTML = winningMessage;
+  }
+};
+
 const updateUserResources = function(resources, hybridResource, cityCount) {
   let hasDeducted = false;
   const msg = `${cityCount} cities lighted successfully`;
@@ -96,7 +103,9 @@ const updateUserResources = function(resources, hybridResource, cityCount) {
   !hasDeducted && (resources.Oil -= hybridResource);
   const body = `resources=${JSON.stringify(resources)}&cityCount=${cityCount}`;
   const headers = { "Content-Type": "application/x-www-form-urlencoded" };
-  fetch("/returnResources", { method: "POST", headers, body });
+  fetch("/returnResources", { method: "POST", headers, body })
+    .then(res => res.text())
+    .then(displayWinningMessage);
   updateCurrentPlayer();
 };
 

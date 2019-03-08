@@ -792,3 +792,10 @@ const getMapTemplate = function() {
  </g>
 </svg>`;
 };
+
+const getWinningMsg = function(winningMsg) {
+  return `<div class="winningMsg">
+      <i class="fas fa-trophy"></i>
+      <span>${winningMsg}</span>
+    </div>`;
+};
