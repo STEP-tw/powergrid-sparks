@@ -28,25 +28,30 @@ const polling = function() {
           startBuyResourcePhase();
           currentPhase.phase = "buyResources";
         }
-        if (phase == "buildCities" && currentPhase.phase != "buildCities") {
-          document.getElementById("map").innerHTML = getMapTemplate();
-          displayMap();
-          refreshMap();
-          currentPhase.phase = "buildCities";
+        if (phase == "buildCities") {
+          players.forEach(player => updateMap(player));
+          if (currentPhase.phase != "buildCities") {
+            document.getElementById("map").innerHTML = getMapTemplate();
+            displayMap();
+            refreshMap();
+            currentPhase.phase = "buildCities";
+          }
         }
         if (phase == "bureaucracy" && currentPhase.phase != "bureaucracy") {
           getLightedCities();
           selectPowerplant();
           currentPhase.phase = "bureaucracy";
         }
-        if (phase == "buyPowerPlant" && currentPhase.phase != "buyPowerPlant") {
-          displayMarket();
-          currentPhase.phase = "buyPowerPlant";
+        if (phase == "buyPowerPlant") {
+          displayPowerPlants(gameDetails);
+          if (currentPhase.phase != "buyPowerPlant") {
+            displayMarket();
+            currentPhase.phase = "buyPowerPlant";
+          }
         }
-        displayPowerPlants(gameDetails);
+
         updatePlayerStatsDiv(playerStats);
         showActivityLogs(logs);
-        players.forEach(player => updateMap(player));
       });
   }, 500);
 };
