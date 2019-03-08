@@ -93,7 +93,7 @@ const displayWinningMessage = function(winningMsg) {
 
 const updateUserResources = function(resources, hybridResource, cityCount) {
   let hasDeducted = false;
-  const msg = `${cityCount} cities lighted successfully`;
+  const msg = `${cityCount} cities lit successfully`;
   setInnerText("err-msg", msg);
   selectedPowerPlant.splice(0);
   if (resources.Coal >= hybridResource) {
