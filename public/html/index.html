@@ -5,6 +5,11 @@
     <link rel="stylesheet" type="text/css" media="screen" href="/index.css" />
   </head>
 
+  <script>
+    const removeids = function(){
+      document.getElementById("gameId").innerText = "";
+    }
+  </script>
 <body>
   <header>
     <div>P O W E R G R I D</div>
@@ -147,7 +152,7 @@
                 placeholder="Enter Game ID"
                 required
               />
-              <button>SUBMIT</button>
+              <button onclick="removeids()">SUBMIT</button>
             </form>
           </div>
         </div>
