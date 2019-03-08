@@ -5,6 +5,7 @@ const Game = require("./model/Game");
 const PowerPlantMarket = require("./model/power_plant_cards");
 const Player = require("./model/player");
 const Bureaucracy = require("./model/bureaucracy");
+const Graph = require("node-dijkstra");
 
 const powerPlantCards = fs.readFileSync(
   "./private/data/card_details.json",
@@ -15,6 +16,13 @@ const paymentOrder = fs.readFileSync(
   "./private/data/payment_order.json",
   "UTF8"
 );
+
+const travellingCostData = fs.readFileSync(
+  "./private/data/travelling_costs.json",
+  "UTF8"
+);
+
+const graph = new Graph(JSON.parse(travellingCostData));
 
 const getGameId = function(req) {
   return req.cookies.gameId;
@@ -404,6 +412,38 @@ const getGameDetails = function(req, res) {
   );
 };
 
+const getBuildingCost = function(req, res) {
+  const game = initializeGame(req, res);
+  const players = game.getPlayers();
+  const turn = game.getTurn(players);
+  const player = turn.getCurrentPlayer();
+  const playerCities = player.cityNames.slice();
+  const selectedCities = JSON.parse(req.body.selectedCities).map(city =>
+    city.substr(0, city.length - 3)
+  );
+
+  if (playerCities.length == 0) {
+    playerCities.push(selectedCities[0]);
+    selectedCities.shift();
+  }
+
+  const getMinCost = getMinimumCost.bind(null, playerCities);
+  const minCosts = selectedCities.map(city => {
+    const minCost = getMinCost(city);
+    playerCities.push(city);
+    return minCost;
+  });
+  const totalCost = _.sum(minCosts) + 10 * playerCities.length;
+  res.send("" + totalCost);
+};
+
+const getMinimumCost = function(playerCities, selectedCity) {
+  const allPossiblePaths = playerCities.map(
+    playerCity => graph.path(playerCity, selectedCity, { cost: true }).cost
+  );
+  return _.min(allPossiblePaths);
+};
+
 module.exports = {
   renderHome,
   createGame,
@@ -427,5 +467,6 @@ module.exports = {
   selectPowerPlant,
   getCurrentBid,
   returnPlayerResources,
-  getGameDetails
+  getGameDetails,
+  getBuildingCost
 };

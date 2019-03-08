@@ -882,3 +882,60 @@ describe("GET /getGameDetails", function() {
       .expect(200, done);
   });
 });
+
+describe("POST /buildingCost", function() {
+  it("should respond with 200", function(done) {
+    app.activeGames["171"] = new Game(1);
+    const player = new Player("red", "Ankon");
+    app.cookies["1234567"] = "Ankon";
+    app.activeGames["171"].addPlayer(player);
+    app.activeGames["171"].powerPlantMarket = new PowerPlantMarket({
+      "13": {
+        resource: { type: "Oil", quantity: 2 },
+        city: 1,
+        inDeck: true,
+        isSelected: false
+      },
+      "19": {
+        resource: { type: "Garbage", quantity: 1 },
+        city: 3,
+        inDeck: true,
+        isSelected: false
+      }
+    });
+
+    request(app)
+      .post("/buildingCost")
+      .send(`selectedCities=${JSON.stringify(['boston','buffallo'])}`)
+      .set("Cookie", ["gameId=171;playerId=1234567"])
+      .expect(200, done);
+  });
+
+  it("should respond with 200", function(done) {
+    app.activeGames["172"] = new Game(1);
+    const player = new Player("red", "Ankon");
+    player.cityNames = ["new_york"];
+    app.cookies["1234567"] = "Ankon";
+    app.activeGames["172"].addPlayer(player);
+    app.activeGames["172"].powerPlantMarket = new PowerPlantMarket({
+      "13": {
+        resource: { type: "Oil", quantity: 2 },
+        city: 1,
+        inDeck: true,
+        isSelected: false
+      },
+      "19": {
+        resource: { type: "Garbage", quantity: 1 },
+        city: 3,
+        inDeck: true,
+        isSelected: false
+      }
+    });
+
+    request(app)
+      .post("/buildingCost")
+      .send(`selectedCities=${JSON.stringify(['boston','buffallo'])}`)
+      .set("Cookie", ["gameId=172;playerId=1234567"])
+      .expect(200, done);
+  });
+});

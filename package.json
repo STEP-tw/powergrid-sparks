@@ -34,6 +34,7 @@
     "express": "^4.16.4",
     "lodash": "^4.17.11",
     "morgan": "^1.9.1",
+    "node-dijkstra": "^2.5.0",
     "nodemon": "^1.18.10",
     "nyc": "^13.3.0"
   }

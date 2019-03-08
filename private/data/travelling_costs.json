@@ -1,0 +1,195 @@
+{
+  "seattle": { "portland": 3, "boise": 12, "billings": 9 },
+  "portland": { "seattle": 3, "boise": 13, "san_francisco": 24 },
+  "san_francisco": {
+    "portland": 24,
+    "boise": 23,
+    "salt_lake_city": 27,
+    "las_vegas": 14,
+    "los_angeles": 9
+  },
+  "los_angeles": { "san_francisco": 9, "san_deigo": 3, "las_vegas": 9 },
+  "san_deigo": { "las_vegas": 9, "los_angeles": 3, "phoenix": 14 },
+  "phoenix": { "san_diego": 14, "santa_fe": 18, "las_vegas": 15 },
+  "bois": {
+    "seattle": 12,
+    "portland": 13,
+    "san_francisco": 23,
+    "billings": 12,
+    "cheyenne": 24,
+    "salt_lake_city": 8
+  },
+  "salt_lake_city": {
+    "san_francisco": 27,
+    "boise": 8,
+    "las_vegas": 18,
+    "denver": 21,
+    "santa_fe": 28
+  },
+  "las_vegas": {
+    "salt_lake_city": 18,
+    "san_francisco": 14,
+    "los_angeles": 9,
+    "san_deigo": 9,
+    "phoenix": 15,
+    "santa_fe": 27
+  },
+  "billings": {
+    "seattle": 9,
+    "boise": 12,
+    "cheyenne": 9,
+    "fargo": 17,
+    "minneapolis": 18
+  },
+  "cheyenne": {
+    "boise": 24,
+    "minneapolis": 18,
+    "omaha": 14,
+    "denver": 1,
+    "billings": 9
+  },
+  "denver": {
+    "cheyenne": 1,
+    "salt_lake_city": 21,
+    "santa_fe": 23,
+    "kansas_city": 16
+  },
+  "santa_fe": {
+    "phoenix": 18,
+    "las_vegas": 27,
+    "salt_lake_city": 28,
+    "denver": 23,
+    "kansas_city": 16,
+    "oklahoma_city": 15,
+    "dallas": 16,
+    "houston": 21
+  },
+  "fargo": { "ouluth": 6, "minneapolis": 6, "billings": 17 },
+  "ouluth": { "fargo": 6, "minneapolic": 5, "detroit": 15, "chicago": 12 },
+  "minneapolis": {
+    "ouluth": 5,
+    "fargo": 6,
+    "omaha": 8,
+    "chicago": 8,
+    "cheyenne": 18,
+    "billings": 18
+  },
+  "houston": { "new_orleans": 8, "dallas": 5, "santa_fe": 21 },
+  "dallas": {
+    "houston": 5,
+    "santa-fe": 16,
+    "new_orleans": 12,
+    "oklahoma_city": 3,
+    "memphis": 12
+  },
+  "new_orleans": {
+    "jacksonville": 16,
+    "birmingham": 11,
+    "memphis": 7,
+    "dalla": 12,
+    "houston": 8
+  },
+  "jacksonville": {
+    "tampa": 4,
+    "savannah": 1,
+    "birmingham": 9,
+    "new_orleans": 16
+  },
+  "tampa": { "jacksonville": 4, "miami": 4 },
+  "miami": { "tampa": 4 },
+  "boston": { "new_york": 3 },
+  "new_york": { "philadelphia": 1, "buffalo": 8 ,"boston":3},
+  "philadelphia": { "new_york": 1, "washington": 3 },
+  "washington": { "philadelphia": 3, "norfolk": 5, "pitsburgh": 6 },
+  "norfolk": { "washington": 5, "raleigh": 3 },
+  "raleigh": {
+    "savannah": 7,
+    "pitsburgh": 7,
+    "norfolk": 3,
+    "cincinnati": 15,
+    "atlanta": 7
+  },
+  "savannah": { "raleigh": 7, "atlanta": 7, "jacksonville": 1 },
+  "atlanta": {
+    "savannah": 7,
+    "raleigh": 7,
+    "knoxville": 5,
+    "st_louis": 12,
+    "birmingham": 3
+  },
+  "knoxville": { "atlanta": 5, "cincinnati": 6 },
+  "pitsburgh": {
+    "washington": 6,
+    "raleigh": 7,
+    "cincinnati": 7,
+    "detroit": 6,
+    "buffalo": 7
+  },
+  "buffalo": { "new_york": 8, "pitsburgh": 7, "detroit": 7 },
+  "detroit": {
+    "buffalo": 7,
+    "pitsburgh": 6,
+    "ouluth": 15,
+    "chicago": 7,
+    "cincinnati": 4
+  },
+  "cincinnati": {
+    "detroit": 4,
+    "pitsburgh": 7,
+    "raleigh": 15,
+    "knoxville": 6,
+    "st_louis": 12,
+    "chicago": 7
+  },
+  "st_louis": {
+    "cincinnati": 12,
+    "atlanta": 12,
+    "memphis": 7,
+    "kansan_city": 6,
+    "chicago": 10
+  },
+  "memphis": {
+    "birmingham": 6,
+    "new_orleans": 7,
+    "dallas": 12,
+    "oklahoma_city": 14,
+    "kansas_city": 12,
+    "st_louis": 7
+  },
+  "birmingham": {
+    "new_orleans": 11,
+    "jacksonville": 9,
+    "atlanta": 3,
+    "memphis": 6
+  },
+  "chicago": {
+    "detroit": 7,
+    "cincinnati": 7,
+    "st_louis": 10,
+    "kansas_city": 8,
+    "omaha": 13,
+    "minneapolis": 8,
+    "ouluth": 12
+  },
+  "omaha": {
+    "chicago": 13,
+    "minneapolis": 8,
+    "kansas_city": 5,
+    "cheyenne": 14
+  },
+  "oklahama_city": {
+    "dallas": 3,
+    "santa_fe": 15,
+    "kansas_city": 8,
+    "memphis": 14
+  },
+  "kansas_city": {
+    "st_louis": 6,
+    "memphis": 12,
+    "oklahoma_city": 8,
+    "santa_fe": 16,
+    "denver": 16,
+    "omaha": 5,
+    "chicago": 8
+  }
+}

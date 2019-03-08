@@ -26,22 +26,15 @@ const generateHTML = function(totalCost, cities) {
   setInnerText("city-count", cities.length);
 };
 
-const deselectCity = function(currentCost, cityCost) {
+const deselectCity = function() {
   event.target.className.baseVal = undefined;
-  const totalCost = currentCost - cityCost;
   selectedCities.splice(selectedCities.indexOf(event.target), 1);
-  const cities = [];
-  selectedCities.forEach(selectedCity => cities.push(selectedCity.id));
-  generateHTML(totalCost, cities);
+  updateBildCityCost();
 };
 
-const selectCity = function(cityCost, currentCost) {
+const selectCity = function() {
   selectedCities.push(event.target);
   event.target.className.baseVal = "highlighted";
-  const totalCost = cityCost + currentCost;
-  const cities = [];
-  selectedCities.forEach(selectedCity => cities.push(selectedCity.id));
-  generateHTML(totalCost, cities);
 };
 
 const updateCost = function() {
@@ -52,6 +45,21 @@ const updateCost = function() {
     return deselectCity(currentCost, cityCost);
   }
   selectCity(cityCost, currentCost);
+  updateBildCityCost();
+};
+
+const updateBildCityCost = function() {
+  const cities = [];
+  selectedCities.forEach(selectedCity => cities.push(selectedCity.id));
+  fetch("/buildingCost", {
+    method: "POST",
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    body: `selectedCities=${JSON.stringify(cities)}`
+  })
+    .then(res => res.text())
+    .then(cost => {
+      generateHTML(cost, cities);
+    });
 };
 
 const reset = function() {

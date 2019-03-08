@@ -28,14 +28,15 @@ const {
   makeBid,
   selectPowerPlant,
   getCurrentBid,
-  getGameDetails
+  getGameDetails,
+  getBuildingCost
 } = require("./src/handlers");
 
 app.set("views", __dirname + "/public/html");
 app.engine("html", view.renderFile);
 app.set("view engine", "html");
 
-app.use(logger("dev"));
+// app.use(logger("dev"));
 app.use(bodyParser.text());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
@@ -60,6 +61,7 @@ app.get("/cities/light", lightCities);
 app.get("/player/powerplants", getPowerplants);
 app.post("/returnResources", returnPlayerResources);
 app.get("/getGameDetails", getGameDetails);
+app.post("/buildingCost",getBuildingCost);
 
 app.use(express.static("public/html"));
 app.use(express.static("public/stylesheet"));
