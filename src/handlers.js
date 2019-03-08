@@ -95,9 +95,11 @@ const renderGamePage = function(req, res) {
 };
 
 const renderGameplay = function(req, res) {
-  const gameId = getGameId(req);
-  const game = res.app.activeGames[+gameId];
-  res.render("gameplay.html", { players: game.getPlayers() });
+  try {
+    const gameId = getGameId(req);
+    const game = res.app.activeGames[+gameId];
+    res.render("gameplay.html", { players: game.getPlayers() });
+  } catch (error) {}
 };
 
 const addPlayer = function(game, joinerName, res, gameId) {
@@ -389,35 +391,37 @@ const getCurrentBid = function(req, res) {
 };
 
 const getGameDetails = function(req, res) {
-  const game = initializeGame(req, res);
-  const players = game.getPlayers();
-  const turn = game.getTurn(players);
-  let player = turn.getCurrentPlayer();
-  const resourceMarket = game.getResourceMarket();
-  if (game.currentPhase() == "buyPowerPlant" && game.isAuctionStarted) {
-    if (game.isBidOver()) {
-      if (game.auction.players.length) {
-        player = game.auction.players[0];
+  try {
+    const game = initializeGame(req, res);
+    const players = game.getPlayers();
+    const turn = game.getTurn(players);
+    let player = turn.getCurrentPlayer();
+    const resourceMarket = game.getResourceMarket();
+    if (game.currentPhase() == "buyPowerPlant" && game.isAuctionStarted) {
+      if (game.isBidOver()) {
+        if (game.auction.players.length) {
+          player = game.auction.players[0];
+        }
+      } else {
+        player = game.auction.bid.currentBidder;
       }
-    } else {
-      player = game.auction.bid.currentBidder;
     }
-  }
-  const resources = resourceMarket.getResources();
-  const powerPlants = game.getPowerPlantMarket();
-  const playerId = getPlayerId(req);
-  const playerStats = game.players.find(player => player.id == playerId);
-  res.send(
-    JSON.stringify({
-      player,
-      players,
-      resources,
-      powerPlants: JSON.stringify(powerPlants),
-      phase: game.currentPhase(),
-      playerStats,
-      logs: game.getLogs()
-    })
-  );
+    const resources = resourceMarket.getResources();
+    const powerPlants = game.getPowerPlantMarket();
+    const playerId = getPlayerId(req);
+    const playerStats = game.players.find(player => player.id == playerId);
+    res.send(
+      JSON.stringify({
+        player,
+        players,
+        resources,
+        powerPlants: JSON.stringify(powerPlants),
+        phase: game.currentPhase(),
+        playerStats,
+        logs: game.getLogs()
+      })
+    );
+  } catch (error) {}
 };
 
 const formatCityNames = function(cityNames) {
@@ -429,8 +433,8 @@ const getBuildingCost = function(req, res) {
   const players = game.getPlayers();
   const turn = game.getTurn(players);
   const player = turn.getCurrentPlayer();
-  const playerCities = formatCityNames(player.cityNames)
-  const selectedCities = formatCityNames(JSON.parse(req.body.selectedCities))
+  const playerCities = formatCityNames(player.cityNames);
+  const selectedCities = formatCityNames(JSON.parse(req.body.selectedCities));
 
   if (playerCities.length == 0) {
     playerCities.push(selectedCities[0]);
