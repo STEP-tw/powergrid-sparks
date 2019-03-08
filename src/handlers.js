@@ -420,19 +420,20 @@ const getGameDetails = function(req, res) {
   );
 };
 
+const formatCityNames = function(cityNames) {
+  return cityNames.map(city => city.substr(0, city.length - 3));
+};
+
 const getBuildingCost = function(req, res) {
   const game = initializeGame(req, res);
   const players = game.getPlayers();
   const turn = game.getTurn(players);
   const player = turn.getCurrentPlayer();
-  const playerCities = player.cityNames.slice();
-  const selectedCities = JSON.parse(req.body.selectedCities).map(city =>
-    city.substr(0, city.length - 3)
-  );
+  const playerCities = formatCityNames(player.cityNames)
+  const selectedCities = formatCityNames(JSON.parse(req.body.selectedCities))
 
   if (playerCities.length == 0) {
     playerCities.push(selectedCities[0]);
-    selectedCities.shift();
   }
 
   const getMinCost = getMinimumCost.bind(null, playerCities);
@@ -441,7 +442,7 @@ const getBuildingCost = function(req, res) {
     playerCities.push(city);
     return minCost;
   });
-  const totalCost = _.sum(minCosts) + 10 * playerCities.length;
+  const totalCost = _.sum(minCosts) + 10 * selectedCities.length;
   res.send("" + totalCost);
 };
 
