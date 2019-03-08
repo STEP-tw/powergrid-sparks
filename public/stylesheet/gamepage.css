@@ -595,12 +595,13 @@ header {
 }
 
 .city-count {
-  width: 20%;
+  width: 30%;
+  height: 10%;
   border: none;
   text-align: center;
-  border-bottom: 1px solid #3c3b2f;
+  border-bottom: 2px solid #3c3b2f;
   color: #3c3b2f;
-  font-size: 22px;
+  font-size: 30px;
   background: inherit;
   border-radius: 8px;
 }
