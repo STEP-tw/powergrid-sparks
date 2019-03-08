@@ -1,5 +1,5 @@
 html {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: Avenir Next !important;
   height: 100%;
 }
 
@@ -597,17 +597,19 @@ header {
 .city-count {
   width: 20%;
   border: none;
-  font-weight: lighter;
   text-align: center;
-  border-bottom: 1px solid #b9d8e7;
-  color: aliceblue;
+  border-bottom: 1px solid #3c3b2f;
+  color: #3c3b2f;
   font-size: 22px;
   background: inherit;
   border-radius: 8px;
 }
 
 .city-count:hover {
+  color: aliceblue;
   background: #2d313d;
+  border-bottom: 1px solid #b9d8e7;
+  font-weight: lighter;
 }
 
 .city-count:focus {

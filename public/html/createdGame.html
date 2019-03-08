@@ -16,7 +16,7 @@
           <div>Waiting for other players to join</div>
           <div>GAME ID: <%= gameId %></div>
           <div class="loader"></div>
-          <div id="players">
+          <div id="players" style="line-height: 1.6">
             <% users.forEach(function(user){ %> <%- include('joinedUser', {name:
             user.name}); %> <% }); %>
           </div>

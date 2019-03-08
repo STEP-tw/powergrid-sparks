@@ -10,7 +10,7 @@ html,
 body {
   width: 100%;
   height: 100%;
-  font-family: inherit;
+  font-family: Avenir Next !important;
   background-image: url("https://bit.ly/2S7mJsU");
   background-size: cover;
   margin: 0;
