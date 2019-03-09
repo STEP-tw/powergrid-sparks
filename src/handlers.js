@@ -99,7 +99,9 @@ const renderGameplay = function(req, res) {
     const gameId = getGameId(req);
     const game = res.app.activeGames[+gameId];
     res.render("gameplay.html", { players: game.getPlayers() });
-  } catch (error) {}
+  } catch (error) {
+    res.send("");
+  }
 };
 
 const addPlayer = function(game, joinerName, res, gameId) {
@@ -311,7 +313,7 @@ const returnPlayerResources = function(req, res) {
     return res.send(winningMsg);
   }
   turn.isLastPlayer() && game.changePhaseTo("buyPowerPlant");
-  res.send();
+  res.send("");
 };
 
 const getWinner = function(players) {
@@ -373,7 +375,7 @@ const getCurrentBid = function(req, res) {
     game.updatePowerPlants();
     game.resetTurn();
     game.changePhaseTo("buyResources");
-    return;
+    return res.send("");
   }
   if (isBidOver) {
     return res.send(
@@ -427,7 +429,9 @@ const getGameDetails = function(req, res) {
         logs: game.getLogs()
       })
     );
-  } catch (error) {}
+  } catch (error) {
+    res.send("");
+  }
 };
 
 const formatCityNames = function(cityNames) {
