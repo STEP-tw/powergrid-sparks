@@ -207,15 +207,17 @@ const buyResources = function(req, res) {
   });
 };
 
-const getRequiredResDetails = function(powerPlants) {
-  const requiredResDetails = {};
-  const resources = Object.keys(powerPlants).map(powerPlant => {
-    return powerPlants[powerPlant].resource;
+const getStorageCapacity = function(powerPlants) {
+  const storageCapacity = {};
+  storageCapacity["Coal"] = 0;
+  storageCapacity["Oil"] = 0;
+  storageCapacity["Garbage"] = 0;
+  storageCapacity["Uranium"] = 0;
+  Object.keys(powerPlants).forEach(powerPlant => {
+    storageCapacity[powerPlants[powerPlant].resource.type] +=
+      powerPlants[powerPlant].resource.quantity * 2;
   });
-  resources.forEach(resource => {
-    requiredResDetails[resource.type] = resource.quantity * 2;
-  });
-  return requiredResDetails;
+  return storageCapacity;
 };
 
 const parseResourceDetails = function(selectedResourceDetails) {
@@ -232,22 +234,24 @@ const parseResourceDetails = function(selectedResourceDetails) {
 };
 
 const areValidTypes = function(playerPowerplants, selectedResourceDetails) {
-  const requiredResDetails = getRequiredResDetails(playerPowerplants);
+  const storageCapacity = getStorageCapacity(playerPowerplants);
   const selectedResources = parseResourceDetails(selectedResourceDetails);
   const selectedResourceTypes = Object.keys(selectedResources);
-  const requiredResTypes = Object.keys(requiredResDetails);
+  const requiredTypes = Object.keys(storageCapacity).filter(
+    type => storageCapacity[type] != 0
+  );
   return selectedResourceTypes.every(resourceType =>
-    requiredResTypes.includes(resourceType)
+    requiredTypes.includes(resourceType)
   );
 };
 
 const hasCapacity = function(playerPowerplants, selectedResourceDetails) {
-  const requiredResDetails = getRequiredResDetails(playerPowerplants);
+  const storageCapacity = getStorageCapacity(playerPowerplants);
   const selectedResources = parseResourceDetails(selectedResourceDetails);
   const selectedResourceTypes = Object.keys(selectedResources);
   return selectedResourceTypes.every(
     resourceType =>
-      selectedResources[resourceType] <= requiredResDetails[resourceType]
+      selectedResources[resourceType] <= storageCapacity[resourceType]
   );
 };
 
