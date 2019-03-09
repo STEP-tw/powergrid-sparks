@@ -459,6 +459,17 @@ const getMinimumCost = function(playerCities, selectedCity) {
   return _.min(allPossiblePaths);
 };
 
+const passBuyingResources = function(req, res) {
+  const game = initializeGame(req, res);
+  const players = game.getPlayers();
+  const turn = game.getTurn(players);
+  const currentPlayer = turn.getCurrentPlayer().name;
+  const isLastPlayer = turn.isLastPlayer();
+  const logMsg = `${currentPlayer} has passed`;
+  game.addLog(logMsg);
+  res.send({ isLastPlayer });
+};
+
 module.exports = {
   renderHome,
   createGame,
@@ -479,6 +490,7 @@ module.exports = {
   getPowerplants,
   returnPlayerResources,
   makeBid,
+  passBuyingResources,
   selectPowerPlant,
   getCurrentBid,
   returnPlayerResources,

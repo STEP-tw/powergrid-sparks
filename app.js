@@ -20,6 +20,7 @@ const {
   getCurrentPlayer,
   updateCurrentPlayer,
   buyResources,
+  passBuyingResources,
   buildCities,
   getPlayers,
   lightCities,
@@ -62,6 +63,7 @@ app.get("/player/powerplants", getPowerplants);
 app.post("/returnResources", returnPlayerResources);
 app.get("/getGameDetails", getGameDetails);
 app.post("/buildingCost", getBuildingCost);
+app.get("/passBuyingResources", passBuyingResources);
 
 app.use(express.static("public/html"));
 app.use(express.static("public/stylesheet"));

@@ -61,7 +61,7 @@ const showFailedPaymentMessage = function() {
     messageContainer.innerText = "";
   }, 3000);
   messageContainer.innerText = "You don't have enough money.";
-  messageContainer.style.textAlign = "justify"
+  messageContainer.style.textAlign = "justify";
   messageContainer.style.padding = "6%";
   messageContainer.style.color = "rgb(156, 47, 47)";
 };
@@ -88,7 +88,7 @@ const ShowInvalidResource = function() {
 const showInvalidResourceError = function() {
   const messageContainer = document.getElementById("insufficient-money");
   messageContainer.style.display = "inline";
-  messageContainer.style.textAlign = "justify"
+  messageContainer.style.textAlign = "justify";
   messageContainer.style.padding = "6%";
   messageContainer.style.color = "rgb(156, 47, 47)";
   messageContainer.innerText =
@@ -246,4 +246,16 @@ const displayMarket = function() {
   });
   const biddingSection = getBiddingSectionTemplate();
   document.getElementById("bidding-section").innerHTML = biddingSection;
+};
+
+const passBuyingResources = function() {
+  fetch("/passBuyingResources")
+    .then(res => res.json())
+    .then(res => {
+      if (res.isLastPlayer) {
+        displayMap();
+        return;
+      }
+      resetTurn();
+    });
 };
