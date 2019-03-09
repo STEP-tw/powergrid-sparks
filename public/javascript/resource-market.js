@@ -254,7 +254,6 @@ const passBuyingResources = function() {
     .then(res => {
       if (res.isLastPlayer) {
         displayMap();
-        return;
       }
       resetTurn();
     });
