@@ -307,8 +307,11 @@ describe("GET /passBuyingResources", function() {
   it("should return code 200 the user passed", done => {
     app.activeGames["9"] = new Game(2);
     app.cookies["99"] = "Ankon";
+    app.cookies["999"] = "Gaurav";
     const player1 = new Player("red", "Ankon");
+    const player2 = new Player("black", "Gaurav");
     app.activeGames["9"].addPlayer(player1);
+    app.activeGames["9"].addPlayer(player2);
     const turn = app.activeGames["9"].getTurn([player1]);
     turn.currentPlayerIndex = 0;
     request(app)

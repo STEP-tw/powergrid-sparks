@@ -469,6 +469,7 @@ const passBuyingResources = function(req, res) {
   const turn = game.getTurn(players);
   const currentPlayer = turn.getCurrentPlayer().name;
   const isLastPlayer = turn.isLastPlayer();
+  if (isLastPlayer) game.changePhaseTo("buildCities");
   const logMsg = `${currentPlayer} has passed`;
   game.addLog(logMsg);
   res.send({ isLastPlayer });
