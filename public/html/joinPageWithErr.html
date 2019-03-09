@@ -1,24 +1,48 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Page Title</title>
-  <link rel="stylesheet" type="text/css" media="screen" href="/joinPageWithErr.css">
-</head>
-<body>
-  <div class="overlay" id="join-game">
-    <div class="popup">
-      <div>
-        <form autocomplete="off" class="options" method="POST" action="/joinGame">
-          <input class="textField" name='joinerName' id='joinerName' type="text" placeholder="Enter Your Name" required>
-          <input class="textField" name="gameId" id='gameId' type="text" placeholder="Enter Game ID" required>
-          <div class="err-msg">INVALID GAME ID</div>
-          <button>SUBMIT</button>
-        </form>
+  <head>
+    <title>Page Title</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      media="screen"
+      href="/joinPageWithErr.css"
+    />
+  </head>
+  <body>
+    <div class="overlay" id="join-game">
+      <div class="popup">
+        <div>
+          <form
+            autocomplete="off"
+            class="options"
+            method="POST"
+            action="/joinGame"
+          >
+            <input
+              class="textField"
+              name="joinerName"
+              id="joinerName"
+              type="text"
+              placeholder="Enter Your Name"
+              required
+            />
+            <input
+              class="textField"
+              name="gameId"
+              id="gameId"
+              type="text"
+              placeholder="Enter Game ID"
+              required
+            />
+            <div class="err-msg">INVALID GAME ID</div>
+            <button>Join Game</button>
+          </form>
+        </div>
+      </div>
+      <div class="cross-button">
+        <span onclick="window.location.href = '/'">x</span>
       </div>
     </div>
-    <div class="cross-button">
-      <span onclick="window.location.href = '/'">x</span>
-    </div>
-  </div>
-</body>
+  </body>
 </html>

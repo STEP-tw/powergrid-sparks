@@ -7,7 +7,7 @@ const getLightedCities = function() {
     heading +
     '<input min="0" max="21" class="city-count" value="0" autocomplete="off" type="number" id="lighted-cities">';
   buildingPhase.innerHTML +=
-    '<button class="bid-option" id="submit">Submit</button>';
+    '<button class="bid-option" id="submit">Light</button>';
   document.getElementById("submit").onclick = validatePlayerAssets;
 };
 
