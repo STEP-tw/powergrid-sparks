@@ -4,7 +4,7 @@ class PlayingOrder {
   }
 
   getOrder() {
-    return this.players.sort((x, y) => x.cities - y.cities);
+    return this.players.sort((x, y) => y.cities - x.cities);
   }
 }
 

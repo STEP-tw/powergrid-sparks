@@ -47,11 +47,12 @@ const polling = function() {
           displayPowerPlants(gameDetails);
           if (currentPhase.phase != "buyPowerPlant") {
             displayMarket();
+            window.location.reload(true);
             currentPhase.phase = "buyPowerPlant";
           }
         }
 
-        if(phase == "endGame"){
+        if (phase == "endGame") {
           currentPhase.phase = "endGame";
           displayWinningMessage(winner + " has won the game !");
         }

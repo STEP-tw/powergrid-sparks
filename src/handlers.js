@@ -240,9 +240,9 @@ const areValidTypes = function(playerPowerplants, selectedResourceDetails) {
   const storageCapacity = getStorageCapacity(playerPowerplants);
   const selectedResources = parseResourceDetails(selectedResourceDetails);
   const selectedResourceTypes = Object.keys(selectedResources);
-  if(storageCapacity['Hybrid']){
-    storageCapacity['Coal'] += storageCapacity['Hybrid'];
-    storageCapacity['Oil'] += storageCapacity['Hybrid'];
+  if (storageCapacity["Hybrid"]) {
+    storageCapacity["Coal"] += storageCapacity["Hybrid"];
+    storageCapacity["Oil"] += storageCapacity["Hybrid"];
   }
   const requiredTypes = Object.keys(storageCapacity).filter(
     type => storageCapacity[type] != 0
@@ -256,12 +256,13 @@ const hasCapacity = function(playerPowerplants, selectedResourceDetails) {
   const storageCapacity = getStorageCapacity(playerPowerplants);
   const selectedResources = parseResourceDetails(selectedResourceDetails);
   const selectedResourceTypes = Object.keys(selectedResources);
-  if(storageCapacity['Hybrid']){
-    storageCapacity['Coal'] += storageCapacity['Hybrid']/2;
-    storageCapacity['Oil'] += storageCapacity['Hybrid']/2;
+  if (storageCapacity["Hybrid"]) {
+    storageCapacity["Coal"] += storageCapacity["Hybrid"] / 2;
+    storageCapacity["Oil"] += storageCapacity["Hybrid"] / 2;
   }
-  return selectedResourceTypes.every(resourceType => 
-    selectedResources[resourceType] <= storageCapacity[resourceType]
+  return selectedResourceTypes.every(
+    resourceType =>
+      selectedResources[resourceType] <= storageCapacity[resourceType]
   );
 };
 
@@ -337,6 +338,7 @@ const refillResources = function(currentPlayer, game) {
     const resourceMarket = game.getResourceMarket();
     resourceMarket.refillResourceStep1();
     game.setPlayingOrder();
+    console.log(game.getPlayers(), "+++++++++++++++++");
     game.rearrangePowerPlants();
   }
 };
@@ -435,7 +437,7 @@ const getGameDetails = function(req, res) {
         phase: game.currentPhase(),
         playerStats,
         logs: game.getLogs(),
-        winner:game.getWinner()
+        winner: game.getWinner()
       })
     );
   } catch (error) {
