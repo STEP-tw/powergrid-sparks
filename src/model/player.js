@@ -63,7 +63,8 @@ class Player {
   }
 
   addResources(resources) {
-    ["Coal", "Oil", "Uranium", "Garbage"].map(resource => {
+    const totalResorces = ["Coal", "Oil", "Uranium", "Garbage"];
+    totalResorces.map(resource => {
       const resourceDetails = resources[resource].match(/_/g);
       if (resourceDetails != null) {
         const resourceCount = resourceDetails.length;
