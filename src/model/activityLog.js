@@ -6,7 +6,7 @@ class ActivityLog {
 
   addLog(log) {
     let timeStamp = new this.DateProvider();
-    this.logs.unshift({ log, timeStamp });
+    this.logs.unshift({ log, timeStamp: `${timeStamp.getHours()} : ${ timeStamp.getMinutes()}` });
   }
 
   getLogs() {

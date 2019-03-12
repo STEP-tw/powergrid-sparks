@@ -43,7 +43,7 @@
         <div class="arrow-right"></div>
       </div>
     </div>
-    <div class="header-option" id='activity-log-button' onclick="displayActivityLogs()">Activity log</div>
+    <div class="header-option" id='activity-log-button' onclick="getActivityLogs()">Activity log</div>
     <div class="header-option" id='display-map'  onclick="displayMap()">Map</div>
   </header>
   <main id="main" style="height:78%; width:100%; display: flex">
@@ -638,7 +638,7 @@
       <section class="activity-log" id="activity-log">
         <div class="close-activitylog"  id="close-activity-log" onclick="closeActivityLog()">X</div>
         <div style="text-align: center;border-bottom: 1px solid">ACTIVITY LOG</div>
-        <div id="logs"></div>
+        <div class="logs" id="logs"></div>
       </section>
     </section>
   </main>

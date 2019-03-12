@@ -30,7 +30,8 @@ const {
   selectPowerPlant,
   getCurrentBid,
   getGameDetails,
-  getBuildingCost
+  getBuildingCost,
+  sendLogs
 } = require("./src/handlers");
 
 app.set("views", __dirname + "/public/html");
@@ -64,6 +65,7 @@ app.post("/returnResources", returnPlayerResources);
 app.get("/getGameDetails", getGameDetails);
 app.post("/buildingCost", getBuildingCost);
 app.get("/passBuyingResources", passBuyingResources);
+app.get("/logs", sendLogs);
 
 app.use(express.static("public/html"));
 app.use(express.static("public/stylesheet"));

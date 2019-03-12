@@ -16,12 +16,15 @@ const showActivityLogs = function(logs) {
   const activityDiv = document.getElementById("logs");
   activityDiv.innerText = "";
   logs.forEach(log => {
-    activityDiv.innerText += log.log + "\n";
+    activityDiv.innerHTML += `<div class="logs-representation"><div>&#x27A3; ${log.log}</div><div>${log.timeStamp}</div></div> \n`;
   });
 };
 
 const getActivityLogs = function() {
   fetch("/logs")
     .then(res => res.json())
-    .then(res => showActivityLogs(res));
+    .then(res => {
+      displayActivityLogs();
+      showActivityLogs(res)
+    });
 };

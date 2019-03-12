@@ -359,6 +359,26 @@ describe("POST /cities/build", () => {
       .set("Cookie", ["gameId=99;playerId=999"])
       .expect(200, done);
   });
+
+  it("should return code 200 if resource data is registered succesfully", done => {
+    const player1 = new Player("green", "naman");
+    player1.addPowerplant({
+      value: "3",
+      resource: {
+        type: "Hybrid",
+        quantity: 2
+      },
+      city: 1
+    });
+    app.activeGames["869"] = new Game(2);
+    app.activeGames["869"].addPlayer(player1);
+    app.cookies["863"] = "naman";
+    request(app)
+      .post("/resources/buy")
+      .set("Cookie", ["gameId=869;playerId=863"])
+      .send("Coal=1_2&Uranium=&Oil=1_2,1_3,1_4,1_5,1_6,1_7&Garbage=&Cost=150")
+      .expect(200, done);
+  });
 });
 
 describe("GET /players", () => {
@@ -872,7 +892,7 @@ describe("GET /getGameDetails", function() {
     app.cookies["1234567"] = "Ankon";
     app.activeGames["111"].powerPlantMarket = new PowerPlantMarket({
       "13": {
-        resource: { type: "Oil", quantity: 2 },
+        resource: { type: "Hybrid", quantity: 2 },
         city: 1,
         inDeck: true,
         isSelected: false
@@ -885,7 +905,7 @@ describe("GET /getGameDetails", function() {
       }
     });
 
-    app.activeGames["111"].conductAuction("19");
+    app.activeGames["111"].conductAuction("13");
     app.activeGames["111"].conductAuction("pass");
     app.activeGames["111"].conductAuction("pass");
 
@@ -952,6 +972,19 @@ describe("POST /buildingCost", function() {
       .post("/buildingCost")
       .send(`selectedCities=${JSON.stringify(["boston", "buffallo"])}`)
       .set("Cookie", ["gameId=172;playerId=1234567"])
+      .expect(200, done);
+  });
+});
+
+describe("GET /logs", function() {
+  it("should respond with 200", function(done) {
+    const player1 = new Player("green", "gaurav");
+    app.activeGames["53"] = new Game(1);
+    app.activeGames["53"].addPlayer(player1);
+
+    request(app)
+      .get("/logs")
+      .set("Cookie", ["gameId=53;playerId=1234567"])
       .expect(200, done);
   });
 });

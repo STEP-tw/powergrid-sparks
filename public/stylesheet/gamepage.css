@@ -167,14 +167,16 @@ button {
   border: 1px solid white;
   position: absolute;
   z-index: 2;
-  overflow: scroll;
+  /* overflow: scroll; */
   width: 40%;
   height: 70%;
   background-color: #2d303d;
   font-size: 22px;
   display: none;
   flex-direction: column;
-  align-items: center;
+  box-sizing: border-box;
+  padding: 0px 10px;
+  /* align-items: center; */
   line-height: 2;
   margin: 2%;
   color: #e5e4b9;
@@ -626,7 +628,7 @@ header {
 }
 .close-activitylog {
   position: absolute;
-  top: 1%;
+  top: 0%;
   right: 3%;
   cursor: pointer;
   font-size: 25px;
@@ -787,4 +789,19 @@ header {
   justify-content: space-evenly;
   align-items: center;
   color: inherit;
+}
+
+.logs-representation{
+  display: flex;
+  justify-content: space-between;
+}
+
+.logs{
+  overflow: scroll;
+  background-color: #2d303d;
+  font-size: 22px;
+  flex-direction: column;
+  box-sizing: border-box;
+  line-height: 2;
+  color: #e5e4b9;
 }

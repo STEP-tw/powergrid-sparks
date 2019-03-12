@@ -135,12 +135,6 @@ const initializeMarket = function(req, res) {
   res.send(cardDetails);
 };
 
-const createBuyPowerPlantLog = function(game, turn, powerplant) {
-  const playerName = turn.getCurrentPlayer().name;
-  const logMsg = `${playerName} has bought power plant ${powerplant.value}.`;
-  game.addLog(logMsg);
-};
-
 const createBuildCityLog = function(game, turn, cityCount) {
   const playerName = turn.getCurrentPlayer().name;
   const logMsg = `${playerName} has build ${cityCount} cities.`;
@@ -490,6 +484,11 @@ const passBuyingResources = function(req, res) {
   res.send({ isLastPlayer });
 };
 
+const sendLogs = function(req,res){
+  const game = initializeGame(req, res);
+  res.send(game.getLogs());
+}
+
 module.exports = {
   renderHome,
   createGame,
@@ -515,5 +514,6 @@ module.exports = {
   getCurrentBid,
   returnPlayerResources,
   getGameDetails,
-  getBuildingCost
+  getBuildingCost,
+  sendLogs
 };
