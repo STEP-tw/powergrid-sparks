@@ -24,6 +24,7 @@ class Game {
     this.phase = new Phase();
     this.isAuctionStarted = false;
     this.currentPowerPlant;
+    this.winner;
   }
 
   conductAuction(cost) {
@@ -200,6 +201,14 @@ class Game {
 
   currentPhase() {
     return this.phase.currentPhase();
+  }
+  
+  setWinner(winner){
+    this.winner = winner;
+  }
+
+  getWinner(){
+    return this.winner;
   }
 }
 

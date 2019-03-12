@@ -4,6 +4,7 @@ class Phase {
     this.buyResources = false;
     this.buildCities = false;
     this.bureaucracy = false;
+    this.endGame = false;
   }
 
   changePhaseTo(currentPhase) {

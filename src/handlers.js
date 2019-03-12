@@ -316,16 +316,16 @@ const returnPlayerResources = function(req, res) {
   refillResources(currentPlayer, game);
   const winner = getWinner(game.getPlayers());
   if (turn.isLastPlayer() && winner.length > 0) {
-    let winningMsg = winner[0].name + " won";
-    winner.length > 1 && (winningMsg = "match draw");
-    return res.send(winningMsg);
+    game.changePhaseTo("endGame");
+    game.setWinner(winner[0].name);
+    return res.send("");
   }
   turn.isLastPlayer() && game.changePhaseTo("buyPowerPlant");
   res.send("");
 };
 
 const getWinner = function(players) {
-  return players.filter(player => player.getLightedCity() > 2);
+  return players.filter(player => player.getLightedCity() > 1);
 };
 
 const refillResources = function(currentPlayer, game) {
@@ -434,7 +434,8 @@ const getGameDetails = function(req, res) {
         powerPlants: JSON.stringify(powerPlants),
         phase: game.currentPhase(),
         playerStats,
-        logs: game.getLogs()
+        logs: game.getLogs(),
+        winner:game.getWinner()
       })
     );
   } catch (error) {

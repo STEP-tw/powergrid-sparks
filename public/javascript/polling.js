@@ -12,7 +12,8 @@ const polling = function() {
           resources,
           phase,
           playerStats,
-          logs
+          logs,
+          winner
         } = gameDetails;
         handleTurn(player);
         showPlayerDetails(gameDetails.players);
@@ -48,6 +49,11 @@ const polling = function() {
             displayMarket();
             currentPhase.phase = "buyPowerPlant";
           }
+        }
+
+        if(phase == "endGame"){
+          currentPhase.phase = "endGame";
+          displayWinningMessage(winner + " has won the game !");
         }
 
         updatePlayerStatsDiv(playerStats);
