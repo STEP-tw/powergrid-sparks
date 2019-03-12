@@ -215,6 +215,7 @@ const getStorageCapacity = function(powerPlants) {
   storageCapacity["Oil"] = 0;
   storageCapacity["Garbage"] = 0;
   storageCapacity["Uranium"] = 0;
+  storageCapacity["Hybrid"] = 0;
   Object.keys(powerPlants).forEach(powerPlant => {
     storageCapacity[powerPlants[powerPlant].resource.type] +=
       powerPlants[powerPlant].resource.quantity * 2;
@@ -239,6 +240,10 @@ const areValidTypes = function(playerPowerplants, selectedResourceDetails) {
   const storageCapacity = getStorageCapacity(playerPowerplants);
   const selectedResources = parseResourceDetails(selectedResourceDetails);
   const selectedResourceTypes = Object.keys(selectedResources);
+  if(storageCapacity['Hybrid']){
+    storageCapacity['Coal'] += storageCapacity['Hybrid'];
+    storageCapacity['Oil'] += storageCapacity['Hybrid'];
+  }
   const requiredTypes = Object.keys(storageCapacity).filter(
     type => storageCapacity[type] != 0
   );
@@ -251,9 +256,12 @@ const hasCapacity = function(playerPowerplants, selectedResourceDetails) {
   const storageCapacity = getStorageCapacity(playerPowerplants);
   const selectedResources = parseResourceDetails(selectedResourceDetails);
   const selectedResourceTypes = Object.keys(selectedResources);
-  return selectedResourceTypes.every(
-    resourceType =>
-      selectedResources[resourceType] <= storageCapacity[resourceType]
+  if(storageCapacity['Hybrid']){
+    storageCapacity['Coal'] += storageCapacity['Hybrid']/2;
+    storageCapacity['Oil'] += storageCapacity['Hybrid']/2;
+  }
+  return selectedResourceTypes.every(resourceType => 
+    selectedResources[resourceType] <= storageCapacity[resourceType]
   );
 };
 
