@@ -17,7 +17,6 @@ const removeFirstTwoClasses = function(text) {
 };
 
 const displayMap = function() {
-  document.getElementById("display-map").style.display = "none";
   const map = document.getElementById("map");
   const market = document.getElementById("market");
   document.getElementById(
@@ -40,3 +39,12 @@ const generateDiv = function(className, id) {
   divElement.id = id;
   return divElement;
 };
+
+
+const displayMapPopup = function(){
+  document.getElementById("map-popup").style.visibility = "visible";
+}
+
+const removeMapOverlay = function(){
+  document.querySelector('#map-popup').style.visibility = 'hidden';
+}

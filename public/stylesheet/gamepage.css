@@ -805,3 +805,25 @@ header {
   line-height: 2;
   color: #e5e4b9;
 }
+
+.map-overlay {
+  visibility: hidden;
+  z-index: 2;
+  position: absolute;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(40, 41, 32, 0.55);
+  height: 100%;
+}
+
+.map-cross-button {
+  text-align: right;
+  font-size: 40px;
+  color: rgb(218, 213, 226);
+  cursor: pointer;
+  position: absolute;
+  top: 1%;
+  right: 2%;
+}
