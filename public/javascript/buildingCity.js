@@ -99,8 +99,10 @@ const buildCities = function() {
 
 const updateCity = function(cityName, playerColor) {
   if (cityName.length < 2) return;
-  document.getElementById(cityName).style.fill = playerColor;
-  document.getElementById(cityName).onclick = "";
+  document.querySelectorAll(`#${cityName}`).forEach(city => {
+    city.style.fill = playerColor;
+    city.onclick = "";
+  });
 };
 
 const updateMap = function(player) {
