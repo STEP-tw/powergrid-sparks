@@ -483,10 +483,22 @@ const passBuyingResources = function(req, res) {
   res.send({ isLastPlayer });
 };
 
-const sendLogs = function(req,res){
+const sendLogs = function(req, res) {
   const game = initializeGame(req, res);
   res.send(game.getLogs());
-}
+};
+
+const passBuildingCities = function(req, res) {
+  const game = initializeGame(req, res);
+  const players = game.getPlayers();
+  const turn = game.getTurn(players);
+  const currentPlayer = turn.getCurrentPlayer().name;
+  const isLastPlayer = turn.isLastPlayer();
+  if (isLastPlayer) game.changePhaseTo("bureaucracy");
+  const logMsg = `${currentPlayer} has passed in building cities`;
+  game.addLog(logMsg);
+  res.send({ isLastPlayer });
+};
 
 module.exports = {
   renderHome,
@@ -502,6 +514,7 @@ module.exports = {
   updateCurrentPlayer,
   buyResources,
   buildCities,
+  passBuildingCities,
   getPlayers,
   updateResourceMarket,
   lightCities,

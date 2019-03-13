@@ -31,7 +31,8 @@ const {
   getCurrentBid,
   getGameDetails,
   getBuildingCost,
-  sendLogs
+  sendLogs,
+  passBuildingCities
 } = require("./src/handlers");
 
 app.set("views", __dirname + "/public/html");
@@ -55,6 +56,7 @@ app.get("/currentPlayer", getCurrentPlayer);
 app.get("/currentPlayer/update", updateCurrentPlayer);
 app.post("/resources/buy", buyResources);
 app.post("/cities/build", buildCities);
+app.get("/passBuildingCities", passBuildingCities);
 app.get("/players", getPlayers);
 app.post("/auction/bid", makeBid);
 app.post("/powerPlant/select", selectPowerPlant);

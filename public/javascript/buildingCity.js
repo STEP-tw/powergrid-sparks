@@ -120,3 +120,9 @@ const refreshMap = function() {
       players.forEach(player => updateMap(player));
     });
 };
+
+const passBuildingCities = function() {
+  fetch("/passBuildingCities")
+    .then(res => res.json())
+    .then(res => updateCurrentPlayer());
+};

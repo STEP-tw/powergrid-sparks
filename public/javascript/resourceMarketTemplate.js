@@ -32,6 +32,7 @@ const getBuildCitiesTemplate = function() {
         <div>Number of Cities :<span id = "city-count"> 0</span></div>
         <div id="payment-failed"></div>
         <button class="bid-option" onclick="buildCities()"> Build</button>
+        <button class="bid-option" onclick="passBuildingCities()"> Pass</button>
         <button class="bid-option" onclick="reset()"> Cancel</button>
       </div>`;
 };

@@ -321,6 +321,21 @@ describe("GET /passBuyingResources", function() {
   });
 });
 
+describe("GET /passBuildingCities", function() {
+  it("should return code 200 the user passed", done => {
+    app.activeGames["9"] = new Game(1);
+    app.cookies["99"] = "Ankon";
+    const player1 = new Player("red", "Ankon");
+    app.activeGames["9"].addPlayer(player1);
+    const turn = app.activeGames["9"].getTurn([player1]);
+    turn.currentPlayerIndex = 0;
+    request(app)
+      .get("/passBuildingCities")
+      .set("Cookie", ["gameId=9;playerId=99"])
+      .expect(200, done);
+  });
+});
+
 describe("POST /cities/build", () => {
   it("should  add the city details to the player who buys if player has enough money", done => {
     app.activeGames["99"] = new Game(2);
