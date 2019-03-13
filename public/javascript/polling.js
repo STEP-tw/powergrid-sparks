@@ -47,8 +47,8 @@ const polling = function() {
           displayPowerPlants(gameDetails);
           if (currentPhase.phase != "buyPowerPlant") {
             displayMarket();
-            window.location.reload(true);
             currentPhase.phase = "buyPowerPlant";
+            window.location.reload(true);
           }
         }
 
@@ -58,9 +58,7 @@ const polling = function() {
         }
 
         updatePlayerStatsDiv(playerStats);
-        // showActivityLogs(logs);
         displayLog(logs);
-        players.forEach(player => updateMap(player));
       });
   }, 500);
 };

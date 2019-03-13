@@ -91,7 +91,6 @@ const persistCardClass = function(powerPlants, currentMarketDiv) {
   const selectedPowerPlant = Object.keys(powerPlants).filter(
     powerPlantCost => powerPlants[powerPlantCost].isSelected
   );
-  document.getElementById("make-bid").onclick = null;
   currentMarketDiv.childNodes.forEach(node => {
     if (node.id == `powerPlant_${selectedPowerPlant[0]}`) {
       node.className = "selected-card";
