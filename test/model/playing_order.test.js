@@ -11,7 +11,7 @@ describe("getOrder", () => {
   player3.cities = 3;
   it("should rearrange playing order based number of cities player has", () => {
     const playingOrder = new PlayingOrder([player1, player2, player3]);
-    const expectedOutput = [player3, player1, player2];
+    const expectedOutput = [player2, player1, player3];
     const actualOutput = playingOrder.getOrder();
     chai.expect(expectedOutput).to.be.deep.equal(actualOutput);
   });
