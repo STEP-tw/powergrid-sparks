@@ -332,7 +332,6 @@ const refillResources = function(currentPlayer, game) {
     const resourceMarket = game.getResourceMarket();
     resourceMarket.refillResourceStep1();
     game.setPlayingOrder();
-    console.log(game.getPlayers(), "+++++++++++++++++");
     game.rearrangePowerPlants();
   }
 };
