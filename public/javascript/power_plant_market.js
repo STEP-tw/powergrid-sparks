@@ -32,7 +32,6 @@ const displayPowerPlantMarket = function(powerPlantCards) {
 };
 
 const updatePriceDiv = function(price) {
-  setInnerText("current-bid-amount", price);
   setInnerText("bid-amount", price);
 };
 
@@ -190,7 +189,6 @@ const generatePowerPlantPriceDiv = function(powerPlantCost) {
 };
 
 const resetBidAmount = function() {
-  document.getElementById("current-bid-amount").innerText = 0;
   document.getElementById("bid-amount").innerText = 0;
 };
 

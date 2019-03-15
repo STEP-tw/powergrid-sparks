@@ -1,8 +1,6 @@
 const getBiddingSectionTemplate = function() {
   return `
     <div class='auction'>
-      Initial bid amount :
-          <span id="current-bid-amount"></span>
     </div>
     <div class="increase-bid auction">Increase bid : 
     <span id="bid-amount"></span>&nbsp
