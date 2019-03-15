@@ -48,7 +48,7 @@ const polling = function() {
           if (currentPhase.phase != "buyPowerPlant") {
             displayMarket();
             currentPhase.phase = "buyPowerPlant";
-            window.location.reload(true);
+            // window.location.reload(true);
           }
         }
 
