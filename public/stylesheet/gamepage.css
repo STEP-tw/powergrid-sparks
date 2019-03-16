@@ -519,7 +519,19 @@ td {
   flex-direction: column;
 }
 
-.bid-option {
+.bid-option-disabled {
+  height: 8%;
+  width: 60%;
+  border-radius: 8px;
+  font-family: Avenir;
+  background: #24251cd1;
+  font-size: 18px;
+  color: #bbbaa1;
+  border: none;
+  cursor: default;
+}
+
+.bid-option-enabled {
   height: 8%;
   width: 60%;
   border-radius: 8px;
@@ -530,12 +542,12 @@ td {
   border: none;
 }
 
-.bid-option:hover {
+.bid-option-enabled:hover {
   font-size: 19px;
   background: #1d1d17d1;
 }
 
-.bid-option:focus {
+.bid-option-enabled:focus {
   outline: none;
 }
 

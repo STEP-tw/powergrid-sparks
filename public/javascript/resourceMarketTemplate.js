@@ -5,7 +5,7 @@ const getBiddingSectionTemplate = function() {
     <div class="increase-bid auction">Increase bid : 
     <span id="bid-amount"></span>&nbsp
     <button class='increase-bid-button button' id="increase_bid" onclick = 'increaseBid()'>&#x2b</button></div>
-    <button class = 'auction bid-option' id="make-bid">Make Bid</button>&nbsp<button class='auction bid-option' onclick="pass()">Pass</button>
+    <button class = 'auction bid-option-disabled' id="make-bid">Bid</button>&nbsp<button class='auction bid-option-enabled' onclick="pass()">Pass</button>
     
     <div id="selected-resource-amount" style="visibility:hidden">
     Selected Resource Amount : <span id="resource-amount">0</span>
@@ -18,8 +18,8 @@ const getBiddingSectionTemplate = function() {
 const getBuyResourceTemplate = function() {
   return `<div class = "selected-resource-amount" id="selected-resource-amount">
     <div>Selected Resource Amount </div><div id="resource-amount">0</div>
-    <button class="bid-option" style="height:18%" onclick="buyResources()">Buy Resources</button>
-    <button class="bid-option" style="height:18%" onclick="passBuyingResources()">Pass</div> </div>
+    <button class="bid-option-enabled" style="height:18%" onclick="buyResources()">Buy Resources</button>
+    <button class="bid-option-enabled" style="height:18%" onclick="passBuyingResources()">Pass</div> </div>
     <div id="insufficient-money" style="display:hidden"></div>`;
 };
 
@@ -29,9 +29,9 @@ const getBuildCitiesTemplate = function() {
         <div id="selected-cities" class="selected-cities"></div>
         <div>Number of Cities :<span id = "city-count"> 0</span></div>
         <div id="payment-failed"></div>
-        <button class="bid-option" onclick="buildCities()"> Build</button>
-        <button class="bid-option" onclick="passBuildingCities()"> Pass</button>
-        <button class="bid-option" onclick="reset()"> Cancel</button>
+        <button class="bid-option-enabled" onclick="buildCities()"> Build</button>
+        <button class="bid-option-enabled" onclick="passBuildingCities()"> Pass</button>
+        <button class="bid-option-enabled" onclick="reset()"> Cancel</button>
       </div>`;
 };
 

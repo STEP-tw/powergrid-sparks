@@ -94,6 +94,7 @@ const persistCardClass = function(powerPlants, currentMarketDiv) {
     if (node.id == `powerPlant_${selectedPowerPlant[0]}`) {
       node.className = "selected-card";
       document.getElementById("make-bid").onclick = makeBid;
+      document.getElementById("make-bid").className = "bid-option-enabled"
     }
   });
   fetch("/currentBid")
