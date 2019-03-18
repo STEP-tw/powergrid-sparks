@@ -103,6 +103,7 @@ const updateCity = function(cityName, playerColor) {
   document.querySelectorAll(`#${cityName}`).forEach(city => {
     city.style.fill = playerColor;
     city.onclick = "";
+    city.style.cursor = "inherit";
   });
 };
 
