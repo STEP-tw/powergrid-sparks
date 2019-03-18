@@ -89,7 +89,7 @@ describe("Auction", () => {
           }
         }
       ];
-      auction.selectPowerPlant("pass");
+      auction.selectPowerPlant("","pass");
       const actualOutput = auction.players;
       chai
         .expect(actualOutput)
@@ -98,7 +98,7 @@ describe("Auction", () => {
     });
 
     it("should start the auction if one selects powerplant", () => {
-      auction.selectPowerPlant("13");
+      auction.selectPowerPlant("13","13");
       const expectedOutput = {
         value: "13",
         resource: { type: "Oil", quantity: 2 },

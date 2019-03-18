@@ -42,6 +42,8 @@ const selectPowerPlant = function(element) {
     headers: { "Content-Type": "application/x-www-form-urlencoded" },
     body: `powerPlantCost=${powerPlantCost}`
   });
+  selectedPowerPlants.pop();
+  selectedPowerPlants.push(element.id);
   resetBidAmount();
   updatePriceDiv(powerPlantCost);
 };
@@ -201,11 +203,12 @@ const addPowerPlantToPlayer = function(count, powerPlants, powerPlantCost) {
 
 const makeBid = function() {
   const bidAmount = getInnerText("bid-amount");
+  const selectedPowerPlant = selectedPowerPlants[0] 
   document.getElementsByClassName;
   fetch("/auction/bid", {
     method: "POST",
     headers: { "Content-Type": "application/x-www-form-urlencoded" },
-    body: `bidAmount=${bidAmount}`
+    body: `bidAmount=${bidAmount}&selectedPowerPlant=${selectedPowerPlant}`
   }).then(res => updateCurrentPlayer());
 };
 
@@ -213,7 +216,7 @@ const pass = function() {
   fetch("/auction/bid", {
     method: "POST",
     headers: { "Content-Type": "application/x-www-form-urlencoded" },
-    body: `bidAmount=pass`
+    body: `bidAmount=pass&selectedPowerPlant=`
   }).then(res => updateCurrentPlayer());
 };
 

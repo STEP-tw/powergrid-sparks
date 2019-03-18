@@ -27,26 +27,26 @@ class Game {
     this.winner;
   }
 
-  conductAuction(cost) {
+  conductAuction(bidAmount,selectedPowerPlant) {
     if (this.auction == undefined) {
       const auctionPlayers = this.players.slice();
       this.auction = new Auction(auctionPlayers, this.powerPlantMarket);
-      this.auction.selectPowerPlant(cost);
-      this.currentPowerPlant = cost;
+      this.auction.selectPowerPlant(selectedPowerPlant,bidAmount);
+      this.currentPowerPlant = selectedPowerPlant;
       this.isAuctionStarted = true;
       return;
     }
 
     if (this.auction.isBidOver) {
-      this.auction.selectPowerPlant(cost);
-      this.currentPowerPlant = cost;
+      this.auction.selectPowerPlant(selectedPowerPlant,bidAmount);
+      this.currentPowerPlant = selectedPowerPlant;
       return;
     }
 
-    const { isBidOver, value } = this.auction.continue(cost);
+    const { isBidOver, value } = this.auction.continue(bidAmount);
 
     if (isBidOver) {
-      this.sellPowerPlant(value);
+      this.sellPowerPlant(this.currentPowerPlant);
       this.updatePowerPlants();
     }
   }

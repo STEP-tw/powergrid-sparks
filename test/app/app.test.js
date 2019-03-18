@@ -726,7 +726,7 @@ describe("POST /auction/bid", function() {
 
     request(app)
       .post("/auction/bid")
-      .send("bidAmount=13")
+      .send("bidAmount=13&selectedPowerPlant=powerPlant_13")
       .set("Cookie", ["gameId=53;playerId=1234567"])
       .expect(200, done);
   });
@@ -805,7 +805,7 @@ describe("GET /getGameDetails", function() {
       }
     });
 
-    app.activeGames["55"].conductAuction("13");
+    app.activeGames["55"].conductAuction("13","13");
 
     request(app)
       .get("/getGameDetails")
@@ -859,7 +859,7 @@ describe("GET /getGameDetails", function() {
       }
     });
 
-    app.activeGames["155"].conductAuction("pass");
+    app.activeGames["155"].conductAuction("pass","");
     request(app)
       .get("/getGameDetails")
       .set("Cookie", ["gameId=155;playerId=1234567"])
@@ -888,7 +888,7 @@ describe("GET /getGameDetails", function() {
       }
     });
 
-    app.activeGames["156"].conductAuction("19");
+    app.activeGames["156"].conductAuction("19","19");
     app.activeGames["156"].conductAuction("pass");
     request(app)
       .get("/getGameDetails")
@@ -920,7 +920,7 @@ describe("GET /getGameDetails", function() {
       }
     });
 
-    app.activeGames["111"].conductAuction("13");
+    app.activeGames["111"].conductAuction("13","13");
     app.activeGames["111"].conductAuction("pass");
     app.activeGames["111"].conductAuction("pass");
 

@@ -55,10 +55,10 @@ class Auction {
     this.currentPlayer = this.players[0];
   }
 
-  selectPowerPlant(powerPlantCost) {
+  selectPowerPlant(powerPlantCost,currentBidAmount) {
     this.biddingResult = undefined;
     this.isBidOver = false;
-    if (powerPlantCost == "pass") {
+    if (currentBidAmount == "pass") {
       this.updatePlayers();
       this.isBidOver = true;
       this.action = `${this.currentPlayer.name} has passed`;
@@ -71,7 +71,7 @@ class Auction {
       city: this.powerPlantMarket.cards[powerPlantCost].city
     };
     this.action = `${this.currentPlayer.name} has selected the Power Plant `;
-    this.currentBidAmount = powerPlantCost;
+    this.currentBidAmount = currentBidAmount;
     this.start();
   }
 
