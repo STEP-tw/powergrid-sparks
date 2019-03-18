@@ -523,6 +523,7 @@ td {
   color: #bbbaa1;
   border: none;
   cursor: default;
+  outline: none;
 }
 
 .bid-option-enabled {
