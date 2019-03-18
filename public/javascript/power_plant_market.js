@@ -138,6 +138,7 @@ const persistCardClass = function(powerPlants, currentMarketDiv) {
             if (+currentBid >= +cost) return updatePriceDiv(currentBid);
             return;
           }
+          document.getElementById("bid-amount").innerText = 0;
           updateCurrentPlayer();
         });
     });
