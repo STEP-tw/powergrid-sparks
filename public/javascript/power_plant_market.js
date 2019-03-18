@@ -51,6 +51,7 @@ const selectPowerPlant = function(element) {
 const handleMarketState = function(state, powerPlantDiv, powerPlantCost) {
   if (state == "currentMarket") {
     powerPlantDiv.onclick = selectPowerPlant.bind(null, powerPlantDiv);
+    powerPlantDiv.style.cursor = "pointer";
     currentMarketCards[powerPlantCost] = {
       isSelected: false,
       powerplant: powerPlantDiv
