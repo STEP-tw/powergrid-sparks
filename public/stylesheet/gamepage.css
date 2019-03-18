@@ -853,3 +853,7 @@ header {
   top: 1%;
   right: 2%;
 }
+
+.filled { 
+  cursor: pointer;
+}
