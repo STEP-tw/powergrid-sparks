@@ -97,7 +97,7 @@ const persistCardClass = function(powerPlants, currentMarketDiv) {
     if (node.id == `powerPlant_${selectedPowerPlant[0]}`) {
       node.className = "selected-card";
       document.getElementById("make-bid").onclick = makeBid;
-      document.getElementById("make-bid").className = "bid-option-enabled"
+      document.getElementById("make-bid").className = "bid-option-enabled";
     }
   });
   fetch("/currentBid")
@@ -146,11 +146,10 @@ const persistCardClass = function(powerPlants, currentMarketDiv) {
 const displayPowerPlants = function({ powerPlants, phase }) {
   powerPlants = JSON.parse(powerPlants);
   if (phase == "buyPowerPlant") {
-    const logDiv = generateDiv("log", "log");
     const currentMarketDiv = generateMarket(powerPlants, 0, 4, "currentMarket");
     const futureMarketDiv = generateMarket(powerPlants, 4, 8, "futureMarket");
     const powerPlantDiv = generateDiv("power-plant-cards", "power-plant-cards");
-    appendChildren(powerPlantDiv, [logDiv, currentMarketDiv, futureMarketDiv]);
+    appendChildren(powerPlantDiv, [currentMarketDiv, futureMarketDiv]);
     persistCardClass(powerPlants, currentMarketDiv);
     const market = document.getElementById("market").children[0];
     market.replaceChild(powerPlantDiv, market.childNodes[0]);
@@ -166,6 +165,8 @@ const fetchCurrentPowerPlants = function() {
 const generateBidDiv = function() {
   const biddingDiv = generateDiv("bidding-section", "bidding-section");
   biddingDiv.innerHTML = getBiddingSectionTemplate();
+  const logsDiv = generateDiv("one-line-log", "one-line-log");
+  document.getElementById("info").appendChild(logsDiv);
   document.getElementById("info").appendChild(biddingDiv);
 };
 
@@ -222,6 +223,15 @@ const pass = function() {
 };
 
 const displayLog = function(logs) {
-  const log = document.getElementById("log");
-  log.innerText = logs[0].log;
+  const log = document.getElementById("one-line-log");
+  const latestActivityHeadDiv = generateDiv(
+    "latest-activity-header",
+    "latest-activity-header"
+  );
+  latestActivityHeadDiv.innerHTML = "Latest Activity";
+  const latestActivityDiv = generateDiv("", "");
+  latestActivityDiv.innerText = logs[0].log;
+  log.innerText = "";
+  log.appendChild(latestActivityHeadDiv);
+  log.appendChild(latestActivityDiv);
 };

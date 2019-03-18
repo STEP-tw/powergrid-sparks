@@ -283,6 +283,7 @@ const lightCities = function(req, res) {
   const playerId = getPlayerId(req);
   const currentPlayer = game.players.find(player => player.id == playerId);
   const cityCount = currentPlayer.getCityCount();
+  game.addLog(`${currentPlayer.name} has lighted ${cityCount} cities`);
   const resources = currentPlayer.getResources();
   const powerplants = currentPlayer.getPowerplants();
   res.send({ powerplants, cityCount, resources });
@@ -483,7 +484,7 @@ const passBuyingResources = function(req, res) {
   const currentPlayer = turn.getCurrentPlayer().name;
   const isLastPlayer = turn.isLastPlayer();
   if (isLastPlayer) game.changePhaseTo("buildCities");
-  const logMsg = `${currentPlayer} has passed`;
+  const logMsg = `${currentPlayer} has passed in buying resources`;
   game.addLog(logMsg);
   res.send({ isLastPlayer });
 };
