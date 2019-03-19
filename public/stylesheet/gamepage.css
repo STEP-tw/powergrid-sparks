@@ -773,7 +773,8 @@ header {
 }
 
 .bureaucracy-heading {
-  font-size: 32px;
+  font-size: 45px;
+  color: #e6e7be;
 }
 
 .current-phase {
@@ -847,6 +848,23 @@ header {
   align-items: center;
   background: rgba(40, 41, 32, 0.55);
   height: 100%;
+}
+
+.discarding-powerplant-popup{
+  visibility: hidden;
+  z-index: 1;
+  position: absolute;
+  width: 100%;
+  top:0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(40, 41, 32, 0.55);
+  height: 100%;
+  flex-direction: column;
+  justify-content: space-evenly;
+  padding: 3% 0px;
+  box-sizing: border-box;
 }
 
 .map-cross-button {

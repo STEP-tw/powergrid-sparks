@@ -108,8 +108,16 @@ const persistCardClass = function(powerPlants, currentMarketDiv) {
         players,
         phase,
         isBidOver,
-        isAuctionStarted
+        isAuctionStarted,
+        hasMoreThenThreePowerplants,
+        powerplants,
+        currentPlayerId
       } = auction;
+      if (hasMoreThenThreePowerplants && readCookie(document.cookie).playerId == currentPlayerId) {
+        displayDiscardingPowerplantOption(powerplants);
+        return;
+      }
+
       if (phase == "buyResources") {
         designResourceMarket();
         startBuyResourcePhase();
@@ -236,3 +244,41 @@ const displayLog = function(logs) {
   log.appendChild(latestActivityHeadDiv);
   log.appendChild(latestActivityDiv);
 };
+
+const displayDiscardingPowerplantOption = function(powerplants) {
+  document.getElementById("discarding-powerplant-popup").style.visibility =
+    "visible";
+  document.getElementById(
+    "discarding-powerplant-popup"
+  ).innerText = JSON.stringify(powerplants);
+
+  const allPowerplants = generateMarket(powerplants, 0, 3, "map123");
+  const bureaucracyDiv = document.getElementById("discarding-powerplant-popup");
+  const heading = generateDiv("bureaucracy-heading", "");
+  const discardingButton = document.createElement("button");
+  discardingButton.className = "bid-option-enabled";
+  discardingButton.style.width = "25%";
+  discardingButton.innerText = "Discard";
+  discardingButton.onclick = discardPowerplant;
+  heading.innerText = "Select Powerplant to discard";
+  bureaucracyDiv.innerHTML = "";
+  const msgDiv = generateDiv("bureaucracy-err-msg", "err-msg");
+  appendChildren(bureaucracyDiv, [heading, allPowerplants, msgDiv,discardingButton]);
+  const market = bureaucracyDiv.childNodes;
+  const playersPowerplant = market[1].childNodes;
+  playersPowerplant.forEach(powerplant => {
+    powerplant.onclick = selectDiv.bind(null, powerplant);
+  });
+};
+
+const discardPowerplant = function(){
+  fetch("/discardPowerplant", {
+    method: "POST",
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    body: `powerplant=${selectedPowerPlant[0]}`
+  }).then(res=>{
+    selectedPowerPlant.pop();
+    document.getElementById("discarding-powerplant-popup").style.visibility =
+      "hidden";
+  })
+}

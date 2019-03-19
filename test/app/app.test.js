@@ -1003,3 +1003,17 @@ describe("GET /logs", function() {
       .expect(200, done);
   });
 });
+
+
+describe("POST /discardPowerplant", function() {
+  it("should respond with 200", function(done) {
+    const player1 = new Player("green", "gaurav");
+    app.activeGames["53"] = new Game(1);
+    app.activeGames["53"].addPlayer(player1);
+
+    request(app)
+      .post("/discardPowerplant")
+      .set("Cookie", ["gameId=53;playerId=1234567"])
+      .expect(200, done);
+  });
+});

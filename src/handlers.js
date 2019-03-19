@@ -372,6 +372,9 @@ const selectPowerPlant = function(req, res) {
 
 const getCurrentBid = function(req, res) {
   const game = initializeGame(req, res);
+  const players = game.getPlayers();
+  const turn = game.getTurn(players);
+  const player = turn.getCurrentPlayer();
   const currentBid = game.getCurrentBid();
   const isBidOver = game.isBidOver();
   const isAuctionOver = game.isAuctionOver();
@@ -386,6 +389,7 @@ const getCurrentBid = function(req, res) {
     game.changePhaseTo("buyResources");
     return res.send("");
   }
+
   if (isBidOver) {
     return res.send(
       JSON.stringify({
@@ -393,7 +397,10 @@ const getCurrentBid = function(req, res) {
         isBidOver,
         phase,
         isAuctionStarted,
-        players: auctionPlayers
+        players: auctionPlayers,
+        hasMoreThenThreePowerplants: Object.keys(player.getPowerplants()).length > 3,
+        currentPlayerId: player.id,
+        powerplants:player.getPowerplants()
       })
     );
   }
@@ -506,6 +513,16 @@ const passBuildingCities = function(req, res) {
   res.send({ isLastPlayer });
 };
 
+const discardPowerplant = function(req,res){
+  const powerplantValue = req.body.powerplant;
+  const game = initializeGame(req, res);
+  const players = game.getPlayers();
+  const turn = game.getTurn(players);
+  const player = turn.getCurrentPlayer();
+  players[0].discardPowerplant(powerplantValue);
+  res.send("");
+}
+
 module.exports = {
   renderHome,
   createGame,
@@ -533,5 +550,6 @@ module.exports = {
   returnPlayerResources,
   getGameDetails,
   getBuildingCost,
-  sendLogs
+  sendLogs,
+  discardPowerplant
 };

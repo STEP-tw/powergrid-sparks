@@ -120,10 +120,11 @@ class Auction {
       this.players = this.players.filter(
         player => player.name != this.biddingResult.winner.name
       );
+      
       this.currentPlayer = this.players[0];
       this.currentBidAmount = undefined;
     }
-    return { isBidOver: this.isBidOver, value: this.selectedPowerPlant.value };
+    return { isBidOver: this.isBidOver, value: this.selectedPowerPlant.value};
   }
 
   isBidDone() {

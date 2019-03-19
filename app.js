@@ -32,14 +32,15 @@ const {
   getGameDetails,
   getBuildingCost,
   sendLogs,
-  passBuildingCities
+  passBuildingCities,
+  discardPowerplant
 } = require("./src/handlers");
 
 app.set("views", __dirname + "/public/html");
 app.engine("html", view.renderFile);
 app.set("view engine", "html");
 
-app.use(logger("dev"));
+// app.use(logger("dev"));
 app.use(bodyParser.text());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
@@ -68,6 +69,7 @@ app.get("/getGameDetails", getGameDetails);
 app.post("/buildingCost", getBuildingCost);
 app.get("/passBuyingResources", passBuyingResources);
 app.get("/logs", sendLogs);
+app.post("/discardPowerplant", discardPowerplant);
 
 app.use(express.static("public/html"));
 app.use(express.static("public/stylesheet"));

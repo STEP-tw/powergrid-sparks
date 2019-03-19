@@ -72,6 +72,10 @@ class Player {
       }
     });
   }
+
+  discardPowerplant(powerplantValue){
+    delete this.powerplants[powerplantValue];
+  }
 }
 
 module.exports = Player;
