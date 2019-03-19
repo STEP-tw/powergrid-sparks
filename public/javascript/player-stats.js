@@ -11,7 +11,7 @@ const updatePlayerStatsDiv = function(playerStats) {
     addPowerPlantToPlayer(count, powerplants, cost);
     count++;
   });
-  
+
   setInnerText("player-money", money);
   setInnerText("player-cities", cities);
 };

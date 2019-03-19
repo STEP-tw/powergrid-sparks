@@ -72,7 +72,7 @@ const reset = function() {
 
 const takeBuildAction = function(player) {
   if (player.isPaymentSuccess) {
-    setInnerText("payment-failed","");
+    setInnerText("payment-failed", "");
     reset();
     updateCurrentPlayer();
     return;

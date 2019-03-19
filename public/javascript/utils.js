@@ -40,11 +40,10 @@ const generateDiv = function(className, id) {
   return divElement;
 };
 
-
-const displayMapPopup = function(){
+const displayMapPopup = function() {
   document.getElementById("map-popup").style.visibility = "visible";
-}
+};
 
-const removeMapOverlay = function(){
-  document.querySelector('#map-popup').style.visibility = 'hidden';
-}
+const removeMapOverlay = function() {
+  document.querySelector("#map-popup").style.visibility = "hidden";
+};

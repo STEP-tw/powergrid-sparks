@@ -120,7 +120,7 @@ const handleSellResources = function(player) {
     displayMap();
   }
 };
-     
+
 const getResourceDetails = function() {
   const resourceDetails = { Coal: [], Oil: [], Uranium: [], Garbage: [] };
   const ids = boughtResources.resourcesID;
