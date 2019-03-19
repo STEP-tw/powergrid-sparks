@@ -352,12 +352,12 @@ const updateResourceMarket = function(resourcesDetail, game) {
 const makeBid = function(req, res) {
   const bidAmount = req.body.bidAmount;
   const game = initializeGame(req, res);
-  let selectedPowerPlant =game.currentPowerPlant;
+  let selectedPowerPlant = game.currentPowerPlant;
   const selectedPowerPlantDetails = req.body.selectedPowerPlant;
-  if(!selectedPowerPlantDetails.length==0){
-    selectedPowerPlant = req.body.selectedPowerPlant.split('_')[1];
+  if (!selectedPowerPlantDetails.length == 0) {
+    selectedPowerPlant = req.body.selectedPowerPlant.split("_")[1];
   }
-  game.conductAuction(bidAmount,selectedPowerPlant);
+  game.conductAuction(bidAmount, selectedPowerPlant);
   const action = game.getAuctionAction();
   game.addLog(action);
   res.send("");
