@@ -15,7 +15,7 @@ const updateJoinedPlayers = function(response, interval) {
 };
 
 window.onload = function() {
-  const gameId = document.getElementById('gameId').value;
+  const gameId = document.getElementById("gameId").value;
   const interval = setInterval(() => {
     fetch(`/createGame?gameId=${gameId}`)
       .then(res => res.json())
