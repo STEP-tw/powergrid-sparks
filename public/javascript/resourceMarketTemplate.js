@@ -9,7 +9,7 @@ const getBiddingSectionTemplate = function() {
     
     <div id="selected-resource-amount" style="visibility:hidden">
     Selected Resource Amount : <span id="resource-amount">0</span>
-    <button onclick="buyResources()" >Buy Resources</button></div>
+    <button id="buyResources">Buy Resources</button></div>
     <div id="insufficient-money" style="display:hidden"></div>
     </div>
   `;
@@ -18,7 +18,7 @@ const getBiddingSectionTemplate = function() {
 const getBuyResourceTemplate = function() {
   return `<div class = "selected-resource-amount" id="selected-resource-amount">
     <div>Selected Resource Amount </div><div id="resource-amount">0</div>
-    <button class="bid-option-enabled" style="height:18%" onclick="buyResources()">Buy Resources</button>
+    <button class="bid-option-enabled" id="buyResources" style="height:18%">Buy Resources</button>
     <button class="bid-option-enabled" style="height:18%" onclick="passBuyingResources()">Pass</div> </div>
     <div id="insufficient-money" style="display:hidden"></div>`;
 };

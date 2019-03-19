@@ -208,6 +208,7 @@ const unselectResource = function(resourceDiv, amount, resourceDetails) {
 
 const generateResourceValue = function() {
   const resourceDiv = event.target;
+  document.getElementById("buyResources").onclick = buyResources;
   if (resourceDiv.id) {
     const clickBorder = "2px solid black";
     const resourceDetails = splitByHyphen(resourceDiv.id);
