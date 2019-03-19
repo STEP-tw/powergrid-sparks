@@ -465,6 +465,10 @@ td {
   font-size: 80%;
 }
 
+.waiting-message {
+  text-align: center;
+}
+
 .bidding-section {
   background-color: #aaa985;
   border-radius: 10px;
@@ -855,6 +859,6 @@ header {
   right: 2%;
 }
 
-.filled { 
+.filled {
   cursor: pointer;
 }

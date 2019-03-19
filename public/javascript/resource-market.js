@@ -49,6 +49,8 @@ const resetTurn = function() {
   updateCurrentPlayer();
   document.getElementById("selected-resource-amount").style.visibility =
     "hidden";
+  document.getElementById("bidding-section").innerHTML =
+    "<div class = 'waiting-message'>Waiting for other players to finish buying resources</div>";
   setInnerText("resource-amount", 0);
   setInnerText("insufficient-money", "");
   boughtResources.resourcesID = [];
