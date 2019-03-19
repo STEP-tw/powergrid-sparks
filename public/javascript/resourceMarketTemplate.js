@@ -29,7 +29,7 @@ const getBuildCitiesTemplate = function() {
         <div id="selected-cities" class="selected-cities"></div>
         <div>Number of Cities :<span id = "city-count"> 0</span></div>
         <div id="payment-failed"></div>
-        <button class="bid-option-enabled" onclick="buildCities()"> Build</button>
+        <button class="bid-option-enabled" id="buildCities"> Build</button>
         <button class="bid-option-enabled" onclick="passBuildingCities()"> Pass</button>
         <button class="bid-option-enabled" onclick="reset()"> Cancel</button>
       </div>`;

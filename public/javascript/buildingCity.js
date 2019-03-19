@@ -38,6 +38,7 @@ const selectCity = function() {
 };
 
 const updateCost = function() {
+  document.getElementById("buildCities").onclick = buildCities;
   const selectedHouse = event.target.id.split("_");
   const cityCost = +selectedHouse[selectedHouse.length - 1];
   const currentCost = +getInnerText("building-cost");
