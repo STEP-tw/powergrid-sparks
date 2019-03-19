@@ -16,7 +16,7 @@ class Bureaucracy {
   }
 
   payForLightedCities(paymentOrder) {
-    const lightedCity = this.player.lightedCity
+    const lightedCity = this.player.lightedCity;
     const money = paymentOrder[lightedCity];
     this.player.earnMoney(money);
   }

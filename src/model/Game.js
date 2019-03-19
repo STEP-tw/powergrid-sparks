@@ -43,7 +43,7 @@ class Game {
       return;
     }
 
-    const { isBidOver} = this.auction.continue(bidAmount);
+    const { isBidOver } = this.auction.continue(bidAmount);
 
     if (isBidOver) {
       this.sellPowerPlant(this.currentPowerPlant);
