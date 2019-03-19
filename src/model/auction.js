@@ -104,7 +104,6 @@ class Auction {
 
   continue(bid) {
     this.isBidOver = this.bid.makeBid(bid);
-    // console.log(bid, this.isBidOver);
     this.action = this.bid.action;
     if (bid != "pass") {
       this.currentBidAmount = bid;

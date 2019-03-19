@@ -27,18 +27,18 @@ class Game {
     this.winner;
   }
 
-  conductAuction(bidAmount,selectedPowerPlant) {
+  conductAuction(bidAmount, selectedPowerPlant) {
     if (this.auction == undefined) {
       const auctionPlayers = this.players.slice();
       this.auction = new Auction(auctionPlayers, this.powerPlantMarket);
-      this.auction.selectPowerPlant(selectedPowerPlant,bidAmount);
+      this.auction.selectPowerPlant(selectedPowerPlant, bidAmount);
       this.currentPowerPlant = selectedPowerPlant;
       this.isAuctionStarted = true;
       return;
     }
 
     if (this.auction.isBidOver) {
-      this.auction.selectPowerPlant(selectedPowerPlant,bidAmount);
+      this.auction.selectPowerPlant(selectedPowerPlant, bidAmount);
       this.currentPowerPlant = selectedPowerPlant;
       return;
     }
@@ -202,12 +202,12 @@ class Game {
   currentPhase() {
     return this.phase.currentPhase();
   }
-  
-  setWinner(winner){
+
+  setWinner(winner) {
     this.winner = winner;
   }
 
-  getWinner(){
+  getWinner() {
     return this.winner;
   }
 }
