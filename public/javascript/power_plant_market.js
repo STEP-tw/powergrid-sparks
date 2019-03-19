@@ -206,7 +206,7 @@ const addPowerPlantToPlayer = function(count, powerPlants, powerPlantCost) {
 
 const makeBid = function() {
   const bidAmount = getInnerText("bid-amount");
-  const selectedPowerPlant = selectedPowerPlants[0] 
+  const selectedPowerPlant = selectedPowerPlants[0];
   document.getElementsByClassName;
   fetch("/auction/bid", {
     method: "POST",

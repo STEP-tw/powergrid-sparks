@@ -55,7 +55,7 @@ class Auction {
     this.currentPlayer = this.players[0];
   }
 
-  selectPowerPlant(powerPlantCost,currentBidAmount) {
+  selectPowerPlant(powerPlantCost, currentBidAmount) {
     this.biddingResult = undefined;
     this.isBidOver = false;
     if (currentBidAmount == "pass") {
