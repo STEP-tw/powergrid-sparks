@@ -62,7 +62,6 @@ const handleMarketState = function(state, powerPlantDiv, powerPlantCost) {
 const generatePowerPlantInfo = function(powerPlantDetails) {
   const infoDiv = document.createElement("div");
   infoDiv.className = "card-details";
-  console.log(powerPlantDetails);
   infoDiv.innerHTML = `${resources[powerPlantDetails.resource.type]} 
                                ${powerPlantDetails.resource.quantity} 
                                <i class='fas fa-arrow-right' ></i >  
