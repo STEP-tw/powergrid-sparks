@@ -1,10 +1,15 @@
 const currentPhase = { phase: "buyPowerPlant" };
+let gameEtag = 01;
 
 const polling = function() {
   setInterval(() => {
     highlightPhase(currentPhase.phase);
-    fetch("/getGameDetails")
-      .then(res => res.json())
+    fetch("/getGameDetails", { headers: { "If-None-Match": gameEtag } })
+      .then(res => {
+        gameEtag = res.headers.get("ETag");
+        if (res.status == 200) return res.json();
+        return new Promise().reject();
+      })
       .then(gameDetails => {
         const {
           player,
@@ -58,6 +63,7 @@ const polling = function() {
 
         updatePlayerStatsDiv(playerStats);
         displayLog(logs);
-      });
+      })
+      .catch(() => console.log("rejected"));
   }, 500);
 };
