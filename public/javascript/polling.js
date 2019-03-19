@@ -64,6 +64,6 @@ const polling = function() {
         updatePlayerStatsDiv(playerStats);
         displayLog(logs);
       })
-      .catch(() => console.log("rejected"));
+      .catch();
   }, 500);
 };

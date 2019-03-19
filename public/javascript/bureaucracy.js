@@ -87,7 +87,12 @@ const validatePlayerResources = function(userInfo) {
 const displayWinningMessage = function(winningMsg) {
   if (winningMsg) {
     const winningMessage = getWinningMsg(winningMsg);
-    document.getElementById("main").innerHTML = winningMessage;
+    const main = document.getElementById("main");
+    const winningMessageDiv = document.createElement("div");
+    winningMessageDiv.style.margin = "0 auto";
+    winningMessageDiv.innerHTML = winningMessage;
+    const activityLog = document.getElementById("activity-log");
+    appendChildren(main, [winningMessageDiv, activityLog]);
   }
 };
 
