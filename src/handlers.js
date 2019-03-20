@@ -316,6 +316,7 @@ const returnPlayerResources = function(req, res) {
     game.setWinner(winner[0].name);
     return res.send("");
   }
+  console.log(turn.isLastPlayer());
   turn.isLastPlayer() && game.changePhaseTo("buyPowerPlant");
   res.send("");
 };
