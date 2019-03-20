@@ -17,6 +17,9 @@ class Turn {
   }
 
   isLastPlayer() {
+    console.log(this.players);
+    console.log(this.players.length-1);
+    console.log(this.getCurrentPlayer());
     return this.players[this.players.length - 1] == this.getCurrentPlayer();
   }
 }
