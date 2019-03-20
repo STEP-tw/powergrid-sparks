@@ -14,7 +14,7 @@ class Bid {
     this.currentBidder = this.players[0];
     if (bid == "pass") {
       this.updatePlayers();
-      this.action = `${this.currentBidder.name} has passed`;
+      this.action = `${this.currentBidder.name} has passed on bid`;
       this.currentBidder = this.players[0];
       return this.isBidOver();
     }
@@ -61,7 +61,9 @@ class Auction {
     if (currentBidAmount == "pass") {
       this.updatePlayers();
       this.isBidOver = true;
-      this.action = `${this.currentPlayer.name} has passed`;
+      this.action = `${
+        this.currentPlayer.name
+      } has passed on buying powerPlant`;
       this.currentPlayer = this.players[0];
       return this.isAuctionOver();
     }
@@ -120,11 +122,11 @@ class Auction {
       this.players = this.players.filter(
         player => player.name != this.biddingResult.winner.name
       );
-      
+
       this.currentPlayer = this.players[0];
       this.currentBidAmount = undefined;
     }
-    return { isBidOver: this.isBidOver, value: this.selectedPowerPlant.value};
+    return { isBidOver: this.isBidOver, value: this.selectedPowerPlant.value };
   }
 
   isBidDone() {
