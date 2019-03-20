@@ -65,7 +65,7 @@
     "houston": 21
   },
   "fargo": { "ouluth": 6, "minneapolis": 6, "billings": 17 },
-  "ouluth": { "fargo": 6, "minneapolic": 5, "detroit": 15, "chicago": 12 },
+  "ouluth": { "fargo": 6, "minneapolis": 5, "detroit": 15, "chicago": 12 },
   "minneapolis": {
     "ouluth": 5,
     "fargo": 6,
@@ -98,7 +98,7 @@
   "tampa": { "jacksonville": 4, "miami": 4 },
   "miami": { "tampa": 4 },
   "boston": { "new_york": 3 },
-  "new_york": { "philadelphia": 0.1, "buffalo": 8 ,"boston":3},
+  "new_york": { "philadelphia": 0.1, "buffalo": 8, "boston": 3 },
   "philadelphia": { "new_york": 0.1, "washington": 3 },
   "washington": { "philadelphia": 3, "norfolk": 5, "pitsburgh": 6 },
   "norfolk": { "washington": 5, "raleigh": 3 },
