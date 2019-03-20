@@ -317,6 +317,7 @@ const returnPlayerResources = function(req, res) {
     return res.send("");
   }
   console.log('ankon');
+  console.log(turn.isLastPlayer());
   turn.isLastPlayer() && game.changePhaseTo("buyPowerPlant");
   res.send("");
 };
