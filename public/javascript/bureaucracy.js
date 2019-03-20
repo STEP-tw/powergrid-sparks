@@ -108,9 +108,8 @@ const updateUserResources = function(resources, hybridResource, cityCount) {
   !hasDeducted && (resources.Oil -= hybridResource);
   const body = `resources=${JSON.stringify(resources)}&cityCount=${cityCount}`;
   const headers = { "Content-Type": "application/x-www-form-urlencoded" };
-  fetch("/returnResources", { method: "POST", headers, body });
-
-  updateCurrentPlayer();
+  fetch("/returnResources", { method: "POST", headers, body })
+    .then(res => updateCurrentPlayer());
 };
 
 const updatePowerplantInfo = function(powerplants) {
