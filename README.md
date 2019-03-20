@@ -22,5 +22,7 @@ Click here to play
   
 4. To start the application run npm start
   ```
+  
+  ```
   npm start
   ```
