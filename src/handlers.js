@@ -316,7 +316,7 @@ const returnPlayerResources = function(req, res) {
     game.setWinner(winner[0].name);
     return res.send("");
   }
-  console.log('ankon');
+  console.log("ankon");
   console.log(turn.isLastPlayer());
   turn.isLastPlayer() && game.changePhaseTo("buyPowerPlant");
   res.send("");
@@ -400,9 +400,10 @@ const getCurrentBid = function(req, res) {
         phase,
         isAuctionStarted,
         players: auctionPlayers,
-        hasMoreThenThreePowerplants: Object.keys(player.getPowerplants()).length > 3,
+        hasMoreThenThreePowerplants:
+          Object.keys(player.getPowerplants()).length > 3,
         currentPlayerId: player.id,
-        powerplants:player.getPowerplants()
+        powerplants: player.getPowerplants()
       })
     );
   }
@@ -515,7 +516,7 @@ const passBuildingCities = function(req, res) {
   res.send({ isLastPlayer });
 };
 
-const discardPowerplant = function(req,res){
+const discardPowerplant = function(req, res) {
   const powerplantValue = req.body.powerplant;
   const game = initializeGame(req, res);
   const players = game.getPlayers();
@@ -523,7 +524,7 @@ const discardPowerplant = function(req,res){
   const player = turn.getCurrentPlayer();
   players[0].discardPowerplant(powerplantValue);
   res.send("");
-}
+};
 
 module.exports = {
   renderHome,

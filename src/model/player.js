@@ -73,7 +73,7 @@ class Player {
     });
   }
 
-  discardPowerplant(powerplantValue){
+  discardPowerplant(powerplantValue) {
     delete this.powerplants[powerplantValue];
   }
 }

@@ -113,7 +113,10 @@ const persistCardClass = function(powerPlants, currentMarketDiv) {
         powerplants,
         currentPlayerId
       } = auction;
-      if (hasMoreThenThreePowerplants && readCookie(document.cookie).playerId == currentPlayerId) {
+      if (
+        hasMoreThenThreePowerplants &&
+        readCookie(document.cookie).playerId == currentPlayerId
+      ) {
         displayDiscardingPowerplantOption(powerplants);
         return;
       }
@@ -262,7 +265,12 @@ const displayDiscardingPowerplantOption = function(powerplants) {
   heading.innerText = "Select Powerplant to discard";
   bureaucracyDiv.innerHTML = "";
   const msgDiv = generateDiv("bureaucracy-err-msg", "err-msg");
-  appendChildren(bureaucracyDiv, [heading, allPowerplants, msgDiv,discardingButton]);
+  appendChildren(bureaucracyDiv, [
+    heading,
+    allPowerplants,
+    msgDiv,
+    discardingButton
+  ]);
   const market = bureaucracyDiv.childNodes;
   const playersPowerplant = market[1].childNodes;
   playersPowerplant.forEach(powerplant => {
@@ -270,14 +278,14 @@ const displayDiscardingPowerplantOption = function(powerplants) {
   });
 };
 
-const discardPowerplant = function(){
+const discardPowerplant = function() {
   fetch("/discardPowerplant", {
     method: "POST",
     headers: { "Content-Type": "application/x-www-form-urlencoded" },
     body: `powerplant=${selectedPowerPlant[0]}`
-  }).then(res=>{
+  }).then(res => {
     selectedPowerPlant.pop();
     document.getElementById("discarding-powerplant-popup").style.visibility =
       "hidden";
-  })
-}
+  });
+};
