@@ -8,7 +8,9 @@ const polling = function() {
       .then(res => {
         gameEtag = res.headers.get("ETag");
         if (res.status == 200) return res.json();
-        return new Promise().reject();
+        return new Promise((resolve, reject) => {
+          reject();
+        });
       })
       .then(gameDetails => {
         const {
@@ -64,6 +66,5 @@ const polling = function() {
         updatePlayerStatsDiv(playerStats);
         displayLog(logs);
       })
-      .catch();
   }, 500);
 };
