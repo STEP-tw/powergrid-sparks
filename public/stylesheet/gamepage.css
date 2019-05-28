@@ -850,12 +850,12 @@ header {
   height: 100%;
 }
 
-.discarding-powerplant-popup{
+.discarding-powerplant-popup {
   visibility: hidden;
   z-index: 1;
   position: absolute;
   width: 100%;
-  top:0px;
+  top: 0px;
   display: flex;
   justify-content: center;
   align-items: center;
