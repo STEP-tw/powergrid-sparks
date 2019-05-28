@@ -323,7 +323,7 @@ const returnPlayerResources = function(req, res) {
 };
 
 const getWinner = function(players) {
-  return players.filter(player => player.getLightedCity() > 1);
+  return players.filter(player => player.getLightedCity() > 8);
 };
 
 const refillResources = function(currentPlayer, game) {
