@@ -14,6 +14,7 @@ const {
 } = require("./constants/filePaths");
 const { RESOURCE_TYPE } = require("./constants/resourceTypes");
 const { PHASES } = require("./constants/phases");
+const { NUMBER_OF_LIGHTED_CITIES_TO_WIN } = require("./constants/rules");
 
 const powerPlantCards = fs.readFileSync(CARD_DATA_PATH, ENCODING_UTF8);
 
@@ -317,13 +318,14 @@ const returnPlayerResources = function(req, res) {
     game.setWinner(winner[0].name);
     return res.send("");
   }
-  console.log(turn.isLastPlayer());
   turn.isLastPlayer() && game.changePhaseTo(PHASES.BUY_POWERPLANT);
   res.send("");
 };
 
 const getWinner = function(players) {
-  return players.filter(player => player.getLightedCity() > 8);
+  return players.filter(
+    player => player.getLightedCity() >= NUMBER_OF_LIGHTED_CITIES_TO_WIN
+  );
 };
 
 const refillResources = function(currentPlayer, game) {
