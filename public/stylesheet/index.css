@@ -190,3 +190,16 @@ header {
   font-size: 40px;
   color: #b0d8eb;
 }
+
+.rules-book {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.rules-book > embed {
+  width: 75%;
+  height: 85%;
+  background-color: inherit;
+}
