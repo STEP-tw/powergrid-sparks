@@ -6,21 +6,27 @@ const PowerPlantMarket = require("./model/power_plant_cards");
 const Player = require("./model/player");
 const Bureaucracy = require("./model/bureaucracy");
 const Graph = require("node-dijkstra");
+const {
+  CARD_DATA_PATH,
+  PAYMENT_ORDER_DATA_PATH,
+  TRAVELLING_COST_DATA_PATH,
+  ENCODING_UTF8
+} = require("./constants/filePaths");
+const { COAL, OIL, URANIUM, GRABAGE, HYBRID } = require("./constants/resourceTypes");
+const {
+  BUY_POWERPLANT,
+  BUY_RESOURCES,
+  END_GAME,
+  BUILD_CITIES,
+  BUREAUCRACY
+} = require("./constants/phases");
+const { NUMBER_OF_LIGHTED_CITIES_TO_WIN } = require("./constants/rules");
 
-const powerPlantCards = fs.readFileSync(
-  "./private/data/card_details.json",
-  "UTF8"
-);
+const powerPlantCards = fs.readFileSync(CARD_DATA_PATH, ENCODING_UTF8);
 
-const paymentOrder = fs.readFileSync(
-  "./private/data/payment_order.json",
-  "UTF8"
-);
+const paymentOrder = fs.readFileSync(PAYMENT_ORDER_DATA_PATH, ENCODING_UTF8);
 
-const travellingCostData = fs.readFileSync(
-  "./private/data/travelling_costs.json",
-  "UTF8"
-);
+const travellingCostData = fs.readFileSync(TRAVELLING_COST_DATA_PATH, ENCODING_UTF8);
 
 const graph = new Graph(JSON.parse(travellingCostData));
 
@@ -192,7 +198,7 @@ const buyResources = function(req, res) {
     currentPlayer.addResources(resourcesDetail);
     updateResourceMarket(resourcesDetail, game);
     createBuyResourceLog(game, turn, resourcesDetail);
-    if (isLastPlayer) game.changePhaseTo("buildCities");
+    if (isLastPlayer) game.changePhaseTo(BUILD_CITIES);
   }
   res.send({
     currentPlayer,
@@ -205,11 +211,11 @@ const buyResources = function(req, res) {
 
 const getStorageCapacity = function(powerPlants) {
   const storageCapacity = {};
-  storageCapacity["Coal"] = 0;
-  storageCapacity["Oil"] = 0;
-  storageCapacity["Garbage"] = 0;
-  storageCapacity["Uranium"] = 0;
-  storageCapacity["Hybrid"] = 0;
+  storageCapacity[COAL] = 0;
+  storageCapacity[OIL] = 0;
+  storageCapacity[GRABAGE] = 0;
+  storageCapacity[URANIUM] = 0;
+  storageCapacity[HYBRID] = 0;
   Object.keys(powerPlants).forEach(powerPlant => {
     storageCapacity[powerPlants[powerPlant].resource.type] +=
       powerPlants[powerPlant].resource.quantity * 2;
@@ -219,12 +225,10 @@ const getStorageCapacity = function(powerPlants) {
 
 const parseResourceDetails = function(selectedResourceDetails) {
   const selectedResources = {};
-  const resources = ["Coal", "Oil", "Uranium", "Garbage"];
+  const resources = [COAL, OIL, URANIUM, GRABAGE];
   resources.filter(resource => {
     if (selectedResourceDetails[resource].length > 2) {
-      selectedResources[resource] = selectedResourceDetails[resource].split(
-        ","
-      ).length;
+      selectedResources[resource] = selectedResourceDetails[resource].split(",").length;
     }
   });
   return selectedResources;
@@ -234,9 +238,9 @@ const areValidTypes = function(playerPowerplants, selectedResourceDetails) {
   const storageCapacity = getStorageCapacity(playerPowerplants);
   const selectedResources = parseResourceDetails(selectedResourceDetails);
   const selectedResourceTypes = Object.keys(selectedResources);
-  if (storageCapacity["Hybrid"]) {
-    storageCapacity["Coal"] += storageCapacity["Hybrid"];
-    storageCapacity["Oil"] += storageCapacity["Hybrid"];
+  if (storageCapacity[HYBRID]) {
+    storageCapacity[COAL] += storageCapacity[HYBRID];
+    storageCapacity[OIL] += storageCapacity[HYBRID];
   }
   const requiredTypes = Object.keys(storageCapacity).filter(
     type => storageCapacity[type] != 0
@@ -250,13 +254,12 @@ const hasCapacity = function(playerPowerplants, selectedResourceDetails) {
   const storageCapacity = getStorageCapacity(playerPowerplants);
   const selectedResources = parseResourceDetails(selectedResourceDetails);
   const selectedResourceTypes = Object.keys(selectedResources);
-  if (storageCapacity["Hybrid"]) {
-    storageCapacity["Coal"] += storageCapacity["Hybrid"] / 2;
-    storageCapacity["Oil"] += storageCapacity["Hybrid"] / 2;
+  if (storageCapacity[HYBRID]) {
+    storageCapacity[COAL] += storageCapacity[HYBRID] / 2;
+    storageCapacity[OIL] += storageCapacity[HYBRID] / 2;
   }
   return selectedResourceTypes.every(
-    resourceType =>
-      selectedResources[resourceType] <= storageCapacity[resourceType]
+    resourceType => selectedResources[resourceType] <= storageCapacity[resourceType]
   );
 };
 
@@ -273,7 +276,7 @@ const buildCities = function(req, res) {
     const cities = cityNames.filter(city => city.length > 1);
     createBuildCityLog(game, turn, cities.length - 1);
     currentPlayer.addCityNames(cities);
-    if (isLastPlayer) game.changePhaseTo("bureaucracy");
+    if (isLastPlayer) game.changePhaseTo(BUREAUCRACY);
   }
   res.send({ isPaymentSuccess, currentPlayer });
 };
@@ -312,17 +315,18 @@ const returnPlayerResources = function(req, res) {
   refillResources(currentPlayer, game);
   const winner = getWinner(game.getPlayers());
   if (turn.isLastPlayer() && winner.length > 0) {
-    game.changePhaseTo("endGame");
+    game.changePhaseTo(END_GAME);
     game.setWinner(winner[0].name);
     return res.send("");
   }
-  console.log(turn.isLastPlayer());
-  turn.isLastPlayer() && game.changePhaseTo("buyPowerPlant");
+  turn.isLastPlayer() && game.changePhaseTo(BUY_POWERPLANT);
   res.send("");
 };
 
 const getWinner = function(players) {
-  return players.filter(player => player.getLightedCity() > 8);
+  return players.filter(
+    player => player.getLightedCity() >= NUMBER_OF_LIGHTED_CITIES_TO_WIN
+  );
 };
 
 const refillResources = function(currentPlayer, game) {
@@ -387,7 +391,7 @@ const getCurrentBid = function(req, res) {
     game.sellPowerPlant(game.currentPowerPlant);
     game.updatePowerPlants();
     game.resetTurn();
-    game.changePhaseTo("buyResources");
+    game.changePhaseTo(BUY_RESOURCES);
     return res.send("");
   }
 
@@ -399,8 +403,7 @@ const getCurrentBid = function(req, res) {
         phase,
         isAuctionStarted,
         players: auctionPlayers,
-        hasMoreThenThreePowerplants:
-          Object.keys(player.getPowerplants()).length > 3,
+        hasMoreThenThreePowerplants: Object.keys(player.getPowerplants()).length > 3,
         currentPlayerId: player.id,
         powerplants: player.getPowerplants()
       })
@@ -423,7 +426,7 @@ const getGameDetails = function(req, res) {
     const turn = game.getTurn(players);
     let player = turn.getCurrentPlayer();
     const resourceMarket = game.getResourceMarket();
-    if (game.currentPhase() == "buyPowerPlant" && game.isAuctionStarted) {
+    if (game.currentPhase() == BUY_POWERPLANT && game.isAuctionStarted) {
       if (game.isBidOver()) {
         if (game.auction.players.length) {
           player = game.auction.players[0];
@@ -492,7 +495,7 @@ const passBuyingResources = function(req, res) {
   const turn = game.getTurn(players);
   const currentPlayer = turn.getCurrentPlayer().name;
   const isLastPlayer = turn.isLastPlayer();
-  if (isLastPlayer) game.changePhaseTo("buildCities");
+  if (isLastPlayer) game.changePhaseTo(BUILD_CITIES);
   const logMsg = `${currentPlayer} has passed in buying resources`;
   game.addLog(logMsg);
   res.send({ isLastPlayer });
@@ -509,7 +512,7 @@ const passBuildingCities = function(req, res) {
   const turn = game.getTurn(players);
   const currentPlayer = turn.getCurrentPlayer().name;
   const isLastPlayer = turn.isLastPlayer();
-  if (isLastPlayer) game.changePhaseTo("bureaucracy");
+  if (isLastPlayer) game.changePhaseTo(BUREAUCRACY);
   const logMsg = `${currentPlayer} has passed in building cities`;
   game.addLog(logMsg);
   res.send({ isLastPlayer });
