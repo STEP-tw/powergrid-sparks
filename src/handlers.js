@@ -12,8 +12,14 @@ const {
   TRAVELLING_COST_DATA_PATH,
   ENCODING_UTF8
 } = require("./constants/filePaths");
-const { RESOURCE_TYPE } = require("./constants/resourceTypes");
-const { PHASES } = require("./constants/phases");
+const { COAL, OIL, URANIUM, GRABAGE, HYBRID } = require("./constants/resourceTypes");
+const {
+  BUY_POWERPLANT,
+  BUY_RESOURCES,
+  END_GAME,
+  BUILD_CITIES,
+  BUREAUCRACY
+} = require("./constants/phases");
 const { NUMBER_OF_LIGHTED_CITIES_TO_WIN } = require("./constants/rules");
 
 const powerPlantCards = fs.readFileSync(CARD_DATA_PATH, ENCODING_UTF8);
@@ -192,7 +198,7 @@ const buyResources = function(req, res) {
     currentPlayer.addResources(resourcesDetail);
     updateResourceMarket(resourcesDetail, game);
     createBuyResourceLog(game, turn, resourcesDetail);
-    if (isLastPlayer) game.changePhaseTo(PHASES.BUILD_CITIES);
+    if (isLastPlayer) game.changePhaseTo(BUILD_CITIES);
   }
   res.send({
     currentPlayer,
@@ -205,11 +211,11 @@ const buyResources = function(req, res) {
 
 const getStorageCapacity = function(powerPlants) {
   const storageCapacity = {};
-  storageCapacity[RESOURCE_TYPE.COAL] = 0;
-  storageCapacity[RESOURCE_TYPE.OIL] = 0;
-  storageCapacity[RESOURCE_TYPE.GRABAGE] = 0;
-  storageCapacity[RESOURCE_TYPE.URANIUM] = 0;
-  storageCapacity[RESOURCE_TYPE.HYBRID] = 0;
+  storageCapacity[COAL] = 0;
+  storageCapacity[OIL] = 0;
+  storageCapacity[GRABAGE] = 0;
+  storageCapacity[URANIUM] = 0;
+  storageCapacity[HYBRID] = 0;
   Object.keys(powerPlants).forEach(powerPlant => {
     storageCapacity[powerPlants[powerPlant].resource.type] +=
       powerPlants[powerPlant].resource.quantity * 2;
@@ -219,12 +225,7 @@ const getStorageCapacity = function(powerPlants) {
 
 const parseResourceDetails = function(selectedResourceDetails) {
   const selectedResources = {};
-  const resources = [
-    RESOURCE_TYPE.COAL,
-    RESOURCE_TYPE.OIL,
-    RESOURCE_TYPE.URANIUM,
-    RESOURCE_TYPE.GRABAGE
-  ];
+  const resources = [COAL, OIL, URANIUM, GRABAGE];
   resources.filter(resource => {
     if (selectedResourceDetails[resource].length > 2) {
       selectedResources[resource] = selectedResourceDetails[resource].split(",").length;
@@ -237,9 +238,9 @@ const areValidTypes = function(playerPowerplants, selectedResourceDetails) {
   const storageCapacity = getStorageCapacity(playerPowerplants);
   const selectedResources = parseResourceDetails(selectedResourceDetails);
   const selectedResourceTypes = Object.keys(selectedResources);
-  if (storageCapacity[RESOURCE_TYPE.HYBRID]) {
-    storageCapacity[RESOURCE_TYPE.COAL] += storageCapacity[RESOURCE_TYPE.HYBRID];
-    storageCapacity[RESOURCE_TYPE.OIL] += storageCapacity[RESOURCE_TYPE.HYBRID];
+  if (storageCapacity[HYBRID]) {
+    storageCapacity[COAL] += storageCapacity[HYBRID];
+    storageCapacity[OIL] += storageCapacity[HYBRID];
   }
   const requiredTypes = Object.keys(storageCapacity).filter(
     type => storageCapacity[type] != 0
@@ -253,9 +254,9 @@ const hasCapacity = function(playerPowerplants, selectedResourceDetails) {
   const storageCapacity = getStorageCapacity(playerPowerplants);
   const selectedResources = parseResourceDetails(selectedResourceDetails);
   const selectedResourceTypes = Object.keys(selectedResources);
-  if (storageCapacity[RESOURCE_TYPE.HYBRID]) {
-    storageCapacity[RESOURCE_TYPE.COAL] += storageCapacity[RESOURCE_TYPE.HYBRID] / 2;
-    storageCapacity[RESOURCE_TYPE.OIL] += storageCapacity[RESOURCE_TYPE.HYBRID] / 2;
+  if (storageCapacity[HYBRID]) {
+    storageCapacity[COAL] += storageCapacity[HYBRID] / 2;
+    storageCapacity[OIL] += storageCapacity[HYBRID] / 2;
   }
   return selectedResourceTypes.every(
     resourceType => selectedResources[resourceType] <= storageCapacity[resourceType]
@@ -275,7 +276,7 @@ const buildCities = function(req, res) {
     const cities = cityNames.filter(city => city.length > 1);
     createBuildCityLog(game, turn, cities.length - 1);
     currentPlayer.addCityNames(cities);
-    if (isLastPlayer) game.changePhaseTo(PHASES.BUREAUCRACY);
+    if (isLastPlayer) game.changePhaseTo(BUREAUCRACY);
   }
   res.send({ isPaymentSuccess, currentPlayer });
 };
@@ -314,11 +315,11 @@ const returnPlayerResources = function(req, res) {
   refillResources(currentPlayer, game);
   const winner = getWinner(game.getPlayers());
   if (turn.isLastPlayer() && winner.length > 0) {
-    game.changePhaseTo(PHASES.END_GAME);
+    game.changePhaseTo(END_GAME);
     game.setWinner(winner[0].name);
     return res.send("");
   }
-  turn.isLastPlayer() && game.changePhaseTo(PHASES.BUY_POWERPLANT);
+  turn.isLastPlayer() && game.changePhaseTo(BUY_POWERPLANT);
   res.send("");
 };
 
@@ -390,7 +391,7 @@ const getCurrentBid = function(req, res) {
     game.sellPowerPlant(game.currentPowerPlant);
     game.updatePowerPlants();
     game.resetTurn();
-    game.changePhaseTo(PHASES.BUY_RESOURCES);
+    game.changePhaseTo(BUY_RESOURCES);
     return res.send("");
   }
 
@@ -425,7 +426,7 @@ const getGameDetails = function(req, res) {
     const turn = game.getTurn(players);
     let player = turn.getCurrentPlayer();
     const resourceMarket = game.getResourceMarket();
-    if (game.currentPhase() == PHASES.BUY_POWERPLANT && game.isAuctionStarted) {
+    if (game.currentPhase() == BUY_POWERPLANT && game.isAuctionStarted) {
       if (game.isBidOver()) {
         if (game.auction.players.length) {
           player = game.auction.players[0];
@@ -494,7 +495,7 @@ const passBuyingResources = function(req, res) {
   const turn = game.getTurn(players);
   const currentPlayer = turn.getCurrentPlayer().name;
   const isLastPlayer = turn.isLastPlayer();
-  if (isLastPlayer) game.changePhaseTo(PHASES.BUILD_CITIES);
+  if (isLastPlayer) game.changePhaseTo(BUILD_CITIES);
   const logMsg = `${currentPlayer} has passed in buying resources`;
   game.addLog(logMsg);
   res.send({ isLastPlayer });
@@ -511,7 +512,7 @@ const passBuildingCities = function(req, res) {
   const turn = game.getTurn(players);
   const currentPlayer = turn.getCurrentPlayer().name;
   const isLastPlayer = turn.isLastPlayer();
-  if (isLastPlayer) game.changePhaseTo(PHASES.BUREAUCRACY);
+  if (isLastPlayer) game.changePhaseTo(BUREAUCRACY);
   const logMsg = `${currentPlayer} has passed in building cities`;
   game.addLog(logMsg);
   res.send({ isLastPlayer });
