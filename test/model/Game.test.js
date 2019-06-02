@@ -145,7 +145,7 @@ describe("Game", () => {
       });
       game.powerPlantMarket = powerPlantMarket;
       game.players = players;
-      game.conductAuction("13","13");
+      game.conductAuction("13", "13");
       const actualOutput = game.getCurrentBid();
       chai.expect("13").to.be.deep.equal(actualOutput);
     });
@@ -530,7 +530,7 @@ describe("Game", () => {
       player3.id = 3;
       game.players = [player1, player2, player3];
       game.powerPlantMarket = powerPlantMarket;
-      game.conductAuction("13","13");
+      game.conductAuction("13", "13");
       const actualOutput = game.getPlayersOrder();
       const expectedOutput = [2, 3, 1];
       chai.expect(expectedOutput).to.be.deep.equal(actualOutput);
@@ -559,9 +559,9 @@ describe("Game", () => {
       player3.id = 3;
       game.powerPlantMarket = powerPlantMarket;
       game.players = [player1, player2, player3];
-      game.conductAuction("13","13");
-      game.conductAuction("pass","");
-      game.conductAuction("pass","");
+      game.conductAuction("13", "13");
+      game.conductAuction("pass", "");
+      game.conductAuction("pass", "");
       const actualOutput = game.getPlayersOrder();
       const expectedOutput = [2, 3];
       chai.expect(expectedOutput).to.be.deep.equal(actualOutput);
@@ -590,9 +590,9 @@ describe("Game", () => {
       player3.id = 3;
       game.powerPlantMarket = powerPlantMarket;
       game.players = [player1, player2, player3];
-      game.conductAuction("13","13");
-      game.conductAuction("pass","");
-      game.conductAuction("pass","");
+      game.conductAuction("13", "13");
+      game.conductAuction("pass", "");
+      game.conductAuction("pass", "");
       const actualOutput = game.getPlayersOrder();
       const expectedOutput = [2, 3];
       chai.expect(expectedOutput).to.be.deep.equal(actualOutput);
@@ -620,9 +620,9 @@ describe("Game", () => {
       player2.id = 2;
       game.powerPlantMarket = powerPlantMarket;
       game.players = [player1, player2];
-      game.conductAuction("13","13");
-      game.conductAuction("pass","");
-      game.conductAuction("19","13");
+      game.conductAuction("13", "13");
+      game.conductAuction("pass", "");
+      game.conductAuction("19", "13");
       const actualOutput = game.getPlayersOrder();
       const expectedOutput = [];
       chai.expect(expectedOutput).to.be.deep.equal(actualOutput);
@@ -651,7 +651,7 @@ describe("Game", () => {
       const player3 = new Player("yellow", "C");
       player3.id = 3;
       game.players = [player1, player2, player3];
-      game.conductAuction("pass","");
+      game.conductAuction("pass", "");
       const actualOutput = game.getBidPlayers();
       const expectedOutput = [2, 3];
       chai.expect(expectedOutput).to.be.deep.equal(actualOutput);
@@ -679,7 +679,7 @@ describe("Game", () => {
       const player1 = new Player("red", "A");
       player1.id = 1;
       game.players = [player1];
-      game.conductAuction("pass","");
+      game.conductAuction("pass", "");
       const actualOutput = game.getAuctionPlayers();
       const expectedOutput = [];
       chai.expect(expectedOutput).to.be.deep.equal(actualOutput);
@@ -691,7 +691,7 @@ describe("Game", () => {
       const player1 = new Player("red", "A");
       player1.id = 1;
       game.players = [player1];
-      game.conductAuction("pass","");
+      game.conductAuction("pass", "");
       const actualOutput = game.getPlayersOrder();
       const expectedOutput = [];
       chai.expect(expectedOutput).to.be.deep.equal(actualOutput);
@@ -705,7 +705,7 @@ describe("Game", () => {
       player1.id = 1;
       player2.id = 2;
       game.players = [player1, player2];
-      game.conductAuction("pass","");
+      game.conductAuction("pass", "");
 
       const actualOutput = game.isAuctionOver();
       const expectedOutput = false;
@@ -716,10 +716,17 @@ describe("Game", () => {
       const player1 = new Player("red", "A");
       player1.id = 1;
       game.players = [player1];
-      game.conductAuction("pass","");
+      game.conductAuction("pass", "");
       const actualOutput = game.isAuctionOver();
       const expectedOutput = true;
       chai.expect(expectedOutput).to.be.deep.equal(actualOutput);
+    });
+  });
+
+  describe("setWinner", () => {
+    it("should set winner name", () => {
+      game.setWinner("Ankon");
+      chai.expect(game.winner).to.be.equal("Ankon");
     });
   });
 });
