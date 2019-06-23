@@ -286,7 +286,6 @@ const lightCities = function(req, res) {
   const playerId = getPlayerId(req);
   const currentPlayer = game.players.find(player => player.id == playerId);
   const cityCount = currentPlayer.getCityCount();
-  game.addLog(`${currentPlayer.name} has lighted ${cityCount} cities`);
   const resources = currentPlayer.getResources();
   const powerplants = currentPlayer.getPowerplants();
   res.send({ powerplants, cityCount, resources });
@@ -312,6 +311,7 @@ const returnPlayerResources = function(req, res) {
   const bureaucracy = new Bureaucracy(currentPlayer);
   bureaucracy.setLightedCity(+cityCount);
   bureaucracy.payForLightedCities(JSON.parse(paymentOrder));
+  game.addLog(`${currentPlayer.name} has lighted ${cityCount} cities`);
   refillResources(currentPlayer, game);
   const winner = getWinner(game.getPlayers());
   if (turn.isLastPlayer() && winner.length > 0) {
@@ -552,7 +552,6 @@ module.exports = {
   passBuyingResources,
   selectPowerPlant,
   getCurrentBid,
-  returnPlayerResources,
   getGameDetails,
   getBuildingCost,
   sendLogs,
