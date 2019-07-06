@@ -522,8 +522,6 @@ const discardPowerplant = function(req, res) {
   const powerplantValue = req.body.powerplant;
   const game = initializeGame(req, res);
   const players = game.getPlayers();
-  const turn = game.getTurn(players);
-  const player = turn.getCurrentPlayer();
   players[0].discardPowerplant(powerplantValue);
   res.send("");
 };
