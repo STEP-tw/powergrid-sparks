@@ -210,12 +210,7 @@ const buyResources = function(req, res) {
 };
 
 const getStorageCapacity = function(powerPlants) {
-  const storageCapacity = {};
-  storageCapacity[COAL] = 0;
-  storageCapacity[OIL] = 0;
-  storageCapacity[GRABAGE] = 0;
-  storageCapacity[URANIUM] = 0;
-  storageCapacity[HYBRID] = 0;
+  const storageCapacity = {COAL:0,OIL:0,GRABAGE:0,URANIUM:0,HYBRID:0};
   Object.keys(powerPlants).forEach(powerPlant => {
     storageCapacity[powerPlants[powerPlant].resource.type] +=
       powerPlants[powerPlant].resource.quantity * 2;
