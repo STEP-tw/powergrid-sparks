@@ -5,7 +5,6 @@ class Turn {
   }
 
   getCurrentPlayer() {
-    // console.log(this.currentPlayerIndex);
     return this.players[this.currentPlayerIndex % this.players.length];
   }
 

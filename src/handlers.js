@@ -12,7 +12,6 @@ const {
   TRAVELLING_COST_DATA_PATH,
   ENCODING_UTF8
 } = require("./constants/filePaths");
-const { COAL, OIL, URANIUM, GRABAGE, HYBRID } = require("./constants/resourceTypes");
 const {
   BUY_POWERPLANT,
   BUY_RESOURCES,
@@ -210,7 +209,13 @@ const buyResources = function(req, res) {
 };
 
 const getStorageCapacity = function(powerPlants) {
-  const storageCapacity = {COAL:0,OIL:0,GRABAGE:0,URANIUM:0,HYBRID:0};
+  const storageCapacity = {
+    COAL: 0,
+    OIL: 0,
+    GRABAGE: 0,
+    URANIUM: 0,
+    HYBRID: 0
+  };
   Object.keys(powerPlants).forEach(powerPlant => {
     storageCapacity[powerPlants[powerPlant].resource.type] +=
       powerPlants[powerPlant].resource.quantity * 2;
@@ -223,7 +228,9 @@ const parseResourceDetails = function(selectedResourceDetails) {
   const resources = [COAL, OIL, URANIUM, GRABAGE];
   resources.filter(resource => {
     if (selectedResourceDetails[resource].length > 2) {
-      selectedResources[resource] = selectedResourceDetails[resource].split(",").length;
+      selectedResources[resource] = selectedResourceDetails[resource].split(
+        ","
+      ).length;
     }
   });
   return selectedResources;
@@ -254,7 +261,8 @@ const hasCapacity = function(playerPowerplants, selectedResourceDetails) {
     storageCapacity[OIL] += storageCapacity[HYBRID] / 2;
   }
   return selectedResourceTypes.every(
-    resourceType => selectedResources[resourceType] <= storageCapacity[resourceType]
+    resourceType =>
+      selectedResources[resourceType] <= storageCapacity[resourceType]
   );
 };
 
@@ -398,7 +406,8 @@ const getCurrentBid = function(req, res) {
         phase,
         isAuctionStarted,
         players: auctionPlayers,
-        hasMoreThenThreePowerplants: Object.keys(player.getPowerplants()).length > 3,
+        hasMoreThenThreePowerplants:
+          Object.keys(player.getPowerplants()).length > 3,
         currentPlayerId: player.id,
         powerplants: player.getPowerplants()
       })
