@@ -6,6 +6,7 @@ const PowerPlantMarket = require("./model/power_plant_cards");
 const Player = require("./model/player");
 const Bureaucracy = require("./model/bureaucracy");
 const Graph = require("node-dijkstra");
+const { COAL, OIL, URANIUM, GRABAGE, HYBRID } = require("./constants/resourceTypes");
 const {
   CARD_DATA_PATH,
   PAYMENT_ORDER_DATA_PATH,
@@ -25,7 +26,10 @@ const powerPlantCards = fs.readFileSync(CARD_DATA_PATH, ENCODING_UTF8);
 
 const paymentOrder = fs.readFileSync(PAYMENT_ORDER_DATA_PATH, ENCODING_UTF8);
 
-const travellingCostData = fs.readFileSync(TRAVELLING_COST_DATA_PATH, ENCODING_UTF8);
+const travellingCostData = fs.readFileSync(
+  TRAVELLING_COST_DATA_PATH,
+  ENCODING_UTF8
+);
 
 const graph = new Graph(JSON.parse(travellingCostData));
 
@@ -209,13 +213,13 @@ const buyResources = function(req, res) {
 };
 
 const getStorageCapacity = function(powerPlants) {
-  const storageCapacity = {
-    COAL: 0,
-    OIL: 0,
-    GRABAGE: 0,
-    URANIUM: 0,
-    HYBRID: 0
-  };
+  const storageCapacity = {};
+  storageCapacity[COAL] = 0;
+  storageCapacity[OIL] = 0;
+  storageCapacity[GRABAGE] = 0;
+  storageCapacity[URANIUM] = 0;
+  storageCapacity[HYBRID] = 0;
+
   Object.keys(powerPlants).forEach(powerPlant => {
     storageCapacity[powerPlants[powerPlant].resource.type] +=
       powerPlants[powerPlant].resource.quantity * 2;
