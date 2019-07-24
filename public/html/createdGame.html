@@ -15,7 +15,7 @@
         <div class="waiting-page">
           <div>Waiting for other players to join</div>
           <div>GAME ID: <%= gameId %></div>
-          <div class="loader"></div>
+          <img class="loader" src="newLoader.gif" alt="loader">
           <div id="players" style="line-height: 1.6">
             <% users.forEach(function(user){ %> <%- include('joinedUser', {name:
             user.name}); %> <% }); %>
